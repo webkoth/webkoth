@@ -1,66 +1,120 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# WEBKOTH UI
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+WEBKOTH UI - это библиотека веб-интерфейса, предоставляющая широкий набор готовых компонентов для разработки фронтенда. Она основана на Tailwind CSS и включает в себя компоненты, разработанные для:
 
-## About Laravel
+- Native HTML
+- Blade-шаблонов для Laravel 
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+#### В разработке:
+- Vue.js
+- React.js
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Методология: [Atomic Design](https://atomicdesign.bradfrost.com/)
+### Дизайн компонентов вдохновлен: [Practical and Refactoring UI](https://www.refactoringui.com/)
+### Архитектура: [Feature-Sliced Design](https://feature-sliced.design/) 
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Кратко о методологии
 
-## Learning Laravel
+1. **Интерфейс как система:** Автор подчеркивает важность рассмотрения интерфейса как системы, а не просто как отдельных страниц или компонентов. Atomic Design предлагает подход, который помогает организовать компоненты в повторно используемые и масштабируемые блоки, формируя единую систему.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+2. **Атомы, молекулы, организмы, шаблоны, страницы:** Методология Atomic Design предлагает пять уровней компонентов, начиная от самых маленьких "атомов" (например, кнопки) и объединяя их в более крупные "молекулы", "организмы", "шаблоны" и, наконец, "страницы". Эти уровни предоставляют ясную структуру для создания и поддержки интерфейса.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+3. **Философия модульности:** Atomic Design нацелен на создание модульных и "переиспользуемых" компонентов. Разделение интерфейса на более мелкие части облегчает их использование в различных контекстах и проектах, что способствует поддержке и масштабированию дизайна.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+4. **Инструменты и термины:** Автор представляет несколько терминов и инструментов, таких как "Атомы" (простые элементы), "Молекулы" (группы атомов), "Организмы" (группы молекул и атомов), "Шаблоны" (группы организмов, молекул и атомов) и "Страницы" (конечные продукты).
 
-## Laravel Sponsors
+5. **Работа над проектом:** В ресурсе также предоставляется обзор методов работы над проектом, основанных на Atomic Design. Это включает в себя этапы разработки, такие как создание элементов, их компонентов, формирование страниц и т. д.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## Атомарный дизайн
 
-### Premium Partners
+Атомарный дизайн представляет собой иерархическую систему элементов интерфейса, основанную на принципах симметрии и комбинаторики. Разделение на следующие уровни помогает организовать элементы интерфейса:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+### Атомы
+Атомы представляют собой самые мелкие элементы интерфейса, такие как кнопки, поля ввода и текст.
 
-## Contributing
+### Молекулы
+Молекулы - это комбинации атомов, образующие более сложные элементы, такие как формы и меню.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Компоненты
+Компоненты - это молекулы, которые могут быть повторно использованы в различных контекстах.
 
-## Code of Conduct
+### Системы
+Системы представляют собой наборы компонентов, образующих целостный интерфейс.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Атомарный дизайн обеспечивает легкость масштабирования и адаптации интерфейса к различным устройствам и размерам экрана. Это достигается за счет универсальности атомов и молекул, которые могут быть использованы в различных контекстах.
 
-## Security Vulnerabilities
+Этот подход также делает интерфейсы более гибкими и устойчивыми к изменениям. Благодаря компонентам, легко изменяемым или обновляемым без воздействия на весь интерфейс, достигается высокая адаптивность и поддерживаемость.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### Простыми словами:
 
-## License
+1. "Атомы" (простые элементы)
+2. "Молекулы" (группы атомов)
+3. "Организмы" (группы молекул и атомов)
+4. "Шаблоны" (группы организмов, молекул и атомов)
+5. "Страницы" (конечные продукты).
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+![img.png](storage/app/public/img.png)
+
+## Содержание
+
+1. [Установка](#установка)
+2. [Использование](#использование)
+3. [Возможности](#возможности)
+4. [Участие в разработке](#участие-в-разработке)
+5. [Поддержка](#поддержка)
+6. [Авторы и благодарности](#авторы-и-благодарности)
+7. [Лицензия](#лицензия)
+8. [Статус проекта](#статус-проекта)
+9. [Планы на будущее](#планы-на-будущее)
+
+## Установка
+
+Чтобы установить WEBKOTH UI, выполните следующие шаги:
+
+1. [Склонировать репозиторий](#)
+2. [Установить зависимости](#)
+3. [Настроить параметры](#)
+4. [Запустить приложение](#)
+
+Дополнительные инструкции по установке можно найти в разделе [Установка](#).
+
+## Использование
+
+Изучите примеры использования WEBKOTH UI, ознакомившись с документацией в разделе [Использование](#).
+
+## Возможности
+
+- Компоненты на базе Native HTML
+- Blade-шаблоны для интеграции с Laravel
+- Компоненты Vue.js и React.js
+- Возможная интеграция с Bootstrap
+- Основано на стеке TALL
+
+## Участие в разработке
+
+Мы приветствуем ваши вклады! Если вы хотите внести свой вклад в развитие WEBKOTH UI, прочтите [Руководство по участию в разработке](#) для получения дополнительной информации.
+
+## Поддержка
+
+Если у вас возникли вопросы или вам нужна помощь, посетите наш [Исследователь проблем](#) или присоединитесь к нашему сообществу в [Чат-комнате](#).
+
+## Авторы и благодарности
+
+Мы хотели бы выразить благодарность всем участникам, которые помогли сделать WEBKOTH UI возможным.
+
+## Лицензия
+
+WEBKOTH UI - это программное обеспечение с открытым исходным кодом, лицензированное на условиях [MIT License](#).
+
+## Статус проекта
+
+В настоящее время активно ведется разработка WEBKOTH UI.
+
+## Планы на будущее
+
+В планах на будущее включены следующие возможности:
+
+- Поддержка Bootstrap
+
+Дополнительные детали можно найти в разделе [Планы на будущее](#).
