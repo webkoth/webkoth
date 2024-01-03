@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,7 +14,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::view('/', 'welcome');
+Route::view('/alerts', 'alerts', [
+    'message' => 'A new software update is available',
+    'description' => 'This description from route'
+]);
+Route::view('/buttons', 'buttons', [
+    'message' => 'A new software update is available',
+    'description' => 'This description from route'
+]);
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
