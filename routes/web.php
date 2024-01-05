@@ -23,6 +23,8 @@ Route::view('/buttons', 'buttons', [
     'description' => 'This description from route'
 ]);
 
+Route::view('/webkoth', 'layouts.webkoth');
+
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
