@@ -1,20 +1,22 @@
 import type { Metadata } from "next";
 import { JsonLdPerson } from "@/components/json-ld-person";
 import { cvData } from "@/app/data/cv";
+import { use } from "react";
 
 type Props = {
-  params: { lang: "en" | "ru" };
+  params: Promise<{ lang: string }>;
   children: React.ReactNode;
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const lang = params.lang || "en";
+  const { lang: rawLang } = await params;
+  const lang = (rawLang === "ru" ? "ru" : "en") as "en" | "ru";
   const data = cvData[lang];
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://webkoth.com';
 
   return {
     title: {
-      default: lang === "en" 
+      default: lang === "en"
         ? "Minas Sarkisyan - Fullstack Engineer | CV"
         : "Минас Саркисян - Fullstack Engineer | Резюме",
       template: "%s | Minas Sarkisyan"
@@ -56,7 +58,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default function LangLayout({ params, children }: Props) {
-  const lang = (params?.lang as "en" | "ru") || "en";
+  const { lang: rawLang } = use(params);
+  const lang = (rawLang === "ru" ? "ru" : "en") as "en" | "ru";
   const data = cvData[lang];
 
   return (
