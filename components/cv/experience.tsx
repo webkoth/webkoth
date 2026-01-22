@@ -9,14 +9,14 @@ interface ExperienceProps {
 
 export function Experience({ data, lang }: ExperienceProps) {
   return (
-    <Card>
-      <CardHeader className="bg-primary/10 border-b border-primary/20">
+    <Card className="p-0 gap-0">
+      <CardHeader className="bg-primary/10 border-b border-primary/20 px-6 py-4">
         <CardTitle className="flex items-center gap-2 text-primary">
           <Briefcase className="w-5 h-5" />
           {lang === "en" ? "Experience" : "Опыт работы"}
         </CardTitle>
       </CardHeader>
-      <CardContent className="pt-6 space-y-8">
+      <CardContent className="p-6 space-y-8">
         {data.experience.map((job, index) => (
           <div key={index} className="relative pl-6 border-l-2 border-muted pb-8 last:pb-0">
              <div className="absolute -left-[9px] top-0 h-4 w-4 rounded-full bg-primary ring-4 ring-background" />

@@ -11,14 +11,14 @@ interface SkillsProps {
 
 export function Skills({ data, lang }: SkillsProps) {
   return (
-    <Card>
-      <CardHeader className="bg-primary/10 border-b border-primary/20">
+    <Card className="p-0 gap-0">
+      <CardHeader className="bg-primary/10 border-b border-primary/20 px-6 py-4">
         <CardTitle className="flex items-center gap-2 text-primary">
           <Wrench className="w-5 h-5" />
           {lang === "en" ? "Technical Skills" : "Технические навыки"}
         </CardTitle>
       </CardHeader>
-      <CardContent className="pt-6 space-y-4">
+      <CardContent className="p-6 space-y-4">
         {data.skills.map((skill) => (
           <div key={skill.name}>
             <div className="flex justify-between mb-1 text-sm font-medium">

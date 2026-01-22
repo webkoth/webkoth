@@ -9,14 +9,14 @@ interface EducationProps {
 
 export function Education({ data, lang }: EducationProps) {
   return (
-    <Card>
-      <CardHeader className="bg-primary/10 border-b border-primary/20">
+    <Card className="p-0 gap-0">
+      <CardHeader className="bg-primary/10 border-b border-primary/20 px-6 py-4">
         <CardTitle className="flex items-center gap-2 text-primary">
           <GraduationCap className="w-5 h-5" />
           {lang === "en" ? "Education" : "Образование"}
         </CardTitle>
       </CardHeader>
-      <CardContent className="pt-6">
+      <CardContent className="p-6">
          <div className="space-y-1">
             <h3 className="font-bold">{data.education.university}</h3>
             <p className="text-muted-foreground">{data.education.degree}</p>

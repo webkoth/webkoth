@@ -10,11 +10,11 @@ interface ContactsProps {
 
 export function Contacts({ data, lang }: ContactsProps) {
   return (
-    <Card>
-      <CardHeader className="bg-primary/10 border-b border-primary/20">
+    <Card className="p-0 gap-0">
+      <CardHeader className="bg-primary/10 border-b border-primary/20 px-6 py-4">
         <CardTitle className="text-primary">{lang === "en" ? "Contacts" : "Контакты"}</CardTitle>
       </CardHeader>
-      <CardContent className="pt-6 space-y-3">
+      <CardContent className="p-6 space-y-3">
         {data.contacts.email && (
           <Link 
             href={`mailto:${data.contacts.email}`} 
