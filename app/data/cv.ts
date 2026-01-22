@@ -70,7 +70,7 @@ export const cvData: Record<"en" | "ru", CVData> = {
       {
         period: "2024-11 - now",
         role: "Fullstack Engineer",
-        company: "Skolkovo",
+        company: "NDI",
         type: "hybrid",
         description: [
           "Full-cycle development of a private social network ecosystem (Architecture, Backend, Frontend, DevOps).",
@@ -222,7 +222,7 @@ export const cvData: Record<"en" | "ru", CVData> = {
       {
         period: "2024-11 - по настоящее время",
         role: "Fullstack Engineer",
-        company: "Сколково",
+        company: "NDI",
         type: "гибрид",
         description: [
           "Полный цикл разработки закрытой социальной сети: от проектирования архитектуры до реализации (Backend, Frontend, DevOps).",
