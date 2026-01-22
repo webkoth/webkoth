@@ -5,6 +5,7 @@ import { Header } from "@/components/cv/header";
 import { Contacts } from "@/components/cv/contacts";
 import { About } from "@/components/cv/about";
 import { Skills } from "@/components/cv/skills";
+import { VideoBlock } from "@/components/cv/video-block";
 import { Experience } from "@/components/cv/experience";
 import { Education } from "@/components/cv/education";
 import { Portfolio } from "@/components/cv/portfolio";
@@ -43,6 +44,7 @@ export default function Home() {
             <Header data={data} />
             <Contacts data={data} lang={lang} />
             <Skills data={data} lang={lang} />
+            <VideoBlock data={data} lang={lang} />
           </div>
 
           {/* Right Main Content (or Bottom on mobile): Experience, Education, About */}

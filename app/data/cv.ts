@@ -30,6 +30,10 @@ export type CVData = {
     functionality: string;
     technologies: string[];
   }[];
+  video?: {
+    title: string;
+    url: string;
+  };
 };
 
 export const cvData: Record<"en" | "ru", CVData> = {
@@ -180,6 +184,10 @@ export const cvData: Record<"en" | "ru", CVData> = {
         technologies: ["GIT", "Jira", "Gitlab CI/CD", "Postman", "ssh"],
       },
     ],
+    video: {
+      title: "My YouTube Channel",
+      url: "https://www.youtube.com/watch?v=WwpUeTx1SOc",
+    },
   },
   ru: {
     name: "Минас Саркисян",
@@ -328,5 +336,9 @@ export const cvData: Record<"en" | "ru", CVData> = {
         technologies: ["GIT", "Jira", "Gitlab CI/CD", "Postman", "ssh"],
       },
     ],
+    video: {
+      title: "Мой YouTube канал",
+      url: "https://www.youtube.com/watch?v=WwpUeTx1SOc",
+    },
   },
 };
