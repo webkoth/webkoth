@@ -3,10 +3,35 @@
 import { CVData } from "@/app/data/cv";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Wrench } from "lucide-react";
+import { Tooltip } from "@/components/ui/tooltip";
 
 interface SkillsProps {
   data: CVData;
   lang: "en" | "ru";
+}
+
+function getSkillLevel(level: number, lang: "en" | "ru"): string {
+  const levels = {
+    en: {
+      expert: "Expert",
+      advanced: "Advanced",
+      intermediate: "Intermediate",
+      beginner: "Beginner",
+    },
+    ru: {
+      expert: "Эксперт",
+      advanced: "Продвинутый",
+      intermediate: "Средний",
+      beginner: "Начинающий",
+    },
+  };
+
+  const t = levels[lang];
+
+  if (level >= 90) return `${t.expert} (${level}%)`;
+  if (level >= 75) return `${t.advanced} (${level}%)`;
+  if (level >= 50) return `${t.intermediate} (${level}%)`;
+  return `${t.beginner} (${level}%)`;
 }
 
 export function Skills({ data, lang }: SkillsProps) {
@@ -23,14 +48,15 @@ export function Skills({ data, lang }: SkillsProps) {
           <div key={skill.name}>
             <div className="flex justify-between mb-1 text-sm font-medium">
               <span>{skill.name}</span>
-              {/* <span className="text-muted-foreground">{skill.level}%</span> */}
             </div>
-            <div className="h-2 w-full bg-secondary rounded-full overflow-hidden">
-              <div 
-                className="h-full bg-primary transition-all duration-1000 ease-out rounded-full"
-                style={{ width: `${skill.level}%` }} 
-              />
-            </div>
+            <Tooltip content={getSkillLevel(skill.level, lang)}>
+              <div className="h-2 w-full bg-secondary rounded-full overflow-hidden cursor-help">
+                <div 
+                  className="h-full bg-primary transition-all duration-1000 ease-out rounded-full"
+                  style={{ width: `${skill.level}%` }} 
+                />
+              </div>
+            </Tooltip>
           </div>
         ))}
       </CardContent>

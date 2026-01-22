@@ -11,6 +11,7 @@ import { Education } from "@/components/cv/education";
 import { Portfolio } from "@/components/cv/portfolio";
 import { ModeToggle } from "@/components/mode-toggle";
 import { LanguageToggle } from "@/components/language-toggle";
+import { LLMDocsButton } from "@/components/llm-docs-button";
 
 export default function Home() {
   const [lang, setLang] = useState<"en" | "ru">("en");
@@ -23,6 +24,7 @@ export default function Home() {
         {/* Top Controls */}
         <div className="flex items-center justify-end gap-2 mb-6">
           <div className="flex items-center gap-2">
+            <LLMDocsButton data={data} lang={lang} />
             <LanguageToggle lang={lang} setLang={setLang} />
             <ModeToggle />
           </div>
