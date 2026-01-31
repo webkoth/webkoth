@@ -1,0 +1,18 @@
+# Deployment Configuration
+name: webkoth
+type: nextjs
+server: 77.232.136.239
+domain: webkoth.com
+port: 3000
+
+deploy:
+  method: github-actions
+  path: /var/www/webkoth
+
+git:
+  repo: git@github.com:webkoth/webkoth.git
+  branch: main
+
+pm2:
+  name: webkoth
+  instances: 1
