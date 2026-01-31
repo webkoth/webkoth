@@ -1,36 +1,29 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Hi, I'm Minas Sarkisyan
 
-## Getting Started
+**Fullstack Engineer** with 9+ years of experience building complex web applications (ERP, CRM, Marketplaces).
 
-First, run the development server:
+I specialize in the **Laravel ecosystem** and modern JavaScript frameworks (**Vue, React, Next.js**). I focus on delivering complete, scalable solutions by combining strong architectural principles with AI-augmented workflows.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Tech Stack
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**Backend:** PHP / Laravel / Symfony, MySQL / PostgreSQL / Redis, Microservices / REST API
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+**Frontend:** JavaScript / TypeScript, Vue.js / React / Next.js, Tailwind CSS
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+**DevOps:** Docker, Nginx, Linux, CI/CD, Git
 
-## Learn More
+**AI Workflow:** Claude Code, Cursor
 
-To learn more about Next.js, take a look at the following resources:
+## Featured Projects
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **ERP systems** for oil & gas industry (2000+ employees)
+- **Fintech platform** for investment sector (50+ engineers team)
+- **Cryptocurrency exchange** microservices architecture
+- **Insurance CRM** with high-load REST API
+- **Logistics marketplace** for US e-commerce market
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Links
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+[![Portfolio](https://img.shields.io/badge/Portfolio-webkoth.com-blue?style=flat-square)](https://webkoth.com)
+[![Telegram](https://img.shields.io/badge/Telegram-@minasarkisyan-blue?style=flat-square&logo=telegram)](https://t.me/minasarkisyan)
+[![Email](https://img.shields.io/badge/Email-webkoth@gmail.com-red?style=flat-square&logo=gmail)](mailto:webkoth@gmail.com)
