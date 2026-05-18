@@ -1,0 +1,71 @@
+import type { Metadata } from "next";
+import { JsonLdPerson } from "@/components/json-ld-person";
+import { cvData } from "@/app/data/cv";
+import { use } from "react";
+
+type Props = {
+  params: Promise<{ lang: string }>;
+  children: React.ReactNode;
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { lang: rawLang } = await params;
+  const lang = (rawLang === "ru" ? "ru" : "en") as "en" | "ru";
+  const data = cvData[lang];
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://webkoth.com';
+
+  return {
+    title: {
+      default: lang === "en"
+        ? "Minas Sarkisyan - Fullstack Engineer | CV"
+        : "Минас Саркисян - Fullstack Engineer | Резюме",
+      template: "%s | Minas Sarkisyan"
+    },
+    description: data.about,
+    alternates: {
+      canonical: `${baseUrl}/${lang}/minasarkisyan`,
+      languages: {
+        'en': `${baseUrl}/en/minasarkisyan`,
+        'ru': `${baseUrl}/ru/minasarkisyan`,
+        'x-default': `${baseUrl}/en/minasarkisyan`,
+      },
+    },
+    openGraph: {
+      type: 'website',
+      locale: lang === "en" ? 'en_US' : 'ru_RU',
+      alternateLocale: lang === "en" ? ['ru_RU'] : ['en_US'],
+      url: `${baseUrl}/${lang}/minasarkisyan`,
+      siteName: 'Minas Sarkisyan - CV',
+      title: `${data.name} - ${data.role}`,
+      description: data.about,
+      images: [
+        {
+          url: `${baseUrl}/images/profile.jpg`,
+          width: 400,
+          height: 400,
+          alt: data.name,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${data.name} - ${data.role}`,
+      description: data.about,
+      images: [`${baseUrl}/images/profile.jpg`],
+      creator: '@minasarkisyan',
+    },
+  };
+}
+
+export default function LangLayout({ params, children }: Props) {
+  const { lang: rawLang } = use(params);
+  const lang = (rawLang === "ru" ? "ru" : "en") as "en" | "ru";
+  const data = cvData[lang];
+
+  return (
+    <>
+      <JsonLdPerson data={data} lang={lang} />
+      {children}
+    </>
+  );
+}
