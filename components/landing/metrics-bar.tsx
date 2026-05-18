@@ -42,7 +42,7 @@ function Metric({ value, suffix, label }: { value: number; suffix: string; label
 
 export function MetricsBar({ lang }: { lang: Lang }) {
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-6 pt-8 border-t border-border">
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-6 pt-8 border-border">
       {copy[lang].hero.metrics.map((m) => (
         <Metric key={m.label} value={m.value} suffix={m.suffix} label={m.label} />
       ))}
