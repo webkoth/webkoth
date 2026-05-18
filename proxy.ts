@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
 const locales = ['en', 'ru']
-const defaultLocale = 'en'
+const defaultLocale = 'ru'
 
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl
@@ -12,18 +12,10 @@ export function proxy(request: NextRequest) {
     (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
   )
 
-  // If pathname is root, redirect to default locale
+  // If pathname is root, redirect by locale preference (default /ru, English-first browsers get /en)
   if (pathname === '/') {
-    // Try to detect locale from Accept-Language header
-    const acceptLanguage = request.headers.get('accept-language')
-    let detectedLocale = defaultLocale
-
-    if (acceptLanguage) {
-      // Simple detection: check if Russian is preferred
-      if (acceptLanguage.includes('ru')) {
-        detectedLocale = 'ru'
-      }
-    }
+    const primary = request.headers.get('accept-language')?.split(',')[0]?.toLowerCase() ?? ''
+    const detectedLocale = primary.startsWith('en') ? 'en' : defaultLocale
 
     return NextResponse.redirect(
       new URL(`/${detectedLocale}`, request.url)
