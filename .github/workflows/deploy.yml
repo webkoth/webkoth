@@ -17,8 +17,10 @@ jobs:
           username: root
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
+            set -e
             cd /var/www/webkoth
-            git pull origin main
-            npm install
-            npm run build
+            git fetch origin main
+            git reset --hard origin/main
+            npm install --no-fund --no-audit
+            NODE_OPTIONS="--max-old-space-size=3072" npm run build
             pm2 restart webkoth

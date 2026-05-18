@@ -1,21 +1,72 @@
-# Next.js template
+# webkoth · AI Integration
 
-This is a Next.js template with shadcn/ui.
+> I ship AI into products. From idea to production. One person, end-to-end.
 
-## Adding components
+**Audit in 1 day · MVP in 1 week.**
 
-To add components to your app, run the following command:
+[![webkoth.com](https://img.shields.io/badge/site-webkoth.com-007492?style=flat-square)](https://webkoth.com)
+[![CV](https://img.shields.io/badge/CV-webkoth.com%2Fminasarkisyan-007492?style=flat-square)](https://webkoth.com/minasarkisyan)
+[![Telegram](https://img.shields.io/badge/Telegram-@abnorsky-26a5e4?style=flat-square&logo=telegram&logoColor=white)](https://t.me/abnorsky)
+[![Calendar](https://img.shields.io/badge/Book%2015--min-Google%20Calendar-34a853?style=flat-square)](https://calendar.app.google/jY324Q2AHe1apJo79)
 
-```bash
-npx shadcn@latest add button
-```
+---
 
-This will place the ui components in the `components` directory.
+I'm **Minas Sarkisyan** — senior fullstack engineer, 9+ years in production, 2.5+ years shipping AI features into real products.
 
-## Using components
+I work as a single contractor from idea to prod — no agency handoffs, no account managers. The code you see is my code.
 
-To use the components in your app, import them as follows:
+## What I solve
 
-```tsx
-import { Button } from "@/components/ui/button";
-```
+- **RAG** — search across your docs and knowledge base
+- **LLM agents** — tool use, orchestration, autonomous workflows
+- **MCP servers** — connect your API/service to Claude and other agents (3 published on npm)
+- **Multi-provider cascade** — Claude → Gemini → Groq fallback, no vendor lock-in
+- **Document pipelines** — OCR → LLM → structured data
+- **AI features in existing products** — no rewrites, clean integration
+
+## Featured work
+
+### HubMarket — AI-SaaS for marketplace sellers
+
+Founder + sole developer · production · 3 marketplaces (WB, Ozon, Yandex Market) · 0 LLM downtime via cascade
+
+`Next.js 16` `React 19` `Hono` `Prisma` `pg-boss` `Vercel AI SDK` `Python/FastAPI`
+
+### timeweb-mcp-server — open-source MCP for Timeweb Cloud
+
+[![npm downloads](https://img.shields.io/npm/dw/timeweb-mcp-server?style=flat-square&color=cb3837)](https://www.npmjs.com/package/timeweb-mcp-server)
+[![GitHub stars](https://img.shields.io/github/stars/webkoth/timeweb-mcp-server?style=flat-square)](https://github.com/webkoth/timeweb-mcp-server)
+
+`Node.js` `TypeScript` `MCP SDK`
+
+### Other production work
+
+AI OCR ⇢ GPT (Skolkovo) · AI Landing builder · Lenderkit fintech (50+ engineers) · ERP oil & gas (500+ users) · 1+ TB analytics
+
+→ Full portfolio: **[webkoth.com/minasarkisyan](https://webkoth.com/minasarkisyan)**
+
+## Daily stack
+
+**AI:** Claude, Gemini, Groq, Yandex GPT · MCP · Vercel AI SDK · pgvector
+
+**Backend:** Next.js, Hono, FastAPI, PHP/Laravel · Postgres, ClickHouse, Redis · pg-boss queues
+
+**Frontend:** React 19, Vue 3, TypeScript, Tailwind v4, shadcn/ui
+
+**DevOps:** Docker, Linux, Cloudflare, PM2
+
+**Tooling:** Claude Code, Cursor (daily)
+
+## About this repo
+
+This is the source for **[webkoth.com](https://webkoth.com)** — the bilingual (RU / EN) landing for my AI integration service plus CV at `/minasarkisyan`.
+
+Built with Next.js 16 (Turbopack), React 19, Tailwind v4, shadcn/ui (base-vega + Base UI primitives), Framer Motion, Shiki, Mermaid.
+
+## Get in touch
+
+- Site: **[webkoth.com](https://webkoth.com)**
+- CV: [webkoth.com/minasarkisyan](https://webkoth.com/minasarkisyan)
+- Book a 15-min Discovery: [Google Calendar](https://calendar.app.google/jY324Q2AHe1apJo79)
+- Telegram: [@abnorsky](https://t.me/abnorsky)
+- Email: webkoth@gmail.com

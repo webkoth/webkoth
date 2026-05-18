@@ -1,7 +1,7 @@
 # Deployment Configuration
 name: webkoth
 type: nextjs
-server: 213.171.4.133
+server: 85.239.51.141
 domain: webkoth.com
 port: 3000
 
