@@ -188,7 +188,7 @@ export const copy = {
     why: {
       title: "Почему именно так",
       items: [
-        { title: "Один контракт от идеи до прода", body: "Нет передачи между фронт/бэк/AI/DevOps — это я весь. В HubMarket это уже доказано: Founder + sole dev.", proofLabel: "→ HubMarket", proofAnchor: "#featured" },
+        { title: "От идеи до прода — без передач", body: "Работает один и тот же человек на всех слоях — фронт, бэк, AI, DevOps. В HubMarket это уже доказано: Founder + sole dev, цикл «запрос → прод» 3-4 дня.", proofLabel: "→ HubMarket", proofAnchor: "#featured" },
         { title: "Production-уровень, не «PoC и до свидания»", body: "Multi-provider cascade, очереди, наблюдаемость, откаты. Не «работает на демо», а «не падает в проде».", proofLabel: "→ Skolkovo loyalty", proofAnchor: "#case-skolkovo" },
         { title: "Я живу в AI-стеке", body: "3 опубликованных MCP-сервера на npm. Ежедневно в Claude Code и Cursor. Это не курсы — рабочие инструменты.", proofLabel: "→ npm", proofHref: "https://www.npmjs.com/~webkoth" },
       ] as ReadonlyArray<{
@@ -448,7 +448,7 @@ await server.connect(new StdioServerTransport());`,
     why: {
       title: "Why this works",
       items: [
-        { title: "One contract from idea to prod", body: "No handoffs between front/back/AI/DevOps — that's all me. Proven on HubMarket: Founder + sole dev.", proofLabel: "→ HubMarket", proofAnchor: "#featured" },
+        { title: "From idea to prod — no handoffs", body: "The same person works across all layers — front, back, AI, DevOps. Proven on HubMarket: Founder + sole dev, request → prod cycle 3-4 days.", proofLabel: "→ HubMarket", proofAnchor: "#featured" },
         { title: "Production-grade, not 'PoC and bye'", body: "Multi-provider cascade, queues, observability, rollbacks. Doesn't 'work on demo' — doesn't fall in prod.", proofLabel: "→ Skolkovo loyalty", proofAnchor: "#case-skolkovo" },
         { title: "I live in the AI stack", body: "3 published MCP servers on npm. Daily in Claude Code and Cursor. Not courses — actual tools.", proofLabel: "→ npm", proofHref: "https://www.npmjs.com/~webkoth" },
       ] as ReadonlyArray<{
