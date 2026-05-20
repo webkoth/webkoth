@@ -4,15 +4,23 @@ import { sendTelegramMessage, escapeHtml } from "@/lib/landing/telegram";
 import { rateLimitTake } from "@/lib/landing/rate-limit";
 
 const schema = z.object({
+  audience: z.enum(["founder", "smb", "agency", "other"]).optional(),
   name: z.string().min(1).max(120),
   contact: z.string().min(2).max(200),
-  package: z.enum(["audit", "mvp", "support", "unsure"]),
+  package: z.enum(["sprint", "integration", "subcontract", "auditOnly", "unsure"]),
   message: z.string().min(10).max(4000),
-  budget: z.enum(["unknown", "under500", "to2m", "over2m", "usd"]).optional(),
+  budget: z.enum(["under200", "to600", "to12m", "over12m", "usd", "unknown"]).optional(),
   website: z.string().optional(), // honeypot — checked in body, not schema
   filledAtMs: z.number(),
   lang: z.enum(["en", "ru"]).optional(),
 });
+
+const AUDIENCE_LABEL: Record<string, string> = {
+  founder: "Founder",
+  smb: "SMB CTO",
+  agency: "Agency",
+  other: "Other",
+};
 
 const MIN_FILL_MS = 1500;
 
@@ -51,10 +59,13 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ ok: true }, { status: 200 });
   }
 
+  const audienceTag = parsed.data.audience ? `[${AUDIENCE_LABEL[parsed.data.audience]}] ` : "";
+
   const text =
-    `<b>📨 New lead</b>\n\n` +
+    `<b>📨 ${audienceTag}New lead</b>\n\n` +
     `<b>Name:</b> ${escapeHtml(parsed.data.name)}\n` +
     `<b>Contact:</b> ${escapeHtml(parsed.data.contact)}\n` +
+    (parsed.data.audience ? `<b>Audience:</b> ${parsed.data.audience}\n` : "") +
     `<b>Package:</b> ${parsed.data.package}\n` +
     (parsed.data.budget ? `<b>Budget:</b> ${parsed.data.budget}\n` : "") +
     `<b>Lang:</b> ${parsed.data.lang ?? "?"}\n` +
