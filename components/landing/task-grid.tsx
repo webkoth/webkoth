@@ -34,11 +34,17 @@ export function TaskGrid({ lang }: { lang: Lang }) {
             return (
               <StaggerItem key={item.title}>
                 <Link href={item.anchor} className="group block h-full">
-                  <Card className="h-full transition-all hover:border-primary/40 hover:-translate-y-0.5">
+                  <Card className="h-full transition-all hover:border-primary/40 hover:-translate-y-1">
                     <CardContent className="p-6">
                       <Icon className="size-6 mb-4 text-primary" strokeWidth={1.5} />
-                      <h3 className="text-lg font-medium mb-2">{item.title}</h3>
-                      <p className="text-sm text-muted-foreground">{item.sub}</p>
+                      <h3 className="text-lg font-medium mb-3">{item.title}</h3>
+                      <div className="space-y-1.5 text-sm leading-snug">
+                        <div className="text-muted-foreground">{item.trigger}</div>
+                        <div className="text-muted-foreground">→ {item.action}</div>
+                        <div className="font-medium text-foreground transition-colors group-hover:text-primary">
+                          → {item.outcome}
+                        </div>
+                      </div>
                     </CardContent>
                   </Card>
                 </Link>
