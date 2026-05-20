@@ -29,10 +29,23 @@ export function Portfolio({ data, lang }: PortfolioProps) {
                 animation: `fadeInUp 0.5s ease-out ${index * 0.1}s both`,
               }}
             >
-              {/* Project Title - Prominent */}
-              <h3 className="font-bold text-lg mb-3 text-primary group-hover:text-primary/90 transition-colors">
-                {project.title}
-              </h3>
+              {/* Project Title - Prominent + AI tag */}
+              <div className="mb-3 flex items-start justify-between gap-2">
+                <h3 className="font-bold text-lg text-primary group-hover:text-primary/90 transition-colors">
+                  {project.title}
+                </h3>
+                {project.aiTag ? (
+                  <span
+                    className={
+                      project.aiTag === "AI"
+                        ? "flex-shrink-0 rounded-full bg-primary/15 px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider text-primary"
+                        : "flex-shrink-0 rounded-full bg-muted/60 px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider text-muted-foreground"
+                    }
+                  >
+                    {project.aiTag}
+                  </span>
+                ) : null}
+              </div>
 
               {/* Functionality - Highlighted as Value Proposition */}
               <div className="mb-4">

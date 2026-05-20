@@ -34,6 +34,12 @@ export function Experience({ data, lang }: ExperienceProps) {
                 <span className="text-sm text-muted-foreground">{job.type}</span>
              </div>
 
+             {job.aiMarker ? (
+                <div className="mb-3 inline-block rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-medium text-primary">
+                  {job.aiMarker}
+                </div>
+             ) : null}
+
              <ul className="list-disc list-outside ml-4 space-y-1 text-sm text-muted-foreground">
                 {job.description.map((item, i) => (
                     <li key={i}>{item}</li>
