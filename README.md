@@ -70,3 +70,24 @@ Built with Next.js 16 (Turbopack), React 19, Tailwind v4, shadcn/ui (base-vega +
 - Book a 15-min Discovery: [Google Calendar](https://calendar.app.google/jY324Q2AHe1apJo79)
 - Telegram: [@abnorsky](https://t.me/abnorsky)
 - Email: webkoth@gmail.com
+
+---
+
+## Changelog
+
+### 2026-05-20 — Landing rewrite
+
+- Hero repositioned to «Production AI в вашем продукте — за дни, не за кварталы.»
+- Pricing restructured into 3 audience-segmented packages (founder / SMB / agency)
+- TaskGrid items rewritten as outcome vignettes (trigger → action → outcome with a number)
+- New Tech Stack section with 6 categorized chip groups + multi-provider cascade mermaid diagram
+- Roadmap redesigned as vertical zigzag timeline (chaseai.io-inspired)
+- Audience tags on all 7 case cards; new HubMarket stocksync case (founder 3-day delivery proof)
+- FAQ extended +4 items (sprint templates / whitelabel / code ownership / post-free-month support)
+- Lead-form: audience selector + progress indicator + altChannels escape hatch at top + new package/budget options
+- Hero code mockup: outcome comments (latency / cost / uptime)
+- HubMarket featured: +4th metric («cycle from feature-request to prod: 3-4 days»)
+- «Один X» positioning removed from Hero / WhyMe / FAQ — replaced with positive framings
+
+Plans: `docs/superpowers/plans/2026-05-20-landing-rewrite.md`
+PRD: [#1](https://github.com/webkoth/webkoth/issues/1) · Slices: [#4](https://github.com/webkoth/webkoth/issues/4)–[#11](https://github.com/webkoth/webkoth/issues/11)
