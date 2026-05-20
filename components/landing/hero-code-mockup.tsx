@@ -3,9 +3,12 @@ import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 
 const CODE = `// hubmarket/lib/llm-cascade.ts
+// latency p99: ~180ms · cost: ~$0.0003/req
+// 0 LLM downtime since launch (8 months in prod)
 import { generateText } from "ai";
 import { anthropic, gemini, groq } from "@/providers";
 
+// primary → fallback 1 → fallback 2 (cheapest)
 const providers = [anthropic, gemini, groq];
 
 export async function withCascade(prompt: string) {
