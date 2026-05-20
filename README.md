@@ -75,6 +75,17 @@ Built with Next.js 16 (Turbopack), React 19, Tailwind v4, shadcn/ui (base-vega +
 
 ## Changelog
 
+### 2026-05-20 — Pet-projects Tier 1 Task 1 (in-repo portion)
+
+- New case page at `/[lang]/cases/hubmarket-stocksync` — backs the founder-tagged case card on landing and the «B-Sprint case» portfolio entry on CV
+- Bilingual (RU+EN), contains: timeline (4 days), decisions made (Playwright vs official APIs, pg-boss as queue, deltas vs snapshots), outcome bullets, stack
+- Resolves the cross-PRD dependency: stocksync card on landing no longer links to a 404
+
+Pet-projects PRD remaining items (Tier 1 Task 2 — 4th MCP server, Tier 1 Task 3 — eval pipeline, Tier 2 backlog) are external work (separate GitHub repos, GPU rental, etc.) and are not implemented in this branch. See `docs/superpowers/plans/2026-05-20-pet-projects.md` for the full backlog.
+
+Plans: `docs/superpowers/plans/2026-05-20-pet-projects.md`
+PRD: [#3](https://github.com/webkoth/webkoth/issues/3)
+
 ### 2026-05-20 — CV redesign (`/[lang]/minasarkisyan`)
 
 - Two-layer structure: above-the-fold pitch + 8 deep sections (Production AI, Open Source / MCP, Skills, Experience, Portfolio, Education, Content, Final Hire CTA)
