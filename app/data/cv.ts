@@ -1,7 +1,57 @@
 
+export type SkillMaturity = "production" | "touch";
+
+export type SkillItem = {
+  name: string;
+  maturity: SkillMaturity;
+};
+
+export type SkillCategory = {
+  category: string;
+  items: SkillItem[];
+};
+
+export type ChipGroup = {
+  groupLabel: string;
+  chips: string[];
+};
+
+export type ProductionAIAchievement = {
+  title: string;
+  body: string;
+  evidence?: string;
+};
+
+export type OpenSourcePackage = {
+  name: string;
+  description: string;
+  npmPkg?: string;
+  ghOwner: string;
+  ghRepo: string;
+  highlights: string[];
+};
+
+export type ContentLink = {
+  platform: "youtube" | "github" | "npm" | "telegram" | "blog";
+  label: string;
+  url: string;
+  caption?: string;
+};
+
+export type HireCta = {
+  headline: string;
+  body: string;
+  primaryLabel: string;
+  primaryUrl: string;
+  secondaryLabel: string;
+  secondaryUrl: string;
+  emailLabel: string;
+};
+
 export type CVData = {
   name: string;
   role: string;
+  roleSub: string;
   location: string;
   contacts: {
     email: string;
@@ -10,12 +60,18 @@ export type CVData = {
     linkedin?: string;
   };
   about: string;
-  skills: { name: string; level: number }[]; // Level 0-100 based on the bars in the CV
+  pitch: string;
+  chipGroups: ChipGroup[];
+  metrics: { value: number; suffix: string; label: string }[];
+  skills: SkillCategory[];
+  productionAI: ProductionAIAchievement[];
+  openSource: OpenSourcePackage[];
   experience: {
     period: string;
     role: string;
     company: string;
-    type: string; // remote, office, etc.
+    type: string;
+    aiMarker?: string;
     description: string[];
   }[];
   education: {
@@ -29,17 +85,23 @@ export type CVData = {
     team: string;
     functionality: string;
     technologies: string[];
+    aiTag?: "AI" | "AI-adjacent" | null;
   }[];
+  content: ContentLink[];
+  hireCta: HireCta;
   video?: {
     title: string;
     url: string;
   };
 };
 
+const CALENDAR_URL = "https://calendar.app.google/jY324Q2AHe1apJo79";
+
 export const cvData: Record<"en" | "ru", CVData> = {
   en: {
     name: "Minas Sarkisyan",
-    role: "Senior Fullstack Engineer",
+    role: "Senior Fullstack & AI Engineer",
+    roleSub: "Production AI since 2023: MCP, multi-provider cascade, RAG, agents",
     location: "Krasnodar, Russia · Remote / Hybrid · open to relocation",
     contacts: {
       email: "webkoth@gmail.com",
@@ -48,19 +110,150 @@ export const cvData: Record<"en" | "ru", CVData> = {
     },
     about:
       "Senior Fullstack Engineer with 9 years of production experience in PHP/Laravel and the modern JS stack (TypeScript, React 19, Next.js 16, Vue 3). For the last 2.5 years deeply embedded in production AI: multi-provider LLM cascades (Claude + Gemini + Groq), RAG, AI agents, and 3 published MCP servers on npm. Currently supporting 5+ products in the Skolkovo School of Management ecosystem and building HubMarket — an AI-powered SaaS for marketplace sellers (Wildberries, Ozon, Yandex Market).",
+    pitch: "9 years fullstack in production, 2.5 years deep with LLMs. 3 published MCP servers on npm. Currently: Skolkovo School (5+ products on support) + HubMarket (AI-SaaS, founder + sole dev).",
+    metrics: [
+      { value: 9, suffix: "+", label: "yrs fullstack" },
+      { value: 2.5, suffix: "", label: "yrs production AI" },
+      { value: 3, suffix: "", label: "npm MCP servers" },
+      { value: 5, suffix: "+", label: "products live" },
+    ],
+    chipGroups: [
+      {
+        groupLabel: "Python / Backend",
+        chips: ["Python 3.10+", "FastAPI", "asyncio", "TypeScript", "Node.js / Hono", "PHP 8 / Laravel"],
+      },
+      {
+        groupLabel: "AI / LLM",
+        chips: ["Anthropic Claude", "OpenAI", "Google Gemini", "Yandex GPT", "Groq", "MCP (3 servers on npm)", "Multi-provider cascade", "RAG", "structured output", "tool calling", "pgvector", "Vercel AI SDK"],
+      },
+      {
+        groupLabel: "Frontend",
+        chips: ["React 19 / Next.js 16", "Vue 3", "Tailwind", "shadcn/ui"],
+      },
+      {
+        groupLabel: "Data & Infra",
+        chips: ["PostgreSQL", "MySQL", "ClickHouse", "MongoDB", "Redis", "Docker", "Nginx", "Linux", "CI/CD"],
+      },
+      {
+        groupLabel: "Observability & Tooling",
+        chips: ["Sentry", "pino", "PostHog", "Claude Code (daily)", "Cursor (daily)"],
+      },
+    ],
+    hireCta: {
+      headline: "Open to roles and contract work",
+      body: "Reply within 24h. Remote / hybrid / open to relocation.",
+      primaryLabel: "Telegram: @abnorsky",
+      primaryUrl: "https://t.me/abnorsky",
+      secondaryLabel: "15-min call (Calendar)",
+      secondaryUrl: CALENDAR_URL,
+      emailLabel: "webkoth@gmail.com",
+    },
     skills: [
-      { name: "AI / LLM Integration", level: 90 },
-      { name: "Vercel AI SDK / RAG / MCP", level: 85 },
-      { name: "Claude Code / Cursor", level: 95 },
-      { name: "PHP / Laravel / Symfony", level: 95 },
-      { name: "TypeScript / Node.js / Hono", level: 85 },
-      { name: "Python / FastAPI / asyncio", level: 75 },
-      { name: "REST API / Event-driven", level: 90 },
-      { name: "Vue 3 / React 19 / Next.js 16", level: 88 },
-      { name: "Tailwind CSS / shadcn/ui / Radix", level: 90 },
-      { name: "PostgreSQL / MySQL / Redis", level: 90 },
-      { name: "OOP / SOLID / DDD", level: 90 },
-      { name: "Docker / Nginx / Linux / CI-CD", level: 85 },
+      {
+        category: "AI / LLM",
+        items: [
+          { name: "Anthropic Claude", maturity: "production" },
+          { name: "OpenAI", maturity: "production" },
+          { name: "Google Gemini", maturity: "production" },
+          { name: "Yandex GPT", maturity: "production" },
+          { name: "Groq", maturity: "production" },
+          { name: "MCP (3 servers on npm)", maturity: "production" },
+          { name: "RAG / pgvector", maturity: "production" },
+          { name: "Multi-provider cascade", maturity: "production" },
+          { name: "structured output / tool calling", maturity: "production" },
+          { name: "Vercel AI SDK", maturity: "production" },
+          { name: "self-hosted (Ollama / vLLM)", maturity: "touch" },
+        ],
+      },
+      {
+        category: "Backend",
+        items: [
+          { name: "Python 3.10+ / FastAPI / asyncio", maturity: "production" },
+          { name: "PHP 8 / Laravel / Symfony", maturity: "production" },
+          { name: "TypeScript / Node.js / Hono", maturity: "production" },
+          { name: "Go", maturity: "touch" },
+        ],
+      },
+      {
+        category: "Frontend",
+        items: [
+          { name: "React 19 / Next.js 16", maturity: "production" },
+          { name: "Vue 3 / Inertia.js", maturity: "production" },
+          { name: "Tailwind 4 / shadcn/ui / Radix", maturity: "production" },
+        ],
+      },
+      {
+        category: "Databases",
+        items: [
+          { name: "PostgreSQL", maturity: "production" },
+          { name: "MySQL", maturity: "production" },
+          { name: "ClickHouse", maturity: "production" },
+          { name: "MongoDB", maturity: "production" },
+          { name: "Redis", maturity: "production" },
+          { name: "pgvector", maturity: "production" },
+        ],
+      },
+      {
+        category: "Architecture",
+        items: [
+          { name: "REST API / Event-driven", maturity: "production" },
+          { name: "OOP / SOLID / DDD", maturity: "production" },
+          { name: "Microservices", maturity: "production" },
+        ],
+      },
+      {
+        category: "DevOps / Tooling",
+        items: [
+          { name: "Docker", maturity: "production" },
+          { name: "Nginx / Linux", maturity: "production" },
+          { name: "CI/CD (GitLab / GitHub Actions)", maturity: "production" },
+          { name: "Sentry / pino / PostHog", maturity: "production" },
+          { name: "Claude Code / Cursor (daily)", maturity: "production" },
+          { name: "Kubernetes", maturity: "touch" },
+        ],
+      },
+    ],
+    productionAI: [
+      {
+        title: "Multi-provider LLM cascade in HubMarket",
+        body: "Architecture with fallback Claude → Gemini → Groq: 0 LLM downtime over 8 months in prod. Automatic cost-log and quality-drift tracking.",
+        evidence: "Featured case on webkoth.com",
+      },
+      {
+        title: "RAG systems and vector search",
+        body: "pgvector in HubMarket (production), Yandex GPT pipeline in Skolkovo. Embeddings, chunking, retrieval tuning for domain data.",
+        evidence: "HubMarket + AI document recognition service in Skolkovo",
+      },
+      {
+        title: "MCP servers for agentic automation",
+        body: "3 MCP servers published on npm. Full coverage of Timeweb Cloud API (servers, DBs, K8s, S3, DNS). Used by AI agents from Claude Code / Cursor.",
+        evidence: "npmjs.com/~webkoth",
+      },
+      {
+        title: "Document pipelines (OCR → LLM → structured)",
+        body: "Production AI document recognition service in Skolkovo: PDF → Yandex OCR → Yandex GPT (structured output) → DB write with educational program linkage.",
+        evidence: "Skolkovo · async queues, admin panel",
+      },
+      {
+        title: "Dual-provider AI landing builder",
+        body: "Production AI builder in Skolkovo: GPT-4o-mini for text + NanoBanano for images. 21 ready blocks, multi-page landings, HTML export.",
+        evidence: "Skolkovo · Vue 3 + PHP",
+      },
+      {
+        title: "Tool-calling agents with MTProto access",
+        body: "HubMarket Telegram bot on grammy + Pyrogram (MTProto) — tool-calling agent over marketplace data.",
+        evidence: "HubMarket production",
+      },
+    ],
+    openSource: [
+      {
+        name: "timeweb-mcp-server",
+        description: "Full Timeweb Cloud API coverage via MCP protocol. Cloud servers, databases (PostgreSQL/MySQL/MongoDB/Redis/ClickHouse), Kubernetes, S3, DNS, domains. Used by AI agents from Claude Desktop / Claude Code / Cursor for deployment automation.",
+        npmPkg: "timeweb-mcp-server",
+        ghOwner: "webkoth",
+        ghRepo: "timeweb-mcp-server",
+        highlights: ["Node.js + TypeScript", "MCP SDK", "Full Timeweb API coverage", "Production-ready"],
+      },
     ],
     experience: [
       {
@@ -68,6 +261,7 @@ export const cvData: Record<"en" | "ru", CVData> = {
         role: "Senior Fullstack Engineer",
         company: "Skolkovo School of Management",
         type: "remote",
+        aiMarker: "AI / LLM in production (5+ products: OCR, AI-builder, RAG)",
         description: [
           "Support 5+ products in parallel within the school's digital ecosystem",
           "AI document recognition service (Yandex OCR → Yandex GPT, async queues)",
@@ -82,6 +276,7 @@ export const cvData: Record<"en" | "ru", CVData> = {
         role: "Backend Developer · Data-Intensive",
         company: "MPSTATS (mpstats.io)",
         type: "remote",
+        aiMarker: "Data-intensive (1+ TB) — foundation for embeddings / RAG",
         description: [
           "High-load Laravel microservices for marketplace e-commerce analytics — processing 1+ TB of data.",
           "Optimised critical APIs: −20% latency, +30% throughput via SQL, indexes, Redis.",
@@ -135,6 +330,15 @@ export const cvData: Record<"en" | "ru", CVData> = {
     },
     portfolio: [
       {
+        title: "HubMarket: Marketplace stock sync (B-Sprint case)",
+        stack: ["Next.js", "Hono", "Playwright", "pg-boss"],
+        team: "1 fullstack (founder request → prod in 3 days)",
+        functionality:
+          "Production B-Sprint exemplar: founder request → architecture → implementation → handover to prod in 3 days. Stock sync across 3 marketplaces (WB, Ozon, Yandex Market) for a HubMarket customer. Full writeup: webkoth.com/cases/hubmarket-stocksync.",
+        technologies: ["Playwright", "pg-boss", "PostgreSQL"],
+        aiTag: null,
+      },
+      {
         title: "HubMarket — AI-SaaS for marketplace sellers",
         stack: [
           "Next.js 16",
@@ -158,6 +362,7 @@ export const cvData: Record<"en" | "ru", CVData> = {
           "PostHog",
           "Cloudflare Workers",
         ],
+        aiTag: "AI",
       },
       {
         title: "AI document recognition service (Skolkovo)",
@@ -174,6 +379,7 @@ export const cvData: Record<"en" | "ru", CVData> = {
         functionality:
           "Production AI pipeline: PDF upload → Yandex OCR (text recognition) → Yandex GPT (data structuring) → DB write with educational program / student linkage. Async queues for heavy files, admin panel.",
         technologies: ["GIT", "Docker", "MySQL", "Yandex Cloud API"],
+        aiTag: "AI",
       },
       {
         title: "AI landing builder with dual AI providers (Skolkovo)",
@@ -189,6 +395,7 @@ export const cvData: Record<"en" | "ru", CVData> = {
         functionality:
           "Drag & drop block editor with inline Tailwind class editing. Two production AI integrations: GPT-4o-mini for text generation/improvement, NanoBanano for image generation/enhancement. 21 ready blocks, multi-page landings, HTML export.",
         technologies: ["GIT", "Docker", "OpenAI API"],
+        aiTag: "AI",
       },
       {
         title:
@@ -198,6 +405,7 @@ export const cvData: Record<"en" | "ru", CVData> = {
         functionality:
           "Full Timeweb Cloud API coverage: cloud servers, databases (PostgreSQL/MySQL/MongoDB/Redis/ClickHouse), Kubernetes, S3, DNS, domains. Used by AI agents to automate deployments from Claude Desktop / Claude Code / Cursor.",
         technologies: ["npm", "GitHub", "REST API"],
+        aiTag: "AI",
       },
       {
         title: "High-load loyalty backend (Skolkovo)",
@@ -220,6 +428,7 @@ export const cvData: Record<"en" | "ru", CVData> = {
           "Mailgun",
           "Telegram",
         ],
+        aiTag: null,
       },
       {
         title: "ERP system for an oil & gas company (Itpelag)",
@@ -236,6 +445,7 @@ export const cvData: Record<"en" | "ru", CVData> = {
         functionality:
           "Full ERP from scratch for 500+ users. Warehouse, procurement, sales, finance modules. Microservices on Docker, REST API for mobile apps with OAuth 2.0 + JWT, load testing.",
         technologies: ["GIT", "Jira", "GitLab CI/CD", "Docker", "ssh"],
+        aiTag: null,
       },
       {
         title: "Lenderkit.com — fintech platform (Justcoded)",
@@ -244,6 +454,7 @@ export const cvData: Record<"en" | "ru", CVData> = {
         functionality:
           "Core team of a fintech investment product (50+ engineers). Document validation modules, crypto wallet integration, REST API. Integrations: Polymesh (blockchain), DocuSign. Team Lead on a client project (5 developers).",
         technologies: ["GIT", "Youtrack", "Jenkins", "Docker", "Swagger"],
+        aiTag: null,
       },
       {
         title: "E-commerce analytics on 1+ TB data (MPSTATS)",
@@ -261,6 +472,7 @@ export const cvData: Record<"en" | "ru", CVData> = {
         functionality:
           "High-load Laravel microservices for marketplace e-commerce analytics — 1+ TB of data. ETL/ELT pipelines, BI dashboard APIs, automation of routine seller tasks. Optimised critical APIs: −20% latency, +30% throughput.",
         technologies: ["GIT", "Telescope", "Horizon", "GitLab CI/CD"],
+        aiTag: "AI-adjacent",
       },
       {
         title: "Microservices crypto exchange (Itpelag)",
@@ -275,6 +487,33 @@ export const cvData: Record<"en" | "ru", CVData> = {
         functionality:
           "Microservices for crypto exchange and external wallet integrations.",
         technologies: ["GIT", "Docker", "Microservices"],
+        aiTag: null,
+      },
+    ],
+    content: [
+      {
+        platform: "youtube",
+        label: "YouTube",
+        url: "https://www.youtube.com/watch?v=WwpUeTx1SOc",
+        caption: "Tech notes and walkthroughs",
+      },
+      {
+        platform: "github",
+        label: "GitHub @webkoth",
+        url: "https://github.com/webkoth",
+        caption: "Pet-projects and open-source",
+      },
+      {
+        platform: "npm",
+        label: "npm @webkoth",
+        url: "https://www.npmjs.com/~webkoth",
+        caption: "MCP servers published",
+      },
+      {
+        platform: "telegram",
+        label: "Telegram @abnorsky",
+        url: "https://t.me/abnorsky",
+        caption: "Direct contact",
       },
     ],
     video: {
@@ -285,7 +524,8 @@ export const cvData: Record<"en" | "ru", CVData> = {
 
   ru: {
     name: "Минас Саркисян",
-    role: "Senior Fullstack Engineer",
+    role: "Senior Fullstack & AI Engineer",
+    roleSub: "Production AI с 2023: MCP, multi-provider cascade, RAG, агенты",
     location: "Краснодар · Удалённо / Гибрид · готов к переезду",
     contacts: {
       email: "webkoth@gmail.com",
@@ -294,19 +534,150 @@ export const cvData: Record<"en" | "ru", CVData> = {
     },
     about:
       "Senior Fullstack-инженер с 9 годами production-опыта в PHP/Laravel и современном JS-стеке (TypeScript, React 19, Next.js 16, Vue 3). Последние 2.5 года плотно работаю с LLM в продакшене: мульти-провайдерные каскады (Claude + Gemini + Groq), RAG, AI-агенты и 3 опубликованных MCP-сервера на npm. Сейчас support 5+ продуктов в Школе управления Сколково и AI-SaaS HubMarket для селлеров маркетплейсов (Wildberries, Ozon, Yandex Market).",
+    pitch: "9 лет в проде fullstack, 2.5 года плотно с LLM. 3 опубликованных MCP-сервера на npm. Сейчас — Сколково (5+ продуктов в поддержке) + HubMarket (AI-SaaS, founder + sole dev).",
+    metrics: [
+      { value: 9, suffix: "+", label: "лет fullstack" },
+      { value: 2.5, suffix: "", label: "года production AI" },
+      { value: 3, suffix: "", label: "MCP-сервера на npm" },
+      { value: 5, suffix: "+", label: "продуктов в проде" },
+    ],
+    chipGroups: [
+      {
+        groupLabel: "Python / Backend",
+        chips: ["Python 3.10+", "FastAPI", "asyncio", "TypeScript", "Node.js / Hono", "PHP 8 / Laravel"],
+      },
+      {
+        groupLabel: "AI / LLM",
+        chips: ["Anthropic Claude", "OpenAI", "Google Gemini", "Yandex GPT", "Groq", "MCP (3 серверов на npm)", "Multi-provider cascade", "RAG", "structured output", "tool calling", "pgvector", "Vercel AI SDK"],
+      },
+      {
+        groupLabel: "Frontend",
+        chips: ["React 19 / Next.js 16", "Vue 3", "Tailwind", "shadcn/ui"],
+      },
+      {
+        groupLabel: "Data & Infra",
+        chips: ["PostgreSQL", "MySQL", "ClickHouse", "MongoDB", "Redis", "Docker", "Nginx", "Linux", "CI/CD"],
+      },
+      {
+        groupLabel: "Observability & Tooling",
+        chips: ["Sentry", "pino", "PostHog", "Claude Code (ежедневно)", "Cursor (ежедневно)"],
+      },
+    ],
+    hireCta: {
+      headline: "Готов обсудить вакансию или контракт",
+      body: "Ответ — в течение суток. Удалённо / гибрид / готов к релокации.",
+      primaryLabel: "Telegram: @abnorsky",
+      primaryUrl: "https://t.me/abnorsky",
+      secondaryLabel: "15-мин звонок (Calendar)",
+      secondaryUrl: CALENDAR_URL,
+      emailLabel: "webkoth@gmail.com",
+    },
     skills: [
-      { name: "AI / LLM Integration", level: 90 },
-      { name: "Vercel AI SDK / RAG / MCP", level: 85 },
-      { name: "Claude Code / Cursor", level: 95 },
-      { name: "PHP / Laravel / Symfony", level: 95 },
-      { name: "TypeScript / Node.js / Hono", level: 85 },
-      { name: "Python / FastAPI / asyncio", level: 75 },
-      { name: "REST API / Event-driven", level: 90 },
-      { name: "Vue 3 / React 19 / Next.js 16", level: 88 },
-      { name: "Tailwind CSS / shadcn/ui / Radix", level: 90 },
-      { name: "PostgreSQL / MySQL / Redis", level: 90 },
-      { name: "OOP / SOLID / DDD", level: 90 },
-      { name: "Docker / Nginx / Linux / CI-CD", level: 85 },
+      {
+        category: "AI / LLM",
+        items: [
+          { name: "Anthropic Claude", maturity: "production" },
+          { name: "OpenAI", maturity: "production" },
+          { name: "Google Gemini", maturity: "production" },
+          { name: "Yandex GPT", maturity: "production" },
+          { name: "Groq", maturity: "production" },
+          { name: "MCP (3 серверов на npm)", maturity: "production" },
+          { name: "RAG / pgvector", maturity: "production" },
+          { name: "Multi-provider cascade", maturity: "production" },
+          { name: "structured output / tool calling", maturity: "production" },
+          { name: "Vercel AI SDK", maturity: "production" },
+          { name: "self-hosted (Ollama / vLLM)", maturity: "touch" },
+        ],
+      },
+      {
+        category: "Backend",
+        items: [
+          { name: "Python 3.10+ / FastAPI / asyncio", maturity: "production" },
+          { name: "PHP 8 / Laravel / Symfony", maturity: "production" },
+          { name: "TypeScript / Node.js / Hono", maturity: "production" },
+          { name: "Go", maturity: "touch" },
+        ],
+      },
+      {
+        category: "Frontend",
+        items: [
+          { name: "React 19 / Next.js 16", maturity: "production" },
+          { name: "Vue 3 / Inertia.js", maturity: "production" },
+          { name: "Tailwind 4 / shadcn/ui / Radix", maturity: "production" },
+        ],
+      },
+      {
+        category: "Базы данных",
+        items: [
+          { name: "PostgreSQL", maturity: "production" },
+          { name: "MySQL", maturity: "production" },
+          { name: "ClickHouse", maturity: "production" },
+          { name: "MongoDB", maturity: "production" },
+          { name: "Redis", maturity: "production" },
+          { name: "pgvector", maturity: "production" },
+        ],
+      },
+      {
+        category: "Архитектура",
+        items: [
+          { name: "REST API / Event-driven", maturity: "production" },
+          { name: "OOP / SOLID / DDD", maturity: "production" },
+          { name: "Microservices", maturity: "production" },
+        ],
+      },
+      {
+        category: "DevOps / Tooling",
+        items: [
+          { name: "Docker", maturity: "production" },
+          { name: "Nginx / Linux", maturity: "production" },
+          { name: "CI/CD (GitLab / GitHub Actions)", maturity: "production" },
+          { name: "Sentry / pino / PostHog", maturity: "production" },
+          { name: "Claude Code / Cursor (ежедневно)", maturity: "production" },
+          { name: "Kubernetes", maturity: "touch" },
+        ],
+      },
+    ],
+    productionAI: [
+      {
+        title: "Multi-provider LLM cascade в HubMarket",
+        body: "Архитектура с фолбэком Claude → Gemini → Groq: 0 downtime LLM за 8 месяцев в проде. Автоматический cost-log и quality-drift отслеживание.",
+        evidence: "Featured case на лендинге webkoth.com",
+      },
+      {
+        title: "RAG-системы и vector search",
+        body: "pgvector в HubMarket (production), Yandex GPT pipeline в Сколково. Эмбеддинги, chunking, retrieval-tuning под domain-данные.",
+        evidence: "HubMarket + AI-сервис распознавания документов в Сколково",
+      },
+      {
+        title: "MCP-серверы для агентной автоматизации",
+        body: "3 опубликованных MCP-сервера на npm. Полная поддержка Timeweb Cloud API (серверы, БД, K8s, S3, DNS). Используется AI-агентами из Claude Code / Cursor.",
+        evidence: "npmjs.com/~webkoth",
+      },
+      {
+        title: "Document-пайплайны (OCR → LLM → structured)",
+        body: "Production AI-сервис распознавания документов в Сколково: PDF → Yandex OCR → Yandex GPT (structured output) → DB write с привязкой к образовательным программам.",
+        evidence: "Сколково · async queues, admin panel",
+      },
+      {
+        title: "Dual-provider AI-landing builder",
+        body: "Production AI-конструктор в Сколково: GPT-4o-mini для текста + NanoBanano для изображений. 21 готовый блок, мульти-страничные лендинги, HTML-экспорт.",
+        evidence: "Сколково · Vue 3 + PHP",
+      },
+      {
+        title: "Tool-calling агенты с MTProto-доступом",
+        body: "Telegram-бот HubMarket на grammy + Pyrogram (MTProto) — агент с tool calling над marketplace-данными.",
+        evidence: "HubMarket production",
+      },
+    ],
+    openSource: [
+      {
+        name: "timeweb-mcp-server",
+        description: "Полная поддержка Timeweb Cloud API через MCP-протокол. Серверы, БД (PostgreSQL/MySQL/MongoDB/Redis/ClickHouse), Kubernetes, S3, DNS, домены. Используется AI-агентами из Claude Desktop / Claude Code / Cursor для автоматизации деплоев.",
+        npmPkg: "timeweb-mcp-server",
+        ghOwner: "webkoth",
+        ghRepo: "timeweb-mcp-server",
+        highlights: ["Node.js + TypeScript", "MCP SDK", "Full Timeweb API coverage", "Production-ready"],
+      },
     ],
     experience: [
       {
@@ -314,6 +685,7 @@ export const cvData: Record<"en" | "ru", CVData> = {
         role: "Senior Fullstack Engineer",
         company: "Школа управления Сколково",
         type: "удаленно",
+        aiMarker: "AI / LLM в проде (5+ продуктов: OCR, AI-builder, RAG)",
         description: [
           "Support параллельно 5+ продуктов в цифровой экосистеме школы",
           "AI-сервис распознавания документов (Yandex OCR → Yandex GPT, асинхронные очереди)",
@@ -328,6 +700,7 @@ export const cvData: Record<"en" | "ru", CVData> = {
         role: "Backend Developer · Data-Intensive",
         company: "MPSTATS (mpstats.io)",
         type: "удалённо",
+        aiMarker: "Data-intensive (1+ ТБ) — фундамент для embeddings / RAG",
         description: [
           "High-load Laravel микросервисы для e-commerce-аналитики маркетплейсов — обработка 1+ ТБ данных",
           "Оптимизация критических API: −20% latency, +30% throughput через сложные SQL, индексы, Redis",
@@ -381,6 +754,15 @@ export const cvData: Record<"en" | "ru", CVData> = {
     },
     portfolio: [
       {
+        title: "HubMarket: маркетплейс-синхронизация остатков (B-Sprint case)",
+        stack: ["Next.js", "Hono", "Playwright", "pg-boss"],
+        team: "1 fullstack (от запроса фаундера до прода — 3 дня)",
+        functionality:
+          "Production-кейс founder-driven спринта: запрос → архитектура → реализация → передача в прод за 3 дня. Синхронизация остатков по 3 маркетплейсам (WB, Ozon, Yandex Market) для клиента HubMarket. Полный writeup: webkoth.com/cases/hubmarket-stocksync.",
+        technologies: ["Playwright", "pg-boss", "PostgreSQL"],
+        aiTag: null,
+      },
+      {
         title: "HubMarket — AI-SaaS для селлеров маркетплейсов",
         stack: [
           "Next.js 16",
@@ -404,6 +786,7 @@ export const cvData: Record<"en" | "ru", CVData> = {
           "PostHog",
           "Cloudflare Workers",
         ],
+        aiTag: "AI",
       },
       {
         title: "AI-сервис распознавания документов (Сколково)",
@@ -420,6 +803,7 @@ export const cvData: Record<"en" | "ru", CVData> = {
         functionality:
           "Production AI-пайплайн: загрузка PDF → Yandex OCR (распознавание) → Yandex GPT (структурирование данных) → запись в БД с привязкой к образовательным программам и студентам. Асинхронные очереди для тяжёлых файлов, админка.",
         technologies: ["GIT", "Docker", "MySQL", "Yandex Cloud API"],
+        aiTag: "AI",
       },
       {
         title: "AI-конструктор лендингов с двумя AI-провайдерами (Сколково)",
@@ -435,6 +819,7 @@ export const cvData: Record<"en" | "ru", CVData> = {
         functionality:
           "Drag & drop редактор блоков с inline-редактированием Tailwind-классов. Две AI-интеграции в проде: GPT-4o-mini для генерации/перефразирования текстов, NanoBanano для генерации и улучшения изображений. 21 готовый блок, мульти-страничные лендинги, экспорт в HTML.",
         technologies: ["GIT", "Docker", "OpenAI API"],
+        aiTag: "AI",
       },
       {
         title:
@@ -444,6 +829,7 @@ export const cvData: Record<"en" | "ru", CVData> = {
         functionality:
           "Полная поддержка Timeweb Cloud API: серверы, БД (PostgreSQL/MySQL/MongoDB/Redis/ClickHouse), Kubernetes, S3, DNS, домены. Используется AI-агентами для автоматизации деплоев из Claude Desktop / Claude Code / Cursor.",
         technologies: ["npm", "GitHub", "REST API"],
+        aiTag: "AI",
       },
       {
         title: "High-load backend программы лояльности (Сколково)",
@@ -466,6 +852,7 @@ export const cvData: Record<"en" | "ru", CVData> = {
           "Mailgun",
           "Telegram",
         ],
+        aiTag: null,
       },
       {
         title: "ERP для нефтегазовой компании (Itpelag)",
@@ -482,6 +869,7 @@ export const cvData: Record<"en" | "ru", CVData> = {
         functionality:
           "Полноценный ERP с нуля для 500+ пользователей. Модули склада, закупок, продаж, финансов. Микросервисы на Docker, REST API для мобильных приложений с OAuth 2.0 + JWT, нагрузочное тестирование.",
         technologies: ["GIT", "Jira", "GitLab CI/CD", "Docker", "ssh"],
+        aiTag: null,
       },
       {
         title: "Lenderkit.com — финтех-платформа (Justcoded)",
@@ -490,6 +878,7 @@ export const cvData: Record<"en" | "ru", CVData> = {
         functionality:
           "Core-команда финтех-продукта в сфере инвестиций (50+ инженеров). Модули валидации документов, интеграция криптокошельков, REST API. Интеграции: Polymesh (blockchain), DocuSign. Team Lead на клиентском проекте (5 разработчиков).",
         technologies: ["GIT", "Youtrack", "Jenkins", "Docker", "Swagger"],
+        aiTag: null,
       },
       {
         title: "E-commerce аналитика на 1+ ТБ данных (MPSTATS)",
@@ -507,6 +896,7 @@ export const cvData: Record<"en" | "ru", CVData> = {
         functionality:
           "High-load Laravel микросервисы для e-commerce-аналитики маркетплейсов — 1+ ТБ данных. ETL/ELT-пайплайны, API для BI-дашбордов, автоматизация рутинных задач селлеров. Оптимизация критических API: −20% latency, +30% throughput.",
         technologies: ["GIT", "Telescope", "Horizon", "GitLab CI/CD"],
+        aiTag: "AI-adjacent",
       },
       {
         title: "Микросервисная криптобиржа (Itpelag)",
@@ -521,6 +911,33 @@ export const cvData: Record<"en" | "ru", CVData> = {
         functionality:
           "Микросервисы для обмена криптовалют и интеграции с внешними кошельками.",
         technologies: ["GIT", "Docker", "Microservices"],
+        aiTag: null,
+      },
+    ],
+    content: [
+      {
+        platform: "youtube",
+        label: "YouTube",
+        url: "https://www.youtube.com/watch?v=WwpUeTx1SOc",
+        caption: "Технические заметки и разборы",
+      },
+      {
+        platform: "github",
+        label: "GitHub @webkoth",
+        url: "https://github.com/webkoth",
+        caption: "Pet-проекты и open-source",
+      },
+      {
+        platform: "npm",
+        label: "npm @webkoth",
+        url: "https://www.npmjs.com/~webkoth",
+        caption: "MCP-серверы в публикации",
+      },
+      {
+        platform: "telegram",
+        label: "Telegram @abnorsky",
+        url: "https://t.me/abnorsky",
+        caption: "Личные контакты",
       },
     ],
     video: {

@@ -11,8 +11,8 @@ export function JsonLdPerson({ data, lang }: JsonLdPersonProps) {
   // Get current job from experience
   const currentJob = data.experience[0];
   
-  // Build skills array
-  const skills = data.skills.map(skill => skill.name);
+  // Build skills array — flatten categorized skills into a single list of names
+  const skills = data.skills.flatMap((cat) => cat.items.map((item) => item.name));
   
   // Build sameAs array (social profiles)
   const sameAs: string[] = [];

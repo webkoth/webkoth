@@ -84,8 +84,12 @@ function formatCVAsMarkdown(data: CVData, lang: "en" | "ru"): string {
   markdown += `## ${t.about}\n\n${data.about}\n\n`
 
   markdown += `## ${t.skills}\n\n`
-  data.skills.forEach((skill) => {
-    markdown += `- ${skill.name}: ${skill.level}%\n`
+  data.skills.forEach((cat) => {
+    markdown += `### ${cat.category}\n`
+    cat.items.forEach((item) => {
+      markdown += `- ${item.name}${item.maturity === "touch" ? " _(touch)_" : ""}\n`
+    })
+    markdown += `\n`
   })
   markdown += `\n`
 
