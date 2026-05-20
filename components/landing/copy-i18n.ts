@@ -4,10 +4,10 @@ export const copy = {
   ru: {
     nav: { brand: "webkoth · AI Integration" },
     hero: {
-      h1: "Внедряю ИИ в продукты",
-      sub: "От идеи до production. Один человек, полный цикл.",
+      h1: "Production AI в вашем продукте — за дни, не за кварталы.",
+      sub: "AI-агенты, RAG, MCP на готовом стеке. Стартапу — MVP за неделю. SMB — production-каскад. Агентству — MCP-разработка whitelabel. Прямой контакт с разработчиком.",
       specs: ["RAG", "LLM-агенты", "MCP", "multi-provider cascade"],
-      ctaPrimary: "Заказать аудит за 80 000 ₽",
+      ctaPrimary: "Заказать аудит",
       ctaSecondary: "Обсудить проект",
       metrics: [
         { value: 9, suffix: "+", label: "лет fullstack" },
@@ -163,10 +163,10 @@ await server.connect(new StdioServerTransport());`,
   en: {
     nav: { brand: "webkoth · AI Integration" },
     hero: {
-      h1: "I ship AI into products",
-      sub: "From idea to production. One person, end-to-end.",
+      h1: "Production AI in your product — in days, not quarters.",
+      sub: "AI agents, RAG, MCP on a ready stack. Founders — MVP in a week. SMB — production cascade. Agencies — whitelabel MCP development. Direct contact with the developer.",
       specs: ["RAG", "LLM agents", "MCP", "multi-provider cascade"],
-      ctaPrimary: "Get an audit · $1,000",
+      ctaPrimary: "Get an audit",
       ctaSecondary: "Discuss a project",
       metrics: [
         { value: 9, suffix: "+", label: "yrs fullstack" },
