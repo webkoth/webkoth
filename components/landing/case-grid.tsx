@@ -12,7 +12,10 @@ export function CaseGrid({ lang }: { lang: Lang }) {
         <StaggerGroup className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {t.items.map((item) => (
             <StaggerItem key={item.id}>
-              <CaseCard item={item} />
+              <CaseCard
+                item={item}
+                tagLabel={item.audienceTag ? t.tagLabels[item.audienceTag] : undefined}
+              />
             </StaggerItem>
           ))}
         </StaggerGroup>

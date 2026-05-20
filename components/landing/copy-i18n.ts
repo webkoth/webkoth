@@ -162,18 +162,26 @@ export const copy = {
     cases: {
       title: "Ещё кейсы",
       moreLink: "Полное портфолио и опыт → /minasarkisyan",
+      tagLabels: {
+        founder: "Для фаундера",
+        smb: "Для SMB",
+        agency: "Для агентств",
+      },
       items: [
-        { id: "case-skolkovo", title: "AI OCR ⇢ GPT", sub: "Skolkovo · Yandex stack · async queues", stack: ["Laravel 12", "Yandex OCR", "Yandex GPT"] },
-        { id: "case-landing", title: "AI Landing builder", sub: "Skolkovo · dual-provider", stack: ["Vue 3", "GPT-4o-mini", "NanoBanano"] },
-        { id: "case-mcp", title: "timeweb-mcp-server", sub: "Open-source · npm · GitHub", stack: ["Node.js", "TypeScript", "MCP SDK"], openSource: { npmPkg: "timeweb-mcp-server", ghOwner: "webkoth", ghRepo: "timeweb-mcp-server" } },
-        { id: "case-lenderkit", title: "Lenderkit fintech", sub: "Justcoded · team-lead", stack: ["PHP 8", "Laravel", "PostgreSQL"] },
-        { id: "case-erp", title: "ERP oil & gas", sub: "Itpelag · 500+ users", stack: ["Laravel", "Oracle", "Docker"] },
-        { id: "case-mpstats", title: "1+ TB analytics", sub: "MPSTATS · −20% latency, +30% throughput", stack: ["Laravel", "ClickHouse", "Pandas"] },
+        { id: "case-skolkovo", title: "AI OCR ⇢ GPT", sub: "Skolkovo · Yandex stack · async queues", stack: ["Laravel 12", "Yandex OCR", "Yandex GPT"], audienceTag: "smb" },
+        { id: "case-landing", title: "AI Landing builder", sub: "Skolkovo · dual-provider", stack: ["Vue 3", "GPT-4o-mini", "NanoBanano"], audienceTag: "founder" },
+        { id: "case-hubmarket-stocksync", title: "Маркетплейс-синхронизация остатков", sub: "HubMarket · запрос фаундера → прод за 3 дня", stack: ["Next.js", "Hono", "Playwright", "pg-boss"], audienceTag: "founder", link: "/ru/cases/hubmarket-stocksync" },
+        { id: "case-mcp", title: "timeweb-mcp-server", sub: "Open-source · npm · GitHub", stack: ["Node.js", "TypeScript", "MCP SDK"], openSource: { npmPkg: "timeweb-mcp-server", ghOwner: "webkoth", ghRepo: "timeweb-mcp-server" }, audienceTag: "agency" },
+        { id: "case-lenderkit", title: "Lenderkit fintech", sub: "Justcoded · team-lead", stack: ["PHP 8", "Laravel", "PostgreSQL"], audienceTag: "smb" },
+        { id: "case-erp", title: "ERP oil & gas", sub: "Itpelag · 500+ users", stack: ["Laravel", "Oracle", "Docker"], audienceTag: "smb" },
+        { id: "case-mpstats", title: "1+ TB analytics", sub: "MPSTATS · −20% latency, +30% throughput", stack: ["Laravel", "ClickHouse", "Pandas"], audienceTag: "smb" },
       ] as ReadonlyArray<{
         id: string;
         title: string;
         sub: string;
         stack: string[];
+        audienceTag: "founder" | "smb" | "agency";
+        link?: string;
         openSource?: { npmPkg: string; ghOwner: string; ghRepo: string };
       }>,
     },
@@ -410,18 +418,26 @@ await server.connect(new StdioServerTransport());`,
     cases: {
       title: "More cases",
       moreLink: "Full portfolio & background → /minasarkisyan",
+      tagLabels: {
+        founder: "For founders",
+        smb: "For SMB",
+        agency: "For agencies",
+      },
       items: [
-        { id: "case-skolkovo", title: "AI OCR ⇢ GPT", sub: "Skolkovo · Yandex stack · async queues", stack: ["Laravel 12", "Yandex OCR", "Yandex GPT"] },
-        { id: "case-landing", title: "AI Landing builder", sub: "Skolkovo · dual-provider", stack: ["Vue 3", "GPT-4o-mini", "NanoBanano"] },
-        { id: "case-mcp", title: "timeweb-mcp-server", sub: "Open-source · npm · GitHub", stack: ["Node.js", "TypeScript", "MCP SDK"], openSource: { npmPkg: "timeweb-mcp-server", ghOwner: "webkoth", ghRepo: "timeweb-mcp-server" } },
-        { id: "case-lenderkit", title: "Lenderkit fintech", sub: "Justcoded · team-lead", stack: ["PHP 8", "Laravel", "PostgreSQL"] },
-        { id: "case-erp", title: "ERP oil & gas", sub: "Itpelag · 500+ users", stack: ["Laravel", "Oracle", "Docker"] },
-        { id: "case-mpstats", title: "1+ TB analytics", sub: "MPSTATS · −20% latency, +30% throughput", stack: ["Laravel", "ClickHouse", "Pandas"] },
+        { id: "case-skolkovo", title: "AI OCR ⇢ GPT", sub: "Skolkovo · Yandex stack · async queues", stack: ["Laravel 12", "Yandex OCR", "Yandex GPT"], audienceTag: "smb" },
+        { id: "case-landing", title: "AI Landing builder", sub: "Skolkovo · dual-provider", stack: ["Vue 3", "GPT-4o-mini", "NanoBanano"], audienceTag: "founder" },
+        { id: "case-hubmarket-stocksync", title: "Marketplace stock sync", sub: "HubMarket · founder request → prod in 3 days", stack: ["Next.js", "Hono", "Playwright", "pg-boss"], audienceTag: "founder", link: "/en/cases/hubmarket-stocksync" },
+        { id: "case-mcp", title: "timeweb-mcp-server", sub: "Open-source · npm · GitHub", stack: ["Node.js", "TypeScript", "MCP SDK"], openSource: { npmPkg: "timeweb-mcp-server", ghOwner: "webkoth", ghRepo: "timeweb-mcp-server" }, audienceTag: "agency" },
+        { id: "case-lenderkit", title: "Lenderkit fintech", sub: "Justcoded · team-lead", stack: ["PHP 8", "Laravel", "PostgreSQL"], audienceTag: "smb" },
+        { id: "case-erp", title: "ERP oil & gas", sub: "Itpelag · 500+ users", stack: ["Laravel", "Oracle", "Docker"], audienceTag: "smb" },
+        { id: "case-mpstats", title: "1+ TB analytics", sub: "MPSTATS · −20% latency, +30% throughput", stack: ["Laravel", "ClickHouse", "Pandas"], audienceTag: "smb" },
       ] as ReadonlyArray<{
         id: string;
         title: string;
         sub: string;
         stack: string[];
+        audienceTag: "founder" | "smb" | "agency";
+        link?: string;
         openSource?: { npmPkg: string; ghOwner: string; ghRepo: string };
       }>,
     },
