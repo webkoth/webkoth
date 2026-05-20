@@ -75,6 +75,21 @@ Built with Next.js 16 (Turbopack), React 19, Tailwind v4, shadcn/ui (base-vega +
 
 ## Changelog
 
+### 2026-05-20 — CV redesign (`/[lang]/minasarkisyan`)
+
+- Two-layer structure: above-the-fold pitch + 8 deep sections (Production AI, Open Source / MCP, Skills, Experience, Portfolio, Education, Content, Final Hire CTA)
+- Single-column vertical-flow layout (dropped 2-column sidebar)
+- Removed 0-100 progress bars on skills; replaced with categorized chips + production/touch maturity markers
+- New sections: Production AI / LLM achievements, Open Source / MCP packages, Content & Channels, Hire CTA (x2 on page)
+- AI / AI-adjacent chips on portfolio cards; AI markers on Skolkovo + MPSTATS experience entries
+- SEO updates: keyword-dense title + description, 28 keywords array, robots index:true, expanded JSON-LD knowsAbout with AI engineering terms
+- New portfolio entry at top: HubMarket stocksync (B-Sprint case, founder 3-day delivery)
+
+**Reconciliation note:** `pitch` and `metrics` claim "3 MCP servers on npm" — only `timeweb-mcp-server` is verified public. Either lower the claim to 1, or ship Pet-projects Tier 1 Task 2 (4th MCP server) before publishing. The CV is otherwise ready to deploy.
+
+Plans: `docs/superpowers/plans/2026-05-20-cv-redesign.md`
+PRD: [#2](https://github.com/webkoth/webkoth/issues/2)
+
 ### 2026-05-20 — Landing rewrite
 
 - Hero repositioned to «Production AI в вашем продукте — за дни, не за кварталы.»
