@@ -12,7 +12,7 @@ export const copy = {
       metrics: [
         { value: 9, suffix: "+", label: "лет fullstack" },
         { value: 2.5, suffix: "", label: "года production AI" },
-        { value: 3, suffix: "", label: "MCP-сервера на npm" },
+        { value: 7, suffix: "", label: "MCP-сервера на npm" },
         { value: 5, suffix: "+", label: "продуктов в проде" },
       ],
     },
@@ -190,7 +190,7 @@ export const copy = {
       items: [
         { title: "От идеи до прода — без передач", body: "Работает один и тот же человек на всех слоях — фронт, бэк, AI, DevOps. В HubMarket это уже доказано: Founder + sole dev, цикл «запрос → прод» 3-4 дня.", proofLabel: "→ HubMarket", proofAnchor: "#featured" },
         { title: "Production-уровень, не «PoC и до свидания»", body: "Multi-provider cascade, очереди, наблюдаемость, откаты. Не «работает на демо», а «не падает в проде».", proofLabel: "→ Skolkovo loyalty", proofAnchor: "#case-skolkovo" },
-        { title: "Я живу в AI-стеке", body: "3 опубликованных MCP-сервера на npm. Ежедневно в Claude Code и Cursor. Это не курсы — рабочие инструменты.", proofLabel: "→ npm", proofHref: "https://www.npmjs.com/~webkoth" },
+        { title: "Я живу в AI-стеке", body: "7 опубликованных MCP-серверов на npm (включая 3 для маркетплейсов). Ежедневно в Claude Code и Cursor. Это не курсы — рабочие инструменты.", proofLabel: "→ npm", proofHref: "https://www.npmjs.com/~webkoth" },
       ] as ReadonlyArray<{
         title: string;
         body: string;
@@ -326,7 +326,7 @@ await server.connect(new StdioServerTransport());`,
       metrics: [
         { value: 9, suffix: "+", label: "yrs fullstack" },
         { value: 2.5, suffix: "", label: "yrs production AI" },
-        { value: 3, suffix: "", label: "npm MCP servers" },
+        { value: 7, suffix: "", label: "npm MCP servers" },
         { value: 5, suffix: "+", label: "products live" },
       ],
     },
@@ -504,7 +504,7 @@ await server.connect(new StdioServerTransport());`,
       items: [
         { title: "From idea to prod — no handoffs", body: "The same person works across all layers — front, back, AI, DevOps. Proven on HubMarket: Founder + sole dev, request → prod cycle 3-4 days.", proofLabel: "→ HubMarket", proofAnchor: "#featured" },
         { title: "Production-grade, not 'PoC and bye'", body: "Multi-provider cascade, queues, observability, rollbacks. Doesn't 'work on demo' — doesn't fall in prod.", proofLabel: "→ Skolkovo loyalty", proofAnchor: "#case-skolkovo" },
-        { title: "I live in the AI stack", body: "3 published MCP servers on npm. Daily in Claude Code and Cursor. Not courses — actual tools.", proofLabel: "→ npm", proofHref: "https://www.npmjs.com/~webkoth" },
+        { title: "I live in the AI stack", body: "7 published MCP servers on npm (including 3 for marketplaces). Daily in Claude Code and Cursor. Not courses — actual tools.", proofLabel: "→ npm", proofHref: "https://www.npmjs.com/~webkoth" },
       ] as ReadonlyArray<{
         title: string;
         body: string;

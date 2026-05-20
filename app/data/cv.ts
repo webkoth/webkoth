@@ -109,12 +109,12 @@ export const cvData: Record<"en" | "ru", CVData> = {
       github: "github.com/webkoth",
     },
     about:
-      "Senior Fullstack Engineer with 9 years of production experience in PHP/Laravel and the modern JS stack (TypeScript, React 19, Next.js 16, Vue 3). For the last 2.5 years deeply embedded in production AI: multi-provider LLM cascades (Claude + Gemini + Groq), RAG, AI agents, and 3 published MCP servers on npm. Currently supporting 5+ products in the Skolkovo School of Management ecosystem and building HubMarket — an AI-powered SaaS for marketplace sellers (Wildberries, Ozon, Yandex Market).",
-    pitch: "9 years fullstack in production, 2.5 years deep with LLMs. 3 published MCP servers on npm. Currently: Skolkovo School (5+ products on support) + HubMarket (AI-SaaS, founder + sole dev).",
+      "Senior Fullstack Engineer with 9 years of production experience in PHP/Laravel and the modern JS stack (TypeScript, React 19, Next.js 16, Vue 3). For the last 2.5 years deeply embedded in production AI: multi-provider LLM cascades (Claude + Gemini + Groq), RAG, AI agents, and 7 published MCP servers on npm (including 3 for marketplaces). Currently supporting 5+ products in the Skolkovo School of Management ecosystem and building HubMarket — an AI-powered SaaS for marketplace sellers (Wildberries, Ozon, Yandex Market).",
+    pitch: "9 years fullstack in production, 2.5 years deep with LLMs. 7 published MCP servers on npm (including 3 for marketplaces). Currently: Skolkovo School (5+ products on support) + HubMarket (AI-SaaS, founder + sole dev).",
     metrics: [
       { value: 9, suffix: "+", label: "yrs fullstack" },
       { value: 2.5, suffix: "", label: "yrs production AI" },
-      { value: 3, suffix: "", label: "npm MCP servers" },
+      { value: 7, suffix: "", label: "npm MCP servers" },
       { value: 5, suffix: "+", label: "products live" },
     ],
     chipGroups: [
@@ -124,7 +124,7 @@ export const cvData: Record<"en" | "ru", CVData> = {
       },
       {
         groupLabel: "AI / LLM",
-        chips: ["Anthropic Claude", "OpenAI", "Google Gemini", "Yandex GPT", "Groq", "MCP (3 servers on npm)", "Multi-provider cascade", "RAG", "structured output", "tool calling", "pgvector", "Vercel AI SDK"],
+        chips: ["Anthropic Claude", "OpenAI", "Google Gemini", "Yandex GPT", "Groq", "MCP (7 servers on npm, +3 for marketplaces)", "Multi-provider cascade", "RAG", "structured output", "tool calling", "pgvector", "Vercel AI SDK"],
       },
       {
         groupLabel: "Frontend",
@@ -157,7 +157,7 @@ export const cvData: Record<"en" | "ru", CVData> = {
           { name: "Google Gemini", maturity: "production" },
           { name: "Yandex GPT", maturity: "production" },
           { name: "Groq", maturity: "production" },
-          { name: "MCP (3 servers on npm)", maturity: "production" },
+          { name: "MCP (7 servers on npm)", maturity: "production" },
           { name: "RAG / pgvector", maturity: "production" },
           { name: "Multi-provider cascade", maturity: "production" },
           { name: "structured output / tool calling", maturity: "production" },
@@ -226,7 +226,7 @@ export const cvData: Record<"en" | "ru", CVData> = {
       },
       {
         title: "MCP servers for agentic automation",
-        body: "3 MCP servers published on npm. Full coverage of Timeweb Cloud API (servers, DBs, K8s, S3, DNS). Used by AI agents from Claude Code / Cursor.",
+        body: "7 MCP servers published on npm, including 3 marketplace-specific ones (WB, Ozon, Yandex Market) on top of Timeweb Cloud API coverage (servers, DBs, K8s, S3, DNS). Used by AI agents from Claude Code / Cursor.",
         evidence: "npmjs.com/~webkoth",
       },
       {
@@ -533,12 +533,12 @@ export const cvData: Record<"en" | "ru", CVData> = {
       github: "github.com/webkoth",
     },
     about:
-      "Senior Fullstack-инженер с 9 годами production-опыта в PHP/Laravel и современном JS-стеке (TypeScript, React 19, Next.js 16, Vue 3). Последние 2.5 года плотно работаю с LLM в продакшене: мульти-провайдерные каскады (Claude + Gemini + Groq), RAG, AI-агенты и 3 опубликованных MCP-сервера на npm. Сейчас support 5+ продуктов в Школе управления Сколково и AI-SaaS HubMarket для селлеров маркетплейсов (Wildberries, Ozon, Yandex Market).",
-    pitch: "9 лет в проде fullstack, 2.5 года плотно с LLM. 3 опубликованных MCP-сервера на npm. Сейчас — Сколково (5+ продуктов в поддержке) + HubMarket (AI-SaaS, founder + sole dev).",
+      "Senior Fullstack-инженер с 9 годами production-опыта в PHP/Laravel и современном JS-стеке (TypeScript, React 19, Next.js 16, Vue 3). Последние 2.5 года плотно работаю с LLM в продакшене: мульти-провайдерные каскады (Claude + Gemini + Groq), RAG, AI-агенты и 7 опубликованных MCP-серверов на npm (включая 3 для маркетплейсов). Сейчас support 5+ продуктов в Школе управления Сколково и AI-SaaS HubMarket для селлеров маркетплейсов (Wildberries, Ozon, Yandex Market).",
+    pitch: "9 лет в проде fullstack, 2.5 года плотно с LLM. 7 опубликованных MCP-серверов на npm (включая 3 для маркетплейсов). Сейчас — Сколково (5+ продуктов в поддержке) + HubMarket (AI-SaaS, founder + sole dev).",
     metrics: [
       { value: 9, suffix: "+", label: "лет fullstack" },
       { value: 2.5, suffix: "", label: "года production AI" },
-      { value: 3, suffix: "", label: "MCP-сервера на npm" },
+      { value: 7, suffix: "", label: "MCP-сервера на npm" },
       { value: 5, suffix: "+", label: "продуктов в проде" },
     ],
     chipGroups: [
@@ -548,7 +548,7 @@ export const cvData: Record<"en" | "ru", CVData> = {
       },
       {
         groupLabel: "AI / LLM",
-        chips: ["Anthropic Claude", "OpenAI", "Google Gemini", "Yandex GPT", "Groq", "MCP (3 серверов на npm)", "Multi-provider cascade", "RAG", "structured output", "tool calling", "pgvector", "Vercel AI SDK"],
+        chips: ["Anthropic Claude", "OpenAI", "Google Gemini", "Yandex GPT", "Groq", "MCP (7 серверов на npm, +3 для маркетплейсов)", "Multi-provider cascade", "RAG", "structured output", "tool calling", "pgvector", "Vercel AI SDK"],
       },
       {
         groupLabel: "Frontend",
@@ -581,7 +581,7 @@ export const cvData: Record<"en" | "ru", CVData> = {
           { name: "Google Gemini", maturity: "production" },
           { name: "Yandex GPT", maturity: "production" },
           { name: "Groq", maturity: "production" },
-          { name: "MCP (3 серверов на npm)", maturity: "production" },
+          { name: "MCP (7 серверов на npm)", maturity: "production" },
           { name: "RAG / pgvector", maturity: "production" },
           { name: "Multi-provider cascade", maturity: "production" },
           { name: "structured output / tool calling", maturity: "production" },
@@ -650,7 +650,7 @@ export const cvData: Record<"en" | "ru", CVData> = {
       },
       {
         title: "MCP-серверы для агентной автоматизации",
-        body: "3 опубликованных MCP-сервера на npm. Полная поддержка Timeweb Cloud API (серверы, БД, K8s, S3, DNS). Используется AI-агентами из Claude Code / Cursor.",
+        body: "7 опубликованных MCP-серверов на npm: включая 3 специализированных для маркетплейсов (WB, Ozon, Yandex Market) поверх полной поддержки Timeweb Cloud API (серверы, БД, K8s, S3, DNS). Используется AI-агентами из Claude Code / Cursor.",
         evidence: "npmjs.com/~webkoth",
       },
       {

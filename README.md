@@ -96,7 +96,7 @@ PRD: [#3](https://github.com/webkoth/webkoth/issues/3)
 - SEO updates: keyword-dense title + description, 28 keywords array, robots index:true, expanded JSON-LD knowsAbout with AI engineering terms
 - New portfolio entry at top: HubMarket stocksync (B-Sprint case, founder 3-day delivery)
 
-**Reconciliation note:** `pitch` and `metrics` claim "3 MCP servers on npm" — only `timeweb-mcp-server` is verified public. Either lower the claim to 1, or ship Pet-projects Tier 1 Task 2 (4th MCP server) before publishing. The CV is otherwise ready to deploy.
+**MCP count update (resolved 2026-05-20):** `pitch`/`metrics`/`chipGroups` now reflect **7 MCP servers on npm (including 3 for marketplaces)**. Previous reconciliation flag closed.
 
 Plans: `docs/superpowers/plans/2026-05-20-cv-redesign.md`
 PRD: [#2](https://github.com/webkoth/webkoth/issues/2)
