@@ -17,11 +17,48 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: {
       default: lang === "en"
-        ? "Minas Sarkisyan - Fullstack Engineer | CV"
-        : "Минас Саркисян - Fullstack Engineer | Резюме",
+        ? "Minas Sarkisyan — Senior Fullstack & AI Engineer | Python, MCP, RAG, LLM"
+        : "Минас Саркисян — Senior Fullstack & AI Engineer | Python, MCP, RAG, LLM",
       template: "%s | Minas Sarkisyan"
     },
-    description: data.about,
+    description: lang === "en"
+      ? "Senior Fullstack / AI Engineer. 9 years in production. Python, FastAPI, TypeScript, React, PHP. 2.5 years deep with LLMs: MCP (3 npm servers), multi-provider cascade, RAG, agents. Currently: Skolkovo School (5+ products) + HubMarket (AI-SaaS founder). Open to roles and contract work."
+      : "Senior Fullstack / AI-инженер. 9 лет в проде. Python, FastAPI, TypeScript, React, PHP. 2.5 года плотно с LLM: MCP (3 npm-сервера), multi-provider cascade, RAG, агенты. Сейчас: Сколково (5+ продуктов) + HubMarket (AI-SaaS founder). Открыт к вакансиям и контрактной работе.",
+    keywords: [
+      "Senior Fullstack Engineer",
+      "AI Engineer",
+      "Python",
+      "FastAPI",
+      "asyncio",
+      "TypeScript",
+      "Node.js",
+      "React",
+      "Next.js",
+      "PHP",
+      "Laravel",
+      "LLM",
+      "Anthropic Claude",
+      "OpenAI",
+      "MCP",
+      "Model Context Protocol",
+      "RAG",
+      "pgvector",
+      "vector database",
+      "Multi-provider cascade",
+      "tool calling",
+      "structured output",
+      "Docker",
+      "PostgreSQL",
+      "production AI",
+      "open to relocation",
+      "remote",
+      lang === "en" ? "Krasnodar" : "Краснодар",
+    ],
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: { index: true, follow: true },
+    },
     alternates: {
       canonical: `${baseUrl}/${lang}/minasarkisyan`,
       languages: {

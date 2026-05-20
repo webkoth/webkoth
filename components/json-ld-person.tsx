@@ -12,7 +12,16 @@ export function JsonLdPerson({ data, lang }: JsonLdPersonProps) {
   const currentJob = data.experience[0];
   
   // Build skills array — flatten categorized skills into a single list of names
-  const skills = data.skills.flatMap((cat) => cat.items.map((item) => item.name));
+  // and augment with JD-fit keywords that may not be in the categorized skills
+  const categorizedSkills = data.skills.flatMap((cat) => cat.items.map((item) => item.name));
+  const additionalKeywords = [
+    "Production AI Engineering",
+    "Large Language Models",
+    "Retrieval-Augmented Generation (RAG)",
+    "LLM agents and tool calling",
+    "Multi-provider LLM cascade",
+  ];
+  const skills = Array.from(new Set([...additionalKeywords, ...categorizedSkills]));
   
   // Build sameAs array (social profiles)
   const sameAs: string[] = [];
