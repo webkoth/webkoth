@@ -8,8 +8,8 @@ import { cn } from "@/lib/utils";
 import type { Lang } from "./copy-i18n";
 
 const stickyCopy = {
-  ru: { label: "Аудит за 80 000 ₽" },
-  en: { label: "Audit · $1,000" },
+  ru: { label: "Заказать аудит" },
+  en: { label: "Get an audit" },
 } as const;
 
 export function StickyCta({ lang }: { lang: Lang }) {
@@ -51,7 +51,7 @@ export function StickyCta({ lang }: { lang: Lang }) {
           className="fixed bottom-4 right-4 z-40 md:bottom-6 md:right-6"
         >
           <Link
-            href="#form?package=audit"
+            href="#form?package=auditOnly"
             className={cn(
               buttonVariants({ variant: "default", size: "lg" }),
               "shadow-xl shadow-primary/20 gap-2 group",

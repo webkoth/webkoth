@@ -34,7 +34,7 @@ export function Hero({ lang }: { lang: Lang }) {
             </p>
 
             <div className="mt-10 flex flex-col sm:flex-row gap-3">
-              <Link href="#form?package=audit" className={buttonVariants({ size: "lg" })}>
+              <Link href="#form?package=auditOnly" className={buttonVariants({ size: "lg" })}>
                 {t.hero.ctaPrimary}
               </Link>
               <Link href="#form" className={buttonVariants({ size: "lg", variant: "outline" })}>

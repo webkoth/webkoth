@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Check } from "lucide-react";
-import { packages } from "@/lib/landing/pricing";
+import { packageIds } from "@/lib/landing/pricing";
 import { copy, type Lang } from "./copy-i18n";
 import { SpotlightCard } from "./spotlight-card";
 import { StaggerGroup, StaggerItem } from "./stagger";
@@ -47,17 +47,18 @@ export function ProcessPricing({ lang }: { lang: Lang }) {
         </div>
 
         <div id="pricing" className="scroll-mt-20">
-          <h3 className="text-xl md:text-2xl font-semibold tracking-tight mb-10">
+          <h3 className="text-xl md:text-2xl font-semibold tracking-tight mb-2">
             {pricing.title}
           </h3>
+          <p className="text-sm md:text-base text-muted-foreground mb-10 max-w-3xl">
+            {pricing.subtitle}
+          </p>
           <StaggerGroup className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {packages.map((p) => {
-              const isFeatured = p.id === "mvp";
-              const data = pricing.packages[p.id];
-              const price = lang === "ru" ? p.priceRu : p.priceEn;
-              const duration = lang === "ru" ? p.duration.ru : p.duration.en;
+            {packageIds.map((id) => {
+              const isFeatured = id === "integration";
+              const data = pricing.packages[id];
               return (
-                <StaggerItem key={p.id} className="h-full">
+                <StaggerItem key={id} className="h-full">
                   <SpotlightCard
                     className={cn("h-full rounded-3xl", isFeatured && "md:-translate-y-2")}
                   >
@@ -68,15 +69,17 @@ export function ProcessPricing({ lang }: { lang: Lang }) {
                       )}
                     >
                       <CardContent className="p-6 flex flex-col flex-1 gap-4">
-                        <div className="flex items-start justify-between">
-                          <h3 className="text-xl font-semibold">{data.name}</h3>
-                          <Badge variant={isFeatured ? "default" : "secondary"}>
+                        <div className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
+                          {data.audience}
+                        </div>
+                        <h3 className="text-xl font-semibold">{data.name}</h3>
+                        <div>
+                          <Badge
+                            variant={isFeatured ? "default" : "secondary"}
+                            className="text-sm font-mono tabular-nums"
+                          >
                             {data.pill}
                           </Badge>
-                        </div>
-                        <div>
-                          <div className="text-3xl font-semibold tabular-nums">{price}</div>
-                          <div className="text-sm text-muted-foreground mt-1">{duration}</div>
                         </div>
                         <ul className="flex-1 space-y-2">
                           {data.items.map((item) => (
@@ -86,8 +89,25 @@ export function ProcessPricing({ lang }: { lang: Lang }) {
                             </li>
                           ))}
                         </ul>
+                        {data.excludes.length > 0 && (
+                          <div className="border-t border-border pt-3">
+                            <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-2">
+                              {pricing.excludesLabel}
+                            </div>
+                            <ul className="space-y-1">
+                              {data.excludes.map((item) => (
+                                <li
+                                  key={item}
+                                  className="text-xs text-muted-foreground leading-snug"
+                                >
+                                  · {item}
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
                         <Link
-                          href={`#form?package=${p.id}`}
+                          href={`#form?package=${id}`}
                           className={buttonVariants({
                             variant: isFeatured ? "default" : "outline",
                           })}

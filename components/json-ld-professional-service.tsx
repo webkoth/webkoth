@@ -1,4 +1,8 @@
-import { packages } from "@/lib/landing/pricing";
+const offerData: { name: string; priceRu: string; priceEn: string }[] = [
+  { name: "AI-MVP Sprint", priceRu: "150000", priceEn: "1500" },
+  { name: "Production AI Integration", priceRu: "600000", priceEn: "6000" },
+  { name: "Subcontract / Whitelabel", priceRu: "120000", priceEn: "1200" },
+];
 
 export function JsonLdProfessionalService({ lang }: { lang: "en" | "ru" }) {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://webkoth.com";
@@ -18,11 +22,14 @@ export function JsonLdProfessionalService({ lang }: { lang: "en" | "ru" }) {
       sameAs: ["https://github.com/webkoth", "https://t.me/abnorsky"],
     },
     areaServed: { "@type": "Place", name: lang === "ru" ? "Россия и зарубежные удалённые проекты" : "Russia and worldwide remote" },
-    offers: packages.map((p) => ({
+    offers: offerData.map((o) => ({
       "@type": "Offer",
-      name: p.id,
-      price: lang === "ru" ? p.priceRu : p.priceEn,
-      priceCurrency: lang === "ru" ? "RUB" : "USD",
+      name: o.name,
+      priceSpecification: {
+        "@type": "PriceSpecification",
+        minPrice: lang === "ru" ? o.priceRu : o.priceEn,
+        priceCurrency: lang === "ru" ? "RUB" : "USD",
+      },
     })),
   };
 
