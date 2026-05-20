@@ -11,41 +11,11 @@ import { SpotlightCard } from "./spotlight-card";
 import { StaggerGroup, StaggerItem } from "./stagger";
 
 export function ProcessPricing({ lang }: { lang: Lang }) {
-  const roadmap = copy[lang].roadmap;
   const pricing = copy[lang].pricing;
 
   return (
     <section id="process-pricing" className="border-t border-border bg-muted/20">
-      <div className="max-w-6xl mx-auto px-4 md:px-8 py-20 md:py-28 space-y-20">
-        <div>
-          <div className="max-w-2xl mb-14">
-            <h2 className="text-2xl md:text-4xl font-semibold tracking-tight mb-3">
-              {roadmap.title}
-            </h2>
-            <p className="text-muted-foreground">{roadmap.sub}</p>
-          </div>
-
-          <StaggerGroup className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-4">
-            {roadmap.steps.map((s) => (
-              <StaggerItem key={s.num}>
-                <article className="relative h-full pt-10">
-                  <span
-                    aria-hidden
-                    className="absolute -top-2 left-0 font-serif italic text-5xl md:text-6xl text-muted-foreground/30 leading-none"
-                  >
-                    {s.num}
-                  </span>
-                  <div className="relative border-l-2 border-primary/30 pl-4 pt-2">
-                    <h3 className="text-base font-semibold mb-1">{s.title}</h3>
-                    <p className="font-mono text-xs text-muted-foreground mb-3">{s.pill}</p>
-                    <p className="text-sm text-muted-foreground leading-relaxed">{s.body}</p>
-                  </div>
-                </article>
-              </StaggerItem>
-            ))}
-          </StaggerGroup>
-        </div>
-
+      <div className="max-w-6xl mx-auto px-4 md:px-8 py-20 md:py-28">
         <div id="pricing" className="scroll-mt-20">
           <h3 className="text-xl md:text-2xl font-semibold tracking-tight mb-2">
             {pricing.title}
