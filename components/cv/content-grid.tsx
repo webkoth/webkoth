@@ -1,13 +1,13 @@
 "use client";
 
 import type { CVData } from "@/app/data/cv";
-import { Youtube, Github, Send, Package, FileText, type LucideIcon } from "lucide-react";
+import { Video, Code2, Box, MessageCircle, FileText, type LucideIcon } from "lucide-react";
 
 const IconMap: Record<string, LucideIcon> = {
-  youtube: Youtube,
-  github: Github,
-  npm: Package,
-  telegram: Send,
+  youtube: Video,
+  github: Code2,
+  npm: Box,
+  telegram: MessageCircle,
   blog: FileText,
 };
 
