@@ -5,6 +5,8 @@ import { FeaturedCase } from "@/components/landing/featured-case";
 import { CaseGrid } from "@/components/landing/case-grid";
 import { ClientVoices } from "@/components/landing/client-voices";
 import { WhyMe } from "@/components/landing/why-me";
+import { TechStack } from "@/components/landing/tech-stack";
+import { RoadmapTimeline } from "@/components/landing/roadmap-timeline";
 import { ProcessPricing } from "@/components/landing/process-pricing";
 import { Faq } from "@/components/landing/faq";
 import { LeadForm } from "@/components/landing/lead-form";
@@ -26,6 +28,8 @@ export default async function Home({ params }: Props) {
       <SectionReveal><CaseGrid lang={lang} /></SectionReveal>
       <SectionReveal><ClientVoices lang={lang} /></SectionReveal>
       <SectionReveal><WhyMe lang={lang} /></SectionReveal>
+      <SectionReveal><TechStack lang={lang} /></SectionReveal>
+      <SectionReveal><RoadmapTimeline lang={lang} /></SectionReveal>
       <SectionReveal><ProcessPricing lang={lang} /></SectionReveal>
       <SectionReveal><Faq lang={lang} /></SectionReveal>
       <SectionReveal><LeadForm lang={lang} /></SectionReveal>
