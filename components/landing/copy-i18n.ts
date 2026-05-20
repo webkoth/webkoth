@@ -155,6 +155,7 @@ export const copy = {
         "3 marketplaces (WB, Ozon, Yandex Market)",
         "0 LLM downtime через cascade",
         "End-to-end один человек",
+        "Цикл «запрос фичи → прод»: 3-4 дня",
       ],
       stack: ["Next.js 16", "React 19", "Hono", "Prisma", "pg-boss", "Vercel AI SDK", "Python/FastAPI", "Playwright", "ЮKassa", "Cloudflare Workers"],
     },
@@ -398,7 +399,12 @@ await server.connect(new StdioServerTransport());`,
     featured: {
       title: "Case: HubMarket",
       sub: "AI-SaaS for marketplace sellers · Founder + sole developer · production",
-      metrics: ["3 marketplaces (WB, Ozon, Yandex Market)", "0 LLM downtime via cascade", "End-to-end, one person"],
+      metrics: [
+        "3 marketplaces (WB, Ozon, Yandex Market)",
+        "0 LLM downtime via cascade",
+        "End-to-end, one person",
+        "Feature request → prod cycle: 3-4 days",
+      ],
       stack: ["Next.js 16", "React 19", "Hono", "Prisma", "pg-boss", "Vercel AI SDK", "Python/FastAPI", "Playwright", "YooKassa", "Cloudflare Workers"],
     },
     cases: {
