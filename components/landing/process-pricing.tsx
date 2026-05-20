@@ -37,7 +37,7 @@ export function ProcessPricing({ lang }: { lang: Lang }) {
                   </span>
                   <div className="relative border-l-2 border-primary/30 pl-4 pt-2">
                     <h3 className="text-base font-semibold mb-1">{s.title}</h3>
-                    <p className="font-mono text-xs text-muted-foreground mb-3">{s.time}</p>
+                    <p className="font-mono text-xs text-muted-foreground mb-3">{s.pill}</p>
                     <p className="text-sm text-muted-foreground leading-relaxed">{s.body}</p>
                   </div>
                 </article>
