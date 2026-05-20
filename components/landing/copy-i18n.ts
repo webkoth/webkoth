@@ -199,6 +199,38 @@ export const copy = {
         proofHref?: string;
       }>,
     },
+    techStack: {
+      eyebrow: "СТЕК",
+      title: "Работаю в вашем стеке",
+      sub: "Без «давайте перепишем на новое». Адаптируюсь к вашему бэкенду, фронту, AI-провайдеру и инфре.",
+      diagramTitle: "Пример архитектуры: multi-provider cascade",
+      categories: [
+        {
+          name: "Бэкенд",
+          items: ["PHP / Laravel", "Node.js / Hono", "Python / FastAPI", "Go (touch)"],
+        },
+        {
+          name: "Фронтенд",
+          items: ["React / Next.js", "Vue 3 / Inertia", "TypeScript", "Tailwind", "shadcn/ui"],
+        },
+        {
+          name: "AI-провайдеры",
+          items: ["Anthropic Claude", "OpenAI", "Google Gemini", "Groq", "Yandex GPT", "self-hosted (Ollama / vLLM)"],
+        },
+        {
+          name: "AI-стек",
+          items: ["Vercel AI SDK", "MCP", "pgvector", "structured output", "tool calling", "RAG"],
+        },
+        {
+          name: "Базы и кэш",
+          items: ["PostgreSQL", "MySQL", "ClickHouse", "Redis", "MongoDB"],
+        },
+        {
+          name: "Инфра и эксплуатация",
+          items: ["Docker", "Nginx", "Cloudflare", "Vercel", "Linux", "Sentry", "pg-boss / Horizon"],
+        },
+      ],
+    },
     form: {
       title: "Заявка на предварительный просчёт",
       altChannelsTop: "Если короче — забронируйте 15-мин Discovery:",
@@ -480,6 +512,38 @@ await server.connect(new StdioServerTransport());`,
         proofAnchor?: string;
         proofHref?: string;
       }>,
+    },
+    techStack: {
+      eyebrow: "STACK",
+      title: "I work in your stack",
+      sub: "No «let's rewrite to the new shiny thing». I adapt to your backend, frontend, AI provider, and infra.",
+      diagramTitle: "Example architecture: multi-provider cascade",
+      categories: [
+        {
+          name: "Backend",
+          items: ["PHP / Laravel", "Node.js / Hono", "Python / FastAPI", "Go (touch)"],
+        },
+        {
+          name: "Frontend",
+          items: ["React / Next.js", "Vue 3 / Inertia", "TypeScript", "Tailwind", "shadcn/ui"],
+        },
+        {
+          name: "AI providers",
+          items: ["Anthropic Claude", "OpenAI", "Google Gemini", "Groq", "Yandex GPT", "self-hosted (Ollama / vLLM)"],
+        },
+        {
+          name: "AI stack",
+          items: ["Vercel AI SDK", "MCP", "pgvector", "structured output", "tool calling", "RAG"],
+        },
+        {
+          name: "Databases & cache",
+          items: ["PostgreSQL", "MySQL", "ClickHouse", "Redis", "MongoDB"],
+        },
+        {
+          name: "Infra & ops",
+          items: ["Docker", "Nginx", "Cloudflare", "Vercel", "Linux", "Sentry", "pg-boss / Horizon"],
+        },
+      ],
     },
     form: {
       title: "Project inquiry",
