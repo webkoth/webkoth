@@ -1,8 +1,6 @@
 "use client";
 
 import { CVData } from "@/app/data/cv";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Wrench } from "lucide-react";
 
 interface SkillsProps {
   data: CVData;
@@ -10,18 +8,13 @@ interface SkillsProps {
 }
 
 export function Skills({ data, lang }: SkillsProps) {
-  const title = lang === "en" ? "Technical Skills" : "Технические навыки";
+  const title = lang === "en" ? "Skills" : "Навыки";
   const touchLabel = "touch";
 
   return (
-    <Card className="p-0 gap-0">
-      <CardHeader className="bg-primary/10 border-b border-primary/20 px-6 py-4">
-        <CardTitle className="flex items-center gap-2 text-primary">
-          <Wrench className="w-5 h-5" />
-          {title}
-        </CardTitle>
-      </CardHeader>
-      <CardContent className="p-6 space-y-5">
+    <section className="space-y-5">
+      <h2 className="text-2xl md:text-3xl font-semibold tracking-tight">{title}</h2>
+      <div className="space-y-5">
         {data.skills.map((cat) => (
           <div key={cat.category}>
             <div className="mb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
@@ -47,7 +40,7 @@ export function Skills({ data, lang }: SkillsProps) {
             </div>
           </div>
         ))}
-      </CardContent>
-    </Card>
+      </div>
+    </section>
   );
 }

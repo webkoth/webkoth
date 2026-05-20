@@ -1,6 +1,4 @@
 import { CVData } from "@/app/data/cv";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { GraduationCap } from "lucide-react";
 
 interface EducationProps {
   data: CVData;
@@ -8,21 +6,16 @@ interface EducationProps {
 }
 
 export function Education({ data, lang }: EducationProps) {
+  const title = lang === "en" ? "Education" : "Образование";
+
   return (
-    <Card className="p-0 gap-0">
-      <CardHeader className="bg-primary/10 border-b border-primary/20 px-6 py-4">
-        <CardTitle className="flex items-center gap-2 text-primary">
-          <GraduationCap className="w-5 h-5" />
-          {lang === "en" ? "Education" : "Образование"}
-        </CardTitle>
-      </CardHeader>
-      <CardContent className="p-6">
-         <div className="space-y-1">
-            <h3 className="font-bold">{data.education.university}</h3>
-            <p className="text-muted-foreground">{data.education.degree}</p>
-            <p className="text-sm text-muted-foreground">{data.education.faculty}</p>
-         </div>
-      </CardContent>
-    </Card>
+    <section className="space-y-5">
+      <h2 className="text-2xl md:text-3xl font-semibold tracking-tight">{title}</h2>
+      <div className="rounded-xl border border-border bg-card p-5 space-y-1">
+        <h3 className="font-bold">{data.education.university}</h3>
+        <p className="text-muted-foreground">{data.education.degree}</p>
+        <p className="text-sm text-muted-foreground">{data.education.faculty}</p>
+      </div>
+    </section>
   );
 }
