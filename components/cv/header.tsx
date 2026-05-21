@@ -7,8 +7,8 @@ interface HeaderProps {
 
 export function Header({ data }: HeaderProps) {
   return (
-    <header className="flex flex-col gap-6 md:flex-row md:items-start">
-      <div className="size-28 md:size-32 relative shrink-0">
+    <header className="flex flex-col items-center gap-5 text-center md:flex-row md:items-start md:gap-6 md:text-left">
+      <div className="size-24 md:size-28 relative shrink-0">
         <div className="absolute inset-0 rounded-full bg-muted overflow-hidden border-4 border-background shadow-xl">
           <Image
             src="/images/profile.jpg"
@@ -20,25 +20,25 @@ export function Header({ data }: HeaderProps) {
         </div>
       </div>
 
-      <div className="flex-1 space-y-3">
+      <div className="flex-1 space-y-2">
         <div>
           <h1 className="text-3xl md:text-4xl font-bold tracking-tight">{data.name}</h1>
-          <p className="mt-1 text-lg font-semibold text-foreground md:text-xl">{data.role}</p>
-          <p className="mt-0.5 text-sm text-muted-foreground md:text-base">{data.roleSub}</p>
-          <p className="mt-0.5 text-xs text-muted-foreground md:text-sm">{data.location}</p>
+          <p className="mt-0.5 text-base font-semibold text-foreground md:text-lg">{data.role}</p>
+          <p className="text-xs text-muted-foreground md:text-sm">{data.roleSub}</p>
+          <p className="text-xs text-muted-foreground">{data.location}</p>
         </div>
 
-        <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground md:text-base">
+        <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
           {data.pitch}
         </p>
 
-        <div className="flex flex-wrap gap-5 md:gap-7 pt-1">
+        <div className="flex flex-wrap justify-center gap-4 pt-2 md:justify-start md:gap-6">
           {data.metrics.map((m) => (
             <div key={m.label}>
-              <div className="text-2xl font-bold tabular-nums md:text-3xl">
+              <div className="text-xl font-bold tabular-nums md:text-2xl">
                 {m.value}{m.suffix}
               </div>
-              <div className="text-xs text-muted-foreground md:text-sm">{m.label}</div>
+              <div className="text-[11px] text-muted-foreground md:text-xs">{m.label}</div>
             </div>
           ))}
         </div>
