@@ -16,7 +16,7 @@ export function Portfolio({ data, lang }: PortfolioProps) {
     <section className="space-y-5">
       <h2 className="text-2xl md:text-3xl font-semibold tracking-tight">{title}</h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {data.portfolio.map((project, index) => (
           <div
             key={index}
