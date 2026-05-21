@@ -53,7 +53,7 @@ function AltChannels({
           rel="noopener noreferrer"
           className="text-foreground underline-offset-4 hover:text-primary hover:underline"
         >
-          📅 {calendarLabel} →
+          📅 {calendarLabel}
         </a>
         <a
           href={contacts.telegram}
@@ -61,7 +61,7 @@ function AltChannels({
           rel="noopener noreferrer"
           className="text-foreground underline-offset-4 hover:text-primary hover:underline"
         >
-          ✈️ {telegramLabel} →
+          ✈️ {telegramLabel}
         </a>
       </div>
     </div>

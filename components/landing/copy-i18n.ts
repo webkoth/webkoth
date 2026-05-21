@@ -161,7 +161,7 @@ export const copy = {
     },
     cases: {
       title: "Ещё кейсы",
-      moreLink: "Полное портфолио и опыт → /minasarkisyan",
+      moreLink: "Полное портфолио и опыт: /minasarkisyan",
       tagLabels: {
         founder: "Для фаундера",
         smb: "Для SMB",
@@ -188,9 +188,9 @@ export const copy = {
     why: {
       title: "Почему именно так",
       items: [
-        { title: "От идеи до прода — без передач", body: "Работает один и тот же человек на всех слоях — фронт, бэк, AI, DevOps. В HubMarket это уже доказано: Founder + sole dev, цикл «запрос → прод» 3-4 дня.", proofLabel: "→ HubMarket", proofAnchor: "#featured" },
-        { title: "Production-уровень, не «PoC и до свидания»", body: "Multi-provider cascade, очереди, наблюдаемость, откаты. Не «работает на демо», а «не падает в проде».", proofLabel: "→ Skolkovo loyalty", proofAnchor: "#case-skolkovo" },
-        { title: "Я живу в AI-стеке", body: "7 опубликованных MCP-серверов на npm (включая 3 для маркетплейсов). Ежедневно в Claude Code и Cursor. Это не курсы — рабочие инструменты.", proofLabel: "→ npm", proofHref: "https://www.npmjs.com/~webkoth" },
+        { title: "От идеи до прода — без передач", body: "Работает один и тот же человек на всех слоях — фронт, бэк, AI, DevOps. В HubMarket это уже доказано: Founder + sole dev, цикл «запрос → прод» 3-4 дня.", proofLabel: "HubMarket", proofAnchor: "#featured" },
+        { title: "Production-уровень, не «PoC и до свидания»", body: "Multi-provider cascade, очереди, наблюдаемость, откаты. Не «работает на демо», а «не падает в проде».", proofLabel: "Skolkovo loyalty", proofAnchor: "#case-skolkovo" },
+        { title: "Я живу в AI-стеке", body: "7 опубликованных MCP-серверов на npm (включая 3 для маркетплейсов). Ежедневно в Claude Code и Cursor. Это не курсы — рабочие инструменты.", proofLabel: "npm", proofHref: "https://www.npmjs.com/~webkoth" },
       ] as ReadonlyArray<{
         title: string;
         body: string;
@@ -475,7 +475,7 @@ await server.connect(new StdioServerTransport());`,
     },
     cases: {
       title: "More cases",
-      moreLink: "Full portfolio & background → /minasarkisyan",
+      moreLink: "Full portfolio & background: /minasarkisyan",
       tagLabels: {
         founder: "For founders",
         smb: "For SMB",
@@ -502,9 +502,9 @@ await server.connect(new StdioServerTransport());`,
     why: {
       title: "Why this works",
       items: [
-        { title: "From idea to prod — no handoffs", body: "The same person works across all layers — front, back, AI, DevOps. Proven on HubMarket: Founder + sole dev, request → prod cycle 3-4 days.", proofLabel: "→ HubMarket", proofAnchor: "#featured" },
-        { title: "Production-grade, not 'PoC and bye'", body: "Multi-provider cascade, queues, observability, rollbacks. Doesn't 'work on demo' — doesn't fall in prod.", proofLabel: "→ Skolkovo loyalty", proofAnchor: "#case-skolkovo" },
-        { title: "I live in the AI stack", body: "7 published MCP servers on npm (including 3 for marketplaces). Daily in Claude Code and Cursor. Not courses — actual tools.", proofLabel: "→ npm", proofHref: "https://www.npmjs.com/~webkoth" },
+        { title: "From idea to prod — no handoffs", body: "The same person works across all layers — front, back, AI, DevOps. Proven on HubMarket: Founder + sole dev, request → prod cycle 3-4 days.", proofLabel: "HubMarket", proofAnchor: "#featured" },
+        { title: "Production-grade, not 'PoC and bye'", body: "Multi-provider cascade, queues, observability, rollbacks. Doesn't 'work on demo' — doesn't fall in prod.", proofLabel: "Skolkovo loyalty", proofAnchor: "#case-skolkovo" },
+        { title: "I live in the AI stack", body: "7 published MCP servers on npm (including 3 for marketplaces). Daily in Claude Code and Cursor. Not courses — actual tools.", proofLabel: "npm", proofHref: "https://www.npmjs.com/~webkoth" },
       ] as ReadonlyArray<{
         title: string;
         body: string;

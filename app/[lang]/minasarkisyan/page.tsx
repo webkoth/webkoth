@@ -87,7 +87,7 @@ export default function MinasarkisyanPage() {
             href={`/${lang}`}
             className="text-xs underline underline-offset-4 hover:text-foreground"
           >
-            ← webkoth.com
+            webkoth.com
           </Link>
         </div>
       </footer>

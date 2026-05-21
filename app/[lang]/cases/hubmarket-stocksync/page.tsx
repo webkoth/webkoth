@@ -71,7 +71,7 @@ const copy: Record<"en" | "ru", Copy> = {
     ],
     stackTitle: "Стек",
     stack: ["Next.js", "Hono", "Playwright", "pg-boss", "PostgreSQL"],
-    backLink: "← Назад к webkoth.com",
+    backLink: "Назад к webkoth.com",
   },
   en: {
     title: "HubMarket: marketplace stock sync",
@@ -109,7 +109,7 @@ const copy: Record<"en" | "ru", Copy> = {
     ],
     stackTitle: "Stack",
     stack: ["Next.js", "Hono", "Playwright", "pg-boss", "PostgreSQL"],
-    backLink: "← Back to webkoth.com",
+    backLink: "Back to webkoth.com",
   },
 };
 
