@@ -23,7 +23,7 @@ export function ProductionAI({ data, lang }: Props) {
             <h3 className="mb-2 text-base font-semibold">{a.title}</h3>
             <p className="text-sm leading-relaxed text-muted-foreground">{a.body}</p>
             {a.evidence ? (
-              <div className="mt-3 text-xs text-primary">→ {a.evidence}</div>
+              <div className="mt-3 text-xs text-primary">{a.evidence}</div>
             ) : null}
           </div>
         ))}

@@ -40,9 +40,9 @@ export function TaskGrid({ lang }: { lang: Lang }) {
                       <h3 className="text-lg font-medium mb-3">{item.title}</h3>
                       <div className="space-y-1.5 text-sm leading-snug">
                         <div className="text-muted-foreground">{item.trigger}</div>
-                        <div className="text-muted-foreground">→ {item.action}</div>
+                        <div className="text-muted-foreground">{item.action}</div>
                         <div className="font-medium text-foreground transition-colors group-hover:text-primary">
-                          → {item.outcome}
+                          {item.outcome}
                         </div>
                       </div>
                     </CardContent>
