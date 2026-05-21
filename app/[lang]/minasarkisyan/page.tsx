@@ -11,7 +11,6 @@ import { Experience } from "@/components/cv/experience";
 import { Portfolio } from "@/components/cv/portfolio";
 import { Education } from "@/components/cv/education";
 import { ContentGrid } from "@/components/cv/content-grid";
-import { SectionReveal } from "@/components/landing/section-reveal";
 import { ModeToggle } from "@/components/mode-toggle";
 import { LanguageToggle } from "@/components/language-toggle";
 import { LLMDocsButton } from "@/components/llm-docs-button";
@@ -48,32 +47,31 @@ export default function MinasarkisyanPage() {
 
       {/* DEEP SECTIONS — each with top border for visual chapter separation */}
       <div className="mx-auto max-w-4xl px-4 md:px-8">
-        {[
-          <ProductionAI key="production-ai" data={data} lang={lang} />,
-          <OpenSource key="open-source" data={data} lang={lang} />,
-          <Skills key="skills" data={data} lang={lang} />,
-          <Experience key="experience" data={data} lang={lang} />,
-          <Portfolio key="portfolio" data={data} lang={lang} />,
-          <Education key="education" data={data} lang={lang} />,
-          <ContentGrid key="content" data={data} lang={lang} />,
-        ].map((node, i) => (
-          <div
-            key={i}
-            className={
-              i === 0
-                ? "py-12 md:py-16"
-                : "border-t border-border py-12 md:py-16"
-            }
-          >
-            <SectionReveal>{node}</SectionReveal>
-          </div>
-        ))}
+        <div className="py-12 md:py-16">
+          <ProductionAI data={data} lang={lang} />
+        </div>
+        <div className="border-t border-border py-12 md:py-16">
+          <OpenSource data={data} lang={lang} />
+        </div>
+        <div className="border-t border-border py-12 md:py-16">
+          <Skills data={data} lang={lang} />
+        </div>
+        <div className="border-t border-border py-12 md:py-16">
+          <Experience data={data} lang={lang} />
+        </div>
+        <div className="border-t border-border py-12 md:py-16">
+          <Portfolio data={data} lang={lang} />
+        </div>
+        <div className="border-t border-border py-12 md:py-16">
+          <Education data={data} lang={lang} />
+        </div>
+        <div className="border-t border-border py-12 md:py-16">
+          <ContentGrid data={data} lang={lang} />
+        </div>
 
         {/* Compact CTA before footer */}
         <div className="border-t border-border py-10">
-          <SectionReveal>
-            <HireCta data={data} variant="compact" />
-          </SectionReveal>
+          <HireCta data={data} variant="compact" />
         </div>
       </div>
 
