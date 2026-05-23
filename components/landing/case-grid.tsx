@@ -1,57 +1,52 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
+import { Briefcase } from "lucide-react";
 import { copy, type Lang } from "./copy-i18n";
 import { CaseCard } from "./case-card";
 import { StaggerGroup, StaggerItem } from "./stagger";
+import { SectionHeader } from "./section-header";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-type AudienceFilter = "all" | "founder" | "smb" | "agency";
-
-const FILTERS: AudienceFilter[] = ["all", "founder", "smb", "agency"];
-
-const filterLabels: Record<Lang, Record<AudienceFilter, string>> = {
-  ru: { all: "Все", founder: "Фаундеру", smb: "SMB", agency: "Агентству" },
-  en: { all: "All", founder: "Founder", smb: "SMB", agency: "Agency" },
-};
+type GroupFilter = "all" | "ai" | "production";
+const FILTERS: GroupFilter[] = ["all", "ai", "production"];
 
 export function CaseGrid({ lang }: { lang: Lang }) {
   const t = copy[lang].cases;
   const eyebrow = lang === "ru" ? "ПОРТФОЛИО" : "PORTFOLIO";
-  const sub =
-    lang === "ru"
-      ? "Кейсы по аудитории — для фаундеров, SMB и агентств."
-      : "Cases by audience — founders, SMB and agencies.";
-  const [filter, setFilter] = useState<AudienceFilter>("all");
+  const [filter, setFilter] = useState<GroupFilter>("all");
 
   const visible =
-    filter === "all"
-      ? t.items
-      : t.items.filter((item) => item.audienceTag === filter);
+    filter === "all" ? t.items : t.items.filter((item) => item.group === filter);
 
   return (
-    <section id="cases" className="relative overflow-hidden">
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_bottom_left,color-mix(in_oklab,var(--chart-2)_7%,transparent),transparent_55%)]"
-      />
-      <div className="mx-auto max-w-6xl px-4 md:px-8 py-20 md:py-28">
-        <div className="mb-8 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-          <div className="max-w-2xl">
-            <div className="mb-2 font-mono text-xs uppercase tracking-widest text-primary">
-              {eyebrow}
-            </div>
-            <h2 className="mb-3 text-2xl md:text-4xl font-semibold tracking-tight">{t.title}</h2>
-            <p className="text-muted-foreground">{sub}</p>
-          </div>
+    <section id="cases" className="relative">
+      <div className="mx-auto max-w-7xl px-4 md:px-8 py-20 md:py-28">
+        <div className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+          <SectionHeader
+            icon={Briefcase}
+            eyebrow={eyebrow}
+            title={t.title}
+            sub={t.sub}
+            className="mb-0"
+          />
 
-          <Tabs value={filter} onValueChange={(v) => setFilter(v as AudienceFilter)}>
-            <TabsList className="h-10 p-1">
-              {FILTERS.map((f) => (
-                <TabsTrigger key={f} value={f} className="px-3.5 text-sm">
-                  {filterLabels[lang][f]}
-                </TabsTrigger>
-              ))}
+          <Tabs value={filter} onValueChange={(v) => setFilter(v as GroupFilter)}>
+            <TabsList>
+              {FILTERS.map((f) => {
+                const count =
+                  f === "all"
+                    ? t.items.length
+                    : t.items.filter((i) => i.group === f).length;
+                return (
+                  <TabsTrigger key={f} value={f}>
+                    {t.groupLabels[f]}
+                    <span className="font-mono text-[10px] text-muted-foreground data-[selected]:text-foreground/70">
+                      {count}
+                    </span>
+                  </TabsTrigger>
+                );
+              })}
             </TabsList>
           </Tabs>
         </div>
@@ -62,16 +57,16 @@ export function CaseGrid({ lang }: { lang: Lang }) {
         >
           {visible.map((item) => (
             <StaggerItem key={item.id}>
-              <CaseCard
-                item={item}
-                tagLabel={item.audienceTag ? t.tagLabels[item.audienceTag] : undefined}
-              />
+              <CaseCard item={item} groupLabel={t.groupLabels[item.group]} />
             </StaggerItem>
           ))}
         </StaggerGroup>
 
         <div className="mt-10 text-sm text-muted-foreground">
-          <Link href={`/${lang}/minasarkisyan`} className="underline underline-offset-4 hover:text-foreground">
+          <Link
+            href={`/${lang}/minasarkisyan`}
+            className="underline underline-offset-4 hover:text-foreground"
+          >
             {t.moreLink}
           </Link>
         </div>

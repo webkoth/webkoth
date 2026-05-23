@@ -2,20 +2,27 @@
 import { useState } from "react";
 import { useReducedMotion } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 import { copy, type Lang } from "./copy-i18n";
 
 type NodeKey =
   | "chrome"
   | "next"
-  | "hono"
   | "queue"
-  | "playwright"
-  | "fastapi"
+  | "parser"
+  | "docparser"
+  | "ai"
   | "bronze"
   | "silver"
-  | "cascade"
   | "telegram";
+
+type Variant = "default" | "ai" | "store" | "out" | "service";
 
 type Node = {
   key: NodeKey;
@@ -23,96 +30,148 @@ type Node = {
   y: number;
   label: string;
   sub?: string;
-  variant?: "default" | "ai" | "store" | "out";
+  badge?: string;
+  variant?: Variant;
 };
 
 type Edge = {
   from: NodeKey;
   to: NodeKey;
-  d: string;
+  shape: "straight" | "curve" | "vertical";
   speed?: number;
   branch: NodeKey[];
 };
 
-// Layout grid — larger nodes + breathing room
-const NW = 168;
-const NH = 64;
-const COL_GAP = 50;
+// SVG-space grid: 5 cols × 3 rows. Container scales via viewBox.
+const NW = 184;
+const NH = 76;
+const COL_GAP = 56;
 const COL: Record<number, number> = {
   0: 40,
-  1: 40 + NW + COL_GAP,
+  1: 40 + (NW + COL_GAP),
   2: 40 + 2 * (NW + COL_GAP),
   3: 40 + 3 * (NW + COL_GAP),
   4: 40 + 4 * (NW + COL_GAP),
-  5: 40 + 5 * (NW + COL_GAP),
 };
-const ROW_TOP = 60;
-const ROW_MID = 240;
-const ROW_BOT = 420;
+const ROW_TOP = 40;
+const ROW_MID = 200;
+const ROW_BOT = 360;
 
-const W = COL[5] + NW + 40;
-const H = ROW_BOT + NH + 50;
+const W = COL[4] + NW + 40;
+const H = ROW_BOT + NH + 30;
 
 const NODES: Node[] = [
-  { key: "chrome", x: COL[0], y: ROW_MID, label: "Chrome MV3", sub: "extension" },
-  { key: "next", x: COL[1], y: ROW_MID, label: "Next.js 16", sub: "app router" },
-  { key: "hono", x: COL[2], y: ROW_MID, label: "Hono API", sub: "edge runtime" },
-  { key: "queue", x: COL[3], y: ROW_MID, label: "pg-boss", sub: "queues" },
-  { key: "playwright", x: COL[4], y: ROW_TOP, label: "Playwright", sub: "WB · Ozon · YM" },
-  { key: "fastapi", x: COL[4], y: ROW_MID, label: "FastAPI", sub: "NPD parser" },
-  { key: "bronze", x: COL[5], y: ROW_TOP, label: "Bronze lake", variant: "store" },
-  { key: "silver", x: COL[5], y: ROW_MID, label: "Silver lake", variant: "store" },
   {
-    key: "cascade",
-    x: COL[4],
+    key: "chrome",
+    x: COL[0],
+    y: ROW_MID,
+    label: "Chrome MV3",
+    sub: "Seller extension",
+  },
+  {
+    key: "next",
+    x: COL[1],
+    y: ROW_MID,
+    label: "Next.js 16",
+    sub: "App Router · API Routes · Prisma",
+    badge: "Monolith",
+  },
+  {
+    key: "queue",
+    x: COL[2],
+    y: ROW_MID,
+    label: "pg-boss",
+    sub: "Очереди поверх Postgres",
+  },
+  {
+    key: "parser",
+    x: COL[3],
+    y: ROW_TOP,
+    label: "hubmarket-parser",
+    sub: "Hono + Playwright",
+    badge: "Microservice",
+    variant: "service",
+  },
+  {
+    key: "docparser",
+    x: COL[3],
+    y: ROW_MID,
+    label: "hubmarket-doc-parser",
+    sub: "FastAPI · НПД",
+    badge: "Microservice",
+    variant: "service",
+  },
+  {
+    key: "ai",
+    x: COL[3],
     y: ROW_BOT,
-    label: "LLM cascade",
-    sub: "Claude → Gemini → Groq",
+    label: "hubmarket-ai",
+    sub: "Hono · LLM cascade",
+    badge: "Microservice",
     variant: "ai",
   },
-  { key: "telegram", x: COL[5], y: ROW_BOT, label: "Telegram bot", variant: "out" },
+  {
+    key: "bronze",
+    x: COL[4],
+    y: ROW_TOP,
+    label: "Bronze lake",
+    sub: "raw JSON",
+    variant: "store",
+  },
+  {
+    key: "silver",
+    x: COL[4],
+    y: ROW_MID,
+    label: "Silver lake",
+    sub: "Prisma tables",
+    variant: "store",
+  },
+  {
+    key: "telegram",
+    x: COL[4],
+    y: ROW_BOT,
+    label: "Telegram bot",
+    sub: "Alerts · AI replies",
+    variant: "out",
+  },
 ];
 
 const NODE_DESCRIPTIONS: Record<NodeKey, { ru: string; en: string }> = {
   chrome: {
-    ru: "Браузерное расширение — точка входа для селлера. Подтягивает токены и снимает данные из кабинетов маркетплейсов.",
-    en: "Browser extension — seller's entry point. Pulls tokens and scrapes data from marketplace dashboards.",
+    ru: "Расширение Chrome — снимает данные из кабинетов маркетплейсов.",
+    en: "Chrome extension — snapshots data from marketplace dashboards.",
   },
   next: {
-    ru: "Frontend на Next.js 16 + React 19. Дашборд, аналитика и конфигурация интеграций — всё в app router.",
-    en: "Frontend on Next.js 16 + React 19. Dashboard, analytics and integration config — all on app router.",
-  },
-  hono: {
-    ru: "API-слой на Hono с edge runtime. Auth, биллинг через ЮKassa, оркестрация задач в очередь.",
-    en: "Hono API on edge runtime. Auth, YooKassa billing, orchestration into the queue.",
+    ru: "Монолит Next.js 16: дашборд, биллинг, оркестрация задач.",
+    en: "Next.js 16 monolith: dashboard, billing, job orchestration.",
   },
   queue: {
-    ru: "Очереди задач поверх PostgreSQL — без отдельной инфры (Redis / Kafka). Шедулинг, ретраи, идемпотентные дедупы.",
-    en: "Job queues on top of PostgreSQL — no separate infra (Redis / Kafka). Scheduling, retries, idempotent dedupes.",
+    ru: "Очереди задач поверх Postgres — без отдельной инфры.",
+    en: "Job queues on top of Postgres — no separate infra.",
   },
-  playwright: {
-    ru: "Парсер маркетплейсов (WB · Ozon · Yandex Market). Снимает данные с UI там, где API недоступен или нестабилен.",
-    en: "Marketplace parser (WB · Ozon · Yandex Market). Scrapes the UI where the API is missing or unstable.",
+  parser: {
+    ru: "Снимает данные с 4 маркетплейсов там, где API нестабилен.",
+    en: "Scrapes 4 marketplaces where the API is unstable.",
   },
-  fastapi: {
-    ru: "Python-сервис парсинга НПД-чеков. ML-pipeline извлекает товарные позиции и суммы из изображений.",
-    en: "Python service for parsing NPD receipts. ML pipeline extracts line items and totals from images.",
+  docparser: {
+    ru: "Парсит финдокументы WB и считает НПД для самозанятых.",
+    en: "Parses WB financial docs and calculates NPD tax.",
+  },
+  ai: {
+    ru: "Multi-provider cascade с автоматическим fallback между LLM.",
+    en: "Multi-provider cascade with automatic LLM fallback.",
   },
   bronze: {
-    ru: "Сырые данные с маркетплейсов в исходном виде — append-only лог дельт без модификаций.",
-    en: "Raw marketplace data in original form — append-only delta log, no modifications.",
+    ru: "Сырой JSON от маркетплейсов — append-only, ничего не теряется.",
+    en: "Raw JSON from marketplaces — append-only, nothing is lost.",
   },
   silver: {
-    ru: "Дедуплицированные и обогащённые данные. Источник для аналитики, LLM-задач и Telegram-уведомлений.",
-    en: "Deduplicated and enriched data. Source for analytics, LLM jobs and Telegram notifications.",
-  },
-  cascade: {
-    ru: "Multi-provider каскад: Claude → Gemini → Groq. 0 downtime LLM за 8 месяцев в проде — если падает основной провайдер, автоматический fallback за секунды.",
-    en: "Multi-provider cascade: Claude → Gemini → Groq. 0 LLM downtime in 8 months — if the primary fails, automatic fallback in seconds.",
+    ru: "Нормализованные таблицы Prisma — основа для аналитики и AI.",
+    en: "Normalised Prisma tables — the source for analytics and AI.",
   },
   telegram: {
-    ru: "Канал уведомлений селлеру: алерты по остаткам, AI-ответы на отзывы, дневной дайджест по выручке и заказам.",
-    en: "Notification channel: stock alerts, AI replies to reviews, daily digest of revenue and orders.",
+    ru: "Алерты, AI-ответы на отзывы, ежедневные отчёты по выручке.",
+    en: "Alerts, AI replies to reviews, daily revenue digests.",
   },
 };
 
@@ -125,301 +184,288 @@ function nodeBy(k: NodeKey) {
   return NODES.find((n) => n.key === k)!;
 }
 
-function straight(from: NodeKey, to: NodeKey): string {
-  const a = centerR(nodeBy(from));
-  const b = centerL(nodeBy(to));
-  return `M${a.x},${a.y} L${b.x},${b.y}`;
-}
-
-function curve(from: NodeKey, to: NodeKey): string {
-  const a = centerR(nodeBy(from));
-  const b = centerL(nodeBy(to));
-  const midX = (a.x + b.x) / 2;
-  return `M${a.x},${a.y} C${midX},${a.y} ${midX},${b.y} ${b.x},${b.y}`;
-}
-
-function vertical(from: NodeKey, to: NodeKey): string {
-  const a = centerB(nodeBy(from));
-  const b = centerT(nodeBy(to));
-  return `M${a.x},${a.y} L${b.x},${b.y}`;
+function pathFor(edge: Edge): string {
+  const a = nodeBy(edge.from);
+  const b = nodeBy(edge.to);
+  if (edge.shape === "vertical") {
+    const p = centerB(a);
+    const q = centerT(b);
+    return `M${p.x},${p.y} L${q.x},${q.y}`;
+  }
+  const p = centerR(a);
+  const q = centerL(b);
+  if (edge.shape === "curve") {
+    const midX = (p.x + q.x) / 2;
+    return `M${p.x},${p.y} C${midX},${p.y} ${midX},${q.y} ${q.x},${q.y}`;
+  }
+  return `M${p.x},${p.y} L${q.x},${q.y}`;
 }
 
 const EDGES: Edge[] = [
-  { from: "chrome", to: "next", d: straight("chrome", "next"), branch: [] },
-  { from: "next", to: "hono", d: straight("next", "hono"), branch: [] },
-  { from: "hono", to: "queue", d: straight("hono", "queue"), branch: [] },
+  { from: "chrome", to: "next", shape: "straight", branch: [] },
+  { from: "next", to: "queue", shape: "straight", branch: [] },
   {
     from: "queue",
-    to: "playwright",
-    d: curve("queue", "playwright"),
-    branch: ["playwright", "bronze", "silver", "cascade", "telegram"],
-    speed: 3.2,
+    to: "parser",
+    shape: "curve",
+    branch: ["parser", "bronze", "silver", "ai", "telegram"],
+    speed: 3.0,
   },
   {
     from: "queue",
-    to: "fastapi",
-    d: straight("queue", "fastapi"),
-    branch: ["fastapi", "cascade", "telegram"],
-    speed: 3.8,
-  },
-  {
-    from: "queue",
-    to: "cascade",
-    d: curve("queue", "cascade"),
-    branch: ["cascade", "telegram"],
+    to: "docparser",
+    shape: "straight",
+    branch: ["docparser", "silver", "ai", "telegram"],
     speed: 3.4,
   },
   {
-    from: "playwright",
+    from: "queue",
+    to: "ai",
+    shape: "curve",
+    branch: ["ai", "telegram"],
+    speed: 3.2,
+  },
+  {
+    from: "parser",
     to: "bronze",
-    d: straight("playwright", "bronze"),
-    branch: ["bronze", "silver", "cascade", "telegram"],
-    speed: 2.6,
+    shape: "straight",
+    branch: ["bronze", "silver", "ai", "telegram"],
+    speed: 2.4,
   },
   {
     from: "bronze",
     to: "silver",
-    d: vertical("bronze", "silver"),
-    branch: ["silver", "cascade", "telegram"],
-    speed: 2.4,
-  },
-  {
-    from: "silver",
-    to: "cascade",
-    d: curve("silver", "cascade"),
-    branch: ["cascade", "telegram"],
-    speed: 2.8,
-  },
-  {
-    from: "fastapi",
-    to: "cascade",
-    d: curve("fastapi", "cascade"),
-    branch: ["cascade", "telegram"],
-    speed: 2.8,
-  },
-  {
-    from: "cascade",
-    to: "telegram",
-    d: straight("cascade", "telegram"),
-    branch: ["telegram"],
+    shape: "vertical",
+    branch: ["silver", "ai", "telegram"],
     speed: 2.2,
+  },
+  {
+    from: "docparser",
+    to: "silver",
+    shape: "straight",
+    branch: ["silver", "ai", "telegram"],
+    speed: 2.6,
+  },
+  {
+    from: "ai",
+    to: "telegram",
+    shape: "straight",
+    branch: ["telegram"],
+    speed: 2.0,
   },
 ];
 
-const VARIANT_STYLES: Record<NonNullable<Node["variant"]>, string> = {
-  default: "fill-card stroke-border",
-  ai: "fill-primary/10 stroke-primary/60",
-  store: "fill-muted/40 stroke-border",
-  out: "fill-emerald-500/10 stroke-emerald-500/60",
+const VARIANT_STYLES: Record<Variant, string> = {
+  default: "bg-card border-border data-[hover=true]:border-foreground/40",
+  service: "bg-card border-border data-[hover=true]:border-primary/60",
+  ai: "bg-primary/5 border-primary/40 data-[hover=true]:border-primary",
+  store: "bg-muted/40 border-border data-[hover=true]:border-foreground/50",
+  out: "bg-emerald-500/5 border-emerald-500/40 data-[hover=true]:border-emerald-500",
 };
+
+const BADGE_TONES: Record<Variant, string> = {
+  default: "bg-muted text-foreground/80",
+  service: "bg-primary/10 text-primary",
+  ai: "bg-primary/15 text-primary",
+  store: "bg-foreground/10 text-foreground/80",
+  out: "bg-emerald-500/15 text-emerald-700 dark:text-emerald-400",
+};
+
+const HUBMARKET_URL = "https://hubmarket.ru";
 
 export function FeaturedCase({ lang }: { lang: Lang }) {
   const t = copy[lang].featured;
   const isRu = lang === "ru";
+  const linkText = isRu ? "HubMarket.ru" : "HubMarket";
+  const titleParts = t.title.split(linkText);
   const reduce = useReducedMotion();
   const [hovered, setHovered] = useState<NodeKey | null>(null);
 
   const isEdgeActive = (e: Edge) =>
-    hovered == null || e.from === hovered || e.to === hovered || e.branch.includes(hovered);
+    hovered == null ||
+    e.from === hovered ||
+    e.to === hovered ||
+    e.branch.includes(hovered);
 
   const isNodeActive = (k: NodeKey) => {
     if (hovered == null) return true;
     if (hovered === k) return true;
-    return EDGES.some((e) => e.from === hovered && (e.to === k || e.branch.includes(k)));
+    return EDGES.some(
+      (e) => e.from === hovered && (e.to === k || e.branch.includes(k)),
+    );
   };
 
-  const hoveredNode = hovered ? nodeBy(hovered) : null;
-  const hoveredDesc = hovered ? NODE_DESCRIPTIONS[hovered][lang] : null;
-
   return (
-    <section id="featured" className="bg-muted/30">
-      <div className="mx-auto max-w-7xl px-4 py-20 md:px-8 md:py-28">
-        <header className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-10">
-          <div className="lg:col-span-7">
-            <h2 className="text-2xl font-semibold tracking-tight md:text-4xl">{t.title}</h2>
+    <TooltipProvider delay={120}>
+      <section id="featured">
+        <div className="mx-auto max-w-7xl px-4 py-20 md:px-8 md:py-28">
+          <header className="mb-12 max-w-2xl">
+            <h2 className="text-3xl font-extrabold tracking-tight md:text-5xl">
+              {titleParts[0]}
+              <a
+                href={HUBMARKET_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary underline decoration-primary/40 underline-offset-4 transition-colors hover:decoration-primary"
+              >
+                {linkText}
+              </a>
+              {titleParts[1] ?? ""}
+            </h2>
             <p className="mt-3 text-muted-foreground md:text-lg">{t.sub}</p>
             <p className="mt-4 font-mono text-[11px] uppercase tracking-wider text-muted-foreground">
               {isRu
-                ? "наведи на компонент — увидишь пояснение и связанную ветку"
-                : "hover a component — see the description and related branch"}
+                ? "наведите на узел — появится описание"
+                : "hover any node — description appears"}
             </p>
-          </div>
-          <div className="lg:col-span-5">
-            <ul className="grid grid-cols-1 gap-2 sm:grid-cols-2">
-              {t.metrics.map((m) => (
-                <li key={m} className="border-l-2 border-primary pl-3 text-sm">
-                  {m}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </header>
+          </header>
 
-        <div className="mt-10 overflow-hidden rounded-2xl border border-border bg-background md:mt-12">
-          <div className="p-4 md:p-8">
-            <svg
-              viewBox={`0 0 ${W} ${H}`}
-              className="h-auto w-full"
-              role="img"
-              aria-label={isRu ? "Архитектура HubMarket" : "HubMarket architecture"}
-            >
-              <defs>
-                <marker
-                  id="arrow"
-                  viewBox="0 0 10 10"
-                  refX="9"
-                  refY="5"
-                  markerWidth="7"
-                  markerHeight="7"
-                  orient="auto-start-reverse"
+          <div className="mt-10 overflow-hidden rounded-2xl border border-border bg-background md:mt-12">
+            <div className="p-4 md:p-8">
+              <div className="relative w-full" style={{ aspectRatio: `${W} / ${H}` }}>
+                <svg
+                  viewBox={`0 0 ${W} ${H}`}
+                  preserveAspectRatio="xMidYMid meet"
+                  className="absolute inset-0 h-full w-full"
+                  role="img"
+                  aria-label={isRu ? "Архитектура HubMarket" : "HubMarket architecture"}
                 >
-                  <path d="M0,0 L10,5 L0,10 z" className="fill-foreground/45" />
-                </marker>
-              </defs>
-
-              {EDGES.map((e, i) => {
-                const active = isEdgeActive(e);
-                return (
-                  <g key={`edge-${i}`}>
-                    <path
-                      d={e.d}
-                      fill="none"
-                      strokeWidth={1.75}
-                      strokeLinecap="round"
-                      className={cn(
-                        "transition-[stroke,opacity] duration-300",
-                        active ? "stroke-foreground/40" : "stroke-foreground/10",
-                      )}
-                      strokeDasharray="5 5"
-                      markerEnd="url(#arrow)"
+                  <defs>
+                    <marker
+                      id="arrow-fc"
+                      viewBox="0 0 10 10"
+                      refX="9"
+                      refY="5"
+                      markerWidth="7"
+                      markerHeight="7"
+                      orient="auto-start-reverse"
                     >
-                      {!reduce && (
-                        <animate
-                          attributeName="stroke-dashoffset"
-                          from="0"
-                          to="-20"
-                          dur="1.4s"
-                          repeatCount="indefinite"
-                        />
-                      )}
-                    </path>
-                    {!reduce && active && (
-                      <circle r={4} className="fill-primary">
-                        <animateMotion
-                          dur={`${e.speed ?? 3}s`}
-                          repeatCount="indefinite"
-                          path={e.d}
-                          rotate="auto"
-                        />
-                      </circle>
-                    )}
-                  </g>
-                );
-              })}
+                      <path d="M0,0 L10,5 L0,10 z" className="fill-foreground/45" />
+                    </marker>
+                  </defs>
 
-              {NODES.map((n) => {
-                const variant = n.variant ?? "default";
-                const active = isNodeActive(n.key);
-                const isHovered = hovered === n.key;
-                return (
-                  <g
-                    key={n.key}
-                    transform={`translate(${n.x}, ${n.y})`}
-                    onMouseEnter={() => setHovered(n.key)}
-                    onMouseLeave={() => setHovered(null)}
-                    onFocus={() => setHovered(n.key)}
-                    onBlur={() => setHovered(null)}
-                    tabIndex={0}
-                    className={cn(
-                      "cursor-help outline-none transition-opacity duration-300",
-                      active ? "opacity-100" : "opacity-35",
-                    )}
-                  >
-                    <rect
-                      width={NW}
-                      height={NH}
-                      rx={12}
-                      ry={12}
-                      strokeWidth={isHovered ? 2 : 1.5}
-                      className={cn(VARIANT_STYLES[variant], "transition-all")}
-                    />
-                    <text
-                      x={NW / 2}
-                      y={n.sub ? 27 : 38}
-                      textAnchor="middle"
-                      className="fill-foreground text-[16px] font-medium"
-                      style={{ fontFamily: "var(--font-geist-sans)" }}
-                    >
-                      {n.label}
-                    </text>
-                    {n.sub && (
-                      <text
-                        x={NW / 2}
-                        y={47}
-                        textAnchor="middle"
-                        className="fill-muted-foreground text-[12px]"
-                        style={{ fontFamily: "var(--font-geist-mono)" }}
+                  {EDGES.map((e, i) => {
+                    const d = pathFor(e);
+                    const active = isEdgeActive(e);
+                    return (
+                      <g key={`edge-${i}`}>
+                        <path
+                          d={d}
+                          fill="none"
+                          strokeWidth={1.75}
+                          strokeLinecap="round"
+                          className={cn(
+                            "transition-[stroke,opacity] duration-300",
+                            active ? "stroke-foreground/45" : "stroke-foreground/10",
+                          )}
+                          strokeDasharray="5 5"
+                          markerEnd="url(#arrow-fc)"
+                        >
+                          {!reduce && (
+                            <animate
+                              attributeName="stroke-dashoffset"
+                              from="0"
+                              to="-20"
+                              dur="1.4s"
+                              repeatCount="indefinite"
+                            />
+                          )}
+                        </path>
+                        {!reduce && active && (
+                          <circle r={4} className="fill-primary">
+                            <animateMotion
+                              dur={`${e.speed ?? 3}s`}
+                              repeatCount="indefinite"
+                              path={d}
+                              rotate="auto"
+                            />
+                          </circle>
+                        )}
+                      </g>
+                    );
+                  })}
+
+                  {NODES.map((n) => {
+                    const variant = n.variant ?? "default";
+                    const active = isNodeActive(n.key);
+                    const isHovered = hovered === n.key;
+                    return (
+                      <foreignObject
+                        key={n.key}
+                        x={n.x}
+                        y={n.y}
+                        width={NW}
+                        height={NH}
                       >
-                        {n.sub}
-                      </text>
-                    )}
-                  </g>
-                );
-              })}
-
-              <g transform={`translate(20, ${H - 22})`}>
-                <circle cx={5} cy={0} r={4} className="fill-primary" />
-                <text
-                  x={18}
-                  y={4}
-                  className="fill-muted-foreground text-[12px]"
-                  style={{ fontFamily: "var(--font-geist-mono)" }}
-                >
-                  {isRu ? "поток данных" : "data flow"}
-                </text>
-              </g>
-            </svg>
-          </div>
-
-          {/* Hover info panel */}
-          <div className="border-t border-border bg-muted/30 px-4 py-5 md:px-8 md:py-6">
-            <div className="min-h-[88px] md:min-h-[72px]">
-              {hoveredNode ? (
-                <div className="flex flex-col gap-2 md:flex-row md:items-start md:gap-5">
-                  <div className="flex shrink-0 items-baseline gap-2 md:w-56">
-                    <span className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
-                      {isRu ? "компонент" : "component"}
-                    </span>
-                    <span className="font-semibold">{hoveredNode.label}</span>
-                    {hoveredNode.sub && (
-                      <span className="font-mono text-xs text-muted-foreground">
-                        · {hoveredNode.sub}
-                      </span>
-                    )}
-                  </div>
-                  <p className="text-sm leading-relaxed text-foreground/85 md:text-base">
-                    {hoveredDesc}
-                  </p>
-                </div>
-              ) : (
-                <div className="flex h-full items-center text-sm text-muted-foreground md:text-base">
-                  {isRu
-                    ? "Наведи или сфокусируйся на любом компоненте схемы — здесь появится пояснение, что он делает и как связан с остальным."
-                    : "Hover or focus any component on the diagram — its role and connections will appear here."}
-                </div>
-              )}
+                        <Tooltip>
+                          <TooltipTrigger
+                            type="button"
+                            onMouseEnter={() => setHovered(n.key)}
+                            onMouseLeave={() => setHovered(null)}
+                            onFocus={() => setHovered(n.key)}
+                            onBlur={() => setHovered(null)}
+                            data-hover={isHovered}
+                            className={cn(
+                              "group flex h-full w-full flex-col items-start justify-center rounded-xl border px-3.5 py-2 text-left shadow-sm outline-none transition-all duration-200",
+                              "focus-visible:ring-2 focus-visible:ring-primary/50",
+                              VARIANT_STYLES[variant],
+                              active ? "opacity-100" : "opacity-30",
+                              isHovered && "shadow-md",
+                            )}
+                          >
+                            <div className="flex w-full items-center justify-between gap-2">
+                              <span className="text-[15px] font-semibold leading-tight tracking-tight text-foreground">
+                                {n.label}
+                              </span>
+                              {n.badge && (
+                                <span
+                                  className={cn(
+                                    "shrink-0 rounded-full px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-wider",
+                                    BADGE_TONES[variant],
+                                  )}
+                                >
+                                  {n.badge}
+                                </span>
+                              )}
+                            </div>
+                            {n.sub && (
+                              <span className="mt-1 font-mono text-[11px] leading-tight text-muted-foreground">
+                                {n.sub}
+                              </span>
+                            )}
+                          </TooltipTrigger>
+                          <TooltipContent
+                            side="top"
+                            className="max-w-xs whitespace-normal border border-primary/40 bg-primary p-3 text-left text-[13px] leading-snug text-primary-foreground shadow-lg"
+                          >
+                            {NODE_DESCRIPTIONS[n.key][lang]}
+                          </TooltipContent>
+                        </Tooltip>
+                      </foreignObject>
+                    );
+                  })}
+                </svg>
+              </div>
+              <div className="mt-3 flex items-center gap-2 font-mono text-[11px] text-muted-foreground">
+                <span className="inline-block h-1.5 w-1.5 rounded-full bg-primary" />
+                {isRu ? "поток данных" : "data flow"}
+              </div>
             </div>
           </div>
-        </div>
 
-        <div className="mt-8 flex flex-wrap gap-1.5">
-          {t.stack.map((s) => (
-            <Badge key={s} variant="secondary" className="font-mono text-[11px]">
-              {s}
-            </Badge>
-          ))}
+          <div className="mt-8 flex flex-wrap gap-2">
+            {t.stack.map((s) => (
+              <Badge
+                key={s}
+                variant="outline"
+                className="h-7 border-primary/40 bg-primary/5 px-3 py-1 font-mono text-[13px] font-medium text-primary hover:bg-primary/10"
+              >
+                {s}
+              </Badge>
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </TooltipProvider>
   );
 }

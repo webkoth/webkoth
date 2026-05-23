@@ -1,8 +1,10 @@
 "use client";
 
+import { Workflow } from "lucide-react";
 import type { Lang } from "./copy-i18n";
 import { copy } from "./copy-i18n";
 import { StaggerGroup, StaggerItem } from "./stagger";
+import { SectionHeader } from "./section-header";
 
 type Step = {
   num: string;
@@ -28,24 +30,9 @@ export function RoadmapTimeline({ lang }: { lang: Lang }) {
   const t = copy[lang].roadmap;
 
   return (
-    <section
-      id="roadmap"
-      className="relative overflow-hidden"
-    >
-      {/* Subtle peach corner gradient */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,rgba(255,180,120,0.05),transparent_60%),radial-gradient(circle_at_bottom_right,rgba(180,170,255,0.04),transparent_60%)]"
-      />
-
-      <div className="max-w-6xl mx-auto px-4 md:px-8 py-20 md:py-28">
-        <div className="mb-14 max-w-2xl">
-          <div className="mb-2 font-mono text-xs uppercase tracking-widest text-primary">
-            {t.eyebrow}
-          </div>
-          <h2 className="text-2xl md:text-4xl font-semibold tracking-tight mb-3">{t.title}</h2>
-          <p className="text-muted-foreground">{t.sub}</p>
-        </div>
+    <section id="roadmap" className="relative">
+      <div className="max-w-7xl mx-auto px-4 md:px-8 py-20 md:py-28">
+        <SectionHeader icon={Workflow} eyebrow={t.eyebrow} title={t.title} sub={t.sub} />
 
         <div className="relative">
           {/* Center vertical line — desktop only */}

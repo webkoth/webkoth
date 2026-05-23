@@ -7,11 +7,11 @@ import { ClientVoices } from "@/components/landing/client-voices";
 import { WhyMe } from "@/components/landing/why-me";
 import { TechStack } from "@/components/landing/tech-stack";
 import { RoadmapTimeline } from "@/components/landing/roadmap-timeline";
-import { ProcessPricing } from "@/components/landing/process-pricing";
 import { Faq } from "@/components/landing/faq";
 import { LeadFormModalProvider } from "@/components/landing/lead-form-modal";
 import { CommandPalette } from "@/components/landing/command-palette";
 import { Footer } from "@/components/landing/footer";
+import { PageBackground } from "@/components/landing/page-background";
 import { SectionReveal } from "@/components/landing/section-reveal";
 import { StickyCta } from "@/components/landing/sticky-cta";
 
@@ -23,6 +23,7 @@ export default async function Home({ params }: Props) {
 
   return (
     <LeadFormModalProvider lang={lang}>
+      <PageBackground />
       <main className="relative z-[1] min-h-screen">
         <Hero lang={lang} />
         <SectionReveal><TaskGrid lang={lang} /></SectionReveal>
@@ -32,7 +33,6 @@ export default async function Home({ params }: Props) {
         <SectionReveal><WhyMe lang={lang} /></SectionReveal>
         <SectionReveal><TechStack lang={lang} /></SectionReveal>
         <SectionReveal><RoadmapTimeline lang={lang} /></SectionReveal>
-        <SectionReveal><ProcessPricing lang={lang} /></SectionReveal>
         <SectionReveal><Faq lang={lang} /></SectionReveal>
         <Footer lang={lang} />
         <StickyCta lang={lang} />

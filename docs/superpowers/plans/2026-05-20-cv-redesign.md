@@ -245,7 +245,7 @@ For RU block, insert these fields (note the `roleSub` goes right after `role`):
     ],
     hireCta: {
       headline: "Готов обсудить вакансию или контракт",
-      body: "Ответ — в течение суток. Удалённо / гибрид / готов к релокации.",
+      body: "Удалённо / гибрид ",
       primaryLabel: "Telegram: @abnorsky",
       primaryUrl: "https://t.me/abnorsky",
       secondaryLabel: "15-мин звонок (Calendar)",

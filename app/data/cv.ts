@@ -565,7 +565,7 @@ export const cvData: Record<"en" | "ru", CVData> = {
     ],
     hireCta: {
       headline: "Готов обсудить вакансию или контракт",
-      body: "Ответ — в течение суток. Удалённо / гибрид / готов к релокации.",
+      body: "Удалённо / гибрид",
       primaryLabel: "Telegram: @abnorsky",
       primaryUrl: "https://t.me/abnorsky",
       secondaryLabel: "15-мин звонок (Calendar)",

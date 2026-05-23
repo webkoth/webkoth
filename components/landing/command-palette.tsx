@@ -40,13 +40,12 @@ const sectionsByLang: Record<Lang, Section[]> = {
   ru: [
     { id: "hero", label: "Главная" },
     { id: "tasks", label: "Что я делаю" },
-    { id: "featured", label: "Кейс: HubMarket" },
+    { id: "featured", label: "Кейс: HubMarket.ru" },
     { id: "cases", label: "Портфолио" },
     { id: "voices", label: "Отзывы" },
     { id: "why", label: "Почему я" },
     { id: "tech-stack", label: "Стек" },
     { id: "roadmap", label: "Как мы работаем" },
-    { id: "process-pricing", label: "Пакеты и цены" },
     { id: "faq", label: "FAQ" },
   ],
   en: [
@@ -58,7 +57,6 @@ const sectionsByLang: Record<Lang, Section[]> = {
     { id: "why", label: "Why me" },
     { id: "tech-stack", label: "Stack" },
     { id: "roadmap", label: "How we work" },
-    { id: "process-pricing", label: "Packages" },
     { id: "faq", label: "FAQ" },
   ],
 };
@@ -72,7 +70,6 @@ const iconForSection: Record<string, React.ComponentType<{ className?: string }>
   why: Rocket,
   "tech-stack": Layers,
   roadmap: Briefcase,
-  "process-pricing": Briefcase,
   faq: HelpCircle,
 };
 

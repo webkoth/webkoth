@@ -1039,7 +1039,7 @@ Find in `components/landing/copy-i18n.ts` (around lines 105-125):
         budgetOptions: { unknown: "Не определён", under500: "до 500k ₽", to2m: "500k–2M ₽", over2m: "2M+ ₽", usd: "USD-эквивалент" },
       },
       submit: "Отправить заявку",
-      hint: "Ответ — в течение суток, обычно — в часы.",
+      hint: "Ответ в течение часа",
       success: { title: "Спасибо, заявка получена", body: "Я уже вижу её в Telegram. Свяжусь в течение суток." },
       error: { title: "Не удалось отправить", body: "Напишите напрямую в Telegram: @abnorsky" },
       altChannels: {
@@ -1087,7 +1087,7 @@ Replace with:
       },
       progressLabel: "Заполнено",
       submit: "Отправить заявку",
-      hint: "Ответ — в течение суток, обычно — в часы.",
+      hint: "Ответ в течение часа",
       success: { title: "Спасибо, заявка получена", body: "Я уже вижу её в Telegram. Свяжусь в течение суток." },
       error: { title: "Не удалось отправить", body: "Напишите напрямую в Telegram: @abnorsky" },
       altChannels: {

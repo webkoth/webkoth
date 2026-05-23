@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       template: "%s | Minas Sarkisyan"
     },
     description: lang === "en"
-      ? "Senior Fullstack / AI Engineer. 10+ years in production. Python, FastAPI, TypeScript, React, PHP. 2.5 years deep with LLMs: MCP (7 npm servers, including 3 for marketplaces), multi-provider cascade, RAG, agents. Currently: Skolkovo School (5+ products) + HubMarket (AI-SaaS founder). Open to roles and contract work."
+      ? "Senior Fullstack / AI Engineer. 10+ years in production. Python, FastAPI, TypeScript, React, PHP. 2.5 years deep with LLMs: MCP (7 npm servers, including 3 for marketplaces), multi-provider cascade, RAG, agents. Currently: HubMarket (AI-SaaS founder). Open to roles and contract work."
       : "Senior Fullstack / AI-инженер. 10+ лет опыта. Python, FastAPI, TypeScript, React, PHP. 2.5 года плотно с LLM: MCP (7 npm-серверов, включая 3 для маркетплейсов), multi-provider cascade, RAG, агенты. Сейчас: Сколково (5+ продуктов) + HubMarket (AI-SaaS founder). Открыт к вакансиям и контрактной работе.",
     keywords: [
       "Senior Fullstack Engineer",

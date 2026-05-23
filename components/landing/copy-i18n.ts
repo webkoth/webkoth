@@ -71,16 +71,16 @@ export const copy = {
         {
           icon: "sparkles",
           title: "AI-фичи в существующий продукт",
-          trigger: "У вас Vue 3 + Laravel",
-          action: "Встроенный AI-виджет хука к существующему API",
-          outcome: "Релиз в пятницу, ни строчки переписанного фронта",
+          trigger: "Генерация описания карточик товара",
+          action: "Встроенный AI-виджет к существующему API",
+          outcome: "Бесшовная интеграция в существующую кастомную CRM систему",
           anchor: "#case-landing",
         },
       ],
     },
     roadmap: {
       eyebrow: "КАК МЫ РАБОТАЕМ",
-      title: "От идеи до прода — за 4 шага",
+      title: "От идеи до прода",
       sub: "Прозрачный процесс — без сюрпризов и аккаунт-менеджеров.",
       steps: [
         {
@@ -93,7 +93,7 @@ export const copy = {
           num: "02",
           title: "Аудит",
           body: "Глубокий разбор задачи, выбор стека и моделей, roadmap и оценка MVP. На выходе — документ и конкретный следующий шаг.",
-          pill: "1 ДЕНЬ · 80 000 ₽ · ОБЯЗАТЕЛЕН ДЛЯ A · ОПЦИОНАЛЕН ДЛЯ B",
+          pill: "1 ДЕНЬ · ОБЯЗАТЕЛЕН ДЛЯ A · ОПЦИОНАЛЕН ДЛЯ B",
         },
         {
           num: "03",
@@ -109,87 +109,49 @@ export const copy = {
         },
       ],
     },
-    pricing: {
-      title: "Пакеты",
-      subtitle: "Под аудиторию. Audit (1 день, 80 000 ₽) — обязательный шаг для Production AI Integration, опционален для AI-MVP Sprint.",
-      excludesLabel: "Не входит",
-      packages: {
-        sprint: {
-          name: "AI-MVP Sprint",
-          audience: "Фаундеру",
-          pill: "150 000 ₽ · 7 дней",
-          items: [
-            "1 AI-сценарий в проде из 3 шаблонов",
-            "RAG-чат-бот / агент с tool calling / AI-фича в существующее приложение",
-            "Готовый стек: Next.js + Hono + Vercel AI SDK + Claude/Gemini fallback",
-            "Handover: код, доки, доступы",
-          ],
-          excludes: ["Дизайн UI с нуля", "Поддержка после релиза", "Fine-tuning моделей", "Оплата токенов LLM"],
-          cta: "Обсудить Sprint",
-        },
-        integration: {
-          name: "Production AI Integration",
-          audience: "SMB / mid-market",
-          pill: "от 600 000 ₽ · 2-4 недели · +1 мес free support",
-          items: [
-            "Адаптация к вашему стеку (PHP/Laravel, Python/FastAPI, Node, Go)",
-            "Multi-provider fallback (без вендор-лока)",
-            "Observability: Sentry / pino / структурированные логи",
-            "Аудит-лог промптов и ответов",
-            "Handover-документ + 1 месяц minimal support бесплатно",
-          ],
-          excludes: ["Дообучение моделей", "Дизайн UI с нуля", "Оплата токенов LLM", "Перевод продукта на новый стек"],
-          cta: "Заказать аудит",
-        },
-        subcontract: {
-          name: "Subcontract / Whitelabel",
-          audience: "Агентству",
-          pill: "от 120 000 ₽ · 2-3 недели · ad-hoc 3 500 ₽/час",
-          items: [
-            "1 MCP-сервер под клиентский API — от 120 000 ₽ за 2 недели",
-            "RAG / агент / AI-фича — от 150 000 ₽ за 2-3 недели",
-            "Ad-hoc консалтинг по AI / MCP — от 3 500 ₽/час",
-            "Whitelabel default + опционально 'AI engineer on team'",
-            "NDA до начала. Коммуникация через вас.",
-          ],
-          excludes: ["Прямая работа с конечным клиентом без согласования", "Минимум на проект — 20 часов"],
-          cta: "Обсудить сабконтракт",
-        },
-      },
-    },
     featured: {
-      title: "Кейс: HubMarket",
-      sub: "AI-SaaS для селлеров маркетплейсов · Founder + sole developer · production",
-      metrics: [
-        "3 marketplaces (WB, Ozon, Yandex Market)",
-        "0 LLM downtime через cascade",
-        "End-to-end один человек",
-        "Цикл «запрос фичи → прод»: 3-4 дня",
+      title: "Кейс: HubMarket.ru",
+      sub: "AI-SaaS для селлеров маркетплейсов",
+      stack: [
+        "Next.js 16",
+        "React 19",
+        "Prisma 7",
+        "PostgreSQL",
+        "pg-boss",
+        "Hono",
+        "AI SDK",
+        "Claude",
+        "Gemini",
+        "Groq",
+        "Python · FastAPI",
+        "Playwright",
+        "Sentry · pino",
+        "ЮKassa",
       ],
-      stack: ["Next.js 16", "React 19", "Hono", "Prisma", "pg-boss", "Vercel AI SDK", "Python/FastAPI", "Playwright", "ЮKassa", "Cloudflare Workers"],
     },
     cases: {
       title: "Ещё кейсы",
+      sub: "AI-проекты (RAG, LLM, агенты, OCR-пайплайны) и тяжёлый production: fintech, ERP, big-data аналитика.",
       moreLink: "Полное портфолио и опыт: /minasarkisyan",
-      tagLabels: {
-        founder: "Для фаундера",
-        smb: "Для SMB",
-        agency: "Для агентств",
+      groupLabels: {
+        all: "Все",
+        ai: "AI / LLM",
+        production: "Production / High-load",
       },
       items: [
-        { id: "case-skolkovo", title: "AI OCR ⇢ GPT", sub: "Skolkovo · Yandex stack · async queues", stack: ["Laravel 12", "Yandex OCR", "Yandex GPT"], audienceTag: "smb" },
-        { id: "case-landing", title: "AI Landing builder", sub: "Skolkovo · dual-provider", stack: ["Vue 3", "GPT-4o-mini", "NanoBanano"], audienceTag: "founder" },
-        { id: "case-hubmarket-stocksync", title: "Маркетплейс-синхронизация остатков", sub: "HubMarket · запрос фаундера → прод за 3 дня", stack: ["Next.js", "Hono", "Playwright", "pg-boss"], audienceTag: "founder", link: "/ru/cases/hubmarket-stocksync" },
-        { id: "case-mcp", title: "timeweb-mcp-server", sub: "Open-source · npm · GitHub", stack: ["Node.js", "TypeScript", "MCP SDK"], openSource: { npmPkg: "timeweb-mcp-server", ghOwner: "webkoth", ghRepo: "timeweb-mcp-server" }, audienceTag: "agency" },
-        { id: "case-lenderkit", title: "Lenderkit fintech", sub: "Justcoded · team-lead", stack: ["PHP 8", "Laravel", "PostgreSQL"], audienceTag: "smb" },
-        { id: "case-erp", title: "ERP oil & gas", sub: "Itpelag · 500+ users", stack: ["Laravel", "Oracle", "Docker"], audienceTag: "smb" },
-        { id: "case-mpstats", title: "1+ TB analytics", sub: "MPSTATS · −20% latency, +30% throughput", stack: ["Laravel", "ClickHouse", "Pandas"], audienceTag: "smb" },
+        { id: "case-hubmarket-stocksync", title: "Маркетплейс-синхронизация остатков", sub: "HubMarket · парсер 4 площадок + pipeline на pg-boss · запрос фаундера в прод за 3 дня", stack: ["Next.js", "Hono", "Playwright", "pg-boss"], group: "ai", link: "/ru/cases/hubmarket-stocksync" },
+        { id: "case-skolkovo", title: "OCR-пайплайн для заявок", sub: "EdTech-заказчик · скан → Yandex OCR → Yandex GPT → структурированная запись в БД", stack: ["Laravel 12", "Yandex OCR", "Yandex GPT"], group: "ai" },
+        { id: "case-landing", title: "AI-генератор лендингов", sub: "EdTech-заказчик · dual-provider генерация текста + картинок по брифу", stack: ["Vue 3", "GPT-4o-mini", "NanoBanano"], group: "ai" },
+        { id: "case-mcp", title: "timeweb-mcp-server", sub: "Open-source MCP-сервер: управление Timeweb-инфрой из Claude Code, Cursor и других агентов", stack: ["Node.js", "TypeScript", "MCP SDK"], openSource: { npmPkg: "timeweb-mcp-server", ghOwner: "webkoth", ghRepo: "timeweb-mcp-server" }, group: "ai" },
+        { id: "case-mpstats", title: "Big-data аналитика 1+ TB", sub: "MPSTATS · ClickHouse-pipeline · −20% latency, +30% throughput", stack: ["Laravel", "ClickHouse", "Pandas"], group: "production" },
+        { id: "case-lenderkit", title: "Lenderkit fintech", sub: "Justcoded · team-lead на платформе p2p-кредитования", stack: ["PHP 8", "Laravel", "PostgreSQL"], group: "production" },
+        { id: "case-erp", title: "ERP для нефтегаза", sub: "Itpelag · 500+ users · learning Oracle stack, Docker-окружение", stack: ["Laravel", "Oracle", "Docker"], group: "production" },
       ] as ReadonlyArray<{
         id: string;
         title: string;
         sub: string;
         stack: string[];
-        audienceTag: "founder" | "smb" | "agency";
+        group: "ai" | "production";
         link?: string;
         openSource?: { npmPkg: string; ghOwner: string; ghRepo: string };
       }>,
@@ -197,13 +159,13 @@ export const copy = {
     why: {
       title: "Почему именно так",
       items: [
-        { title: "От идеи до прода — без передач", body: "Работает один и тот же человек на всех слоях — фронт, бэк, AI, DevOps. В HubMarket это уже доказано: Founder + sole dev, цикл «запрос → прод» 3-4 дня.", proofLabel: "HubMarket", proofAnchor: "#featured" },
-        { title: "Production-уровень, не «PoC и до свидания»", body: "Multi-provider cascade, очереди, наблюдаемость, откаты. Не «работает на демо», а «не падает в проде».", proofLabel: "Skolkovo loyalty", proofAnchor: "#case-skolkovo" },
-        { title: "Я живу в AI-стеке", body: "7 опубликованных MCP-серверов на npm (включая 3 для маркетплейсов). Ежедневно в Claude Code и Cursor. Это не курсы — рабочие инструменты.", proofLabel: "npm", proofHref: "https://www.npmjs.com/~webkoth" },
+        { title: "От идеи до прода — без передач", body: "Работает один и тот же человек на всех слоях — фронт, бэк, AI, DevOps.", proofAnchor: "#featured" },
+        { title: "Production-уровень", body: "Multi-provider cascade, очереди, наблюдаемость, откаты.", proofAnchor: "#case-skolkovo" },
+        { title: "AI-стек — основная экспертиза", body: "7 опубликованных MCP-серверов на npm (включая 3 для маркетплейсов).", proofLabel: "npm", proofHref: "https://www.npmjs.com/~webkoth" },
       ] as ReadonlyArray<{
         title: string;
         body: string;
-        proofLabel: string;
+        proofLabel?: string;
         proofAnchor?: string;
         proofHref?: string;
       }>,
@@ -274,7 +236,7 @@ export const copy = {
         },
       },
       submit: "Отправить заявку",
-      hint: "Ответ — в течение суток, обычно — в часы.",
+      hint: "Ответ в течении часа",
       success: { title: "Спасибо, заявка получена", body: "Я уже вижу её в Telegram. Свяжусь в течение суток." },
       error: { title: "Не удалось отправить", body: "Напишите напрямую в Telegram: @abnorsky" },
       altChannels: {
@@ -319,7 +281,6 @@ server.setRequestHandler("tools/call", async (req) => {
 await server.connect(new StdioServerTransport());`,
     },
     footer: {
-      brand: "webkoth · Минас Саркисян · Краснодар · Remote / Hybrid",
       links: { cv: "CV", github: "GitHub", telegram: "Telegram", youtube: "YouTube" },
       copyright: "© 2026",
     },
@@ -379,7 +340,7 @@ await server.connect(new StdioServerTransport());`,
           title: "Document pipelines",
           trigger: "Student uploads a PDF document",
           action: "OCR extracts text, LLM parses fields",
-          outcome: "DB record + program linkage — no manual entry (in prod at Skolkovo)",
+          outcome: "DB record + program linkage — no manual entry (in prod at an EdTech client)",
           anchor: "#case-skolkovo",
         },
         {
@@ -423,87 +384,49 @@ await server.connect(new StdioServerTransport());`,
         },
       ],
     },
-    pricing: {
-      title: "Packages",
-      subtitle: "By audience. Audit (1 day, $1,000) — required for Production AI Integration, optional for AI-MVP Sprint.",
-      excludesLabel: "Not included",
-      packages: {
-        sprint: {
-          name: "AI-MVP Sprint",
-          audience: "For founders",
-          pill: "$1,500 · 7 days",
-          items: [
-            "1 AI scenario in prod from 3 templates",
-            "RAG chatbot / tool-calling agent / AI feature in existing app",
-            "Ready stack: Next.js + Hono + Vercel AI SDK + Claude/Gemini fallback",
-            "Handover: code, docs, access",
-          ],
-          excludes: ["Custom UI design", "Post-release support", "Model fine-tuning", "LLM token costs"],
-          cta: "Discuss Sprint",
-        },
-        integration: {
-          name: "Production AI Integration",
-          audience: "For SMB / mid-market",
-          pill: "from $6,000 · 2-4 weeks · +1 mo free support",
-          items: [
-            "Adaptation to your stack (PHP/Laravel, Python/FastAPI, Node, Go)",
-            "Multi-provider fallback (no vendor lock-in)",
-            "Observability: Sentry / pino / structured logs",
-            "Prompt + response audit log",
-            "Handover doc + 1 month free minimal support",
-          ],
-          excludes: ["Model fine-tuning", "Custom UI design", "LLM token costs", "Migration to new stack"],
-          cta: "Order an audit",
-        },
-        subcontract: {
-          name: "Subcontract / Whitelabel",
-          audience: "For agencies",
-          pill: "from $1,200 · 2-3 weeks · ad-hoc $35/h",
-          items: [
-            "1 MCP server for client API — from $1,200 in 2 weeks",
-            "RAG / agent / AI feature — from $1,500 in 2-3 weeks",
-            "Ad-hoc consulting on AI / MCP — from $35/h",
-            "Whitelabel default + optional 'AI engineer on team'",
-            "NDA before start. Communication through you.",
-          ],
-          excludes: ["Direct work with end-client without approval", "Minimum 20h per project"],
-          cta: "Discuss subcontract",
-        },
-      },
-    },
     featured: {
       title: "Case: HubMarket",
       sub: "AI-SaaS for marketplace sellers · Founder + sole developer · production",
-      metrics: [
-        "3 marketplaces (WB, Ozon, Yandex Market)",
-        "0 LLM downtime via cascade",
-        "End-to-end, one person",
-        "Feature request → prod cycle: 3-4 days",
+      stack: [
+        "Next.js 16",
+        "React 19",
+        "Prisma 7",
+        "PostgreSQL",
+        "pg-boss",
+        "Hono",
+        "AI SDK",
+        "Claude",
+        "Gemini",
+        "Groq",
+        "Python · FastAPI",
+        "Playwright",
+        "Sentry · pino",
+        "YooKassa",
       ],
-      stack: ["Next.js 16", "React 19", "Hono", "Prisma", "pg-boss", "Vercel AI SDK", "Python/FastAPI", "Playwright", "YooKassa", "Cloudflare Workers"],
     },
     cases: {
       title: "More cases",
+      sub: "AI projects (RAG, LLM, agents, OCR pipelines) and heavy production: fintech, ERP, big-data analytics.",
       moreLink: "Full portfolio & background: /minasarkisyan",
-      tagLabels: {
-        founder: "For founders",
-        smb: "For SMB",
-        agency: "For agencies",
+      groupLabels: {
+        all: "All",
+        ai: "AI / LLM",
+        production: "Production / High-load",
       },
       items: [
-        { id: "case-skolkovo", title: "AI OCR ⇢ GPT", sub: "Skolkovo · Yandex stack · async queues", stack: ["Laravel 12", "Yandex OCR", "Yandex GPT"], audienceTag: "smb" },
-        { id: "case-landing", title: "AI Landing builder", sub: "Skolkovo · dual-provider", stack: ["Vue 3", "GPT-4o-mini", "NanoBanano"], audienceTag: "founder" },
-        { id: "case-hubmarket-stocksync", title: "Marketplace stock sync", sub: "HubMarket · founder request → prod in 3 days", stack: ["Next.js", "Hono", "Playwright", "pg-boss"], audienceTag: "founder", link: "/en/cases/hubmarket-stocksync" },
-        { id: "case-mcp", title: "timeweb-mcp-server", sub: "Open-source · npm · GitHub", stack: ["Node.js", "TypeScript", "MCP SDK"], openSource: { npmPkg: "timeweb-mcp-server", ghOwner: "webkoth", ghRepo: "timeweb-mcp-server" }, audienceTag: "agency" },
-        { id: "case-lenderkit", title: "Lenderkit fintech", sub: "Justcoded · team-lead", stack: ["PHP 8", "Laravel", "PostgreSQL"], audienceTag: "smb" },
-        { id: "case-erp", title: "ERP oil & gas", sub: "Itpelag · 500+ users", stack: ["Laravel", "Oracle", "Docker"], audienceTag: "smb" },
-        { id: "case-mpstats", title: "1+ TB analytics", sub: "MPSTATS · −20% latency, +30% throughput", stack: ["Laravel", "ClickHouse", "Pandas"], audienceTag: "smb" },
+        { id: "case-hubmarket-stocksync", title: "Marketplace stock sync", sub: "HubMarket · 4-marketplace scraper + pg-boss pipeline · founder request to prod in 3 days", stack: ["Next.js", "Hono", "Playwright", "pg-boss"], group: "ai", link: "/en/cases/hubmarket-stocksync" },
+        { id: "case-skolkovo", title: "OCR pipeline for applications", sub: "EdTech client · scan → Yandex OCR → Yandex GPT → structured DB record", stack: ["Laravel 12", "Yandex OCR", "Yandex GPT"], group: "ai" },
+        { id: "case-landing", title: "AI landing generator", sub: "EdTech client · dual-provider text + image generation from a brief", stack: ["Vue 3", "GPT-4o-mini", "NanoBanano"], group: "ai" },
+        { id: "case-mcp", title: "timeweb-mcp-server", sub: "Open-source MCP server: manage Timeweb infra from Claude Code, Cursor and other agents", stack: ["Node.js", "TypeScript", "MCP SDK"], openSource: { npmPkg: "timeweb-mcp-server", ghOwner: "webkoth", ghRepo: "timeweb-mcp-server" }, group: "ai" },
+        { id: "case-mpstats", title: "1+ TB big-data analytics", sub: "MPSTATS · ClickHouse pipeline · −20% latency, +30% throughput", stack: ["Laravel", "ClickHouse", "Pandas"], group: "production" },
+        { id: "case-lenderkit", title: "Lenderkit fintech", sub: "Justcoded · team-lead on a p2p-lending platform", stack: ["PHP 8", "Laravel", "PostgreSQL"], group: "production" },
+        { id: "case-erp", title: "ERP for oil & gas", sub: "Itpelag · 500+ users · Oracle stack, Docker-based environment", stack: ["Laravel", "Oracle", "Docker"], group: "production" },
       ] as ReadonlyArray<{
         id: string;
         title: string;
         sub: string;
         stack: string[];
-        audienceTag: "founder" | "smb" | "agency";
+        group: "ai" | "production";
         link?: string;
         openSource?: { npmPkg: string; ghOwner: string; ghRepo: string };
       }>,
@@ -511,13 +434,13 @@ await server.connect(new StdioServerTransport());`,
     why: {
       title: "Why this works",
       items: [
-        { title: "From idea to prod — no handoffs", body: "The same person works across all layers — front, back, AI, DevOps. Proven on HubMarket: Founder + sole dev, request → prod cycle 3-4 days.", proofLabel: "HubMarket", proofAnchor: "#featured" },
-        { title: "Production-grade, not 'PoC and bye'", body: "Multi-provider cascade, queues, observability, rollbacks. Doesn't 'work on demo' — doesn't fall in prod.", proofLabel: "Skolkovo loyalty", proofAnchor: "#case-skolkovo" },
-        { title: "I live in the AI stack", body: "7 published MCP servers on npm (including 3 for marketplaces). Daily in Claude Code and Cursor. Not courses — actual tools.", proofLabel: "npm", proofHref: "https://www.npmjs.com/~webkoth" },
+        { title: "From idea to prod — no handoffs", body: "The same person works across all layers — front, back, AI, DevOps.", proofAnchor: "#featured" },
+        { title: "Production-grade", body: "Multi-provider cascade, queues, observability, rollbacks.", proofAnchor: "#case-skolkovo" },
+        { title: "AI stack is my core expertise", body: "7 published MCP servers on npm (including 3 for marketplaces).", proofHref: "https://www.npmjs.com/~webkoth" },
       ] as ReadonlyArray<{
         title: string;
         body: string;
-        proofLabel: string;
+        proofLabel?: string;
         proofAnchor?: string;
         proofHref?: string;
       }>,
@@ -633,7 +556,6 @@ server.setRequestHandler("tools/call", async (req) => {
 await server.connect(new StdioServerTransport());`,
     },
     footer: {
-      brand: "webkoth · Minas Sarkisyan · Krasnodar · Remote / Hybrid",
       links: { cv: "CV", github: "GitHub", telegram: "Telegram", youtube: "YouTube" },
       copyright: "© 2026",
     },

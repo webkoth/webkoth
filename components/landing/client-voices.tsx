@@ -1,7 +1,9 @@
+import { MessageSquare } from "lucide-react";
 import { testimonials } from "@/app/data/testimonials";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import type { Lang } from "./copy-i18n";
+import { SectionHeader } from "./section-header";
 
 function getInitials(name: string): string {
   return name
@@ -30,21 +32,9 @@ export function ClientVoices({ lang }: { lang: Lang }) {
   const s = sectionCopy[lang];
 
   return (
-    <section id="voices" className="relative overflow-hidden">
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,color-mix(in_oklab,var(--chart-1)_8%,transparent),transparent_55%)]"
-      />
-      <div className="mx-auto max-w-6xl px-4 md:px-8 py-20 md:py-28">
-        <div className="mb-12 max-w-2xl">
-          <div className="mb-2 font-mono text-xs uppercase tracking-widest text-primary">
-            {s.eyebrow}
-          </div>
-          <h2 className="mb-3 text-2xl md:text-4xl font-semibold tracking-tight">
-            {s.title}
-          </h2>
-          <p className="text-muted-foreground">{s.sub}</p>
-        </div>
+    <section id="voices" className="relative">
+      <div className="mx-auto max-w-7xl px-4 md:px-8 py-20 md:py-28">
+        <SectionHeader icon={MessageSquare} eyebrow={s.eyebrow} title={s.title} sub={s.sub} />
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {testimonials.map((t) => (
             <Card key={t.id} className="h-full">
