@@ -1,15 +1,17 @@
 "use client";
-import Link from "next/link";
-import { buttonVariants } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import { ModeToggle } from "@/components/mode-toggle";
 import { LanguageToggle } from "@/components/language-toggle";
 import { copy, type Lang } from "./copy-i18n";
 import { MetricsBar } from "./metrics-bar";
 import { AiBackground } from "./ai-background";
 import { HeroCodeMockup } from "./hero-code-mockup";
+import { useLeadForm } from "./lead-form-modal";
+import { Magnetic } from "./magnetic";
 
 export function Hero({ lang }: { lang: Lang }) {
   const t = copy[lang];
+  const { open } = useLeadForm();
   return (
     <section id="hero" className="relative overflow-hidden">
       <AiBackground />
@@ -24,7 +26,7 @@ export function Hero({ lang }: { lang: Lang }) {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
           <div className="lg:col-span-7">
-            <h1 className="text-4xl md:text-6xl lg:text-[5rem] lg:leading-[1.05] font-semibold tracking-tight">
+            <h1 className="text-4xl md:text-7xl lg:text-[5rem] lg:leading-[1.02] font-extrabold tracking-tighter">
               {t.hero.h1}
             </h1>
             <p className="mt-6 text-lg md:text-xl text-muted-foreground max-w-2xl">{t.hero.sub}</p>
@@ -34,12 +36,14 @@ export function Hero({ lang }: { lang: Lang }) {
             </p>
 
             <div className="mt-10 flex flex-col sm:flex-row gap-3">
-              <Link href="#form?package=auditOnly" className={buttonVariants({ size: "lg" })}>
-                {t.hero.ctaPrimary}
-              </Link>
-              <Link href="#form" className={buttonVariants({ size: "lg", variant: "outline" })}>
-                {t.hero.ctaSecondary}
-              </Link>
+              <Magnetic className="inline-block">
+                <Button
+                  size="lg"
+                  onClick={() => open({ package: "auditOnly" })}
+                >
+                  {t.hero.ctaSecondary}
+                </Button>
+              </Magnetic>
             </div>
           </div>
 

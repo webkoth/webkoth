@@ -34,7 +34,7 @@ const Icons: Record<string, React.ReactElement> = {
 };
 
 export function ContentGrid({ data, lang }: Props) {
-  const title = lang === "en" ? "Content & Channels" : "Контент и каналы";
+  const title = lang === "en" ? "Resources" : "Ресурсы";
 
   return (
     <section className="space-y-5">

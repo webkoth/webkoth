@@ -5,10 +5,25 @@ import { copy, type Lang } from "./copy-i18n";
 
 export function WhyMe({ lang }: { lang: Lang }) {
   const t = copy[lang].why;
+  const eyebrow = lang === "ru" ? "ПОЧЕМУ Я" : "WHY ME";
+  const sub =
+    lang === "ru"
+      ? "Несколько причин, по которым выбирают меня — и пруфы под каждой."
+      : "A few reasons people pick me — with proof under each one.";
   return (
-    <section id="why" className="border-t border-border">
-      <div className="max-w-6xl mx-auto px-4 md:px-8 py-20 md:py-28">
-        <h2 className="text-2xl md:text-4xl font-semibold tracking-tight mb-12">{t.title}</h2>
+    <section id="why" className="relative overflow-hidden">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_right,color-mix(in_oklab,var(--chart-3)_7%,transparent),transparent_55%)]"
+      />
+      <div className="mx-auto max-w-6xl px-4 md:px-8 py-20 md:py-28">
+        <div className="mb-12 max-w-2xl">
+          <div className="mb-2 font-mono text-xs uppercase tracking-widest text-primary">
+            {eyebrow}
+          </div>
+          <h2 className="mb-3 text-2xl md:text-4xl font-semibold tracking-tight">{t.title}</h2>
+          <p className="text-muted-foreground">{sub}</p>
+        </div>
         <div className="space-y-12 md:space-y-16">
           {t.items.map((item, i) => {
             const proofProps = item.proofHref

@@ -1,20 +1,21 @@
 "use client";
-import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { buttonVariants } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Check } from "lucide-react";
 import { packageIds } from "@/lib/landing/pricing";
 import { copy, type Lang } from "./copy-i18n";
 import { SpotlightCard } from "./spotlight-card";
 import { StaggerGroup, StaggerItem } from "./stagger";
+import { useLeadForm } from "./lead-form-modal";
 
 export function ProcessPricing({ lang }: { lang: Lang }) {
   const pricing = copy[lang].pricing;
+  const { open } = useLeadForm();
 
   return (
-    <section id="process-pricing" className="border-t border-border bg-muted/20">
+    <section id="process-pricing" className="bg-muted/20">
       <div className="max-w-6xl mx-auto px-4 md:px-8 py-20 md:py-28">
         <div id="pricing" className="scroll-mt-20">
           <h3 className="text-xl md:text-2xl font-semibold tracking-tight mb-2">
@@ -76,14 +77,12 @@ export function ProcessPricing({ lang }: { lang: Lang }) {
                             </ul>
                           </div>
                         )}
-                        <Link
-                          href={`#form?package=${id}`}
-                          className={buttonVariants({
-                            variant: isFeatured ? "default" : "outline",
-                          })}
+                        <Button
+                          variant={isFeatured ? "default" : "outline"}
+                          onClick={() => open({ package: id })}
                         >
                           {data.cta}
-                        </Link>
+                        </Button>
                       </CardContent>
                     </Card>
                   </SpotlightCard>

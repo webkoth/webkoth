@@ -30,7 +30,7 @@ export function RoadmapTimeline({ lang }: { lang: Lang }) {
   return (
     <section
       id="roadmap"
-      className="relative border-t border-border overflow-hidden"
+      className="relative overflow-hidden"
     >
       {/* Subtle peach corner gradient */}
       <div

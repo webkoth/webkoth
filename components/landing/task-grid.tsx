@@ -24,10 +24,25 @@ const iconMap: Record<string, LucideIcon> = {
 
 export function TaskGrid({ lang }: { lang: Lang }) {
   const t = copy[lang].tasks;
+  const eyebrow = lang === "ru" ? "С ЧЕМ Я РАБОТАЮ" : "WHAT I WORK ON";
+  const sub =
+    lang === "ru"
+      ? "Шесть форматов задач — выберите вход, который ближе всего к вашей ситуации."
+      : "Six task formats — pick the entry point closest to your situation.";
   return (
-    <section id="tasks" className="border-t border-border">
-      <div className="max-w-6xl mx-auto px-4 md:px-8 py-20 md:py-28">
-        <h2 className="text-2xl md:text-4xl font-semibold tracking-tight mb-12">{t.title}</h2>
+    <section id="tasks" className="relative overflow-hidden">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_right,color-mix(in_oklab,var(--primary)_8%,transparent),transparent_55%)]"
+      />
+      <div className="mx-auto max-w-6xl px-4 md:px-8 py-20 md:py-28">
+        <div className="mb-12 max-w-2xl">
+          <div className="mb-2 font-mono text-xs uppercase tracking-widest text-primary">
+            {eyebrow}
+          </div>
+          <h2 className="mb-3 text-2xl md:text-4xl font-semibold tracking-tight">{t.title}</h2>
+          <p className="text-muted-foreground">{sub}</p>
+        </div>
         <StaggerGroup className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {t.items.map((item) => {
             const Icon = iconMap[item.icon] ?? Sparkles;

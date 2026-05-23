@@ -2,22 +2,31 @@ export type Lang = "en" | "ru";
 
 export const copy = {
   ru: {
-    nav: { brand: "webkoth · AI Integration" },
+    nav: { brand: "Minas Sarkisyan · AI Integration" },
     hero: {
-      h1: "Production AI в вашем продукте — за дни, не за кварталы.",
-      sub: "AI-агенты, RAG, MCP на готовом стеке. Стартапу — MVP за неделю. SMB — production-каскад. Агентству — MCP-разработка whitelabel. Прямой контакт с разработчиком.",
-      specs: ["RAG", "LLM-агенты", "MCP", "multi-provider cascade"],
+      h1: "MVP в production за 5 дней",
+      sub: "AI-агенты, RAG, MCP. MVP за неделю. Прямой контакт с разработчиком.",
+      specs: [
+        "RAG", 
+        "LLM-агенты", 
+        "MCP", 
+        "multi-provider cascade",
+        "RAG по PDF/таблицам",
+        "интеграция через Claude Code, MCP",
+        "latency LLM",
+        "Продуктовый аудит"
+      ],
       ctaPrimary: "Заказать аудит",
       ctaSecondary: "Обсудить проект",
       metrics: [
-        { value: 9, suffix: "+", label: "лет fullstack" },
-        { value: 2.5, suffix: "", label: "года production AI" },
-        { value: 7, suffix: "", label: "MCP-сервера на npm" },
-        { value: 5, suffix: "+", label: "продуктов в проде" },
+        { value: 10, suffix: "+", label: "лет опыта fullstack разработки" },
+        { value: 2, suffix: "", label: "года внедрения production AI" },
+        { value: 10, suffix: "", label: "реализованных MCP-сервера" },
+        { value: 20, suffix: "+", label: "продуктов в продакшене" },
       ],
     },
     tasks: {
-      title: "Какие задачи я закрываю",
+      title: "Пример закрытых задач",
       items: [
         {
           icon: "search",
@@ -56,7 +65,7 @@ export const copy = {
           title: "Документ-пайплайны",
           trigger: "Студент загрузил PDF-документ",
           action: "OCR извлёк текст, LLM разобрал поля",
-          outcome: "Запись в БД, привязка к программе — без ручного ввода (в проде в Сколково)",
+          outcome: "Запись в БД, привязка к программе — без ручного ввода",
           anchor: "#case-skolkovo",
         },
         {

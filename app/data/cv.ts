@@ -216,7 +216,7 @@ export const cvData: Record<"en" | "ru", CVData> = {
     productionAI: [
       {
         title: "Multi-provider LLM cascade in HubMarket",
-        body: "Architecture with fallback Claude → Gemini → Groq: 0 LLM downtime over 8 months in prod. Automatic cost-log and quality-drift tracking.",
+        body: "Architecture with Claude, Gemini, Groq fallback chain: 0 LLM downtime over 8 months in prod. Automatic cost-log and quality-drift tracking.",
         evidence: "Featured case on webkoth.com",
       },
       {
@@ -230,8 +230,8 @@ export const cvData: Record<"en" | "ru", CVData> = {
         evidence: "npmjs.com/~webkoth",
       },
       {
-        title: "Document pipelines (OCR → LLM → structured)",
-        body: "Production AI document recognition service in Skolkovo: PDF → Yandex OCR → Yandex GPT (structured output) → DB write with educational program linkage.",
+        title: "Document pipelines (OCR, LLM, structured output)",
+        body: "Production AI document recognition service in Skolkovo: PDF passed through Yandex OCR, then Yandex GPT for structured output, then DB write with educational program linkage.",
         evidence: "Skolkovo · async queues, admin panel",
       },
       {
@@ -264,7 +264,7 @@ export const cvData: Record<"en" | "ru", CVData> = {
         aiMarker: "AI / LLM in production (5+ products: OCR, AI-builder, RAG)",
         description: [
           "Support 5+ products in parallel within the school's digital ecosystem",
-          "AI document recognition service (Yandex OCR → Yandex GPT, async queues)",
+          "AI document recognition service (Yandex OCR feeding Yandex GPT, async queues)",
           "AI landing builder with two providers: GPT-4o-mini for text + NanoBanano for images",
           "Private alumni social network (Laravel 12, Vue 3 + TypeScript, REST API on 100+ endpoints)",
           "High-load loyalty backend on Octane + Swoole + Reverb + Horizon + Pennant",
@@ -332,9 +332,9 @@ export const cvData: Record<"en" | "ru", CVData> = {
       {
         title: "HubMarket: Marketplace stock sync (B-Sprint case)",
         stack: ["Next.js", "Hono", "Playwright", "pg-boss"],
-        team: "1 fullstack (founder request → prod in 3 days)",
+        team: "1 fullstack (from founder request to prod in 3 days)",
         functionality:
-          "Production B-Sprint exemplar: founder request → architecture → implementation → handover to prod in 3 days. Stock sync across 3 marketplaces (WB, Ozon, Yandex Market) for a HubMarket customer. Full writeup: webkoth.com/cases/hubmarket-stocksync.",
+          "Production B-Sprint exemplar: founder request, architecture, implementation, handover to prod in 3 days. Stock sync across 3 marketplaces (WB, Ozon, Yandex Market) for a HubMarket customer. Full writeup: webkoth.com/cases/hubmarket-stocksync.",
         technologies: ["Playwright", "pg-boss", "PostgreSQL"],
         aiTag: null,
       },
@@ -353,7 +353,7 @@ export const cvData: Record<"en" | "ru", CVData> = {
         ],
         team: "Founder + sole developer",
         functionality:
-          "Analytics & automation for WB / Ozon / Yandex Market sellers. Bronze→Silver data lake, multi-provider LLM cascade (Claude + Gemini + Groq), Playwright-based marketplace parser, FastAPI document parser for Russian self-employment tax, Telegram bot (grammy + Pyrogram MTProto), YooKassa subscriptions, Chrome MV3 extension.",
+          "Analytics & automation for WB / Ozon / Yandex Market sellers. Bronze-to-Silver data lake, multi-provider LLM cascade (Claude + Gemini + Groq), Playwright-based marketplace parser, FastAPI document parser for Russian self-employment tax, Telegram bot (grammy + Pyrogram MTProto), YooKassa subscriptions, Chrome MV3 extension.",
         technologies: [
           "pg-boss",
           "Sentry",
@@ -377,7 +377,7 @@ export const cvData: Record<"en" | "ru", CVData> = {
         ],
         team: "1 fullstack + BA + QA",
         functionality:
-          "Production AI pipeline: PDF upload → Yandex OCR (text recognition) → Yandex GPT (data structuring) → DB write with educational program / student linkage. Async queues for heavy files, admin panel.",
+          "Production AI pipeline: PDF upload, Yandex OCR for text recognition, Yandex GPT for data structuring, DB write with educational program / student linkage. Async queues for heavy files, admin panel.",
         technologies: ["GIT", "Docker", "MySQL", "Yandex Cloud API"],
         aiTag: "AI",
       },
@@ -640,7 +640,7 @@ export const cvData: Record<"en" | "ru", CVData> = {
     productionAI: [
       {
         title: "Multi-provider LLM cascade в HubMarket",
-        body: "Архитектура с фолбэком Claude → Gemini → Groq: 0 downtime LLM за 8 месяцев в проде. Автоматический cost-log и quality-drift отслеживание.",
+        body: "Архитектура с каскадом фолбэков Claude, Gemini, Groq: 0 downtime LLM за 8 месяцев в проде. Автоматический cost-log и quality-drift отслеживание.",
         evidence: "Featured case на лендинге webkoth.com",
       },
       {
@@ -654,8 +654,8 @@ export const cvData: Record<"en" | "ru", CVData> = {
         evidence: "npmjs.com/~webkoth",
       },
       {
-        title: "Document-пайплайны (OCR → LLM → structured)",
-        body: "Production AI-сервис распознавания документов в Сколково: PDF → Yandex OCR → Yandex GPT (structured output) → DB write с привязкой к образовательным программам.",
+        title: "Document-пайплайны (OCR, LLM, structured output)",
+        body: "Production AI-сервис распознавания документов в Сколково: PDF проходит через Yandex OCR, затем Yandex GPT (structured output), затем запись в БД с привязкой к образовательным программам.",
         evidence: "Сколково · async queues, admin panel",
       },
       {
@@ -688,7 +688,7 @@ export const cvData: Record<"en" | "ru", CVData> = {
         aiMarker: "AI / LLM в проде (5+ продуктов: OCR, AI-builder, RAG)",
         description: [
           "Support параллельно 5+ продуктов в цифровой экосистеме школы",
-          "AI-сервис распознавания документов (Yandex OCR → Yandex GPT, асинхронные очереди)",
+          "AI-сервис распознавания документов (Yandex OCR в связке с Yandex GPT, асинхронные очереди)",
           "AI-конструктор лендингов с двумя провайдерами: GPT-4o-mini для текста + NanoBanano для изображений",
           "Закрытая социальная сеть выпускников (Laravel 12, Vue 3 + TypeScript, REST API на 100+ эндпоинтов)",
           "High-load backend программы лояльности на Octane + Swoole + Reverb + Horizon + Pennant",
@@ -758,7 +758,7 @@ export const cvData: Record<"en" | "ru", CVData> = {
         stack: ["Next.js", "Hono", "Playwright", "pg-boss"],
         team: "1 fullstack (от запроса фаундера до прода — 3 дня)",
         functionality:
-          "Production-кейс founder-driven спринта: запрос → архитектура → реализация → передача в прод за 3 дня. Синхронизация остатков по 3 маркетплейсам (WB, Ozon, Yandex Market) для клиента HubMarket. Полный writeup: webkoth.com/cases/hubmarket-stocksync.",
+          "Production-кейс founder-driven спринта: запрос, архитектура, реализация, передача в прод за 3 дня. Синхронизация остатков по 3 маркетплейсам (WB, Ozon, Yandex Market) для клиента HubMarket. Полный writeup: webkoth.com/cases/hubmarket-stocksync.",
         technologies: ["Playwright", "pg-boss", "PostgreSQL"],
         aiTag: null,
       },
@@ -777,7 +777,7 @@ export const cvData: Record<"en" | "ru", CVData> = {
         ],
         team: "Founder + единственный разработчик",
         functionality:
-          "Аналитика и автоматизация для селлеров WB / Ozon / Yandex Market. Архитектура Bronze→Silver Data Lake, мульти-провайдерный LLM-каскад (Claude + Gemini + Groq), парсер маркетплейсов на Playwright + stealth, документ-парсер на FastAPI для расчёта НПД, Telegram-бот (grammy + Pyrogram MTProto), ЮKassa-подписки, Chrome MV3 расширение.",
+          "Аналитика и автоматизация для селлеров WB / Ozon / Yandex Market. Архитектура Data Lake (Bronze, Silver), мульти-провайдерный LLM-каскад (Claude + Gemini + Groq), парсер маркетплейсов на Playwright + stealth, документ-парсер на FastAPI для расчёта НПД, Telegram-бот (grammy + Pyrogram MTProto), ЮKassa-подписки, Chrome MV3 расширение.",
         technologies: [
           "pg-boss",
           "Sentry",
@@ -801,7 +801,7 @@ export const cvData: Record<"en" | "ru", CVData> = {
         ],
         team: "1 fullstack + BA + QA",
         functionality:
-          "Production AI-пайплайн: загрузка PDF → Yandex OCR (распознавание) → Yandex GPT (структурирование данных) → запись в БД с привязкой к образовательным программам и студентам. Асинхронные очереди для тяжёлых файлов, админка.",
+          "Production AI-пайплайн: загрузка PDF, Yandex OCR (распознавание), Yandex GPT (структурирование данных), запись в БД с привязкой к образовательным программам и студентам. Асинхронные очереди для тяжёлых файлов, админка.",
         technologies: ["GIT", "Docker", "MySQL", "Yandex Cloud API"],
         aiTag: "AI",
       },

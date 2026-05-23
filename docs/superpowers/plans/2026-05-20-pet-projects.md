@@ -13,7 +13,7 @@
 ---
 
 ## Task 0: Lock the anti-заглушка principle
-
+ 
 This is **not skippable**. Read and internalize before any task that touches `webkoth/` files.
 
 - [ ] **Step 0.1: Read and acknowledge anti-заглушка principle**

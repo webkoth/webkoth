@@ -1,17 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { FileText, Copy, Check } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import {
-  AlertDialog,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog"
+import { FileText, Copy, Check, X } from "lucide-react"
 import { CVData } from "@/app/data/cv"
 
 interface LLMDocsButtonProps {
@@ -137,55 +127,100 @@ export function LLMDocsButton({ data, lang }: LLMDocsButtonProps) {
     }
   }
 
+  React.useEffect(() => {
+    if (!open) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false)
+    }
+    document.addEventListener("keydown", onKey)
+    const prev = document.body.style.overflow
+    document.body.style.overflow = "hidden"
+    return () => {
+      document.removeEventListener("keydown", onKey)
+      document.body.style.overflow = prev
+    }
+  }, [open])
+
+  const title = lang === "en" ? "LLM Documentation" : "Документация для LLM"
+  const description =
+    lang === "en"
+      ? "Complete CV content in Markdown format, optimized for AI agents and LLMs."
+      : "Полное содержание резюме в формате Markdown, оптимизированное для AI агентов и LLM."
+
+  const closeLabel = lang === "en" ? "Close" : "Закрыть"
+
   return (
-    <AlertDialog open={open} onOpenChange={setOpen}>
-      <AlertDialogTrigger
-        render={
-          <Button variant="outline" size="icon" className="h-9 w-9" title={lang === "en" ? "LLM Documentation" : "Документация для LLM"}>
-            <FileText className="h-[1.2rem] w-[1.2rem]" />
-            <span className="sr-only">LLM Documentation</span>
-          </Button>
-        }
-      />
-      <AlertDialogContent size="default" className="max-w-4xl max-h-[80vh] overflow-hidden flex flex-col data-[size=default]:max-w-4xl">
-        <AlertDialogHeader>
-          <AlertDialogTitle>
-            {lang === "en" ? "LLM Documentation" : "Документация для LLM"}
-          </AlertDialogTitle>
-          <AlertDialogDescription>
-            {lang === "en"
-              ? "Complete CV content in Markdown format, optimized for AI agents and LLMs."
-              : "Полное содержание резюме в формате Markdown, оптимизированное для AI агентов и LLM."}
-          </AlertDialogDescription>
-        </AlertDialogHeader>
-        <div className="flex-1 overflow-auto">
-          <pre className="bg-muted p-4 rounded-lg text-sm font-mono whitespace-pre-wrap break-words">
-            {markdown}
-          </pre>
+    <>
+      <button
+        type="button"
+        title={title}
+        onClick={() => setOpen(true)}
+        className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-border bg-background text-foreground shadow-xs transition hover:bg-muted hover:text-foreground"
+      >
+        <FileText className="h-[1.2rem] w-[1.2rem]" />
+        <span className="sr-only">{title}</span>
+      </button>
+
+      {open ? (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label={title}
+          className="fixed inset-0 z-50 flex items-center justify-center p-4"
+        >
+          <div
+            className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+            onClick={() => setOpen(false)}
+          />
+          <div className="relative z-10 flex max-h-[85vh] w-full max-w-4xl flex-col gap-4 rounded-xl border border-border bg-popover p-6 text-popover-foreground shadow-2xl">
+            <div className="flex items-start justify-between gap-4">
+              <div className="space-y-1">
+                <h2 className="font-heading text-lg font-medium">{title}</h2>
+                <p className="text-sm text-muted-foreground">{description}</p>
+              </div>
+              <button
+                type="button"
+                onClick={() => setOpen(false)}
+                className="rounded-md p-1 text-muted-foreground transition hover:bg-muted hover:text-foreground"
+                aria-label={closeLabel}
+              >
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+            <div className="flex-1 overflow-auto">
+              <pre className="whitespace-pre-wrap break-words rounded-lg bg-muted p-4 font-mono text-sm">
+                {markdown}
+              </pre>
+            </div>
+            <div className="flex justify-end gap-2 border-t pt-4">
+              <button
+                type="button"
+                onClick={handleCopy}
+                className="inline-flex h-9 items-center gap-2 rounded-md border border-border bg-background px-3 text-sm font-medium text-foreground transition hover:bg-muted"
+              >
+                {copied ? (
+                  <>
+                    <Check className="h-4 w-4" />
+                    {lang === "en" ? "Copied!" : "Скопировано!"}
+                  </>
+                ) : (
+                  <>
+                    <Copy className="h-4 w-4" />
+                    {lang === "en" ? "Copy to Clipboard" : "Копировать"}
+                  </>
+                )}
+              </button>
+              <button
+                type="button"
+                onClick={() => setOpen(false)}
+                className="inline-flex h-9 items-center rounded-md border border-border bg-background px-3 text-sm font-medium text-foreground transition hover:bg-muted"
+              >
+                {closeLabel}
+              </button>
+            </div>
+          </div>
         </div>
-        <div className="flex justify-end gap-2 pt-4 border-t">
-          <Button
-            variant="outline"
-            onClick={handleCopy}
-            className="flex items-center gap-2"
-          >
-            {copied ? (
-              <>
-                <Check className="h-4 w-4" />
-                {lang === "en" ? "Copied!" : "Скопировано!"}
-              </>
-            ) : (
-              <>
-                <Copy className="h-4 w-4" />
-                {lang === "en" ? "Copy to Clipboard" : "Копировать"}
-              </>
-            )}
-          </Button>
-          <AlertDialogCancel>
-            {lang === "en" ? "Close" : "Закрыть"}
-          </AlertDialogCancel>
-        </div>
-      </AlertDialogContent>
-    </AlertDialog>
+      ) : null}
+    </>
   )
 }
