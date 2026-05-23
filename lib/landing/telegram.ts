@@ -1,5 +1,5 @@
-const MAX_ATTEMPTS = 3;
-const ATTEMPT_DELAY_MS = 800;
+const MAX_ATTEMPTS = 2;
+const ATTEMPT_DELAY_MS = 600;
 const FETCH_TIMEOUT_MS = 6000;
 
 function describeError(e: unknown): string {
@@ -11,8 +11,8 @@ function describeError(e: unknown): string {
   return parts.join(" | ");
 }
 
-async function attemptSend(token: string, chatId: string, text: string) {
-  const res = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+async function attemptSend(baseUrl: string, token: string, chatId: string, text: string) {
+  const res = await fetch(`${baseUrl}/bot${token}/sendMessage`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -36,16 +36,20 @@ export async function sendTelegramMessage(text: string): Promise<{ ok: boolean; 
   if (!token || !chatId) {
     return { ok: false, error: "Telegram env not configured" };
   }
+  // Defaults to Telegram's official host. Override with TELEGRAM_API_BASE_URL
+  // when the deployment region can't reach api.telegram.org directly
+  // (e.g. RU hosting → Cloudflare Worker proxy).
+  const baseUrl = (process.env.TELEGRAM_API_BASE_URL ?? "https://api.telegram.org").replace(/\/$/, "");
 
   const errors: string[] = [];
   for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt += 1) {
     try {
-      await attemptSend(token, chatId, text);
+      await attemptSend(baseUrl, token, chatId, text);
       return { ok: true };
     } catch (e) {
       const desc = describeError(e);
       errors.push(`#${attempt}: ${desc}`);
-      console.warn(`[telegram] attempt ${attempt} failed: ${desc}`);
+      console.warn(`[telegram] attempt ${attempt} via ${baseUrl} failed: ${desc}`);
       if (attempt < MAX_ATTEMPTS) {
         await new Promise((r) => setTimeout(r, ATTEMPT_DELAY_MS));
       }
