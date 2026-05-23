@@ -18,7 +18,7 @@ export function Header({ data }: HeaderProps) {
   const telegramHandle = data.contacts.telegram.replace("@", "");
   return (
     <header className="flex flex-col items-center gap-6 text-center md:flex-row md:items-start md:gap-8 md:text-left">
-      <div className="relative shrink-0 h-32 w-28 md:h-40 md:w-32">
+      <div className="relative shrink-0 h-36 w-32 md:h-44 md:w-36">
         <div className="absolute inset-0 overflow-hidden rounded-2xl bg-muted ring-1 ring-border shadow-md">
           <Image
             src="/images/profile.jpg"
@@ -33,9 +33,13 @@ export function Header({ data }: HeaderProps) {
       <div className="flex-1 space-y-3">
         <div>
           <h1 className="text-3xl md:text-4xl font-bold tracking-tight">{data.name}</h1>
-          <p className="mt-1 text-base font-semibold text-foreground md:text-lg">{data.role}</p>
-          <p className="text-xs text-muted-foreground md:text-sm">{data.roleSub}</p>
-          <p className="text-xs text-muted-foreground">{data.location}</p>
+          <p className="mt-1 text-base font-semibold text-primary md:text-lg">{data.role}</p>
+          {data.roleSub ? (
+            <p className="text-xs text-muted-foreground md:text-sm">{data.roleSub}</p>
+          ) : null}
+          {data.location ? (
+            <p className="text-xs text-muted-foreground">{data.location}</p>
+          ) : null}
         </div>
 
         <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">

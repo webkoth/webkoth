@@ -2,7 +2,7 @@
 
 import type { CVData } from "@/app/data/cv";
 
-type Props = { data: CVData; lang: "en" | "ru" };
+type Props = { data: CVData };
 
 // Inline brand SVGs (from simple-icons, public domain). Sized 16x16.
 const Icons: Record<string, React.ReactElement> = {
@@ -33,12 +33,9 @@ const Icons: Record<string, React.ReactElement> = {
   ),
 };
 
-export function ContentGrid({ data, lang }: Props) {
-  const title = lang === "en" ? "Resources" : "Ресурсы";
-
+export function ContentGrid({ data }: Props) {
   return (
     <section className="space-y-5">
-      <h2 className="text-2xl md:text-3xl font-semibold tracking-tight">{title}</h2>
       <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-4">
         {data.content.map((c) => (
           <a

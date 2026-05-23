@@ -88,10 +88,18 @@ function formatCVAsMarkdown(data: CVData, lang: "en" | "ru"): string {
     markdown += `### ${job.role}\n`
     markdown += `**${t.period}:** ${job.period}\n`
     markdown += `**${t.company}:** ${job.company} (${job.type})\n`
-    markdown += `**${t.description}:**\n`
-    job.description.forEach((item) => {
-      markdown += `- ${item}\n`
-    })
+    if (job.responsibilities && job.responsibilities.length > 0) {
+      markdown += `**${lang === "en" ? "Responsibilities" : "Обязанности"}:**\n`
+      job.responsibilities.forEach((item) => {
+        markdown += `- ${item}\n`
+      })
+    }
+    if (job.achievements && job.achievements.length > 0) {
+      markdown += `**${lang === "en" ? "Achievements" : "Достижения"}:**\n`
+      job.achievements.forEach((item) => {
+        markdown += `- ${item}\n`
+      })
+    }
     markdown += `\n`
   })
 
