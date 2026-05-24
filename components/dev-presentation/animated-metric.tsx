@@ -20,10 +20,7 @@ export function AnimatedMetric({
   const [displayValue, setDisplayValue] = useState(reduce ? value : 0)
 
   useEffect(() => {
-    if (!inView || reduce) {
-      if (reduce) setDisplayValue(value)
-      return
-    }
+    if (!inView || reduce) return
     const start = performance.now()
     let frame = 0
     const tick = (now: number) => {

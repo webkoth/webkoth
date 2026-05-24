@@ -5,6 +5,7 @@ import { Sparkles, Loader2, ArrowRight, RotateCcw } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Textarea } from '@/components/ui/textarea'
 import { SectionLabel } from './section-label'
+import { FlowDiagram } from './flow-diagram'
 
 const EXAMPLES = [
   'привет нужен мне разработчик уровня сеньор для проекта',
@@ -54,12 +55,14 @@ export function AiDemo() {
           Живой AI-helper
         </h2>
         <p className="text-sm text-muted-foreground md:text-base">
-          Та же кнопка, что и в форме ниже. Поток: браузер →{' '}
-          <code className="rounded bg-muted px-1 py-0.5 font-mono text-xs">/api/ai/polish</code>{' '}
-          (Next.js) → HTTPS Bearer →{' '}
-          <code className="rounded bg-muted px-1 py-0.5 font-mono text-xs">hubmarket-ai</code>{' '}
-          (Hono на отдельном сервере) → cascade Claude → Gemini → Groq → ответ.
+          Та же кнопка, что и в форме ниже. Запрос идёт через прокси Next.js
+          в собственный AI-микросервис, который держит multi-provider cascade.
+          Если Claude недоступен — автоматически Gemini, затем Groq.
         </p>
+      </div>
+
+      <div className="mb-6">
+        <FlowDiagram />
       </div>
 
       <div className="rounded-2xl border border-border bg-card/50 p-5 md:p-6">
