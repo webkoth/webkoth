@@ -11,8 +11,8 @@ export const leadSchema = z.object({
     .regex(/^[+\d\s\-()]+$/, 'Только цифры, пробелы, +-()'),
   email: z.email('Невалидный email').max(200),
   message: z.string().trim().min(10, 'Минимум 10 символов').max(4000),
-  // anti-spam
-  website: z.string().max(0).optional(), // honeypot
+  // anti-spam: honeypot allowed through Zod (non-empty triggers silent-200 in route)
+  website: z.string().optional(),
   filledAtMs: z.number().int().positive(),
 })
 
