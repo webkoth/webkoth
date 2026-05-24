@@ -11,15 +11,16 @@ AI-микросервис hubmarket-ai.
 
 ## Стек
 Next.js 16 (App Router, Turbopack) · React 19 · TypeScript · Tailwind v4
-· shadcn/ui · react-hook-form + Zod · sonner · Resend (REST, без SDK) ·
+· shadcn/ui · react-hook-form + Zod · sonner · Nodemailer (SMTP) ·
 собственный AI-микросервис hubmarket-ai (Hono + AI SDK, cascade
 Claude → Gemini → Groq, Bearer auth)
 
 ## Как запустить локально
 1. `git clone … && cd webkoth && npm install`
 2. Скопировать `.env.example` → `.env.local`, заполнить:
-   - `RESEND_API_KEY`, `RESEND_FROM`, `OWNER_EMAIL` — из https://resend.com
-     (для теста подойдёт `onboarding@resend.dev` без верификации домена)
+   - `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `SMTP_FROM`, `OWNER_EMAIL` —
+     любой SMTP-провайдер. По умолчанию настроено под Timeweb mail
+     (smtp.timeweb.ru:465 SSL); подойдёт и Gmail SMTP с App Password.
    - `AI_SERVICE_URL`, `AI_SERVICE_TOKEN` — адрес и токен hubmarket-ai
      (локально: `http://localhost:3100`, см. `../hubmarket-ai`)
    - `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID` (опц., backup-канал владельцу)
@@ -34,7 +35,7 @@ Claude → Gemini → Groq, Bearer auth)
 - **Защита от спама:** honeypot-поле + min-fill-time (1.5s) + per-IP
   rate-limit (1 submit / 12 мин через token-bucket).
 - **API:** `POST /api/dev-presentation/lead` →
-  `Promise.allSettled` на 3 канала: Resend(owner) · Resend(user copy) · Telegram(backup).
+  `Promise.allSettled` на 3 канала: SMTP(owner) · SMTP(user copy) · Telegram(backup).
 - **Критерий успеха:** owner-email доставлен. Если упала только user-copy —
   ответ `{ok:true, partial:true}`, юзер видит warning. Если owner упал —
   502 `delivery`, пользователь видит retry-кнопку.

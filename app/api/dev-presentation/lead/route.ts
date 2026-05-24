@@ -1,7 +1,7 @@
 import { NextResponse, type NextRequest } from 'next/server'
 import { leadSchema, type AiSummary } from '@/lib/dev-presentation/schemas'
 import { callSummary } from '@/lib/dev-presentation/ai-client'
-import { sendOwnerEmail, sendUserCopy } from '@/lib/dev-presentation/resend'
+import { sendOwnerEmail, sendUserCopy } from '@/lib/dev-presentation/smtp'
 import { sendTelegramMessage, escapeHtml } from '@/lib/landing/telegram'
 import { rateLimitTake } from '@/lib/landing/rate-limit'
 
