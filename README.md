@@ -1,3 +1,80 @@
+# Webkoth — Dev-presentation (test task)
+
+> Лендинг-презентация разработчика для тестового задания.
+> **Live:** https://webkoth.com/dev-presentation
+> **Source:** этот же репозиторий, путь `app/dev-presentation/`
+
+## Что это
+Минилендинг "о себе как разработчике" + контактная форма с email-доставкой
+(owner + копия пользователю) и двумя AI-фичами через собственный
+AI-микросервис hubmarket-ai.
+
+## Стек
+Next.js 16 (App Router, Turbopack) · React 19 · TypeScript · Tailwind v4
+· shadcn/ui · react-hook-form + Zod · sonner · Resend (REST, без SDK) ·
+собственный AI-микросервис hubmarket-ai (Hono + AI SDK, cascade
+Claude → Gemini → Groq, Bearer auth)
+
+## Как запустить локально
+1. `git clone … && cd webkoth && npm install`
+2. Скопировать `.env.example` → `.env.local`, заполнить:
+   - `RESEND_API_KEY`, `RESEND_FROM`, `OWNER_EMAIL` — из https://resend.com
+     (для теста подойдёт `onboarding@resend.dev` без верификации домена)
+   - `AI_SERVICE_URL`, `AI_SERVICE_TOKEN` — адрес и токен hubmarket-ai
+     (локально: `http://localhost:3100`, см. `../hubmarket-ai`)
+   - `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID` (опц., backup-канал владельцу)
+3. `npm run dev` → http://localhost:3000/dev-presentation
+4. AI-микросервис: если запущен `cd ../hubmarket-ai && npm run dev`,
+   обе AI-фичи работают. Если выключен — форма продолжает работать,
+   email-доставка не зависит от AI.
+
+## Как реализована форма
+- **Frontend:** RHF + Zod, 4 поля (имя, телефон, email, сообщение).
+  Состояния: `idle / polishing / submitting / success / partial / error`.
+- **Защита от спама:** honeypot-поле + min-fill-time (1.5s) + per-IP
+  rate-limit (1 submit / 12 мин через token-bucket).
+- **API:** `POST /api/dev-presentation/lead` →
+  `Promise.allSettled` на 3 канала: Resend(owner) · Resend(user copy) · Telegram(backup).
+- **Критерий успеха:** owner-email доставлен. Если упала только user-copy —
+  ответ `{ok:true, partial:true}`, юзер видит warning. Если owner упал —
+  502 `delivery`, пользователь видит retry-кнопку.
+- **AI-summary** вкладывается в письмо владельцу (intent + urgency +
+  TL;DR + suggested_reply). Опционально показывается юзеру в success-UI
+  как collapsible-блок «Как ваш запрос понял AI».
+
+## Какие AI-инструменты использовались
+- **Claude Code** (Anthropic) — основной агент разработки в IDE
+  (дизайн, генерация кода, ревью)
+- **Cursor** — точечные правки
+- **Архитектура AI-обвязки:** `hubmarket-ai` — собственный production
+  микросервис (Hono + Vercel AI SDK), к которому подключён HubMarket и
+  теперь /dev-presentation. Каскад **Claude Sonnet → Gemini → Groq**
+  с автоматическим fallback при недоступности любого провайдера.
+- Для тестового задания добавлены 2 агента:
+  - `lead-polish` — переписывает сообщение пользователя яснее (text)
+  - `lead-summary` — классифицирует intent + urgency + TL;DR (JSON / structured output)
+
+## Что делалось с помощью ИИ
+- Дизайн архитектуры и спека: брейншторм через Claude (8 итераций)
+- Большая часть кода форм / роутов: сгенерировано Claude Code,
+  точечно поправлено руками
+- Email-шаблоны (HTML + text): сгенерированы Claude по гайдлайнам
+- Промпты для агентов `lead-polish` и `lead-summary`:
+  составлены руками с использованием Claude для grammar-check
+
+## Что пришлось исправлять вручную
+- (заполнится по факту в финале — честный список того, что AI сгенерировал
+  криво и пришлось переписать)
+
+## Что бы добавил при следующей итерации
+- Юнит-тесты (vitest) на маппинг ошибок и шаблоны писем
+- Sentry на оба роута + structured logging (pino)
+- Verification email юзеру (double opt-in) для защиты от ложных адресов
+- Persistence лидов в БД (сейчас только email + telegram, исторический
+  лог не ведётся)
+
+---
+
 # webkoth · AI Integration
 
 > I ship AI into products. From idea to production. One person, end-to-end.
