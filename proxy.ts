@@ -24,12 +24,13 @@ export function proxy(request: NextRequest) {
 
   // If pathname doesn't have a locale, redirect to default locale
   if (!pathnameHasLocale) {
-    // Don't redirect API routes, _next, or static files
+    // Don't redirect API routes, _next, static files, or locale-agnostic pages
     if (
       pathname.startsWith('/api') ||
       pathname.startsWith('/_next') ||
       pathname.startsWith('/images') ||
       pathname.startsWith('/favicon.ico') ||
+      pathname.startsWith('/dev-presentation') ||
       pathname.includes('.')
     ) {
       return NextResponse.next()
