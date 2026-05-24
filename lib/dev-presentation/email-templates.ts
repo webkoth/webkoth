@@ -17,8 +17,7 @@ export type OwnerEmailData = {
 }
 
 export function buildOwnerSubject(d: OwnerEmailData): string {
-  const intent = d.aiSummary?.intent ?? 'lead'
-  return `[dev-presentation] ${intent}: ${d.name}`
+  return `Заявка с сайта от ${d.name}`
 }
 
 export function buildOwnerText(d: OwnerEmailData): string {
