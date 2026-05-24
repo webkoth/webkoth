@@ -20,7 +20,8 @@ export type DevPresentationData = {
     metrics: Metric[]
   }
   about: {
-    paragraph: string
+    paragraph?: string
+    directions: { title: string; body: string }[]
     chipGroups: ChipGroup[]
   }
   howIWork: {
@@ -43,7 +44,7 @@ export const devPresentationData: DevPresentationData = {
     name: 'Минас Саркисян',
     role: 'Senior Fullstack | AI Engineer',
     pitch:
-      '10+ лет fullstack-разработки. 2+ года плотно с LLM в проде. Закрываю задачи всех уровней — от фичи до архитектуры.',
+      '10+ лет fullstack-разработки. 2+ года плотно с LLM в проде. Закрываю задачи всех уровней — от разработки функциональности до архитектуры.',
     metrics: [
       { value: 10, suffix: '+', label: 'лет fullstack' },
       { value: 2, suffix: '+', label: 'года production AI' },
@@ -53,7 +54,15 @@ export const devPresentationData: DevPresentationData = {
   },
   about: {
     paragraph:
-      '10+ лет fullstack-разработки в продакшене. 2+ года плотно с LLM: каскады (Claude + Gemini + Groq), RAG, AI-агенты, 7 MCP-серверов на npm. Сейчас строю HubMarket — AI-SaaS для селлеров маркетплейсов.',
+      '10+ лет fullstack-разработки в продакшене. 2+ года плотно с LLM: каскады (Claude + Gemini + Groq), RAG, AI-агенты, 20+ MCP-серверов.',
+    directions: [
+      { title: 'AI-фичи в существующих продуктах', body: 'RAG, агенты, ассистенты, классификаторы — без переписывания основного приложения.' },
+      { title: 'Multi-provider LLM-каскады', body: 'Claude → Gemini → Groq с graceful fallback и автоматическим cost-tracking-ом.' },
+      { title: 'MCP-серверы для агентной автоматизации', body: '7 пакетов на npm. Подключаются к Claude Code / Cursor одной строкой.' },
+      { title: 'Document pipelines', body: 'OCR → LLM → structured output. Заменил ручной ввод в EdTech-сервисе end-to-end.' },
+      { title: 'Full-stack веб', body: 'Next.js / React + Hono / FastAPI / Laravel + Postgres / ClickHouse + Docker.' },
+      { title: 'Data & performance', body: 'ETL/ELT, BI-API, SQL-оптимизация, ClickHouse-аналитика на 1+ ТБ.' },
+    ],
     chipGroups: [
       {
         groupLabel: 'Backend',
@@ -89,16 +98,16 @@ export const devPresentationData: DevPresentationData = {
   howIWork: {
     approach: [
       {
-        title: 'От бизнес-задачи к коду',
-        body: 'Сначала брейншторм и краткий спек, потом итерация. Не пишу код пока не понимаю «зачем».',
+        title: 'Spec-driven development',
+        body: 'Брейншторм → письменный спек с целями/не-целями/контрактами → разбивка на bite-sized таски с приёмочными критериями → код. Каждый шаг — отдельный коммит. Эта же страница сделана по этому пайплайну: docs/superpowers/specs/ и docs/superpowers/plans/ лежат в репо рядом с кодом, их можно открыть и пройтись по ним.',
       },
       {
         title: 'Маленькие PR, прод-first',
-        body: 'Лучше 5 PR по 200 строк чем 1 на 1000. Ранний smoke в проде ловит то, что unit-тесты не ловят.',
+        body: 'Лучше 5 PR по 200 строк чем 1 на 1000. Ранний smoke в проде ловит то, что unit-тесты не ловят (например — что Timeweb блочит SMTP исходящий, как было здесь).',
       },
       {
         title: 'Документирую решения',
-        body: 'ADR / README / inline-комментарии где важно «почему». Следующему мне будет легче.',
+        body: 'ADR / README / inline-комментарии где важно «почему». Следующему мне (или вам) будет проще понять причину выбора без археологии в git blame.',
       },
     ],
     aiHabits: [

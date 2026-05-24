@@ -1,6 +1,7 @@
 import { User } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { SectionLabel } from './section-label'
+import { AnimatedMetric } from './animated-metric'
 import type { DevPresentationData } from '@/app/data/dev-presentation'
 
 export function Hero({ data }: { data: DevPresentationData['hero'] }) {
@@ -19,15 +20,12 @@ export function Hero({ data }: { data: DevPresentationData['hero'] }) {
 
       <div className="mb-8 grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-6">
         {data.metrics.map((m) => (
-          <div key={m.label} className="border-l-2 border-primary/40 pl-3">
-            <div className="text-2xl font-bold tabular-nums md:text-3xl">
-              {m.value}
-              <span className="text-primary">{m.suffix}</span>
-            </div>
-            <div className="mt-1 text-xs text-muted-foreground md:text-sm">
-              {m.label}
-            </div>
-          </div>
+          <AnimatedMetric
+            key={m.label}
+            value={m.value}
+            suffix={m.suffix}
+            label={m.label}
+          />
         ))}
       </div>
 

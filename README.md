@@ -67,15 +67,48 @@ hubmarket-ai (Hono + AI SDK, cascade Claude → Gemini → Groq, Bearer auth) �
   составлены руками с использованием Claude для grammar-check
 
 ## Что пришлось исправлять вручную
-- (заполнится по факту в финале — честный список того, что AI сгенерировал
-  криво и пришлось переписать)
+
+Честный список того, что не взлетело с первого раза:
+
+1. **proxy.ts редиректил `/dev-presentation` → `/ru/dev-presentation`** → 404,
+   потому что страница лежит вне `[lang]`-роута (RU only, по дизайну).
+   Добавил `/dev-presentation` в whitelist редиректа.
+2. **Honeypot валился через Zod (400)** вместо silent-200 — у поля стояло
+   `z.string().max(0)`, что отлавливало любое непустое значение _до_ роут-хендлера
+   и подсказывало боту, что это ловушка. Убрал `.max(0)`.
+3. **lucide-react@1.16 не содержит brand-иконку `Github`** — в v1 их вырезали.
+   Скопировал inline SVG `GithubIcon` из существующего `components/cv/contacts.tsx`.
+4. **base-ui `Button` не поддерживает `asChild`** (как в Radix-shadcn) —
+   использует prop `render={<a href="..." />}`. Поправил в Hero CTA и success-UI.
+5. **Resend sandbox шлёт письма только на email самого Resend-аккаунта** —
+   а юзер вводит произвольный адрес. Тестовое сабмиты возвращали `partial: true`
+   на каждый внешний email. Полностью отказался от Resend в пользу
+   Nodemailer + SMTP без верификации домена.
+6. **Прод-хостинг 85.239.51.141 блокирует outbound SMTP 25/465/587** —
+   стандартное anti-spam ограничение RU-провайдеров. Direct nodemailer падал с
+   `ETIMEDOUT CONN`. Перенёс email в `POST /api/email/send` на hubmarket-ai
+   (на другом хостинге, где SMTP egress работает) — webkoth ходит к нему через
+   HTTPS:443 (всегда открыт) с Bearer-токеном.
+7. **AI summary 4s timeout слишком жёсткий** — на проде Claude отвечает 5-6s
+   из-за WAN latency. `aiSummary` стабильно был `null`. Bump до 8s,
+   с graceful-fallback если AI всё же таймаутит.
+8. **Timeweb SMTP отбивал письма как high-probability spam** — subject
+   `[dev-presentation] hire: Иван` и `Ваше сообщение получено — Минас Саркисян`
+   выглядели как autoresponder-шаблоны. Переписал на естественные:
+   `Заявка с сайта от Иван` и `Получил ваш запрос`.
+
+Большинство — это интеграционные сюрпризы (хостинг блочит SMTP, провайдер
+маркирует subject как spam, lucide удалил иконки в мажоре), а не баги
+сгенерированного кода. AI выдал примерно то, что я просил; реальный мир
+оказался жёстче спеки.
 
 ## Что бы добавил при следующей итерации
 - Юнит-тесты (vitest) на маппинг ошибок и шаблоны писем
-- Sentry на оба роута + structured logging (pino)
+- Sentry на оба роута + structured logging (pino) вместо `console.warn`
 - Verification email юзеру (double opt-in) для защиты от ложных адресов
-- Persistence лидов в БД (сейчас только email + telegram, исторический
-  лог не ведётся)
+- Persistence лидов в БД (сейчас только email + Telegram, исторического лога нет)
+- DKIM-подпись и переезд на собственный домен (`hello@webkoth.com`) — снять
+  зависимость от Timeweb-SMTP-фильтра
 
 ---
 
