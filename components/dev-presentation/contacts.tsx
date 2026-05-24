@@ -21,7 +21,7 @@ export function Contacts({
       id="contacts"
       className="mx-auto max-w-5xl scroll-mt-8 border-t border-border px-4 py-12 md:px-8 md:py-16"
     >
-      <SectionLabel icon={Send}>05 · Контакты</SectionLabel>
+      <SectionLabel icon={Send}>07 · Контакты</SectionLabel>
 
       <div className="mb-8 grid gap-3 md:grid-cols-2">
         <a

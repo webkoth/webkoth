@@ -48,7 +48,7 @@ export function AiDemo() {
 
   return (
     <section className="mx-auto max-w-5xl border-t border-border px-4 py-12 md:px-8 md:py-16">
-      <SectionLabel icon={Sparkles}>AI · попробуйте прямо здесь</SectionLabel>
+      <SectionLabel icon={Sparkles}>05 · AI · попробуйте прямо здесь</SectionLabel>
 
       <div className="mb-6 max-w-3xl">
         <h2 className="mb-2 text-xl font-bold tracking-tight md:text-2xl">
