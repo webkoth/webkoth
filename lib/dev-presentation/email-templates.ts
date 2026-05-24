@@ -75,7 +75,7 @@ export type UserEmailData = {
 }
 
 export function buildUserSubject(): string {
-  return 'Ваше сообщение получено — Минас Саркисян'
+  return 'Получил ваш запрос'
 }
 
 export function buildUserText(d: UserEmailData): string {
