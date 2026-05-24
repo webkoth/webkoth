@@ -57,6 +57,6 @@ export async function callSummary(d: {
   return aiCall<SummaryResult>(
     '/api/leads/summary',
     { input: d },
-    4_000,
+    8_000,
   )
 }

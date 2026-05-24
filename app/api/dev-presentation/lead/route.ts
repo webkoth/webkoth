@@ -6,7 +6,7 @@ import { sendTelegramMessage, escapeHtml } from '@/lib/landing/telegram'
 import { rateLimitTake } from '@/lib/landing/rate-limit'
 
 const MIN_FILL_MS = 1500
-const SUMMARY_TIMEOUT_MS = 4000
+const SUMMARY_TIMEOUT_MS = 8000
 
 export async function POST(req: NextRequest) {
   const ip =
