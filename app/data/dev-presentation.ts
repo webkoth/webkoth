@@ -37,6 +37,10 @@ export type DevPresentationData = {
     githubUrl: string
     calendarUrl: string
   }
+  video: {
+    title: string
+    youtubeId: string
+  }
 }
 
 export const devPresentationData: DevPresentationData = {
@@ -164,5 +168,9 @@ export const devPresentationData: DevPresentationData = {
     github: 'github.com/webkoth',
     githubUrl: 'https://github.com/webkoth',
     calendarUrl: 'https://calendar.app.google/jY324Q2AHe1apJo79',
+  },
+  video: {
+    title: 'Видео с моего YouTube-канала',
+    youtubeId: 'ae-ni9ol0mU',
   },
 }

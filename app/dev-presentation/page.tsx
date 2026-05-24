@@ -9,6 +9,7 @@ import { AboutStack } from '@/components/dev-presentation/about-stack'
 import { HowIWork } from '@/components/dev-presentation/how-i-work'
 import { Cases } from '@/components/dev-presentation/cases'
 import { AiDemo } from '@/components/dev-presentation/ai-demo'
+import { Video } from '@/components/dev-presentation/video'
 import { Contacts } from '@/components/dev-presentation/contacts'
 import { devPresentationData as data } from '@/app/data/dev-presentation'
 
@@ -42,6 +43,7 @@ export default function DevPresentationPage() {
         <SectionReveal><HowIWork data={data.howIWork} /></SectionReveal>
         <SectionReveal><Cases data={data.cases} /></SectionReveal>
         <SectionReveal><AiDemo /></SectionReveal>
+        <SectionReveal><Video data={data.video} /></SectionReveal>
         <SectionReveal><Contacts data={data.contacts} /></SectionReveal>
 
         <footer className="border-t border-border">
