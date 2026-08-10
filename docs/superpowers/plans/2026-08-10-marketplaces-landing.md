@@ -631,10 +631,10 @@ export function Hero({ data }: { data: MarketplacesData['hero'] }) {
       <p className="mt-6 max-w-2xl text-base text-muted-foreground md:text-lg">{data.sub}</p>
 
       <div className="mt-8 flex flex-wrap gap-3">
-        <Button size="lg" render={<a href="#form" />}>
+        <Button size="lg" nativeButton={false} render={<a href="#form" />}>
           {data.ctaPrimary}
         </Button>
-        <Button size="lg" variant="outline" render={<a href="#video" />}>
+        <Button size="lg" variant="outline" nativeButton={false} render={<a href="#video" />}>
           {data.ctaSecondary}
         </Button>
       </div>
@@ -651,7 +651,7 @@ export function Hero({ data }: { data: MarketplacesData['hero'] }) {
 
 Два подводных камня этого репозитория, которые дальше повторяются в каждой секции:
 
-1. `render={<a href="…" />}` — это Base UI вместо radix-овского `asChild`. На этом здесь уже спотыкались (`README.md:81-82`).
+1. `render={<a href="…" />}` — это Base UI вместо radix-овского `asChild`. На этом здесь уже спотыкались (`README.md:81-82`). **Вместе с `render` обязателен `nativeButton={false}`**: проп объявлен в `node_modules/@base-ui/react/internals/types.d.ts` со значением по умолчанию `true`, и без него Base UI пишет в консоль предупреждение, что ожидал нативный `<button>`. Существующий `components/dev-presentation/hero.tsx:32` этот проп не передаёт и warning даёт — чинить его не надо, это вне задачи, но повторять ошибку в новых компонентах не будем.
 2. `Card` несёт в базовых классах `flex flex-col gap-6 py-6` (`components/ui/card.tsx:15`). Собственные отступы через `mt-*` внутри карточки будут складываться с `gap-6` и разъедут вёрстку, поэтому во всех карточках плана передаётся `className="block p-5"` — `block` перебивает `flex` через tailwind-merge, и `gap-6` перестаёт действовать. Там, где нужен именно flex (карточка пакета с прижатой вниз строкой), передаётся `flex flex-col gap-0 p-5`.
 
 - [ ] **Step 2: Создать `components/marketplaces/video-questions.tsx`**
@@ -2176,7 +2176,7 @@ export function StickyCta({ label }: { label: string }) {
 
   return (
     <div className="fixed bottom-4 right-4 z-50 md:bottom-6 md:right-6">
-      <Button size="lg" render={<a href="#form" />}>
+      <Button size="lg" nativeButton={false} render={<a href="#form" />}>
         {label}
       </Button>
     </div>
@@ -2228,7 +2228,7 @@ export default function MarketplacesPage() {
             <div className="flex items-center gap-1">
               <PaletteToggle />
               <ModeToggle />
-              <Button size="sm" className="ml-2" render={<a href="#form" />}>
+              <Button size="sm" className="ml-2" nativeButton={false} render={<a href="#form" />}>
                 Разбор бесплатно
               </Button>
             </div>
