@@ -9,10 +9,10 @@ export function Hero({ data }: { data: MarketplacesData['hero'] }) {
       <p className="mt-6 max-w-2xl text-base text-muted-foreground md:text-lg">{data.sub}</p>
 
       <div className="mt-8 flex flex-wrap gap-3">
-        <Button size="lg" render={<a href="#form" />}>
+        <Button size="lg" nativeButton={false} render={<a href="#form" />}>
           {data.ctaPrimary}
         </Button>
-        <Button size="lg" variant="outline" render={<a href="#video" />}>
+        <Button size="lg" variant="outline" nativeButton={false} render={<a href="#video" />}>
           {data.ctaSecondary}
         </Button>
       </div>
