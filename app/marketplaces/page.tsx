@@ -6,6 +6,9 @@ import { DailyProcesses } from '@/components/marketplaces/daily-processes'
 import { ToolsByMarketplace } from '@/components/marketplaces/tools-by-marketplace'
 import { Packages } from '@/components/marketplaces/packages'
 import { Cases } from '@/components/marketplaces/cases'
+import { Security } from '@/components/marketplaces/security'
+import { HowReviewWorks } from '@/components/marketplaces/how-review-works'
+import { Faq } from '@/components/marketplaces/faq'
 import { marketplacesData as data } from '@/app/data/marketplaces'
 
 export default function MarketplacesPage() {
@@ -28,6 +31,15 @@ export default function MarketplacesPage() {
         </SectionReveal>
         <SectionReveal>
           <Cases data={data.cases} />
+        </SectionReveal>
+        <SectionReveal>
+          <Security data={data.security} />
+        </SectionReveal>
+        <SectionReveal>
+          <HowReviewWorks data={data.review} />
+        </SectionReveal>
+        <SectionReveal>
+          <Faq data={data.faq} />
         </SectionReveal>
       </main>
     </>
