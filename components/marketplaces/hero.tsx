@@ -8,11 +8,25 @@ export function Hero({ data }: { data: MarketplacesData['hero'] }) {
       <h1 className="max-w-3xl text-3xl font-bold tracking-tight md:text-5xl">{data.h1}</h1>
       <p className="mt-6 max-w-2xl text-base text-muted-foreground md:text-lg">{data.sub}</p>
 
+      {/* Базовые классы Button несут shrink-0 и whitespace-nowrap, поэтому длинная
+          подпись главной CTA не помещается в 320px и даёт горизонтальный скролл.
+          На узких экранах отдаём кнопкам всю ширину и разрешаем перенос строки. */}
       <div className="mt-8 flex flex-wrap gap-3">
-        <Button size="lg" nativeButton={false} render={<a href="#form" />}>
+        <Button
+          size="lg"
+          nativeButton={false}
+          className="h-auto w-full py-2.5 whitespace-normal sm:h-10 sm:w-auto sm:py-0 sm:whitespace-nowrap"
+          render={<a href="#form" />}
+        >
           {data.ctaPrimary}
         </Button>
-        <Button size="lg" variant="outline" nativeButton={false} render={<a href="#video" />}>
+        <Button
+          size="lg"
+          variant="outline"
+          nativeButton={false}
+          className="h-auto w-full py-2.5 whitespace-normal sm:h-10 sm:w-auto sm:py-0 sm:whitespace-nowrap"
+          render={<a href="#video" />}
+        >
           {data.ctaSecondary}
         </Button>
       </div>
