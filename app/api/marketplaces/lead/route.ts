@@ -9,6 +9,11 @@ import { rateLimitTake } from '@/lib/landing/rate-limit'
 
 const MIN_FILL_MS = 1500
 
+// Поле «Telegram или email» принимает и «@ivan», и «ivan@example.com».
+// Reply-To ставим только во втором случае: хэндл в этом заголовке даёт
+// невалидный адрес и ломает ответ в один клик, ради которого он и нужен.
+const looksLikeEmail = (s: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s)
+
 export async function POST(req: NextRequest) {
   const ip =
     req.headers.get('x-forwarded-for')?.split(',')[0].trim() ||
@@ -74,6 +79,7 @@ export async function POST(req: NextRequest) {
       ? relaySend({
           from,
           to,
+          replyTo: looksLikeEmail(parsed.data.contact) ? parsed.data.contact : undefined,
           subject: buildLeadSubject(lead),
           text: buildLeadText(lead),
           html: buildLeadHtml(lead),

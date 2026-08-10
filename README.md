@@ -24,7 +24,9 @@ hubmarket-ai (Hono + AI SDK, cascade Claude → Gemini → Groq, Bearer auth) �
      (локально: `http://localhost:3100`, прод: `https://ai.marketsellerai.ru`).
      hubmarket-ai сам хранит SMTP-креды (SMTP_HOST/PORT/USER/PASS в его .env)
      и шлёт письма через свой POST /api/email/send
-   - `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID` (опц., backup-канал владельцу)
+   - `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID` — обязательны: для `/marketplaces`
+     это полноценный канал доставки лида, страхующий заблокированный SMTP
+     (на `/dev-presentation` — backup к email)
 3. `npm run dev` → http://localhost:3000/dev-presentation
 4. AI-микросервис: если запущен `cd ../hubmarket-ai && npm run dev`,
    обе AI-фичи работают. Если выключен — форма продолжает работать,

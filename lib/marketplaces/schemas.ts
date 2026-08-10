@@ -5,7 +5,14 @@ export const CATALOG_SIZES = ['lt100', '100_1000', 'gt1000'] as const
 export const ROLES = ['owner', 'manager', 'other'] as const
 
 export const marketplacesLeadSchema = z.object({
-  name: z.string().trim().min(2, 'Минимум 2 символа').max(120),
+  // Переносы строк запрещены: имя уходит в тему письма (email.ts), а «\r\n» в
+  // заголовке — это header injection. .trim() снимает их только по краям.
+  name: z
+    .string()
+    .trim()
+    .min(2, 'Минимум 2 символа')
+    .max(120)
+    .regex(/^[^\r\n]+$/, 'Без переносов строк'),
   phone: z
     .string()
     .trim()

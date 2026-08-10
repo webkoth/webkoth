@@ -31,6 +31,14 @@ describe('marketplacesLeadSchema', () => {
     expect(r.success).toBe(true)
   })
 
+  it('отклоняет имя с переносом строки — тема письма склеивается из name', () => {
+    const r = marketplacesLeadSchema.safeParse({
+      ...valid,
+      name: 'Иван\nBcc: attacker@example.com',
+    })
+    expect(r.success).toBe(false)
+  })
+
   it('отклоняет неизвестную площадку', () => {
     const r = marketplacesLeadSchema.safeParse({ ...valid, marketplaces: ['avito'] })
     expect(r.success).toBe(false)
