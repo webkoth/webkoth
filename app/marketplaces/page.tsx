@@ -39,7 +39,14 @@ export default function MarketplacesPage() {
             <div className="flex items-center gap-1">
               <PaletteToggle />
               <ModeToggle />
-              <Button size="sm" className="ml-2" nativeButton={false} render={<a href="#form" />}>
+              {/* На 375px кнопка вместе с тогглами не влезает и даёт 17px
+                  горизонтального скролла. На мобильном её работу делает StickyCta. */}
+              <Button
+                size="sm"
+                className="ml-2 hidden sm:inline-flex"
+                nativeButton={false}
+                render={<a href="#form" />}
+              >
                 Разбор бесплатно
               </Button>
             </div>

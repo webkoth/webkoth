@@ -1900,7 +1900,7 @@ git commit -m "feat(marketplaces): lead API route"
 ```tsx
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useState } from 'react'
 import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Send, Check, Loader2, CircleAlert } from 'lucide-react'
@@ -1964,11 +1964,11 @@ type SubmitState = 'idle' | 'submitting' | 'success' | 'error'
 // Пропов нет: заголовок и подпись секции рисует page.tsx, форма отвечает только за поля.
 export function LeadForm() {
   const [state, setState] = useState<SubmitState>('idle')
-  const mountedAt = useRef<number>(0)
 
-  useEffect(() => {
-    mountedAt.current = Date.now()
-  }, [])
+  // Момент монтирования — анти-бот метка: роут отсекает отправки быстрее 1.5 с.
+  // Ленивый useState, а не useRef: значение вычисляется один раз и переживает
+  // ре-рендеры, при этом не читается из ref во время рендера (react-hooks/refs).
+  const [mountedAt] = useState(() => Date.now())
 
   const {
     register,
@@ -1997,7 +1997,7 @@ export function LeadForm() {
       const res = await fetch('/api/marketplaces/lead', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...values, filledAtMs: mountedAt.current }),
+        body: JSON.stringify({ ...values, filledAtMs: mountedAt }),
       })
       if (!res.ok) throw new Error(String(res.status))
       setState('success')
@@ -2231,7 +2231,14 @@ export default function MarketplacesPage() {
             <div className="flex items-center gap-1">
               <PaletteToggle />
               <ModeToggle />
-              <Button size="sm" className="ml-2" nativeButton={false} render={<a href="#form" />}>
+              {/* На 375px кнопка вместе с тогглами не влезает и даёт 17px
+                  горизонтального скролла. На мобильном её работу делает StickyCta. */}
+              <Button
+                size="sm"
+                className="ml-2 hidden sm:inline-flex"
+                nativeButton={false}
+                render={<a href="#form" />}
+              >
                 Разбор бесплатно
               </Button>
             </div>
