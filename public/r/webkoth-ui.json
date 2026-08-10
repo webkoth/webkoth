@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "extends": "none",
+  "name": "webkoth-ui",
+  "title": "Webkoth UI (everything)",
+  "description": "One-shot install: the Webkoth theme plus every custom component. Point an agent here to adopt the full look in a fresh shadcn project.",
+  "registryDependencies": [
+    "https://webkoth.com/r/theme.json",
+    "https://webkoth.com/r/magnetic.json",
+    "https://webkoth.com/r/animated-metric.json",
+    "https://webkoth.com/r/theme-provider.json",
+    "https://webkoth.com/r/mode-toggle.json",
+    "https://webkoth.com/r/palette-toggle.json",
+    "https://webkoth.com/r/language-toggle.json"
+  ],
+  "type": "registry:style"
+}

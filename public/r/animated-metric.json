@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "animated-metric",
+  "title": "Animated Metric",
+  "description": "Counts a number up to its value when scrolled into view, with an accent suffix and label. Respects prefers-reduced-motion.",
+  "dependencies": [
+    "framer-motion"
+  ],
+  "files": [
+    {
+      "path": "components/dev-presentation/animated-metric.tsx",
+      "content": "'use client'\n\nimport { useEffect, useRef, useState } from 'react'\nimport { useInView, useReducedMotion } from 'framer-motion'\n\nexport function AnimatedMetric({\n  value,\n  suffix,\n  label,\n  duration = 1200,\n}: {\n  value: number\n  suffix: string\n  label: string\n  duration?: number\n}) {\n  const ref = useRef<HTMLDivElement>(null)\n  const inView = useInView(ref, { once: true, margin: '-40px' })\n  const reduce = useReducedMotion()\n  const [displayValue, setDisplayValue] = useState(reduce ? value : 0)\n\n  useEffect(() => {\n    if (!inView || reduce) return\n    const start = performance.now()\n    let frame = 0\n    const tick = (now: number) => {\n      const t = Math.min(1, (now - start) / duration)\n      const eased = 1 - Math.pow(1 - t, 3)\n      setDisplayValue(Math.round(value * eased))\n      if (t < 1) frame = requestAnimationFrame(tick)\n    }\n    frame = requestAnimationFrame(tick)\n    return () => cancelAnimationFrame(frame)\n  }, [inView, reduce, value, duration])\n\n  return (\n    <div ref={ref} className=\"border-l-2 border-primary/40 pl-3\">\n      <div className=\"text-2xl font-bold tabular-nums md:text-3xl\">\n        {displayValue}\n        <span className=\"text-primary\">{suffix}</span>\n      </div>\n      <div className=\"mt-1 text-xs text-muted-foreground md:text-sm\">{label}</div>\n    </div>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "components/animated-metric.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

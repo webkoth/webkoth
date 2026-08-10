@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "magnetic",
+  "title": "Magnetic",
+  "description": "Wraps any inline content so it springs toward the cursor on hover. Respects prefers-reduced-motion.",
+  "dependencies": [
+    "framer-motion"
+  ],
+  "files": [
+    {
+      "path": "components/landing/magnetic.tsx",
+      "content": "\"use client\";\nimport { motion, useMotionValue, useSpring, useReducedMotion } from \"framer-motion\";\nimport { useRef, type ReactNode } from \"react\";\n\nconst STRENGTH = 0.25;\n\nexport function Magnetic({ children, className }: { children: ReactNode; className?: string }) {\n  const ref = useRef<HTMLSpanElement>(null);\n  const reduce = useReducedMotion();\n  const x = useMotionValue(0);\n  const y = useMotionValue(0);\n  const sx = useSpring(x, { stiffness: 220, damping: 18, mass: 0.4 });\n  const sy = useSpring(y, { stiffness: 220, damping: 18, mass: 0.4 });\n\n  if (reduce) return <span className={className}>{children}</span>;\n\n  const onMove = (e: React.MouseEvent<HTMLSpanElement>) => {\n    const el = ref.current;\n    if (!el) return;\n    const r = el.getBoundingClientRect();\n    x.set((e.clientX - r.left - r.width / 2) * STRENGTH);\n    y.set((e.clientY - r.top - r.height / 2) * STRENGTH);\n  };\n\n  const onLeave = () => {\n    x.set(0);\n    y.set(0);\n  };\n\n  return (\n    <motion.span\n      ref={ref}\n      onMouseMove={onMove}\n      onMouseLeave={onLeave}\n      style={{ x: sx, y: sy, display: \"inline-block\" }}\n      className={className}\n    >\n      {children}\n    </motion.span>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/magnetic.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

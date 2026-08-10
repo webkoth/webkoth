@@ -1,0 +1,85 @@
+# Webkoth UI Kit — instructions for AI agents
+
+You are about to build a frontend in the "Webkoth" style. This is a shadcn
+registry: a custom theme plus a few custom components layered on top of the
+standard shadcn library. Do NOT rebuild primitives — install them from shadcn,
+then apply this theme and these components.
+
+Live visual reference: https://webkoth.com/ui-kit
+Registry index:        https://webkoth.com/r/registry.json
+
+--------------------------------------------------------------------------------
+## TL;DR — one command
+
+In a Next.js project that already has shadcn initialized:
+
+    npx shadcn@latest add https://webkoth.com/r/webkoth-ui.json
+
+This pulls the theme + every custom component at once. Then build your UI with
+the standard shadcn components (button, card, input, …) and they will already
+look like the Webkoth style.
+
+--------------------------------------------------------------------------------
+## Prerequisites (fresh project)
+
+The stack this theme targets:
+- Next.js (App Router) + React 19
+- Tailwind CSS v4 — NO tailwind.config.js; theme lives in CSS via `@theme inline`
+- shadcn style: "base-vega" (built on @base-ui/react, NOT Radix), base color "mist"
+- Icons: lucide-react
+- Fonts: Geist + Geist Mono (next/font/google), CSS vars --font-sans / --font-geist-mono
+
+If the project is empty, initialize first:
+
+    npx shadcn@latest init        # choose Tailwind v4, base color "mist"
+    npx shadcn@latest add https://webkoth.com/r/webkoth-ui.json
+
+--------------------------------------------------------------------------------
+## Conventions (follow these)
+
+1. Tailwind v4 only. Do not create tailwind.config.{js,ts}. Theme tokens are CSS
+   variables; the `@theme inline` block maps them to utilities (bg-primary, etc.).
+2. Colors are OKLCH. Use semantic tokens (bg-primary, text-muted-foreground,
+   border-border, ring-ring, bg-card …) — never hardcode hex/rgb.
+3. The primary color is a warm coral. A `.palette-classic` class on <html> swaps
+   it to a classic teal. Persisted in localStorage under key "palette".
+4. Light/dark via next-themes with `attribute="class"`. Mount <ThemeProvider> once
+   in the root layout (see theme-provider component below).
+5. Animations: framer-motion. Respect prefers-reduced-motion (the custom
+   components already do).
+6. Radius scale derives from --radius (0.625rem): rounded-sm … rounded-4xl.
+
+Root layout wiring (once per app):
+
+    // app/layout.tsx
+    import { ThemeProvider } from "@/components/theme-provider"
+    import { PalettePreferencesScript } from "@/components/palette-preferences-script"
+    // <head>: <PalettePreferencesScript />   (no-flash, applies saved palette)
+    // <body>: <ThemeProvider attribute="class" defaultTheme="system" enableSystem
+    //                        disableTransitionOnChange>{children}</ThemeProvider>
+
+--------------------------------------------------------------------------------
+## Registry items (install individually if you don't want everything)
+
+Theme (colors, radius scale, classic palette, honeycomb background):
+    npx shadcn@latest add https://webkoth.com/r/theme.json
+
+Components:
+    https://webkoth.com/r/magnetic.json          Magnetic — springs toward cursor on hover
+    https://webkoth.com/r/animated-metric.json   AnimatedMetric — counts up when scrolled into view
+    https://webkoth.com/r/theme-provider.json    ThemeProvider — next-themes wrapper (mount once)
+    https://webkoth.com/r/mode-toggle.json       ModeToggle — light/dark icon button (pulls theme-provider)
+    https://webkoth.com/r/palette-toggle.json    PaletteToggle — warm/classic palette (pulls theme + no-flash script)
+    https://webkoth.com/r/language-toggle.json   LanguageToggle — EN/RU switch for /[lang] routes
+
+Everything at once:
+    https://webkoth.com/r/webkoth-ui.json
+
+--------------------------------------------------------------------------------
+## After install — checklist
+
+- [ ] globals.css contains the Webkoth :root / .dark OKLCH tokens
+- [ ] ThemeProvider mounted in root layout
+- [ ] PalettePreferencesScript in <head> (only if you use PaletteToggle)
+- [ ] Build UI with standard shadcn components; they inherit the theme
+- [ ] Verify dark mode and the palette toggle both recolor correctly

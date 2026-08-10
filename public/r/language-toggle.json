@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "language-toggle",
+  "title": "Language Toggle",
+  "description": "EN/RU segmented switch for Next.js apps with a /[lang] route prefix. Rewrites the current path to the chosen language.",
+  "registryDependencies": [
+    "utils"
+  ],
+  "files": [
+    {
+      "path": "components/language-toggle.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport Link from \"next/link\"\nimport { usePathname } from \"next/navigation\"\nimport { cn } from \"@/lib/utils\"\n\ninterface LanguageToggleProps {\n  currentLang: \"en\" | \"ru\"\n}\n\nfunction buildPath(pathname: string, currentLang: \"en\" | \"ru\", newLang: \"en\" | \"ru\") {\n  const segments = pathname.split(\"/\").filter(Boolean)\n  if (segments[0] === currentLang) {\n    segments[0] = newLang\n  } else {\n    segments.unshift(newLang)\n  }\n  return \"/\" + segments.join(\"/\")\n}\n\nexport function LanguageToggle({ currentLang }: LanguageToggleProps) {\n  const pathname = usePathname() || `/${currentLang}`\n\n  const base =\n    \"inline-flex h-9 items-center justify-center px-3 text-sm font-medium transition-colors\"\n  const active = \"bg-primary text-primary-foreground\"\n  const inactive = \"text-foreground hover:bg-muted\"\n\n  return (\n    <div className=\"flex items-center overflow-hidden rounded-md border border-border\">\n      <Link\n        href={buildPath(pathname, currentLang, \"en\")}\n        aria-current={currentLang === \"en\" ? \"page\" : undefined}\n        className={cn(base, currentLang === \"en\" ? active : inactive)}\n      >\n        EN\n      </Link>\n      <Link\n        href={buildPath(pathname, currentLang, \"ru\")}\n        aria-current={currentLang === \"ru\" ? \"page\" : undefined}\n        className={cn(base, currentLang === \"ru\" ? active : inactive)}\n      >\n        RU\n      </Link>\n    </div>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "components/language-toggle.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

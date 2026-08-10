@@ -1,0 +1,234 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "webkoth",
+  "homepage": "https://webkoth.com",
+  "items": [
+    {
+      "name": "theme",
+      "type": "registry:theme",
+      "title": "Webkoth Theme",
+      "description": "Warm-coral OKLCH theme on a base-vega foundation: light/dark tokens, derived radius scale, a togglable classic (teal) palette, and a subtle honeycomb background. Tailwind v4 (no config file).",
+      "cssVars": {
+        "theme": {
+          "font-heading": "var(--font-sans)",
+          "radius-sm": "calc(var(--radius) * 0.6)",
+          "radius-md": "calc(var(--radius) * 0.8)",
+          "radius-lg": "var(--radius)",
+          "radius-xl": "calc(var(--radius) * 1.4)",
+          "radius-2xl": "calc(var(--radius) * 1.8)",
+          "radius-3xl": "calc(var(--radius) * 2.2)",
+          "radius-4xl": "calc(var(--radius) * 2.6)"
+        },
+        "light": {
+          "background": "oklch(1 0 0)",
+          "foreground": "oklch(0.148 0.004 228.8)",
+          "card": "oklch(1 0 0)",
+          "card-foreground": "oklch(0.148 0.004 228.8)",
+          "popover": "oklch(1 0 0)",
+          "popover-foreground": "oklch(0.148 0.004 228.8)",
+          "primary": "oklch(0.62 0.21 35)",
+          "primary-foreground": "oklch(0.985 0 0)",
+          "secondary": "oklch(0.967 0.001 286.375)",
+          "secondary-foreground": "oklch(0.21 0.006 285.885)",
+          "muted": "oklch(0.963 0.002 197.1)",
+          "muted-foreground": "oklch(0.56 0.021 213.5)",
+          "accent": "oklch(0.963 0.002 197.1)",
+          "accent-foreground": "oklch(0.218 0.008 223.9)",
+          "destructive": "oklch(0.577 0.245 27.325)",
+          "border": "oklch(0.925 0.005 214.3)",
+          "input": "oklch(0.925 0.005 214.3)",
+          "ring": "oklch(0.723 0.014 214.4)",
+          "chart-1": "oklch(0.865 0.127 207.078)",
+          "chart-2": "oklch(0.715 0.143 215.221)",
+          "chart-3": "oklch(0.609 0.126 221.723)",
+          "chart-4": "oklch(0.52 0.105 223.128)",
+          "chart-5": "oklch(0.45 0.085 224.283)",
+          "radius": "0.625rem",
+          "sidebar": "oklch(0.987 0.002 197.1)",
+          "sidebar-foreground": "oklch(0.148 0.004 228.8)",
+          "sidebar-primary": "oklch(0.609 0.126 221.723)",
+          "sidebar-primary-foreground": "oklch(0.984 0.019 200.873)",
+          "sidebar-accent": "oklch(0.963 0.002 197.1)",
+          "sidebar-accent-foreground": "oklch(0.218 0.008 223.9)",
+          "sidebar-border": "oklch(0.925 0.005 214.3)",
+          "sidebar-ring": "oklch(0.723 0.014 214.4)"
+        },
+        "dark": {
+          "background": "oklch(0.19 0.025 250)",
+          "foreground": "oklch(0.96 0.005 230)",
+          "card": "oklch(0.23 0.02 245)",
+          "card-foreground": "oklch(0.96 0.005 230)",
+          "popover": "oklch(0.23 0.02 245)",
+          "popover-foreground": "oklch(0.96 0.005 230)",
+          "primary": "oklch(0.7 0.22 38)",
+          "primary-foreground": "oklch(0.985 0 0)",
+          "secondary": "oklch(0.27 0.015 245)",
+          "secondary-foreground": "oklch(0.96 0.005 230)",
+          "muted": "oklch(0.27 0.015 245)",
+          "muted-foreground": "oklch(0.7 0.015 230)",
+          "accent": "oklch(0.27 0.02 245)",
+          "accent-foreground": "oklch(0.96 0.005 230)",
+          "destructive": "oklch(0.704 0.191 22.216)",
+          "border": "oklch(1 0 0 / 10%)",
+          "input": "oklch(1 0 0 / 15%)",
+          "ring": "oklch(0.7 0.22 38 / 60%)",
+          "chart-1": "oklch(0.865 0.127 207.078)",
+          "chart-2": "oklch(0.715 0.143 215.221)",
+          "chart-3": "oklch(0.609 0.126 221.723)",
+          "chart-4": "oklch(0.52 0.105 223.128)",
+          "chart-5": "oklch(0.45 0.085 224.283)",
+          "sidebar": "oklch(0.218 0.008 223.9)",
+          "sidebar-foreground": "oklch(0.987 0.002 197.1)",
+          "sidebar-primary": "oklch(0.715 0.143 215.221)",
+          "sidebar-primary-foreground": "oklch(0.302 0.056 229.695)",
+          "sidebar-accent": "oklch(0.275 0.011 216.9)",
+          "sidebar-accent-foreground": "oklch(0.987 0.002 197.1)",
+          "sidebar-border": "oklch(1 0 0 / 10%)",
+          "sidebar-ring": "oklch(0.56 0.021 213.5)"
+        }
+      },
+      "css": {
+        ":root.palette-classic": {
+          "--primary": "oklch(0.52 0.105 223.128)",
+          "--primary-foreground": "oklch(0.984 0.019 200.873)",
+          "--ring": "oklch(0.723 0.014 214.4)"
+        },
+        ":root.palette-classic.dark, .dark.palette-classic": {
+          "--primary": "oklch(0.45 0.085 224.283)",
+          "--primary-foreground": "oklch(0.984 0.019 200.873)",
+          "--ring": "oklch(0.56 0.021 213.5)"
+        },
+        "@layer base": {
+          "html": {
+            "font-size": "17px"
+          },
+          "h1, h2, h3": {
+            "letter-spacing": "-0.015em"
+          },
+          "body::before": {
+            "content": "\"\"",
+            "position": "fixed",
+            "inset": "0",
+            "z-index": "0",
+            "pointer-events": "none",
+            "background-image": "radial-gradient(circle at 12% 0%, color-mix(in oklab, var(--primary) 7%, transparent), transparent 40%), radial-gradient(circle at 88% 100%, color-mix(in oklab, var(--chart-2) 5%, transparent), transparent 42%), url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='49' viewBox='0 0 28 49'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%23000' fill-opacity='0.05'%3E%3Cpath d='M13.99 9.25l13 7.5v15l-13 7.5L1 31.75v-15l12.99-7.5zM3 17.9v12.7l10.99 6.34 11-6.35V17.9l-11-6.34L3 17.9zM0 15l12.98-7.5V0h-2v6.35L0 12.69v2.3zm0 18.5L12.98 41v8h-2v-6.85L0 35.81v-2.3zM15 0v7.5L27.99 15H28v-2.31h-.01L17 6.35V0h-2zm0 49v-8l12.99-7.5H28v2.31h-.01L17 42.15V49h-2z'/%3E%3C/g%3E%3C/svg%3E\")",
+            "background-size": "100% 100%, 100% 100%, 56px 98px",
+            "background-position": "0 0, 0 0, 0 0",
+            "mask-image": "linear-gradient(180deg, transparent 0, #000 8%, #000 92%, transparent 100%)",
+            "-webkit-mask-image": "linear-gradient(180deg, transparent 0, #000 8%, #000 92%, transparent 100%)"
+          },
+          ".dark body::before": {
+            "background-image": "radial-gradient(circle at 12% 0%, color-mix(in oklab, var(--primary) 14%, transparent), transparent 40%), radial-gradient(circle at 88% 100%, color-mix(in oklab, var(--chart-2) 10%, transparent), transparent 42%), url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='49' viewBox='0 0 28 49'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.06'%3E%3Cpath d='M13.99 9.25l13 7.5v15l-13 7.5L1 31.75v-15l12.99-7.5zM3 17.9v12.7l10.99 6.34 11-6.35V17.9l-11-6.34L3 17.9zM0 15l12.98-7.5V0h-2v6.35L0 12.69v2.3zm0 18.5L12.98 41v8h-2v-6.85L0 35.81v-2.3zM15 0v7.5L27.99 15H28v-2.31h-.01L17 6.35V0h-2zm0 49v-8l12.99-7.5H28v2.31h-.01L17 42.15V49h-2z'/%3E%3C/g%3E%3C/svg%3E\")"
+          }
+        }
+      }
+    },
+    {
+      "name": "magnetic",
+      "type": "registry:component",
+      "title": "Magnetic",
+      "description": "Wraps any inline content so it springs toward the cursor on hover. Respects prefers-reduced-motion.",
+      "dependencies": ["framer-motion"],
+      "files": [
+        {
+          "path": "components/landing/magnetic.tsx",
+          "type": "registry:component",
+          "target": "components/magnetic.tsx"
+        }
+      ]
+    },
+    {
+      "name": "animated-metric",
+      "type": "registry:component",
+      "title": "Animated Metric",
+      "description": "Counts a number up to its value when scrolled into view, with an accent suffix and label. Respects prefers-reduced-motion.",
+      "dependencies": ["framer-motion"],
+      "files": [
+        {
+          "path": "components/dev-presentation/animated-metric.tsx",
+          "type": "registry:component",
+          "target": "components/animated-metric.tsx"
+        }
+      ]
+    },
+    {
+      "name": "theme-provider",
+      "type": "registry:component",
+      "title": "Theme Provider",
+      "description": "Thin wrapper around next-themes ThemeProvider. Mount once in the root layout.",
+      "dependencies": ["next-themes"],
+      "files": [
+        {
+          "path": "components/theme-provider.tsx",
+          "type": "registry:component",
+          "target": "components/theme-provider.tsx"
+        }
+      ]
+    },
+    {
+      "name": "mode-toggle",
+      "type": "registry:component",
+      "title": "Mode Toggle",
+      "description": "Square icon button that flips light/dark with an animated sun/moon. Hydration-safe.",
+      "dependencies": ["next-themes", "lucide-react"],
+      "registryDependencies": ["https://webkoth.com/r/theme-provider.json"],
+      "files": [
+        {
+          "path": "components/mode-toggle.tsx",
+          "type": "registry:component",
+          "target": "components/mode-toggle.tsx"
+        }
+      ]
+    },
+    {
+      "name": "palette-toggle",
+      "type": "registry:component",
+      "title": "Palette Toggle",
+      "description": "Toggles the .palette-classic class on <html> (warm coral vs classic teal) and persists it. Ships with a no-flash inline script to apply the saved palette before paint. Requires the webkoth theme for the palette CSS variables.",
+      "dependencies": ["lucide-react"],
+      "registryDependencies": ["https://webkoth.com/r/theme.json"],
+      "files": [
+        {
+          "path": "components/palette-toggle.tsx",
+          "type": "registry:component",
+          "target": "components/palette-toggle.tsx"
+        },
+        {
+          "path": "components/landing-preferences-script.tsx",
+          "type": "registry:component",
+          "target": "components/palette-preferences-script.tsx"
+        }
+      ]
+    },
+    {
+      "name": "language-toggle",
+      "type": "registry:component",
+      "title": "Language Toggle",
+      "description": "EN/RU segmented switch for Next.js apps with a /[lang] route prefix. Rewrites the current path to the chosen language.",
+      "registryDependencies": ["utils"],
+      "files": [
+        {
+          "path": "components/language-toggle.tsx",
+          "type": "registry:component",
+          "target": "components/language-toggle.tsx"
+        }
+      ]
+    },
+    {
+      "name": "webkoth-ui",
+      "type": "registry:style",
+      "title": "Webkoth UI (everything)",
+      "description": "One-shot install: the Webkoth theme plus every custom component. Point an agent here to adopt the full look in a fresh shadcn project.",
+      "extends": "none",
+      "registryDependencies": [
+        "https://webkoth.com/r/theme.json",
+        "https://webkoth.com/r/magnetic.json",
+        "https://webkoth.com/r/animated-metric.json",
+        "https://webkoth.com/r/theme-provider.json",
+        "https://webkoth.com/r/mode-toggle.json",
+        "https://webkoth.com/r/palette-toggle.json",
+        "https://webkoth.com/r/language-toggle.json"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "theme-provider",
+  "title": "Theme Provider",
+  "description": "Thin wrapper around next-themes ThemeProvider. Mount once in the root layout.",
+  "dependencies": [
+    "next-themes"
+  ],
+  "files": [
+    {
+      "path": "components/theme-provider.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { ThemeProvider as NextThemesProvider } from \"next-themes\"\n\nexport function ThemeProvider({\n  children,\n  ...props\n}: React.ComponentProps<typeof NextThemesProvider>) {\n  return <NextThemesProvider {...props}>{children}</NextThemesProvider>\n}\n",
+      "type": "registry:component",
+      "target": "components/theme-provider.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

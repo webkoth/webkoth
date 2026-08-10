@@ -1,0 +1,27 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "palette-toggle",
+  "title": "Palette Toggle",
+  "description": "Toggles the .palette-classic class on <html> (warm coral vs classic teal) and persists it. Ships with a no-flash inline script to apply the saved palette before paint. Requires the webkoth theme for the palette CSS variables.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "https://webkoth.com/r/theme.json"
+  ],
+  "files": [
+    {
+      "path": "components/palette-toggle.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Droplet } from \"lucide-react\";\n\ntype Palette = \"warm\" | \"classic\";\n\nfunction getPalette(): Palette {\n  if (typeof document === \"undefined\") return \"warm\";\n  return document.documentElement.classList.contains(\"palette-classic\")\n    ? \"classic\"\n    : \"warm\";\n}\n\nexport function PaletteToggle() {\n  const [palette, setPalette] = React.useState<Palette>(\"warm\");\n  const [mounted, setMounted] = React.useState(false);\n\n  React.useEffect(() => {\n    setMounted(true);\n    setPalette(getPalette());\n  }, []);\n\n  const toggle = () => {\n    const next: Palette = palette === \"warm\" ? \"classic\" : \"warm\";\n    const root = document.documentElement;\n    if (next === \"classic\") root.classList.add(\"palette-classic\");\n    else root.classList.remove(\"palette-classic\");\n    try {\n      localStorage.setItem(\"palette\", next);\n    } catch {}\n    setPalette(next);\n  };\n\n  const isClassic = mounted && palette === \"classic\";\n  const label = isClassic ? \"Switch to warm palette\" : \"Switch to classic palette\";\n\n  return (\n    <button\n      type=\"button\"\n      onClick={toggle}\n      aria-label={label}\n      title={label}\n      className=\"relative inline-flex h-9 w-9 items-center justify-center rounded-md border border-border bg-background text-foreground shadow-xs transition hover:bg-muted\"\n    >\n      <Droplet\n        className=\"h-[1.2rem] w-[1.2rem]\"\n        fill=\"currentColor\"\n        style={{ color: \"var(--primary)\" }}\n      />\n      <span className=\"sr-only\">{label}</span>\n    </button>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/palette-toggle.tsx"
+    },
+    {
+      "path": "components/landing-preferences-script.tsx",
+      "content": "const SCRIPT = `\n(function() {\n  try {\n    var html = document.documentElement;\n    var palette = localStorage.getItem('palette');\n    if (palette === 'classic') html.classList.add('palette-classic');\n  } catch (e) {}\n})();\n`;\n\nexport function LandingPreferencesScript() {\n  return (\n    <script\n      // No-flash: runs before paint. Inline + sync.\n      dangerouslySetInnerHTML={{ __html: SCRIPT }}\n    />\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/palette-preferences-script.tsx"
+    }
+  ],
+  "type": "registry:component"
+}
