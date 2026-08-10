@@ -1,7 +1,19 @@
+import { PageBackground } from '@/components/landing/page-background'
+import { SectionReveal } from '@/components/landing/section-reveal'
+import { Hero } from '@/components/marketplaces/hero'
+import { VideoQuestions } from '@/components/marketplaces/video-questions'
+import { marketplacesData as data } from '@/app/data/marketplaces'
+
 export default function MarketplacesPage() {
   return (
-    <main className="mx-auto max-w-5xl px-4 py-24 md:px-8" lang="ru">
-      <h1 className="text-2xl font-bold">marketplaces route works</h1>
-    </main>
+    <>
+      <PageBackground />
+      <main className="relative z-[1] min-h-screen" lang="ru">
+        <Hero data={data.hero} />
+        <SectionReveal>
+          <VideoQuestions data={data.video} />
+        </SectionReveal>
+      </main>
+    </>
   )
 }
