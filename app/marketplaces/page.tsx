@@ -4,6 +4,8 @@ import { Hero } from '@/components/marketplaces/hero'
 import { VideoQuestions } from '@/components/marketplaces/video-questions'
 import { DailyProcesses } from '@/components/marketplaces/daily-processes'
 import { ToolsByMarketplace } from '@/components/marketplaces/tools-by-marketplace'
+import { Packages } from '@/components/marketplaces/packages'
+import { Cases } from '@/components/marketplaces/cases'
 import { marketplacesData as data } from '@/app/data/marketplaces'
 
 export default function MarketplacesPage() {
@@ -20,6 +22,12 @@ export default function MarketplacesPage() {
         </SectionReveal>
         <SectionReveal>
           <ToolsByMarketplace data={data.tools} />
+        </SectionReveal>
+        <SectionReveal>
+          <Packages data={data.packages} />
+        </SectionReveal>
+        <SectionReveal>
+          <Cases data={data.cases} />
         </SectionReveal>
       </main>
     </>
