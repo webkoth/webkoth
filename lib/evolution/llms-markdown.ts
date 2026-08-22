@@ -1,7 +1,7 @@
 import type { EvolutionData } from '@/app/data/evolution/types'
 import { evolutionBlockOrder } from '@/app/data/evolution'
 
-// Markdown-версия главной для `/llms.txt` и LLM-агентов. Только текст из данных —
+// Markdown-версия главной для `/llms.txt` и LLM-агентов. Только текст из данных -
 // ни одной строки, которой нет на странице.
 
 const H = {
@@ -16,7 +16,7 @@ const H = {
     finale: 'Финал',
     attempts: 'Четыре захода на одну задачу',
     contact: 'Контакт',
-    contactLine: 'Заявка на бесплатный разбор — форма на странице, Telegram @abnorsky.',
+    contactLine: 'Заявка на бесплатный разбор - форма на странице, Telegram @abnorsky.',
   },
   en: {
     lang: '## English version',
@@ -29,7 +29,7 @@ const H = {
     finale: 'Finale',
     attempts: 'Four attempts at one task',
     contact: 'Contact',
-    contactLine: 'Request a free review — the form on the page, or Telegram @abnorsky.',
+    contactLine: 'Request a free review - the form on the page, or Telegram @abnorsky.',
   },
 } as const
 
@@ -39,7 +39,7 @@ export function buildEvolutionMarkdown(d: EvolutionData): string {
 
   out.push(h.lang, '')
   out.push(`# ${d.hero.seal}`, '')
-  // Переносы заголовка — вёрстка; в тексте для LLM фразы идут через точку.
+  // Переносы заголовка - вёрстка; в тексте для LLM фразы идут через точку.
   out.push(d.hero.line1.replace(/\n/g, '. ') + '.', '')
   out.push(d.hero.lead, '')
   out.push(d.hero.sub, '')
@@ -50,22 +50,22 @@ export function buildEvolutionMarkdown(d: EvolutionData): string {
     out.push(`### ${b.step} · ${b.slogan}`, '')
     out.push(`_${h.symptom}:_ ${b.symptom}`, '')
     for (const p of b.description) out.push(p, '')
-    out.push(`**${h.caseTag}: ${b.caseLabel}** — ${b.caseBody}`, '')
+    out.push(`**${h.caseTag}: ${b.caseLabel}** - ${b.caseBody}`, '')
     out.push(`- **${b.mainFact.value}** ${b.mainFact.label}`)
     for (const f of b.facts) out.push(`- ${f.value} ${f.label}`)
     out.push('')
   }
 
-  out.push(`## ${h.namedCase}: ${d.hubmarket.linkText} — ${d.hubmarket.sub}`, '')
+  out.push(`## ${h.namedCase}: ${d.hubmarket.linkText} - ${d.hubmarket.sub}`, '')
   for (const p of d.hubmarket.frame) out.push(p, '')
   for (const n of Object.values(d.hubmarket.nodes)) {
-    out.push(`- **${n.label}** (${n.sub}${n.badge ? ` · ${n.badge}` : ''}) — ${n.description}`)
+    out.push(`- **${n.label}** (${n.sub}${n.badge ? ` · ${n.badge}` : ''}) - ${n.description}`)
   }
   out.push('', `${h.stack}: ${d.hubmarket.stack.join(', ')}`, '')
 
   out.push(`## ${h.process}: ${d.roadmap.title}`, '')
   out.push(d.roadmap.sub, '')
-  for (const s of d.roadmap.steps) out.push(`${s.num}. **${s.title}** (${s.pill}) — ${s.body}`)
+  for (const s of d.roadmap.steps) out.push(`${s.num}. **${s.title}** (${s.pill}) - ${s.body}`)
   out.push('')
 
   out.push(`## ${h.finale}: ${d.finale.slogan}`, '')
