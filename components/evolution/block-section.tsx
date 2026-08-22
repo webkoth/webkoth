@@ -2,20 +2,26 @@ import type { ReactNode } from 'react'
 import { AlertCircle } from 'lucide-react'
 import type { EvolutionBlock, EvolutionData } from '@/app/data/evolution/types'
 import { CasePlaque } from './case-plaque'
+import { STEP_ICONS, type StepKey } from './step-icons'
+import { StepChip } from './step-chip'
 
-// Ритм каждого блока: слоган крупно → плашка симптома → 2–3 предложения → анимация → плашка кейса.
-// На широких экранах текст и анимация стоят рядом, плашка — под ними на всю ширину.
+// Ритм каждого блока: eyebrow (иконка шага · «Шаг» · чип 01) → слоган крупно →
+// плашка симптома → 2–3 предложения → анимация → плашка кейса. На широких
+// экранах текст и анимация стоят рядом, плашка — под ними на всю ширину.
 export function BlockSection({
+  stepKey,
   block,
   labels,
   animation,
   exhibit,
 }: {
+  stepKey: StepKey
   block: EvolutionBlock
   labels: EvolutionData['labels']
   animation: ReactNode
   exhibit?: ReactNode
 }) {
+  const Icon = STEP_ICONS[stepKey]
   return (
     <section
       id={block.id}
@@ -24,8 +30,10 @@ export function BlockSection({
     >
       <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-14">
         <div className="min-w-0 lg:col-span-5">
-          <p className="font-mono text-xs uppercase tracking-[0.18em] text-primary">
-            {labels.step} {block.step}
+          <p className="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.18em] text-primary">
+            <Icon className="size-4" aria-hidden />
+            <span>{labels.step}</span>
+            <StepChip>{block.step}</StepChip>
           </p>
           <h2 id={`${block.id}-title`} className="mt-3 text-3xl font-bold tracking-tight md:text-5xl">
             {block.slogan}
@@ -52,7 +60,7 @@ export function BlockSection({
         </div>
       </div>
 
-      <CasePlaque block={block} tag={labels.caseTag}>
+      <CasePlaque block={block} tag={labels.caseTag} factHint={labels.factHint}>
         {exhibit}
       </CasePlaque>
     </section>

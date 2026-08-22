@@ -1,32 +1,53 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { ModeToggle } from '@/components/mode-toggle'
 import { PaletteToggle } from '@/components/palette-toggle'
 import { LanguageToggle } from '@/components/language-toggle'
-import { Button } from '@/components/ui/button'
+import { FontToggle } from '@/components/font-toggle'
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 import { cn } from '@/lib/utils'
-import type { Lang } from '@/app/data/evolution/types'
+import type { EvolutionData, Lang } from '@/app/data/evolution/types'
+import { STEP_ICONS, isStepKey } from './step-icons'
+import { ReadingProgress } from './reading-progress'
 
 export type NavItem = { id: string; label: string }
 
-// Шапка с якорями по шести блокам — пункты навигации и есть постулаты.
-// Активный блок подсвечивается по скроллу; на узких экранах строка якорей
-// прокручивается горизонтально, чтобы не давать странице расти вширь.
+// Шапка: бренд · служебные тумблеры в ряд (язык, палитра, тема, моно-шрифт) ·
+// строка якорей по шести шагам с иконками-словарём. CTA в шапке нет — её
+// работу делают кнопка в hero и плавающая StickyCta. Активный шаг подсвечивается
+// по скроллу; на узких экранах подписи якорей прячутся, остаются иконка и номер
+// (подпись — в tooltip). Высоту шапки кладём в --header-h: от неё считает
+// «один экран» hero. Под шапкой — полоса прогресса чтения.
 export function HeaderNav({
   lang,
   brand,
-  cta,
-  stepsAria,
+  nav,
+  labels,
   items,
 }: {
   lang: Lang
   brand: string
-  cta: string
-  stepsAria: string
+  nav: EvolutionData['nav']
+  labels: EvolutionData['labels']
   items: NavItem[]
 }) {
   const [activeId, setActiveId] = useState<string | null>(null)
+  const headerRef = useRef<HTMLElement>(null)
+
+  useEffect(() => {
+    const el = headerRef.current
+    if (!el) return
+    const root = document.documentElement
+    const set = () => root.style.setProperty('--header-h', `${el.offsetHeight}px`)
+    set()
+    const ro = new ResizeObserver(set)
+    ro.observe(el)
+    return () => {
+      ro.disconnect()
+      root.style.removeProperty('--header-h')
+    }
+  }, [])
 
   useEffect(() => {
     const sections = items
@@ -58,50 +79,65 @@ export function HeaderNav({
   }, [items])
 
   return (
-    <header className="sticky top-0 z-40 border-b border-border bg-background/80 backdrop-blur-md">
+    <header ref={headerRef} className="sticky top-0 z-40 border-b border-border bg-background/80 backdrop-blur-md">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3 md:px-8">
         <a href="#hero" className="font-mono text-sm text-foreground/80 transition hover:text-primary">
           {brand}
         </a>
         <div className="flex items-center gap-1.5">
           <LanguageToggle currentLang={lang} />
-          <PaletteToggle />
-          <ModeToggle />
-          {/* На мобильном работу этой кнопки делает StickyCta. */}
-          <Button
-            size="sm"
-            className="ml-1.5 hidden sm:inline-flex"
-            nativeButton={false}
-            render={<a href="#form" />}
-          >
-            {cta}
-          </Button>
+          <Tooltip>
+            <TooltipTrigger render={<span className="inline-flex" />}>
+              <PaletteToggle />
+            </TooltipTrigger>
+            <TooltipContent side="bottom">{nav.palette}</TooltipContent>
+          </Tooltip>
+          <Tooltip>
+            <TooltipTrigger render={<span className="inline-flex" />}>
+              <ModeToggle />
+            </TooltipTrigger>
+            <TooltipContent side="bottom">{nav.theme}</TooltipContent>
+          </Tooltip>
+          <Tooltip>
+            <TooltipTrigger render={<span className="inline-flex" />}>
+              <FontToggle />
+            </TooltipTrigger>
+            <TooltipContent side="bottom">{nav.font}</TooltipContent>
+          </Tooltip>
         </div>
       </div>
-      <nav aria-label={stepsAria} className="border-t border-border/60">
-        <ul className="mx-auto flex max-w-6xl gap-1 overflow-x-auto px-2 py-1.5 [scrollbar-width:none] md:px-6 lg:justify-center [&::-webkit-scrollbar]:hidden">
+      <nav aria-label={nav.stepsAria} className="border-t border-border/60">
+        <ul className="mx-auto flex max-w-6xl gap-1 overflow-x-auto px-2 py-1.5 [scrollbar-width:none] md:px-6 lg:justify-center-safe [&::-webkit-scrollbar]:hidden">
           {items.map((item, i) => {
             const active = activeId === item.id
+            const Icon = isStepKey(item.id) ? STEP_ICONS[item.id] : null
             return (
               <li key={item.id} className="shrink-0">
-                <a
-                  href={`#${item.id}`}
-                  aria-current={active ? 'location' : undefined}
-                  className={cn(
-                    'inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs whitespace-nowrap transition md:text-[13px]',
-                    active
-                      ? 'bg-primary/10 text-primary'
-                      : 'text-muted-foreground hover:bg-muted hover:text-foreground',
-                  )}
-                >
-                  <span className="font-mono text-[10px] opacity-60">0{i + 1}</span>
-                  {item.label}
-                </a>
+                <Tooltip>
+                  <TooltipTrigger
+                    render={<a href={`#${item.id}`} aria-current={active ? 'location' : undefined} />}
+                    className={cn(
+                      'inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs whitespace-nowrap transition xl:text-[13px]',
+                      active
+                        ? 'bg-primary/10 text-primary'
+                        : 'text-muted-foreground hover:bg-muted hover:text-foreground',
+                    )}
+                  >
+                    {/* Номер: на мобильном — вместе с иконкой (подписи нет), на lg прячем ради места, с xl — снова. */}
+                    <span className="font-mono text-[10px] opacity-60 lg:hidden 2xl:inline">0{i + 1}</span>
+                    {Icon ? <Icon className="size-3.5" aria-hidden /> : null}
+                    <span className="hidden sm:inline">{item.label}</span>
+                  </TooltipTrigger>
+                  <TooltipContent side="bottom" className="sm:hidden">
+                    {item.label}
+                  </TooltipContent>
+                </Tooltip>
               </li>
             )
           })}
         </ul>
       </nav>
+      <ReadingProgress label={labels.readingProgress} />
     </header>
   )
 }

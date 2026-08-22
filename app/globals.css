@@ -49,57 +49,65 @@
 }
 
 :root {
-    --font-mono-active: var(--font-geist-mono);
+    /* Моно-слот: JetBrains Mono по умолчанию, Geist Mono — по классу .mono-geist (тумблер в шапке). */
+    --font-mono-active: var(--font-jetbrains-mono);
 
+    /* Нейтрали — одна семья на оттенке 267 (#02003f = oklch(0.168 0.114 266.6)):
+       текст — глубокий индиго, серые — с тем же синим подтоном, не зеленоватые. */
     --background: oklch(1 0 0);
-    --foreground: oklch(0.148 0.004 228.8);
+    --foreground: oklch(0.168 0.114 266.6);
     --card: oklch(1 0 0);
-    --card-foreground: oklch(0.148 0.004 228.8);
+    --card-foreground: oklch(0.168 0.114 266.6);
     --popover: oklch(1 0 0);
-    --popover-foreground: oklch(0.148 0.004 228.8);
+    --popover-foreground: oklch(0.168 0.114 266.6);
     --primary: oklch(0.62 0.21 35);
     --primary-foreground: oklch(0.985 0 0);
-    --secondary: oklch(0.967 0.001 286.375);
-    --secondary-foreground: oklch(0.21 0.006 285.885);
-    --muted: oklch(0.963 0.002 197.1);
-    --muted-foreground: oklch(0.56 0.021 213.5);
-    --accent: oklch(0.963 0.002 197.1);
-    --accent-foreground: oklch(0.218 0.008 223.9);
+    --secondary: oklch(0.957 0.012 267);
+    --secondary-foreground: oklch(0.25 0.09 267);
+    --muted: oklch(0.962 0.01 267);
+    --muted-foreground: oklch(0.48 0.055 267);
+    --accent: oklch(0.962 0.01 267);
+    --accent-foreground: oklch(0.22 0.1 267);
     --destructive: oklch(0.577 0.245 27.325);
-    --border: oklch(0.925 0.005 214.3);
-    --input: oklch(0.925 0.005 214.3);
-    --ring: oklch(0.723 0.014 214.4);
+    --border: oklch(0.912 0.014 267);
+    --input: oklch(0.912 0.014 267);
+    --ring: oklch(0.70 0.045 267);
     --chart-1: oklch(0.865 0.127 207.078);
     --chart-2: oklch(0.715 0.143 215.221);
     --chart-3: oklch(0.609 0.126 221.723);
     --chart-4: oklch(0.52 0.105 223.128);
     --chart-5: oklch(0.45 0.085 224.283);
     --radius: 0.625rem;
-    --sidebar: oklch(0.987 0.002 197.1);
-    --sidebar-foreground: oklch(0.148 0.004 228.8);
-    --sidebar-primary: oklch(0.609 0.126 221.723);
-    --sidebar-primary-foreground: oklch(0.984 0.019 200.873);
-    --sidebar-accent: oklch(0.963 0.002 197.1);
-    --sidebar-accent-foreground: oklch(0.218 0.008 223.9);
-    --sidebar-border: oklch(0.925 0.005 214.3);
-    --sidebar-ring: oklch(0.723 0.014 214.4);
+    --sidebar: oklch(0.985 0.004 267);
+    --sidebar-foreground: oklch(0.168 0.114 266.6);
+    --sidebar-primary: oklch(0.62 0.21 35);
+    --sidebar-primary-foreground: oklch(0.985 0 0);
+    --sidebar-accent: oklch(0.962 0.01 267);
+    --sidebar-accent-foreground: oklch(0.22 0.1 267);
+    --sidebar-border: oklch(0.912 0.014 267);
+    --sidebar-ring: oklch(0.70 0.045 267);
+}
+
+:root.mono-geist {
+    --font-mono-active: var(--font-geist-mono);
 }
 
 .dark {
-    --background: oklch(0.19 0.025 250);
-    --foreground: oklch(0.96 0.005 230);
-    --card: oklch(0.23 0.02 245);
-    --card-foreground: oklch(0.96 0.005 230);
-    --popover: oklch(0.23 0.02 245);
-    --popover-foreground: oklch(0.96 0.005 230);
+    /* Тот же оттенок 267, приглушённый: «та же марка в ночном режиме», а не чистый #02003f во весь экран. */
+    --background: oklch(0.17 0.045 267);
+    --foreground: oklch(0.96 0.008 267);
+    --card: oklch(0.215 0.045 267);
+    --card-foreground: oklch(0.96 0.008 267);
+    --popover: oklch(0.215 0.045 267);
+    --popover-foreground: oklch(0.96 0.008 267);
     --primary: oklch(0.7 0.22 38);
     --primary-foreground: oklch(0.985 0 0);
-    --secondary: oklch(0.27 0.015 245);
-    --secondary-foreground: oklch(0.96 0.005 230);
-    --muted: oklch(0.27 0.015 245);
-    --muted-foreground: oklch(0.7 0.015 230);
-    --accent: oklch(0.27 0.02 245);
-    --accent-foreground: oklch(0.96 0.005 230);
+    --secondary: oklch(0.265 0.04 267);
+    --secondary-foreground: oklch(0.96 0.008 267);
+    --muted: oklch(0.265 0.04 267);
+    --muted-foreground: oklch(0.72 0.03 267);
+    --accent: oklch(0.275 0.045 267);
+    --accent-foreground: oklch(0.96 0.008 267);
     --destructive: oklch(0.704 0.191 22.216);
     --border: oklch(1 0 0 / 10%);
     --input: oklch(1 0 0 / 15%);
@@ -109,14 +117,14 @@
     --chart-3: oklch(0.609 0.126 221.723);
     --chart-4: oklch(0.52 0.105 223.128);
     --chart-5: oklch(0.45 0.085 224.283);
-    --sidebar: oklch(0.218 0.008 223.9);
-    --sidebar-foreground: oklch(0.987 0.002 197.1);
-    --sidebar-primary: oklch(0.715 0.143 215.221);
-    --sidebar-primary-foreground: oklch(0.302 0.056 229.695);
-    --sidebar-accent: oklch(0.275 0.011 216.9);
-    --sidebar-accent-foreground: oklch(0.987 0.002 197.1);
+    --sidebar: oklch(0.2 0.045 267);
+    --sidebar-foreground: oklch(0.96 0.008 267);
+    --sidebar-primary: oklch(0.7 0.22 38);
+    --sidebar-primary-foreground: oklch(0.985 0 0);
+    --sidebar-accent: oklch(0.275 0.045 267);
+    --sidebar-accent-foreground: oklch(0.96 0.008 267);
     --sidebar-border: oklch(1 0 0 / 10%);
-    --sidebar-ring: oklch(0.56 0.021 213.5);
+    --sidebar-ring: oklch(0.72 0.03 267);
 }
 
 /* Classic palette override (teal/blue) — toggled via .palette-classic on <html> */

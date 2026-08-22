@@ -26,8 +26,17 @@ export const en: EvolutionData = {
     },
   },
 
-  nav: { cta: 'Review my situation', stepsAria: 'Steps' },
-  labels: { step: 'Step', symptom: 'How it hurts today', caseTag: 'Case' },
+  nav: { cta: 'Review my situation', stepsAria: 'Steps', palette: 'Palette', theme: 'Theme', font: 'Mono font' },
+  labels: {
+    step: 'Step',
+    symptom: 'How it hurts today',
+    caseTag: 'Case',
+    readingProgress: 'Read',
+    copy: 'Copy',
+    copied: 'Copied',
+    all: 'All',
+    factHint: 'how it was counted',
+  },
 
   hero: {
     line1: 'From chaos to system: transparent money, precise decisions.',
@@ -36,6 +45,20 @@ export const en: EvolutionData = {
     sub: 'I solve business problems once — with a system, not a hire.',
     cta: 'Review my situation',
     scrollHint: 'This page is the work plan itself: six steps, in the order they happen',
+    stackHint: 'hover a node to see what it does',
+    stackNodes: {
+      client: 'Users: browser, extension, Telegram — wherever requests come from.',
+      frontend: 'Next.js: UI and server routes; changes ship the same day.',
+      backend: 'Business logic and orchestration: queues, access, integrations.',
+      api: 'External APIs: marketplaces, banks, payments — unstable, hence behind a queue with retries.',
+      ai: 'AI router: picks the model for the task and budget, watches the limits.',
+      ai1: 'Primary model (Claude): hard tasks, generation and document parsing.',
+      ai2: 'Fallback (Gemini): kicks in on an error or rate limit of the primary.',
+      ai3: 'Fast cheap lane (Groq): bulk simple requests and RAG over database data.',
+      queue: 'Job queue on top of Postgres: nothing is lost, a failure means a retry.',
+      worker: 'Workers: drain the queue, write results to the database.',
+      db: 'Postgres: the single source of truth for every screen and report.',
+    },
   },
 
   blocks: {
@@ -52,12 +75,12 @@ export const en: EvolutionData = {
       caseLabel: 'Company IT-infrastructure inventory',
       caseBody:
         'The inventory lived in a legacy system and scattered notes. In one month a new system was built: data models, pages, roles and permissions. Production delivery pipeline — on launch day.',
-      mainFact: { value: '1 month', label: 'from first commit to a working system' },
+      mainFact: { value: '1 month', label: 'from first commit to a working system', note: 'From the first commit in the repository to the day the system went into daily use.' },
       facts: [
-        { value: '16', label: 'data models' },
-        { value: '23', label: 'pages' },
-        { value: '432', label: 'commits' },
-        { value: '29,643', label: 'lines of code' },
+        { value: '16', label: 'data models', note: 'Entities in the database schema: servers, services, access, owners and the links between them.' },
+        { value: '23', label: 'pages', note: 'Application screens: lists, cards, forms, reports — counted by routes in code.' },
+        { value: '432', label: 'commits', note: 'Commits on the main branch over one month, from git history.' },
+        { value: '29,643', label: 'lines of code', note: 'Lines of TypeScript/TSX, excluding dependencies and generated code.' },
       ],
     },
 
@@ -73,12 +96,12 @@ export const en: EvolutionData = {
       caseLabel: 'Management finance loop of a trading company',
       caseBody:
         'Built in a month: cash flow, budget vs actuals with variances, payment requests with an approval route, «Day summary», reconciliation, reference books. The market alternative — a custom-built system from 3–8M ₽ and 7–13 weeks for a single basic module.',
-      mainFact: { value: '48', label: 'data models — and all of it adds up on one screen' },
+      mainFact: { value: '48', label: 'data models — and all of it adds up on one screen', note: 'Models in the schema: accounts, line items, payment requests, approval routes, reconciliation, reference books.' },
       facts: [
-        { value: '40', label: 'pages' },
-        { value: '14', label: 'API routes' },
-        { value: '19', label: 'test files' },
-        { value: '3–8M ₽', label: 'market alternative' },
+        { value: '40', label: 'pages', note: 'Screens: cash flow, budget, payment requests, daily summary, reconciliation, reference books and their cards.' },
+        { value: '14', label: 'API routes', note: 'Server integration points: statement import, approvals, exports.' },
+        { value: '19', label: 'test files', note: 'Automated tests on calculations and approval routes — that is what trust in the numbers rests on.' },
+        { value: '3–8M ₽', label: 'market alternative', note: 'Custom-development benchmark for one basic finance module: 7–13 weeks and 3–8M ₽ by public contractor estimates.' },
       ],
     },
 
@@ -95,10 +118,10 @@ export const en: EvolutionData = {
       caseLabel: 'Sales data warehouse + margin calculation',
       caseBody:
         'A sales data warehouse reconciled with the marketplace down to a single unit. On top of it — margin calculation per account with honest edge-case handling: cost lines never disappear, and the per-account view warns when something is missing.',
-      mainFact: { value: 'to the unit', label: 'reconciliation with the marketplace matches' },
+      mainFact: { value: 'to the unit', label: 'reconciliation with the marketplace matches', note: 'Every sales row is matched to the marketplace report by SKU and quantity — discrepancies are visible line by line.' },
       facts: [
-        { value: '57', label: 'test files guarantee the numbers add up' },
-        { value: '53,618', label: 'lines in the data warehouse' },
+        { value: '57', label: 'test files guarantee the numbers add up', note: 'Test files covering ingestion, reconciliation and margin calculation.' },
+        { value: '53,618', label: 'lines in the data warehouse', note: 'Rows in the warehouse tables at the time of measurement.' },
       ],
     },
 
@@ -115,10 +138,10 @@ export const en: EvolutionData = {
       caseLabel: 'Product portal instead of an external PLM',
       caseBody:
         'Catalogue, label printing, PDF generation, image conversion. Built in days, production pipeline — on launch day. A detail that builds trust: the colour reference runs on the PowerShell built into Windows — used by people with no IT environment at all.',
-      mainFact: { value: 'days', label: 'to replace an external PLM system' },
+      mainFact: { value: 'days', label: 'to replace an external PLM system', note: 'From the first commit to using the portal instead of the external PLM — a few days.' },
       facts: [
-        { value: '1 day', label: 'to the production pipeline' },
-        { value: '0', label: 'dependencies for the colour reference: built-in PowerShell' },
+        { value: '1 day', label: 'to the production pipeline', note: 'The delivery pipeline — CI, auto-deploy, auto-rollback — was assembled on day one.' },
+        { value: '0', label: 'dependencies for the colour reference: built-in PowerShell', note: 'The colour reference is a script on PowerShell built into Windows: nothing to install.' },
       ],
     },
 
@@ -135,11 +158,11 @@ export const en: EvolutionData = {
       caseLabel: 'Project generator and delivery pipeline',
       caseBody:
         'One command scaffolds an application with a database, auth and roles, tests, CI and auto-deploy to two environments — with a smoke check and automatic rollback. The result over one month: seven applications, three of them in production on their very first day.',
-      mainFact: { value: '1 day', label: 'from first commit to production' },
+      mainFact: { value: '1 day', label: 'from first commit to production', note: 'Of seven applications in a month, three reached production on the day of their first commit.' },
       facts: [
-        { value: '7', label: 'applications in a month' },
-        { value: '~217,000', label: 'lines of code' },
-        { value: '1,808', label: 'commits' },
+        { value: '7', label: 'applications in a month', note: 'Applications scaffolded by the generator within one calendar month.' },
+        { value: '~217,000', label: 'lines of code', note: 'Total lines of code across seven repositories, excluding dependencies.' },
+        { value: '1,808', label: 'commits', note: 'Total commits across seven repositories in a month.' },
       ],
     },
 
@@ -156,10 +179,10 @@ export const en: EvolutionData = {
       caseLabel: 'Three working systems, three domain experts',
       caseBody:
         'In three working systems, 43–73 % of changes are made not by programmers but by domain specialists. One of them went from a first commit with reference-book schemas to margin calculation in a single month.',
-      mainFact: { value: '43–73 %', label: 'of changes are made by domain experts, not programmers' },
+      mainFact: { value: '43–73 %', label: 'of changes are made by domain experts, not programmers', note: 'Share of commits by domain experts across three systems: 339 of 784, 67 of 92, 11 of 15.' },
       facts: [
-        { value: '1 month', label: 'from reference-book schemas to margin calculation' },
-        { value: '3', label: 'roles: finance analyst, product specialist, content manager' },
+        { value: '1 month', label: 'from reference-book schemas to margin calculation', note: 'One finance analyst’s path: first commit with reference-book schemas → working margin calculation.' },
+        { value: '3', label: 'roles: finance analyst, product specialist, content manager', note: 'Three roles — three different systems; the domain part was done by no hired programmer.' },
       ],
     },
   },
@@ -387,6 +410,15 @@ export const en: EvolutionData = {
         after: ', I will answer there.',
       },
       failed: { before: 'Could not send. Try again or message me on ', link: 'Telegram', after: '.' },
+      toast: {
+        success: 'Request received',
+        successBody: 'I will reply within a day to agree on a time for the review.',
+        action: 'Message on Telegram',
+        error: 'Could not send',
+        errorBody: 'Try again or message me on Telegram.',
+        rateLimited: 'Too many submissions',
+        rateLimitedBody: 'Retrying now is pointless — message me on Telegram.',
+      },
       submit: 'Book a review',
       submitting: 'Sending…',
       success: {

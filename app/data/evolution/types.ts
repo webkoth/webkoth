@@ -3,7 +3,22 @@
 
 export type Lang = 'ru' | 'en'
 
-export type Fact = { value: string; label: string }
+/** `note` — пояснение «как считалось», показывается в HoverCard на цифре. */
+export type Fact = { value: string; label: string; note?: string }
+
+/** Узлы схемы ProductionStack в hero; подписи узлов английские, описания — в языке страницы. */
+export type StackNodeKey =
+  | 'client'
+  | 'frontend'
+  | 'backend'
+  | 'api'
+  | 'ai'
+  | 'ai1'
+  | 'ai2'
+  | 'ai3'
+  | 'queue'
+  | 'worker'
+  | 'db'
 
 export type EvolutionBlock = {
   /** Якорь секции и ключ навигации. */
@@ -84,8 +99,20 @@ export type EvolutionData = {
     twitterDescription: string
     jsonLd: { name: string; serviceType: string; description: string; area: string }
   }
-  nav: { cta: string; stepsAria: string }
-  labels: { step: string; symptom: string; caseTag: string }
+  nav: { cta: string; stepsAria: string; palette: string; theme: string; font: string }
+  labels: {
+    step: string
+    symptom: string
+    caseTag: string
+    /** aria-подпись полосы прогресса чтения под шапкой. */
+    readingProgress: string
+    copy: string
+    copied: string
+    /** Вкладка «все» в табах таблицы запусков. */
+    all: string
+    /** Подсказка у цифры факта: «как считалось». */
+    factHint: string
+  }
   hero: {
     line1: string
     line2: string
@@ -93,6 +120,8 @@ export type EvolutionData = {
     sub: string
     cta: string
     scrollHint: string
+    stackHint: string
+    stackNodes: Record<StackNodeKey, string>
   }
   blocks: {
     system: EvolutionBlock
@@ -161,6 +190,16 @@ export type EvolutionData = {
       errors: Record<string, string>
       rateLimited: LinkedText
       failed: LinkedText
+      /** Тосты (sonner) об исходе отправки; ссылка на Telegram — кнопка-действие. */
+      toast: {
+        success: string
+        successBody: string
+        action: string
+        error: string
+        errorBody: string
+        rateLimited: string
+        rateLimitedBody: string
+      }
       submit: string
       submitting: string
       success: { title: string; body: string; link: string }

@@ -1,16 +1,24 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import { LifeBuoy, Map, Rocket, Search, type LucideIcon } from 'lucide-react'
 import type { EvolutionData, RoadmapStep } from '@/app/data/evolution/types'
 import { useReveal } from './animations/use-reveal'
+import { StepChip } from './step-chip'
+
+// Иконки четырёх этапов: разбор → аудит и карта → запуск → сопровождение.
+const ROADMAP_ICONS: LucideIcon[] = [Search, Map, Rocket, LifeBuoy]
 
 // «От идеи до прода»: как выполняется план со страницы — четыре шага зигзагом
 // вдоль центральной линии. Один раз проявляется при входе во viewport, в языке
 // страницы: моно-номера шагов, карточки bg-card/70, без лишнего хрома.
-function StepCard({ step }: { step: RoadmapStep }) {
+function StepCard({ step, Icon }: { step: RoadmapStep; Icon: LucideIcon }) {
   return (
     <div className="rounded-2xl border border-border bg-card/70 p-5 backdrop-blur-sm md:p-6">
-      <p className="font-mono text-xs uppercase tracking-[0.18em] text-primary">{step.num}</p>
+      <p className="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.18em] text-primary">
+        <Icon className="size-4" aria-hidden />
+        <StepChip>{step.num}</StepChip>
+      </p>
       <h3 className="mt-2 text-lg font-semibold tracking-tight md:text-xl">{step.title}</h3>
       <p className="mt-2 text-sm leading-relaxed text-muted-foreground md:text-[15px]">{step.body}</p>
       <p className="mt-4 inline-block rounded-full bg-primary/10 px-3 py-1 font-mono text-[10px] uppercase tracking-wider text-primary">
@@ -64,7 +72,7 @@ export function Roadmap({ data }: { data: EvolutionData['roadmap'] }) {
                   className="absolute top-5 left-1/2 hidden size-3 -translate-x-1/2 rounded-full border-2 border-primary bg-background md:block"
                 />
                 <div className={left ? 'md:pr-4' : 'md:col-start-2 md:pl-4'}>
-                  <StepCard step={step} />
+                  <StepCard step={step} Icon={ROADMAP_ICONS[i] ?? Search} />
                 </div>
               </motion.li>
             )

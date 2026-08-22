@@ -1,14 +1,17 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { MessageSquare } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { useLeadDialog } from './lead-dialog'
 
-// Плавающая кнопка ведёт к форме. Прячется, пока на экране hero (там есть своя
-// кнопка) и пока видна сама форма — иначе на мобильном она ложится поверх
-// кнопки отправки.
+// Плавающая кнопка открывает модалку с формой. Прячется, пока на экране hero
+// (там есть своя кнопка) и пока видна inline-форма — иначе на мобильном она
+// ложится поверх кнопки отправки.
 export function StickyCta({ label }: { label: string }) {
   const [heroVisible, setHeroVisible] = useState(true)
   const [formVisible, setFormVisible] = useState(false)
+  const { open } = useLeadDialog()
 
   useEffect(() => {
     const hero = document.getElementById('hero')
@@ -36,7 +39,8 @@ export function StickyCta({ label }: { label: string }) {
 
   return (
     <div className="fixed right-4 bottom-4 z-50 md:right-6 md:bottom-6">
-      <Button size="lg" nativeButton={false} render={<a href="#form" />}>
+      <Button size="lg" className="shadow-lg" onClick={open}>
+        <MessageSquare aria-hidden />
         {label}
       </Button>
     </div>
