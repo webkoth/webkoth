@@ -10,21 +10,20 @@ import { ProductionStack } from "./production-stack"
 import { useLeadDialog } from "./lead-dialog"
 
 // Hero — ровно один экран (100svh минус шапка; высоту шапки кладёт в --header-h
-// сам HeaderNav). Один ряд, выровненный по верху: слева — подпись-замок, заголовок
-// в две строки, описание, одно предложение про подход и кнопка; справа, на уровне
-// заголовка, — «живая» схема работающей системы. Заголовок не переносится и не
-// заходит на схему: его размер ограничен шириной своей колонки (6.5cqw при
-// трекинге −0.04em — ровно столько, чтобы самая длинная фраза, 27 знаков
-// моноширинным, легла в одну строку). Схеме отдано 40% ряда, а на широких экранах
-// она ещё выходит вправо за поле контейнера — там всё равно пустой отступ. Внизу
-// по центру — индикатор «листай». На мобильном всё идёт столбиком: текст и кнопка,
-// затем схема.
+// сам HeaderNav). Текст одной колонкой слева: подпись-замок, заголовок в две
+// строки, описание результатов, одно предложение про подход и кнопка; внизу по
+// центру — индикатор «листай». «Живая» схема работающей системы на десктопе —
+// фон: справа, по центру высоты, под текстом и полупрозрачная; крупный заголовок
+// может на неё заходить — это задумано. На мобильном схема идёт после кнопки,
+// непрозрачная. Размер h1 привязан к ширине окна, его высоте и ширине контейнера,
+// чтобы самая длинная фраза (27 знаков моноширинным) не ломалась на две строки.
+// Ширина описания ограничена ~50 знаками — так читается комфортнее.
 
 /** «**слово**» в тексте → <strong>. Нужен только для описания под заголовком. */
 function renderBold(text: string) {
   return text.split(/\*\*(.+?)\*\*/g).map((part, i) =>
     i % 2 === 1 ? (
-      <strong key={i} className="font-bold text-orange-300 text-foreground">
+      <strong key={i} className="font-bold text-primary">
         {part}
       </strong>
     ) : (
@@ -32,6 +31,7 @@ function renderBold(text: string) {
     )
   )
 }
+
 function ScrollCue({ hint, className }: { hint: string; className?: string }) {
   const reduce = !!useReducedMotion()
   return (
@@ -66,99 +66,109 @@ export function Hero({ data }: { data: EvolutionData["hero"] }) {
 
   return (
     <section id="hero" className="mx-auto max-w-6xl px-4 md:px-8">
-      {/* Классы высоты — литералами: Tailwind не видит собранные из строк имена. */}
-      <div className="relative flex min-h-[calc(100svh-var(--header-h,6rem))] flex-col justify-center py-8 sm:py-12 lg:pt-0 lg:pb-10">
-        {/* Ряд «текст | схема», выровнен по верху: схема на уровне заголовка. */}
-        {/* @container — на колонке текста: от её ширины считается размер h1. */}
-        <div className="lg:grid lg:grid-cols-[3fr_2fr] lg:items-start lg:gap-6">
-          <div className="@container relative z-10 min-w-0">
-            <motion.p
-              className="font-mono text-xs tracking-[0.22em] text-primary uppercase md:text-sm"
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={tr(0.2)}
-            >
-              {data.seal}
-            </motion.p>
-
-            {/* Размер: от ширины окна, его высоты (один экран) и ширины контейнера
-            (6.5cqw при трекинге −0.04em) — чтобы самая длинная фраза (27 знаков
-            моноширинным) не ломалась. whitespace-pre-line: \n в данных — перенос.
-            На телефоне вторая фраза при читаемом размере переносится — это ожидаемо. */}
-            <motion.h1
-              className="mt-3 text-[clamp(1.5rem,min(4.6vw,7svh,6.5cqw),4rem)] leading-[1.08] font-bold tracking-[-0.04em] whitespace-pre-line lg:w-max lg:max-w-none"
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={tr(0.45)}
-            >
-              {data.line1}
-            </motion.h1>
-
-            <div className="mt-6">
-              <div>
-                <motion.p
-                  className="max-w-2xl text-lg font-medium text-balance md:text-xl lg:text-2xl lg:leading-snug"
-                  initial={{ opacity: 0, y: 14 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={tr(0.85)}
-                >
-                  {renderBold(data.lead)}
-                </motion.p>
-
-                <motion.p
-                  className="mt-4 max-w-2xl text-base text-muted-foreground md:text-lg"
-                  initial={{ opacity: 0, y: 14 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={tr(1.2)}
-                >
-                  {data.sub}
-                </motion.p>
-
-                <motion.div
-                  className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center md:mt-7"
-                  initial={{ opacity: 0, y: 14 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={tr(1.5)}
-                >
-                  {/* Button несёт whitespace-nowrap: на 320px длинная подпись даёт
-                  горизонтальный скролл, поэтому на узких экранах — во всю ширину. */}
-                  <Button
-                    size="lg"
-                    onClick={open}
-                    className="h-auto w-full px-6 py-3 text-base whitespace-normal sm:h-12 sm:w-auto sm:py-0 sm:whitespace-nowrap"
-                  >
-                    {data.cta}
-                    <ArrowRight aria-hidden />
-                  </Button>
-                </motion.div>
-
-                {/* Мобильный индикатор — сразу под кнопкой, схема идёт следом вторым экраном */}
-                <motion.div
-                  className="mt-8 lg:hidden"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={tr(2.0)}
-                >
-                  <ScrollCue hint={data.scrollHint} className="flex" />
-                </motion.div>
-              </div>
-            </div>
-          </div>
-
-          {/* Схема: на мобильном — после кнопки вторым экраном; на десктопе — правая
-              колонка ряда, сдвинута к уровню h1 (pt ≈ высота замка). С xl выходит
-              вправо за контейнер (запас поля: 71px на 1366, 156px на 1536). */}
-          <div className="relative z-0 pt-12 lg:pt-8 xl:-mr-16 2xl:-mr-28">
+      {/* Классы высоты — литералами: Tailwind не видит собранные из строк имена.
+          @container — от ширины этого блока считается размер h1. */}
+      <div className="@container relative flex min-h-[calc(100svh-var(--header-h,6rem))] flex-col justify-center py-8 sm:py-12 lg:pt-0 lg:pb-14">
+        {/* Схема: на мобильном — последней, после кнопки; на десктопе — фон справа,
+            по центру высоты, под текстом (z-0) и полупрозрачная. Появляется после
+            текста: выезжает со стороны заголовка и медленно проявляется, чтобы не
+            спорить с ним за внимание. Прозрачность — на внутреннем слое, чтобы
+            motion не перебивал её своим inline-opacity. Один экземпляр на оба режима. */}
+        {/* Ширина: 81% контейнера, но не выше первого экрана: высота схемы ≈ 0.744·ширины,
+            отсюда ограничение через 100svh (на 1366×678 ≈ 700px, на 1920×1080 — все 81%).
+            Левый край растворён градиентной маской: заголовок ложится на «дымку», а не на
+            узлы, и переход от текста к схеме выглядит цельно. Строки статуса нет —
+            она упиралась в подсказку «листай». */}
+        <motion.div
+          className="order-last pt-12 lg:absolute lg:top-1/2 lg:right-0 lg:z-0 lg:w-[min(81%,calc((100svh-var(--header-h,6rem)-3.5rem)/0.744))] lg:-translate-y-1/2 lg:pt-0 xl:-right-12 2xl:-right-24"
+          initial={{ opacity: 0, x: -140 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={
+            reduce ? { duration: 0 } : { duration: 2.2, delay: 1.7, ease: EASE }
+          }
+        >
+          <div className="lg:[mask-image:linear-gradient(to_right,transparent,black_34%)] lg:opacity-35 lg:[-webkit-mask-image:linear-gradient(to_right,transparent,black_34%)]">
             <ProductionStack
-              delay={reduce ? 0 : 1.8}
+              delay={0}
+              showStatus={false}
               copy={{ hint: data.stackHint, nodes: data.stackNodes }}
             />
           </div>
+        </motion.div>
+
+        <div className="relative z-10">
+          <motion.p
+            className="font-mono text-xs tracking-[0.22em] text-primary uppercase md:text-sm"
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={tr(0.2)}
+          >
+            {data.seal}
+          </motion.p>
+
+          {/* Размер: от ширины окна, его высоты (один экран) и ширины контейнера
+            (6.5cqw при трекинге −0.04em) — чтобы самая длинная фраза (27 знаков
+            моноширинным) не ломалась. whitespace-pre-line: \n в данных — перенос.
+            На телефоне вторая фраза при читаемом размере переносится — это ожидаемо. */}
+          <motion.h1
+            className="mt-4 text-[clamp(1.5rem,min(5.2vw,8.5svh,6.5cqw),4.75rem)] leading-[1.06] font-bold tracking-[-0.04em] whitespace-pre-line"
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={tr(0.45)}
+          >
+            {data.line1}
+          </motion.h1>
+
+          <motion.p
+            className="mt-6 max-w-[34ch] text-lg font-medium text-balance md:mt-8 md:max-w-[46ch] md:text-xl lg:text-2xl lg:leading-snug xl:text-[1.75rem]"
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={tr(0.85)}
+          >
+            {renderBold(data.lead)}
+          </motion.p>
+
+          <motion.p
+            className="mt-4 max-w-[52ch] text-base text-muted-foreground md:mt-5 md:text-lg lg:text-xl"
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={tr(1.2)}
+          >
+            {data.sub}
+          </motion.p>
+
+          <motion.div
+            className="mt-7 flex flex-col gap-4 sm:flex-row sm:items-center md:mt-9"
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={tr(1.5)}
+          >
+            {/* Button несёт whitespace-nowrap: на 320px длинная подпись даёт
+              горизонтальный скролл, поэтому на узких экранах — во всю ширину. */}
+            <Button
+              size="lg"
+              onClick={open}
+              className="h-auto w-full px-6 py-3 text-base whitespace-normal sm:h-12 sm:w-auto sm:py-0 sm:whitespace-nowrap lg:h-13 lg:px-7 lg:text-lg"
+            >
+              {data.cta}
+              <ArrowRight aria-hidden />
+            </Button>
+          </motion.div>
+
+          {/* Мобильный индикатор — сразу под кнопкой */}
+          <motion.div
+            className="mt-8 lg:hidden"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={tr(2.0)}
+          >
+            <ScrollCue hint={data.scrollHint} className="flex" />
+          </motion.div>
         </div>
 
         {/* Десктопный индикатор — по центру низа экрана */}
         <motion.div
-          className="absolute bottom-5 left-1/2 z-10 hidden w-max max-w-[90%] -translate-x-1/2 lg:block"
+          className="absolute bottom-5 left-1/2 hidden w-max max-w-[90%] -translate-x-1/2 lg:block"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={tr(2.3)}
