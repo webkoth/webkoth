@@ -51,9 +51,11 @@ const LINK_DROP = 0.06
 /** Радиус связи и «плотная» дистанция в долях R: дрейф заметно «дышит» прозрачностью. */
 const LINK_RADIUS = 1.35
 const LINK_NEAR = 0.75
-/** Базовая прозрачность линий (светлая / тёмная тема). */
-const LINK_ALPHA_LIGHT = 0.11
-const LINK_ALPHA_DARK = 0.17
+/** Базовая прозрачность линий (светлая / тёмная тема) — соты едва заметны, это подложка, а не рисунок. */
+const LINK_ALPHA_LIGHT = 0.05
+const LINK_ALPHA_DARK = 0.08
+/** Общий множитель яркости точек — по той же причине. */
+const DOT_DIM = 0.55
 /** Уровней квантования прозрачности — линии рисуются пачками по уровню, а не по одной. */
 const ALPHA_LEVELS = 10
 
@@ -270,7 +272,7 @@ export function ParticleField() {
         // Пульс включается только у осевших частиц; волна идёт по диагонали.
         const wave = reduce ? 0.5 : 0.5 + 0.5 * Math.sin(t * 0.9 + q.phase * 0.3 + (q.tx + q.ty) * 0.004)
         const pulse = eased * wave
-        const alpha = q.accent ? 0.55 + 0.25 * pulse : 0.34 - 0.16 * eased + 0.08 * pulse
+        const alpha = (q.accent ? 0.55 + 0.25 * pulse : 0.34 - 0.16 * eased + 0.08 * pulse) * DOT_DIM
         const r = 1.7 - 0.45 * eased + 0.35 * pulse
 
         ctx.globalAlpha = alpha

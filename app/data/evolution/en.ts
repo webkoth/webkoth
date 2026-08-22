@@ -26,7 +26,7 @@ export const en: EvolutionData = {
     },
   },
 
-  nav: { cta: 'Review my situation', stepsAria: 'Steps', palette: 'Palette', theme: 'Theme', font: 'Font' },
+  nav: { cta: 'Book a free audit', stepsAria: 'Steps', palette: 'Palette', theme: 'Theme', font: 'Font' },
   labels: {
     step: 'Step',
     symptom: 'How it hurts today',
@@ -39,11 +39,11 @@ export const en: EvolutionData = {
   },
 
   hero: {
-    line1: 'From chaos to system.\nFrom routine to automation.',
-    line2: 'Transparent finances. Precise decisions. Faster processes. Freer resources.',
+    line1: 'From chaos to system\nFrom routine to automation',
+    lead: '**Finances** become transparent, **decisions** more precise, **processes** faster — and **resources** are freed up.',
     seal: 'Business evolution',
     sub: 'I solve business problems once — with a system, not a hire.',
-    cta: 'Review my situation',
+    cta: 'Book a free audit',
     scrollHint: 'This page is the work plan itself: six steps, in the order they happen',
     stackHint: 'hover a node to see what it does',
     stackNodes: {

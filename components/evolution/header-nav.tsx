@@ -123,8 +123,8 @@ export function HeaderNav({
                         : 'text-muted-foreground hover:bg-muted hover:text-foreground',
                     )}
                   >
-                    {/* Номер: на мобильном — вместе с иконкой (подписи нет), на lg прячем ради места, с xl — снова. */}
-                    <span className="font-mono text-[10px] opacity-60 lg:hidden 2xl:inline">0{i + 1}</span>
+                    {/* Номер: на мобильном — вместе с иконкой (подписи нет); на десктопе прячем — иконка + подпись и так говорят всё, а место нужно шести якорям. */}
+                    <span className="font-mono text-[10px] opacity-60 lg:hidden">0{i + 1}</span>
                     {Icon ? <Icon className="size-3.5" aria-hidden /> : null}
                     <span className="hidden sm:inline">{item.label}</span>
                   </TooltipTrigger>

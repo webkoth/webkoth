@@ -39,7 +39,9 @@ export function buildEvolutionMarkdown(d: EvolutionData): string {
 
   out.push(h.lang, '')
   out.push(`# ${d.hero.seal}`, '')
-  out.push(d.hero.line1.replace(/\n/g, ' '), d.hero.line2, '')
+  // Переносы заголовка — вёрстка; в тексте для LLM фразы идут через точку.
+  out.push(d.hero.line1.replace(/\n/g, '. ') + '.', '')
+  out.push(d.hero.lead, '')
   out.push(d.hero.sub, '')
 
   out.push(`## ${h.steps}`, '')

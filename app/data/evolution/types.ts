@@ -114,8 +114,10 @@ export type EvolutionData = {
     factHint: string
   }
   hero: {
+    /** Заголовок: две фразы через \n — каждая на своей строке. */
     line1: string
-    line2: string
+    /** Описание под заголовком: четыре результата одним предложением; **слово** — жирным. */
+    lead: string
     seal: string
     sub: string
     cta: string

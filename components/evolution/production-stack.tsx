@@ -45,7 +45,7 @@ type Node = {
 const NW = 124
 const NH = 56
 const COL_GAP = 24
-const ROW_GAP = 40
+const ROW_GAP = 30
 const PAD_X = 16
 const PAD_Y = 14
 
@@ -383,18 +383,6 @@ function useLiveState(active: boolean, reduce: boolean | null) {
   return state
 }
 
-function useFooterTicker(active: boolean, reduce: boolean | null) {
-  const [calls, setCalls] = useState(12_847)
-  useEffect(() => {
-    if (!active || reduce) return
-    const id = window.setInterval(() => {
-      setCalls((c) => c + Math.floor(1 + Math.random() * 5))
-    }, 1800)
-    return () => window.clearInterval(id)
-  }, [active, reduce])
-  return calls
-}
-
 // ─── Equalizer ────────────────────────────────────────────────
 
 const EQ_DOTS: { color: string; threshold: Load }[] = [
@@ -509,7 +497,6 @@ export function ProductionStack({
   const active = inView && visible
   const reduce = useReducedMotion()
   const liveState = useLiveState(active, reduce)
-  const calls = useFooterTicker(active, reduce)
   const initial = useMemo(() => initialState(), [])
   const { phase, downRef } = useIncident(active, reduce)
   const { traces, lit } = useTraces(active, reduce, svgRef, downRef)
@@ -521,34 +508,14 @@ export function ProductionStack({
     <TooltipProvider delay={120}>
       <motion.div
         ref={ref}
-        initial={reduce ? false : { opacity: 0, y: 24 }}
+        initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
         transition={reduce ? { duration: 0 } : { duration: 0.9, delay, ease: EASE }}
         className="relative w-full"
       >
-        <div
-          aria-hidden
-          className="absolute -inset-6 -z-10 rounded-3xl opacity-50 blur-3xl"
-          style={{ background: 'color-mix(in oklab, var(--primary) 28%, transparent)' }}
-        />
-
-        <div className="overflow-hidden rounded-2xl border border-border bg-card/80 shadow-2xl backdrop-blur">
-          {/* Title bar */}
-          <div className="flex items-center gap-2 border-b border-border bg-muted/40 px-4 py-2.5">
-            <div className="flex gap-1.5">
-              <span className="size-3 rounded-full bg-red-500/70" />
-              <span className="size-3 rounded-full bg-yellow-500/70" />
-              <span className="size-3 rounded-full bg-green-500/70" />
-            </div>
-            <span className="ml-2 font-mono text-xs text-muted-foreground">production-stack</span>
-            <span className="ml-auto flex items-center gap-1.5 text-xs text-muted-foreground">
-              <span className="size-1.5 animate-pulse rounded-full bg-emerald-500" />
-              live
-            </span>
-          </div>
-
-          {/* Diagram */}
-          <div className="p-3 md:p-4">
+        {/* Без «окна»: схема лежит прямо на фоне, под ней — одна строка статуса. */}
+        <div>
+          <div>
             <div className="relative mx-auto w-full" style={{ aspectRatio: `${W} / ${H}` }}>
               <svg
                 ref={svgRef}
@@ -651,27 +618,22 @@ export function ProductionStack({
                 })}
               </svg>
             </div>
-            <p className="mt-3 flex items-center gap-2 font-mono text-[11px] text-muted-foreground">
-              <span className="inline-block size-1.5 rounded-full bg-primary" aria-hidden />
-              {copy.hint}
+            <p className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[11px] text-muted-foreground">
+              <span className="inline-flex items-center gap-1.5">
+                <span className="size-1.5 animate-pulse rounded-full bg-emerald-500" aria-hidden />
+                live
+              </span>
+              <span className="text-foreground/40">·</span>
+              {phase === 'down' ? (
+                <span className="text-amber-500">failover → Agent #2</span>
+              ) : phase === 'recovered' ? (
+                <span className="text-emerald-500">Agent #1 recovered</span>
+              ) : (
+                <span>0 downtime</span>
+              )}
+              <span className="text-foreground/40">·</span>
+              <span>{copy.hint}</span>
             </p>
-          </div>
-
-          {/* Footer */}
-          <div className="flex items-center gap-3 border-t border-border bg-muted/30 px-5 py-3 font-mono text-xs text-muted-foreground">
-            <span className="text-emerald-500">✓</span>
-            <span className="tabular-nums">{calls.toLocaleString('en-US')}</span>
-            <span>req</span>
-            <span className="text-foreground/40">·</span>
-            <span>p99 180ms</span>
-            <span className="text-foreground/40">·</span>
-            {phase === 'down' ? (
-              <span className="text-amber-500">failover → Agent #2</span>
-            ) : phase === 'recovered' ? (
-              <span className="text-emerald-500">Agent #1 recovered</span>
-            ) : (
-              <span>0 downtime</span>
-            )}
           </div>
         </div>
       </motion.div>
