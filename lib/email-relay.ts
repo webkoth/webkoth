@@ -1,5 +1,5 @@
 // Email is delivered via the hubmarket-ai microservice's /api/email/send relay,
-// because outbound SMTP (25/465/587) is blocked from this hosting (85.239.51.141).
+// because outbound SMTP (25/465/587) is blocked from this RU hosting (prod 201.34.133.76).
 // hubmarket-ai lives on different hosting (147.45.171.40) where SMTP egress works.
 //
 // Shared transport: used by both /dev-presentation and /marketplaces lead routes.

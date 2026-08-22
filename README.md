@@ -86,7 +86,7 @@ hubmarket-ai (Hono + AI SDK, cascade Claude → Gemini → Groq, Bearer auth) �
    а юзер вводит произвольный адрес. Тестовое сабмиты возвращали `partial: true`
    на каждый внешний email. Полностью отказался от Resend в пользу
    Nodemailer + SMTP без верификации домена.
-6. **Прод-хостинг 85.239.51.141 блокирует outbound SMTP 25/465/587** —
+6. **Прод-хостинг (RU VPS, сейчас 201.34.133.76) блокирует outbound SMTP 25/465/587** —
    стандартное anti-spam ограничение RU-провайдеров. Direct nodemailer падал с
    `ETIMEDOUT CONN`. Перенёс email в `POST /api/email/send` на hubmarket-ai
    (на другом хостинге, где SMTP egress работает) — webkoth ходит к нему через
