@@ -1,3 +1,5 @@
+import type { Lang } from '@/app/data/evolution/types'
+
 const escapeHtml = (s: string) =>
   s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
 
@@ -6,7 +8,12 @@ export type EvolutionLeadData = {
   contact: string
   answer: string
   ip: string
+  /** Язык страницы, с которой пришла заявка; без него — RU. */
+  lang?: Lang
 }
+
+// Уведомления владельцу всегда на русском — меняется только пометка источника.
+export const sourceLabel = (lang?: Lang) => `Главная webkoth.com (${lang === 'en' ? 'EN · /en' : 'RU · /'})`
 
 // Тема письма нарочно естественная: Timeweb SMTP помечает шаблоны вида
 // "[evolution] new lead" как высоковероятный спам (README.md).
@@ -20,10 +27,10 @@ export function buildLeadText(d: EvolutionLeadData): string {
     `💬 Контакт: ${d.contact}`,
     `🌐 IP:      ${d.ip}`,
     '',
-    'Что уже пробовали с ИИ и что из этого работает:',
+    'Какую проблему хотят решить и что уже пробовали:',
     d.answer,
     '',
-    'Источник: /evolution',
+    `Источник: ${sourceLabel(d.lang)}`,
   ].join('\n')
 }
 
@@ -33,14 +40,14 @@ export function buildLeadHtml(d: EvolutionLeadData): string {
 
   return `<!doctype html>
 <html lang="ru"><body style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#1a1a1a;max-width:640px;margin:0 auto;padding:24px">
-  <h2 style="margin:0 0 16px;font-size:18px">Заявка на разбор — /evolution</h2>
+  <h2 style="margin:0 0 16px;font-size:18px">Заявка на разбор — ${escapeHtml(sourceLabel(d.lang))}</h2>
   <table style="width:100%;border-collapse:collapse;font-size:14px">
     ${row('👤 Имя', d.name)}
     ${row('💬 Контакт', d.contact)}
     ${row('🌐 IP', d.ip)}
   </table>
   <div style="margin-top:20px">
-    <div style="color:#666;font-size:13px;margin-bottom:8px">Что уже пробовали с ИИ и что из этого работает</div>
+    <div style="color:#666;font-size:13px;margin-bottom:8px">Какую проблему хотят решить и что уже пробовали</div>
     <div style="background:#f8f8f8;padding:14px 16px;border-radius:6px;white-space:pre-wrap;font-size:14px;line-height:1.5">${escapeHtml(d.answer)}</div>
   </div>
 </body></html>`

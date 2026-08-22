@@ -59,7 +59,9 @@ AI OCR ⇢ GPT (Skolkovo) · AI Landing builder · Lenderkit fintech (50+ engine
 
 ## About this repo
 
-This is the source for **[webkoth.com](https://webkoth.com)** — the bilingual (RU / EN) landing for my AI integration service plus CV at `/minasarkisyan`.
+This is the source for **[webkoth.com](https://webkoth.com)** — the bilingual (RU at `/`, EN at `/en`) landing «Эволюция бизнеса / Business evolution» plus CV at `/ru/minasarkisyan` · `/en/minasarkisyan`.
+
+Layout: all page copy lives in `app/data/evolution/{ru,en}.ts` (shared type in `types.ts`), page composition in `components/evolution/evolution-page.tsx`, one-shot SVG scenes in `components/evolution/animations/`, lead API at `app/api/evolution/lead`. Redirects (`/ru`, `/evolution`, `/minasarkisyan`) are in `next.config.mjs`; `/llms.txt` is generated from the same data.
 
 Built with Next.js 16 (Turbopack), React 19, Tailwind v4, shadcn/ui (base-vega + Base UI primitives), Framer Motion, Shiki, Mermaid.
 
@@ -74,6 +76,17 @@ Built with Next.js 16 (Turbopack), React 19, Tailwind v4, shadcn/ui (base-vega +
 ---
 
 ## Changelog
+
+### 2026-08-22 — «Эволюция бизнеса» becomes the home page (`/`, `/en`); old landing removed
+
+- Root `/` now serves the Evolution landing directly (RU); full English version at `/en` («I»-form, same structure). Language toggle in the header (`/` ↔ `/en`, CV `/ru/…` ↔ `/en/…`), `hreflang` ru/en/x-default=ru, sitemap updated
+- Carried over from the old landing: the live **production-stack** scene in the hero (right column), the named **HubMarket.ru** case (interactive architecture diagram + stack + 4 product screenshots, account sidebar cropped off) and **«От идеи до прода»** rewritten for the new offer (Разбор → Аудит и карта → Запуск первого процесса → Сопровождение; no prices)
+- Copy split into `app/data/evolution/{ru,en}.ts` with a shared `EvolutionData` type; SVG scene labels parametrised per language
+- Redirects in `next.config.mjs`: `/ru` → `/`, `/evolution` → `/`, `/minasarkisyan` → `/ru/minasarkisyan`; `proxy.ts` removed
+- Lead form sends `lang`; Telegram/email notification is marked «Главная webkoth.com (RU · /)» / «(EN · /en)»
+- `/llms.txt` rebuilt from the new data (RU + EN)
+- Removed: `app/[lang]/page.tsx` + layout, `components/landing/*` (except `magnetic.tsx` used by ui-kit and `page-background.tsx` used by CV), `copy-i18n.ts`, `lib/landing-markdown.ts`, JSON-LD ProfessionalService with old package prices, `/api/lead`, `lib/landing/pricing.ts`, leftover `components/marketplaces/*`; `lib/marketplaces/delivery.ts` moved to `lib/evolution/delivery.ts`
+- Single set of handles site-wide: Telegram `@abnorsky`, GitHub `webkoth`, YouTube `@msarkisyan`
 
 ### 2026-08-22 — Landing «Эволюция бизнеса» (`/evolution`)
 

@@ -9,13 +9,26 @@ import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { contacts } from '@/lib/landing/contacts'
 import { evolutionLeadSchema, type EvolutionLeadInput } from '@/lib/evolution/schemas'
-import type { EvolutionData } from '@/app/data/evolution'
+import type { EvolutionData, Lang, LinkedText } from '@/app/data/evolution/types'
 
 type SubmitState = 'idle' | 'submitting' | 'success' | 'error' | 'rate_limited'
 
+function TelegramNote({ text }: { text: LinkedText }) {
+  return (
+    <span>
+      {text.before}
+      <a href={contacts.telegram} className="text-primary hover:underline">
+        {text.link}
+      </a>
+      {text.after}
+    </span>
+  )
+}
+
 // Минимум полей: имя, контакт и один вопрос — он же первый квалифицирующий
-// вопрос оффера. Заголовок и подпись секции рисует page.tsx.
-export function LeadForm({ copy }: { copy: EvolutionData['finale']['form'] }) {
+// вопрос оффера. Заголовок и подпись секции рисует finale.tsx. Сообщения
+// валидации приходят из схемы кодами и переводятся через `copy.errors`.
+export function LeadForm({ copy, lang }: { copy: EvolutionData['finale']['form']; lang: Lang }) {
   const [state, setState] = useState<SubmitState>('idle')
 
   // Момент монтирования — анти-бот метка: роут отсекает отправки быстрее 1.5 с.
@@ -29,8 +42,10 @@ export function LeadForm({ copy }: { copy: EvolutionData['finale']['form'] }) {
     formState: { errors },
   } = useForm<EvolutionLeadInput>({
     resolver: zodResolver(evolutionLeadSchema),
-    defaultValues: { name: '', contact: '', answer: '', website: '', filledAtMs: 1 },
+    defaultValues: { name: '', contact: '', answer: '', website: '', filledAtMs: 1, lang },
   })
+
+  const msg = (code?: string) => (code ? (copy.errors[code] ?? code) : undefined)
 
   const onSubmit = async (values: EvolutionLeadInput) => {
     setState('submitting')
@@ -38,7 +53,7 @@ export function LeadForm({ copy }: { copy: EvolutionData['finale']['form'] }) {
       const res = await fetch('/api/evolution/lead', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...values, filledAtMs: mountedAt }),
+        body: JSON.stringify({ ...values, filledAtMs: mountedAt, lang }),
       })
       // 429 — отдельное состояние: совет «попробуйте ещё раз» тут не сработает.
       if (res.status === 429) {
@@ -63,7 +78,7 @@ export function LeadForm({ copy }: { copy: EvolutionData['finale']['form'] }) {
         <p className="mt-3 text-sm text-muted-foreground">
           {copy.success.body}{' '}
           <a href={contacts.telegram} className="text-primary hover:underline">
-            Telegram
+            {copy.success.link}
           </a>
           .
         </p>
@@ -97,7 +112,7 @@ export function LeadForm({ copy }: { copy: EvolutionData['finale']['form'] }) {
           />
           {errors.name ? (
             <p id="evo-name-error" className="mt-1 text-xs text-destructive">
-              {errors.name.message}
+              {msg(errors.name.message)}
             </p>
           ) : null}
         </div>
@@ -114,7 +129,7 @@ export function LeadForm({ copy }: { copy: EvolutionData['finale']['form'] }) {
           />
           {errors.contact ? (
             <p id="evo-contact-error" className="mt-1 text-xs text-destructive">
-              {errors.contact.message}
+              {msg(errors.contact.message)}
             </p>
           ) : null}
         </div>
@@ -135,7 +150,7 @@ export function LeadForm({ copy }: { copy: EvolutionData['finale']['form'] }) {
         />
         {errors.answer ? (
           <p id="evo-answer-error" className="mt-1 text-xs text-destructive">
-            {errors.answer.message}
+            {msg(errors.answer.message)}
           </p>
         ) : null}
       </div>
@@ -143,27 +158,14 @@ export function LeadForm({ copy }: { copy: EvolutionData['finale']['form'] }) {
       {state === 'rate_limited' ? (
         <div role="alert" className="flex items-start gap-2 rounded-xl border border-destructive/40 p-4 text-sm">
           <Clock className="mt-0.5 size-4 shrink-0 text-destructive" aria-hidden />
-          <span>
-            Слишком много отправок с вашего адреса. Ограничение временное, но повторять сейчас
-            бесполезно — напишите в{' '}
-            <a href={contacts.telegram} className="text-primary hover:underline">
-              Telegram
-            </a>
-            , отвечу там.
-          </span>
+          <TelegramNote text={copy.rateLimited} />
         </div>
       ) : null}
 
       {state === 'error' ? (
         <div role="alert" className="flex items-start gap-2 rounded-xl border border-destructive/40 p-4 text-sm">
           <CircleAlert className="mt-0.5 size-4 shrink-0 text-destructive" aria-hidden />
-          <span>
-            Не получилось отправить. Попробуйте ещё раз или напишите в{' '}
-            <a href={contacts.telegram} className="text-primary hover:underline">
-              Telegram
-            </a>
-            .
-          </span>
+          <TelegramNote text={copy.failed} />
         </div>
       ) : null}
 

@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { useReveal } from './use-reveal'
+import type { AnimationCopy } from '@/app/data/evolution/types'
 import { clamp, mulberry32 } from './seeded'
 
 // Блок 3. Облако разбросанных точек — шум. При скролле сквозь него проступает
@@ -32,7 +33,7 @@ const POINTS = Array.from({ length: 96 }, () => {
 
 const MARKERS = [112, 212, 312, 412].map((x) => ({ x, y: lineY(x) }))
 
-export function NoiseToSignal() {
+export function NoiseToSignal({ copy }: { copy: AnimationCopy['noise'] }) {
   const { ref, active, tr } = useReveal()
 
   return (
@@ -41,7 +42,7 @@ export function NoiseToSignal() {
       viewBox={`0 0 ${W} ${H}`}
       className="h-auto w-full"
       role="img"
-      aria-label="Облако шумовых точек, сквозь которое проступает линия тренда с маркерами решений"
+      aria-label={copy.aria}
     >
       {/* Оси */}
       <line x1={X0 - 12} y1={Y0 + 18} x2={X1 + 10} y2={Y0 + 18} className="stroke-border" />

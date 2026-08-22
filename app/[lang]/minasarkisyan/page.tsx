@@ -27,6 +27,7 @@ import { PageBackground } from "@/components/landing/page-background";
 import { useParams } from "next/navigation";
 import { useEffect } from "react";
 import Link from "next/link";
+import { contacts } from "@/lib/landing/contacts";
 
 const SECTION_LABELS = {
   en: {
@@ -82,7 +83,7 @@ function YoutubeIcon({ className }: { className?: string }) {
 
 const SOCIAL = [
   { key: "github", href: "https://github.com/webkoth", label: "GitHub", icon: GithubIcon },
-  { key: "telegram", href: "https://t.me/webkoth", label: "Telegram", icon: Send },
+  { key: "telegram", href: contacts.telegram, label: "Telegram", icon: Send },
   { key: "youtube", href: "https://www.youtube.com/@msarkisyan", label: "YouTube", icon: YoutubeIcon },
 ] as const;
 
@@ -99,7 +100,7 @@ export default function MinasarkisyanPage() {
   return (
     <>
       <PageBackground />
-      <main className="relative z-[1] min-h-screen">
+      <main className="relative z-[1] min-h-screen" lang={lang}>
         <div className="border-b border-border">
           <div className="mx-auto flex max-w-5xl items-center justify-end gap-2 px-4 py-3 md:px-8">
             <LLMDocsButton data={data} lang={lang} />
@@ -145,7 +146,7 @@ export default function MinasarkisyanPage() {
           <div className="mx-auto flex max-w-5xl flex-col gap-4 px-4 py-10 md:flex-row md:items-center md:justify-between md:px-8">
             <div className="flex flex-wrap items-center gap-4 text-sm">
               <Link
-                href={`/${lang}`}
+                href="/"
                 className="text-foreground/80 transition hover:text-primary"
               >
                 webkoth.com

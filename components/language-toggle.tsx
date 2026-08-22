@@ -5,13 +5,19 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
 
+type Lang = "en" | "ru"
+
 interface LanguageToggleProps {
-  currentLang: "en" | "ru"
+  currentLang: Lang
 }
 
-function buildPath(pathname: string, currentLang: "en" | "ru", newLang: "en" | "ru") {
+// Главная: RU в корне, EN под /en. Остальные страницы (CV) — /[lang]/… .
+export function buildPath(pathname: string, currentLang: Lang, newLang: Lang): string {
   const segments = pathname.split("/").filter(Boolean)
-  if (segments[0] === currentLang) {
+  const isHome = segments.length === 0 || (segments.length === 1 && (segments[0] === "en" || segments[0] === "ru"))
+  if (isHome) return newLang === "ru" ? "/" : "/en"
+
+  if (segments[0] === currentLang || segments[0] === "en" || segments[0] === "ru") {
     segments[0] = newLang
   } else {
     segments.unshift(newLang)
@@ -20,7 +26,7 @@ function buildPath(pathname: string, currentLang: "en" | "ru", newLang: "en" | "
 }
 
 export function LanguageToggle({ currentLang }: LanguageToggleProps) {
-  const pathname = usePathname() || `/${currentLang}`
+  const pathname = usePathname() || (currentLang === "ru" ? "/" : "/en")
 
   const base =
     "inline-flex h-9 items-center justify-center px-3 text-sm font-medium transition-colors"

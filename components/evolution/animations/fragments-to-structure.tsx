@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { useReveal } from './use-reveal'
+import type { AnimationCopy } from '@/app/data/evolution/types'
 import { mulberry32 } from './seeded'
 
 // Блок 1. Россыпь обрывков (таблицы, сообщения, файлы) хаотично лежит по полю;
@@ -90,7 +91,7 @@ function Glyph({ kind }: { kind: Kind }) {
   }
 }
 
-export function FragmentsToStructure() {
+export function FragmentsToStructure({ copy }: { copy: AnimationCopy['fragments'] }) {
   const { ref, active, tr } = useReveal()
   const state = active ? 'on' : 'off'
   const drawTr = tr(1.1, 0.25)
@@ -102,7 +103,7 @@ export function FragmentsToStructure() {
       viewBox={`0 0 ${W} ${H}`}
       className="h-auto w-full"
       role="img"
-      aria-label="Разрозненные таблицы, сообщения и файлы выстраиваются в схему одного приложения"
+      aria-label={copy.aria}
     >
       {/* Каркас приложения: рисуется линией, пока обрывки занимают места */}
       <motion.rect

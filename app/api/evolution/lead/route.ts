@@ -2,7 +2,7 @@ import { NextResponse, type NextRequest } from 'next/server'
 import { evolutionLeadSchema } from '@/lib/evolution/schemas'
 import { buildLeadHtml, buildLeadSubject, buildLeadText, type EvolutionLeadData } from '@/lib/evolution/email'
 import { buildLeadTelegramText } from '@/lib/evolution/telegram-text'
-import { settleReturning, settleThrowing, summarize } from '@/lib/marketplaces/delivery'
+import { settleReturning, settleThrowing, summarize } from '@/lib/evolution/delivery'
 import { relaySend } from '@/lib/email-relay'
 import { sendTelegramMessage } from '@/lib/landing/telegram'
 import { rateLimitTake } from '@/lib/landing/rate-limit'
@@ -63,6 +63,7 @@ export async function POST(req: NextRequest) {
     contact: parsed.data.contact,
     answer: parsed.data.answer,
     ip,
+    lang: parsed.data.lang,
   }
 
   // 6. Два независимых канала владельцу: email через релей + Telegram

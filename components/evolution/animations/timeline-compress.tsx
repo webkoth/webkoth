@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { useReveal } from './use-reveal'
+import type { AnimationCopy } from '@/app/data/evolution/types'
 
 // Блок 5. Таймлайн, который сжимается: длинная линия «7–13 недель» схлопывается
 // в отрезок «1 день». Ниже — бегущая лента коммитов, превращающихся в галочки
@@ -20,7 +21,7 @@ const CHIP_W = 46
 const CHIP_GAP = 5
 const CHIP_Y = 222
 
-export function TimelineCompress() {
+export function TimelineCompress({ copy }: { copy: AnimationCopy['timeline'] }) {
   const { ref, active, reduce, tr } = useReveal()
 
   return (
@@ -29,11 +30,11 @@ export function TimelineCompress() {
       viewBox={`0 0 ${W} ${H}`}
       className="h-auto w-full"
       role="img"
-      aria-label="Таймлайн: линия в 7–13 недель сжимается в отрезок в один день; лента коммитов превращается в галочки деплоя"
+      aria-label={copy.aria}
     >
       {/* Рыночная альтернатива */}
       <text x={X0} y={52} className="fill-muted-foreground text-[10px]">
-        Заказная разработка · базовый модуль
+        {copy.market}
       </text>
       <rect x={X0} y={62} width={FULL} height={10} rx={5} className="fill-muted stroke-border" />
       {Array.from({ length: WEEKS + 1 }, (_, i) => (
@@ -47,12 +48,12 @@ export function TimelineCompress() {
         />
       ))}
       <text x={X1} y={98} textAnchor="end" className="fill-foreground font-mono text-[11px] font-semibold">
-        7–13 недель
+        {copy.weeks}
       </text>
 
       {/* Здесь: линия схлопывается в день */}
       <text x={X0} y={132} className="fill-muted-foreground text-[10px]">
-        Здесь · от первого коммита до промышленного контура
+        {copy.here}
       </text>
       <rect x={X0} y={142} width={FULL} height={10} rx={5} fill="none" className="stroke-border" strokeDasharray="3 4" />
       <motion.rect
@@ -72,7 +73,7 @@ export function TimelineCompress() {
         animate={active ? { x: X0 + DAY_W + 8, opacity: 1 } : { x: X0 + FULL + 6, opacity: 0 }}
         transition={tr(1.7, 0.4)}
       >
-        1 день
+        {copy.day}
       </motion.text>
       <motion.text
         x={X1}
@@ -83,12 +84,12 @@ export function TimelineCompress() {
         animate={{ opacity: active ? 1 : 0 }}
         transition={tr(0.6, 1.9)}
       >
-        база · роли · тесты · CI · два контура
+        {copy.stack}
       </motion.text>
 
       {/* Лента коммитов → галочки деплоя */}
       <text x={X0} y={CHIP_Y - 12} className="fill-muted-foreground text-[10px]">
-        Изменения доезжают тем же днём: автопроверка, автодеплой, автооткат
+        {copy.commits}
       </text>
       {HASHES.map((hsh, i) => {
         const x = X0 + i * (CHIP_W + CHIP_GAP)
@@ -141,7 +142,7 @@ export function TimelineCompress() {
         animate={{ opacity: active ? 1 : 0 }}
         transition={tr(0.6, 4.2)}
       >
-        коммит → проверка → production
+        {copy.flow}
       </motion.text>
     </svg>
   )

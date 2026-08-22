@@ -1,5 +1,5 @@
 import { escapeHtml } from '@/lib/landing/telegram'
-import type { EvolutionLeadData } from './email'
+import { sourceLabel, type EvolutionLeadData } from './email'
 
 // Telegram sendMessage ограничен 4096 символами и на превышение отвечает 400,
 // а не обрезает сам. Ответ на вопрос допускает до 4000 символов, escapeHtml
@@ -10,7 +10,7 @@ import type { EvolutionLeadData } from './email'
 const TELEGRAM_MAX_CHARS = 4096
 const ANSWER_BUDGET = 2500
 const TRUNCATION_NOTE = '\n\n<i>Ответ обрезан, полный текст — в письме.</i>'
-const ANSWER_HEADER = '\n\n<b>Что пробовали с ИИ и что работает:</b>\n'
+const ANSWER_HEADER = '\n\n<b>Какую проблему хотят решить и что пробовали:</b>\n'
 
 // Режем уже экранированную строку, поэтому на срезе может остаться половина
 // сущности — «&am». Хвостовой «&» без «;» убираем: битая сущность роняет разбор
@@ -23,7 +23,7 @@ function trimDanglingEntity(s: string): string {
 
 export function buildLeadTelegramText(d: EvolutionLeadData): string {
   const base =
-    `<b>🌱 Заявка на разбор — /evolution</b>\n\n` +
+    `<b>🌱 Заявка на разбор — ${escapeHtml(sourceLabel(d.lang))}</b>\n\n` +
     `<b>Имя:</b> ${escapeHtml(d.name)}\n` +
     `<b>Контакт:</b> ${escapeHtml(d.contact)}\n` +
     `<b>IP:</b> ${escapeHtml(d.ip)}`

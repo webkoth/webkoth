@@ -10,11 +10,16 @@ const lead: EvolutionLeadData = {
 }
 
 describe('buildLeadTelegramText', () => {
-  it('собирает шапку и ответ на вопрос', () => {
+  it('собирает шапку и ответ на вопрос; без lang источник — RU-главная', () => {
     const text = buildLeadTelegramText(lead)
-    expect(text).toContain('/evolution')
+    expect(text).toContain('Главная webkoth.com (RU · /)')
     expect(text).toContain('<b>Имя:</b> Иван')
     expect(text).toContain('Собрали бота, им никто не пользуется.')
+  })
+
+  it('помечает заявки с английской версии', () => {
+    const text = buildLeadTelegramText({ ...lead, lang: 'en' })
+    expect(text).toContain('Главная webkoth.com (EN · /en)')
   })
 
   it('экранирует HTML в полях пользователя', () => {

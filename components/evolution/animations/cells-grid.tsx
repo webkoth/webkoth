@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { Cog } from 'lucide-react'
 import { useReveal } from './use-reveal'
+import type { AnimationCopy } from '@/app/data/evolution/types'
 
 // Блок 6. Сетка ячеек-операций, плотно заполненная фигурками людей. При входе
 // в viewport большинство ячеек переходят в режим «авто» (цвет, значок системы),
@@ -68,7 +69,7 @@ function Person() {
   )
 }
 
-export function CellsGrid() {
+export function CellsGrid({ copy }: { copy: AnimationCopy['cells'] }) {
   const { ref, active, tr } = useReveal()
 
   return (
@@ -77,7 +78,7 @@ export function CellsGrid() {
       viewBox={`0 0 ${W} ${H}`}
       className="h-auto w-full"
       role="img"
-      aria-label="Сетка операций: большинство ячеек переходят в режим «авто», люди из них переходят к ячейкам роста"
+      aria-label={copy.aria}
     >
       {/* Ячейки операций */}
       {CELLS.map((c) => (
@@ -111,7 +112,7 @@ export function CellsGrid() {
 
       {/* Ячейки роста */}
       <text x={GROWTH_X + CELL / 2} y={Y0 - 14} textAnchor="middle" className="fill-primary font-mono text-[9px] uppercase tracking-[0.18em]">
-        рост
+        {copy.growth}
       </text>
       {Array.from({ length: ROWS }, (_, r) => (
         <rect
@@ -144,14 +145,14 @@ export function CellsGrid() {
         <rect x={0} y={-9} width={14} height={14} rx={3} className="fill-primary/12 stroke-primary/45" />
         <Cog x={2} y={-7} size={10} className="text-primary" strokeWidth={2} />
         <text x={20} y={2} className="fill-muted-foreground text-[9.5px]">
-          делает система
+          {copy.legendSystem}
         </text>
         <g transform="translate(118 0)">
           <g transform="translate(7 -1) scale(0.8)">
             <Person />
           </g>
           <text x={20} y={2} className="fill-muted-foreground text-[9.5px]">
-            остаётся людям — и переходит в рост
+            {copy.legendPeople}
           </text>
         </g>
       </g>

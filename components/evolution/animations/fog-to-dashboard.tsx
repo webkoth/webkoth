@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { useReveal } from './use-reveal'
+import type { AnimationCopy } from '@/app/data/evolution/types'
 
 // Блок 2. Размытые обрывки отчётов в «тумане» стягиваются в один резкий экран
 // движения средств. Финальный штрих — строка сверки, где второе число
@@ -29,12 +30,7 @@ const chartPoints = CHART.map((v, i) => ({
 const chartPath = chartPoints.map((p, i) => `${i === 0 ? 'M' : 'L'}${p.x.toFixed(1)} ${p.y.toFixed(1)}`).join(' ')
 const areaPath = `${chartPath} L${(CHART_BOX.x + CHART_BOX.w).toFixed(1)} ${CHART_BOX.y + CHART_BOX.h} L${CHART_BOX.x} ${CHART_BOX.y + CHART_BOX.h} Z`
 
-// Цифры иллюстративные, а не из реальных данных клиента.
-const KPI = [
-  { label: 'Поступления', value: '4 812 300' },
-  { label: 'Списания', value: '3 106 450' },
-  { label: 'Остаток', value: '1 705 850' },
-]
+// Цифры KPI и подписи — из данных страницы (иллюстративные, не из реальных данных клиента).
 const RECON_FROM = 1_698_120
 const RECON_TO = 1_705_850
 
@@ -79,7 +75,8 @@ function CountText({
   )
 }
 
-export function FogToDashboard() {
+export function FogToDashboard({ copy }: { copy: AnimationCopy['fog'] }) {
+  const KPI = copy.kpi
   const { ref, active, reduce, tr } = useReveal()
 
   return (
@@ -88,7 +85,7 @@ export function FogToDashboard() {
       viewBox={`0 0 ${W} ${H}`}
       className="h-auto w-full"
       role="img"
-      aria-label="Размытые разрозненные отчёты сливаются в один резкий экран движения средств со строкой сверки, в которой цифры сходятся"
+      aria-label={copy.aria}
     >
       {/* Обрывки в тумане: едут к центру и растворяются в экране */}
       {STRAYS.map((s, i) => {
@@ -122,10 +119,10 @@ export function FogToDashboard() {
       >
         <rect x={CARD.x} y={CARD.y} width={CARD.w} height={CARD.h} rx={12} className="fill-card stroke-border" strokeWidth={1.5} />
         <text x={CARD.x + 18} y={CARD.y + 26} className="fill-foreground text-[12px] font-semibold">
-          Движение средств
+          {copy.title}
         </text>
         <text x={CARD.x + CARD.w - 18} y={CARD.y + 26} textAnchor="end" className="fill-muted-foreground font-mono text-[9px]">
-          сегодня · все счета
+          {copy.subtitle}
         </text>
 
         {KPI.map((k, i) => {
@@ -187,16 +184,16 @@ export function FogToDashboard() {
           transition={tr(0.6, 3.2)}
         />
         <text x={CARD.x + 24} y={CARD.y + 192} className="fill-muted-foreground font-mono text-[9px] uppercase tracking-[0.18em]">
-          Сверка
+          {copy.recon}
         </text>
         <text x={CARD.x + 24} y={CARD.y + 207} className="fill-muted-foreground text-[9px]">
-          банк
+          {copy.bank}
         </text>
         <text x={CARD.x + 140} y={CARD.y + 207} textAnchor="end" className="fill-foreground font-mono text-[11px] font-semibold tabular-nums">
           {fmt(RECON_TO)}
         </text>
         <text x={CARD.x + 176} y={CARD.y + 207} className="fill-muted-foreground text-[9px]">
-          учёт
+          {copy.ledger}
         </text>
         <CountText active={active} reduce={reduce} delay={2.2} duration={1.0} x={CARD.x + 292} y={CARD.y + 207} />
         <motion.g

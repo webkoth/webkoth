@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { FileText, Hand, Package, Tag } from 'lucide-react'
 import { useReveal } from './use-reveal'
+import type { AnimationCopy } from '@/app/data/evolution/types'
 
 // Блок 4. Конвейер: слева стопка однотипных карточек-задач, «рука» двигает одну.
 // При входе в viewport рука исчезает, лента ускоряется, карточки едут сами и на
@@ -18,9 +19,9 @@ const CARD_W = 36
 const CARD_H = 26
 
 const OUT = [
-  { kind: 'label', x: 428, y: 72, label: 'этикетка', Icon: Tag },
-  { kind: 'pdf', x: 428, y: 150, label: 'PDF', Icon: FileText },
-  { kind: 'card', x: 428, y: 228, label: 'карточка', Icon: Package },
+  { kind: 'label', x: 428, y: 72, Icon: Tag },
+  { kind: 'pdf', x: 428, y: 150, Icon: FileText },
+  { kind: 'card', x: 428, y: 228, Icon: Package },
 ] as const
 
 const CARD_COUNT = 9
@@ -45,7 +46,7 @@ function Card({ kind, done }: { kind: 0 | 1 | 2; done?: boolean }) {
   )
 }
 
-export function Conveyor() {
+export function Conveyor({ copy }: { copy: AnimationCopy['conveyor'] }) {
   const { ref, active, reduce, tr } = useReveal()
 
   return (
@@ -54,7 +55,7 @@ export function Conveyor() {
       viewBox={`0 0 ${W} ${H}`}
       className="h-auto w-full"
       role="img"
-      aria-label="Конвейер: карточки-задачи, которые двигали рукой по одной, едут сами и складываются в стопки готовых этикеток, PDF и карточек товара"
+      aria-label={copy.aria}
     >
       {/* Лента и ролики */}
       <rect x={BELT.x} y={BELT.y} width={BELT.w} height={BELT.h} rx={8} className="fill-muted stroke-border" />
@@ -90,12 +91,12 @@ export function Conveyor() {
         transition={tr(0.6, 3.6)}
       />
       <text x={QUEUE.x - 30} y={QUEUE.y + 36} className="fill-muted-foreground font-mono text-[8px] uppercase tracking-[0.18em]">
-        рутина
+        {copy.routine}
       </text>
       <motion.g initial={{ opacity: 0 }} animate={{ opacity: active ? 1 : 0 }} transition={tr(0.8, 3.4)}>
-        {OUT.map((o) => (
+        {OUT.map((o, i) => (
           <text key={o.kind} x={o.x} y={o.y + 30} textAnchor="middle" className="fill-muted-foreground font-mono text-[8px] uppercase tracking-[0.18em]">
-            {o.label}
+            {copy.outputs[i]}
           </text>
         ))}
       </motion.g>

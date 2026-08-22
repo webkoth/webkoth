@@ -1,24 +1,26 @@
-export function JsonLdEvolution() {
+import { cvPath, homePath } from '@/app/data/evolution'
+import type { EvolutionData } from '@/app/data/evolution/types'
+import { contacts } from '@/lib/landing/contacts'
+
+export function JsonLdEvolution({ data }: { data: EvolutionData }) {
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://webkoth.com'
+  const home = homePath(data.lang)
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'Service',
-    name: 'Эволюция бизнеса: из хаоса — в систему, из рутины — в автоматизацию',
-    serviceType: 'Аудит и построение бизнес-систем с ИИ силами предметных экспертов компании',
-    description:
-      'Решаю задачи бизнеса один раз — системой, а не наймом. Первый шаг — аудит: разбор существующих прототипов и карта процессов.',
-    areaServed: { '@type': 'Country', name: 'Россия' },
+    name: data.meta.jsonLd.name,
+    serviceType: data.meta.jsonLd.serviceType,
+    description: data.meta.jsonLd.description,
+    inLanguage: data.lang,
+    areaServed: { '@type': 'Place', name: data.meta.jsonLd.area },
     provider: {
       '@type': 'Person',
-      name: 'Минас Саркисян',
-      url: 'https://webkoth.com',
+      name: data.footer.owner,
+      url: `${baseUrl}${cvPath(data.lang)}`,
+      sameAs: ['https://github.com/webkoth', contacts.telegram],
     },
-    url: 'https://webkoth.com/evolution',
+    url: `${baseUrl}${home === '/' ? '/' : home}`,
   }
 
-  return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-    />
-  )
+  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
 }

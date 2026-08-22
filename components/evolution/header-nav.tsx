@@ -1,12 +1,12 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import Link from 'next/link'
-import { ArrowLeft } from 'lucide-react'
 import { ModeToggle } from '@/components/mode-toggle'
 import { PaletteToggle } from '@/components/palette-toggle'
+import { LanguageToggle } from '@/components/language-toggle'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
+import type { Lang } from '@/app/data/evolution/types'
 
 export type NavItem = { id: string; label: string }
 
@@ -14,14 +14,16 @@ export type NavItem = { id: string; label: string }
 // Активный блок подсвечивается по скроллу; на узких экранах строка якорей
 // прокручивается горизонтально, чтобы не давать странице расти вширь.
 export function HeaderNav({
+  lang,
   brand,
-  back,
   cta,
+  stepsAria,
   items,
 }: {
+  lang: Lang
   brand: string
-  back: string
   cta: string
+  stepsAria: string
   items: NavItem[]
 }) {
   const [activeId, setActiveId] = useState<string | null>(null)
@@ -58,20 +60,17 @@ export function HeaderNav({
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-background/80 backdrop-blur-md">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3 md:px-8">
-        <Link
-          href="/"
-          className="inline-flex items-center gap-1 text-sm text-foreground/80 transition hover:text-primary"
-        >
-          <ArrowLeft className="size-3.5" aria-hidden />
-          {back || brand}
-        </Link>
-        <div className="flex items-center gap-1">
+        <a href="#hero" className="font-mono text-sm text-foreground/80 transition hover:text-primary">
+          {brand}
+        </a>
+        <div className="flex items-center gap-1.5">
+          <LanguageToggle currentLang={lang} />
           <PaletteToggle />
           <ModeToggle />
           {/* На мобильном работу этой кнопки делает StickyCta. */}
           <Button
             size="sm"
-            className="ml-2 hidden sm:inline-flex"
+            className="ml-1.5 hidden sm:inline-flex"
             nativeButton={false}
             render={<a href="#form" />}
           >
@@ -79,7 +78,7 @@ export function HeaderNav({
           </Button>
         </div>
       </div>
-      <nav aria-label="Шаги" className="border-t border-border/60">
+      <nav aria-label={stepsAria} className="border-t border-border/60">
         <ul className="mx-auto flex max-w-6xl gap-1 overflow-x-auto px-2 py-1.5 [scrollbar-width:none] md:px-6 lg:justify-center [&::-webkit-scrollbar]:hidden">
           {items.map((item, i) => {
             const active = activeId === item.id

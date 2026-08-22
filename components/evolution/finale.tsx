@@ -1,12 +1,22 @@
 import { MessageSquare, CheckCircle2, Send } from 'lucide-react'
 import { contacts } from '@/lib/landing/contacts'
-import type { EvolutionData } from '@/app/data/evolution'
+import type { EvolutionData } from '@/app/data/evolution/types'
 import { SproutsTree } from './animations/sprouts-tree'
 import { LeadForm } from './lead-form'
 
 // Финал: честная строка про кладбище, манифест, мини-таблица четырёх заходов
 // и форма. Первый продукт — бесплатный диагностический разбор: карта процессов и план.
-export function Finale({ data }: { data: EvolutionData['finale'] }) {
+export function Finale({
+  data,
+  labels,
+  animation,
+  lang,
+}: {
+  data: EvolutionData['finale']
+  labels: EvolutionData['labels']
+  animation: EvolutionData['animations']['sprouts']
+  lang: EvolutionData['lang']
+}) {
   return (
     <section
       id="finale"
@@ -15,7 +25,9 @@ export function Finale({ data }: { data: EvolutionData['finale'] }) {
     >
       <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-14">
         <div className="min-w-0 lg:col-span-5">
-          <p className="font-mono text-xs uppercase tracking-[0.18em] text-primary">Шаг {data.step}</p>
+          <p className="font-mono text-xs uppercase tracking-[0.18em] text-primary">
+            {labels.step} {data.step}
+          </p>
           <h2 id="finale-title" className="mt-3 text-3xl font-bold tracking-tight md:text-5xl">
             {data.slogan}
           </h2>
@@ -27,7 +39,7 @@ export function Finale({ data }: { data: EvolutionData['finale'] }) {
         </div>
         <div className="min-w-0 lg:col-span-7">
           <div className="rounded-2xl border border-border bg-card/60 p-3 backdrop-blur-sm md:p-5">
-            <SproutsTree />
+            <SproutsTree copy={animation} />
           </div>
         </div>
       </div>
@@ -82,17 +94,13 @@ export function Finale({ data }: { data: EvolutionData['finale'] }) {
         <div id="form" className="min-w-0 scroll-mt-28 lg:col-span-7">
           <div className="mb-6 inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-[0.18em] text-primary">
             <MessageSquare className="size-3.5" aria-hidden />
-            <span>Заявка</span>
+            <span>{data.form.label}</span>
           </div>
           <h3 className="text-xl font-bold tracking-tight md:text-2xl">{data.form.title}</h3>
-          <p className="mt-2 text-sm text-muted-foreground">
-            {data.form.sub}
-          </p>
+          <p className="mt-2 text-sm text-muted-foreground">{data.form.sub}</p>
 
           <div className="my-5 rounded-xl border border-primary/20 bg-primary/5 p-4">
-            <p className="text-xs font-semibold uppercase tracking-wider text-primary">
-              {data.form.takeawaysTitle}
-            </p>
+            <p className="text-xs font-semibold uppercase tracking-wider text-primary">{data.form.takeawaysTitle}</p>
             <ul className="mt-3 space-y-2 text-xs text-muted-foreground md:text-sm">
               {data.form.takeaways.map((item) => (
                 <li key={item} className="flex items-start gap-2">
@@ -113,10 +121,10 @@ export function Finale({ data }: { data: EvolutionData['finale'] }) {
               <Send className="size-3.5 text-primary" aria-hidden />
               <span>{data.form.telegramCta}</span>
             </a>
-            <span className="text-xs text-muted-foreground">или оставьте контакт в форме ниже:</span>
+            <span className="text-xs text-muted-foreground">{data.form.orBelow}</span>
           </div>
 
-          <LeadForm copy={data.form} />
+          <LeadForm copy={data.form} lang={lang} />
         </div>
       </div>
     </section>

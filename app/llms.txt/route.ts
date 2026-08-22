@@ -1,27 +1,26 @@
-import { copy, type Lang } from "@/components/landing/copy-i18n";
-import { buildLandingMarkdown } from "@/lib/landing-markdown";
+import { evolutionData, LANGS } from '@/app/data/evolution'
+import { buildEvolutionMarkdown } from '@/lib/evolution/llms-markdown'
 
-export const dynamic = "force-static";
+export const dynamic = 'force-static'
 
+// Markdown-версия главной (RU + EN) для LLM-агентов и парсеров.
 export function GET() {
-  const langs: Lang[] = ["en", "ru"];
-  const sections = langs.map((lang) =>
-    buildLandingMarkdown(copy[lang], lang),
-  );
+  const sections = LANGS.map((lang) => buildEvolutionMarkdown(evolutionData[lang]))
 
   const body = [
-    "# Minas Sarkisyan — Production AI Integration",
-    "",
-    "> Landing page content in Markdown, optimised for LLM ingestion.",
-    "> Both English and Russian versions are included.",
-    "",
+    '# webkoth.com — Business evolution / Эволюция бизнеса',
+    '',
+    '> Home page content in Markdown, optimised for LLM ingestion.',
+    '> Russian (https://webkoth.com/) and English (https://webkoth.com/en) versions are included.',
+    '> CV: https://webkoth.com/ru/minasarkisyan · https://webkoth.com/en/minasarkisyan',
+    '',
     ...sections,
-  ].join("\n");
+  ].join('\n')
 
   return new Response(body, {
     headers: {
-      "Content-Type": "text/plain; charset=utf-8",
-      "Cache-Control": "public, max-age=3600, s-maxage=3600",
+      'Content-Type': 'text/plain; charset=utf-8',
+      'Cache-Control': 'public, max-age=3600, s-maxage=3600',
     },
-  });
+  })
 }
