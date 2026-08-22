@@ -293,7 +293,7 @@ export function HeroServicesMockup() {
   const reduce = useReducedMotion();
   const liveState = useLiveState(inView, reduce);
   const calls = useFooterTicker(inView, reduce);
-  const initial = useMemo(initialState, []);
+  const initial = useMemo(() => initialState(), []);
 
   return (
     <motion.div

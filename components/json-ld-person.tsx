@@ -5,7 +5,7 @@ interface JsonLdPersonProps {
   lang: "en" | "ru";
 }
 
-export function JsonLdPerson({ data, lang }: JsonLdPersonProps) {
+export function JsonLdPerson({ data }: JsonLdPersonProps) {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://webkoth.com';
   
   // Get current job from experience

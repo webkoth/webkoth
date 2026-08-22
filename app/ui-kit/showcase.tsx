@@ -217,7 +217,7 @@ export function Showcase() {
               <p className="max-w-prose text-sm text-muted-foreground">
                 Приглушённый текст (muted-foreground) для подписей и пояснений.
               </p>
-              <p className="font-mono text-sm">const mono = "Geist Mono"</p>
+              <p className="font-mono text-sm">const mono = &quot;Geist Mono&quot;</p>
             </div>
           </Section>
 

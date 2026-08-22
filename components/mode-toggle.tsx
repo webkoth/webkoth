@@ -4,13 +4,17 @@ import * as React from "react"
 import { Moon, Sun } from "lucide-react"
 import { useTheme } from "next-themes"
 
+// Hydration guard without setState-in-effect: the server snapshot is `false`,
+// the client snapshot is `true`, so the first client render after hydration
+// flips to the real theme. Nothing to subscribe to — the value never changes
+// after mount.
+const subscribeNoop = () => () => {}
+const getClientSnapshot = () => true
+const getServerSnapshot = () => false
+
 export function ModeToggle() {
   const { theme, resolvedTheme, setTheme } = useTheme()
-  const [mounted, setMounted] = React.useState(false)
-
-  React.useEffect(() => {
-    setMounted(true)
-  }, [])
+  const mounted = React.useSyncExternalStore(subscribeNoop, getClientSnapshot, getServerSnapshot)
 
   const current = mounted ? (theme === "system" ? resolvedTheme : theme) : undefined
   const isDark = current === "dark"

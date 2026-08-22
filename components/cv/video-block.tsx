@@ -16,7 +16,7 @@ interface VideoBlockProps {
   lang: "en" | "ru";
 }
 
-export function VideoBlock({ data, lang }: VideoBlockProps) {
+export function VideoBlock({ data }: VideoBlockProps) {
   if (!data.video) return null;
 
   // Extract video ID from URL

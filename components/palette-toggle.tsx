@@ -5,34 +5,41 @@ import { Droplet } from "lucide-react";
 
 type Palette = "warm" | "classic";
 
+// The <html> class list is the source of truth for the palette: the inline
+// preferences script sets it before hydration, and this toggle mutates it.
+// Reading it through useSyncExternalStore keeps SSR ("warm") and the client
+// in sync without a mounted flag + setState-in-effect.
 function getPalette(): Palette {
-  if (typeof document === "undefined") return "warm";
   return document.documentElement.classList.contains("palette-classic")
     ? "classic"
     : "warm";
 }
 
-export function PaletteToggle() {
-  const [palette, setPalette] = React.useState<Palette>("warm");
-  const [mounted, setMounted] = React.useState(false);
+function getServerPalette(): Palette {
+  return "warm";
+}
 
-  React.useEffect(() => {
-    setMounted(true);
-    setPalette(getPalette());
-  }, []);
+function subscribe(onChange: () => void) {
+  const observer = new MutationObserver(onChange);
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["class"],
+  });
+  return () => observer.disconnect();
+}
+
+export function PaletteToggle() {
+  const palette = React.useSyncExternalStore(subscribe, getPalette, getServerPalette);
 
   const toggle = () => {
     const next: Palette = palette === "warm" ? "classic" : "warm";
-    const root = document.documentElement;
-    if (next === "classic") root.classList.add("palette-classic");
-    else root.classList.remove("palette-classic");
+    document.documentElement.classList.toggle("palette-classic", next === "classic");
     try {
       localStorage.setItem("palette", next);
     } catch {}
-    setPalette(next);
   };
 
-  const isClassic = mounted && palette === "classic";
+  const isClassic = palette === "classic";
   const label = isClassic ? "Switch to warm palette" : "Switch to classic palette";
 
   return (

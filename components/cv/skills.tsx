@@ -69,7 +69,7 @@ function toneFor(category: string) {
   };
 }
 
-export function Skills({ data, lang: _lang }: SkillsProps) {
+export function Skills({ data }: SkillsProps) {
   const touchLabel = "touch";
 
   return (

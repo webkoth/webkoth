@@ -84,7 +84,9 @@ export function LeadForm({
   onSuccess?: () => void;
 }) {
   const t = copy[lang].form;
-  const renderedAt = typeof window !== "undefined" ? Date.now() : 0;
+  // Lazy useState (not a bare Date.now() in render): computed once, survives re-renders,
+  // and keeps the React Compiler purity rule happy. 0 on the server, real timestamp on the client.
+  const [renderedAt] = useState(() => (typeof window !== "undefined" ? Date.now() : 0));
   const [submitState, setSubmitState] = useState<"idle" | "loading" | "success" | "error">("idle");
 
   const form = useForm<FormData>({
@@ -199,7 +201,7 @@ export function LeadForm({
           <div>
             <label className="block text-sm mb-1.5">{t.fields.audience}</label>
             <Select
-              value={form.watch("audience")}
+              value={watched.audience}
               onValueChange={(v) => form.setValue("audience", v as FormData["audience"])}
             >
               <SelectTrigger className="w-full">
@@ -235,7 +237,7 @@ export function LeadForm({
           <div>
             <label className="block text-sm mb-1.5">{t.fields.package}</label>
             <Select
-              value={form.watch("package")}
+              value={watched.package}
               onValueChange={(v) => form.setValue("package", v as FormData["package"])}
             >
               <SelectTrigger className="w-full">
@@ -266,7 +268,7 @@ export function LeadForm({
           <div className="md:col-span-2">
             <label className="block text-sm mb-1.5">{t.fields.budget}</label>
             <Select
-              value={form.watch("budget") ?? "unknown"}
+              value={watched.budget ?? "unknown"}
               onValueChange={(v) => form.setValue("budget", v as Exclude<FormData["budget"], undefined>)}
             >
               <SelectTrigger className="w-full">

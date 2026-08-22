@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { useForm } from 'react-hook-form'
+import { useForm, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Sparkles, Send, Loader2, CheckCircle2, AlertCircle, ChevronDown, CalendarClock } from 'lucide-react'
 import { toast } from 'sonner'
@@ -39,7 +39,7 @@ export function LeadFormTest() {
     form.setValue('filledAtMs', Date.now())
   }, [form])
 
-  const messageValue = form.watch('message') ?? ''
+  const messageValue = useWatch({ control: form.control, name: 'message' }) ?? ''
   const polishDisabled =
     state.kind !== 'idle' || messageValue.trim().length < 30
 
