@@ -12,18 +12,19 @@ import { useLeadDialog } from "./lead-dialog"
 // Hero — ровно один экран (100svh минус шапка; высоту шапки кладёт в --header-h
 // сам HeaderNav). Один ряд, выровненный по верху: слева — подпись-замок, заголовок
 // в две строки, описание, одно предложение про подход и кнопка; справа, на уровне
-// заголовка, — «живая» схема работающей системы. Заголовок не переносится и может
-// выйти за свою колонку — тогда он ложится поверх схемы (схема под ним, z-0): это
-// осознанно, на широких экранах схема работает фоном. Внизу по центру — индикатор
-// «листай». На мобильном всё идёт столбиком: текст и кнопка, затем схема. Размер
-// h1 привязан к ширине окна, его высоте и ширине контейнера, чтобы самая длинная
-// фраза (27 знаков) не ломалась на две строки.
+// заголовка, — «живая» схема работающей системы. Заголовок не переносится и не
+// заходит на схему: его размер ограничен шириной своей колонки (6.5cqw при
+// трекинге −0.04em — ровно столько, чтобы самая длинная фраза, 27 знаков
+// моноширинным, легла в одну строку). Схеме отдано 40% ряда, а на широких экранах
+// она ещё выходит вправо за поле контейнера — там всё равно пустой отступ. Внизу
+// по центру — индикатор «листай». На мобильном всё идёт столбиком: текст и кнопка,
+// затем схема.
 
 /** «**слово**» в тексте → <strong>. Нужен только для описания под заголовком. */
 function renderBold(text: string) {
   return text.split(/\*\*(.+?)\*\*/g).map((part, i) =>
     i % 2 === 1 ? (
-      <strong key={i} className="font-bold text-foreground">
+      <strong key={i} className="font-bold text-orange-300 text-foreground">
         {part}
       </strong>
     ) : (
@@ -66,10 +67,11 @@ export function Hero({ data }: { data: EvolutionData["hero"] }) {
   return (
     <section id="hero" className="mx-auto max-w-6xl px-4 md:px-8">
       {/* Классы высоты — литералами: Tailwind не видит собранные из строк имена. */}
-      <div className="@container relative flex min-h-[calc(100svh-var(--header-h,6rem))] flex-col justify-center py-8 sm:py-12 lg:pt-0 lg:pb-10">
+      <div className="relative flex min-h-[calc(100svh-var(--header-h,6rem))] flex-col justify-center py-8 sm:py-12 lg:pt-0 lg:pb-10">
         {/* Ряд «текст | схема», выровнен по верху: схема на уровне заголовка. */}
-        <div className="lg:grid lg:grid-cols-[58fr_42fr] lg:items-start lg:gap-8">
-          <div className="relative z-10 min-w-0">
+        {/* @container — на колонке текста: от её ширины считается размер h1. */}
+        <div className="lg:grid lg:grid-cols-[3fr_2fr] lg:items-start lg:gap-6">
+          <div className="@container relative z-10 min-w-0">
             <motion.p
               className="font-mono text-xs tracking-[0.22em] text-primary uppercase md:text-sm"
               initial={{ opacity: 0, y: 12 }}
@@ -144,8 +146,9 @@ export function Hero({ data }: { data: EvolutionData["hero"] }) {
           </div>
 
           {/* Схема: на мобильном — после кнопки вторым экраном; на десктопе — правая
-            колонка ряда, под заголовком по z, сдвинута к уровню h1 (pt ≈ высота замка). */}
-          <div className="relative z-0 pt-12 lg:pt-8">
+              колонка ряда, сдвинута к уровню h1 (pt ≈ высота замка). С xl выходит
+              вправо за контейнер (запас поля: 71px на 1366, 156px на 1536). */}
+          <div className="relative z-0 pt-12 lg:pt-8 xl:-mr-16 2xl:-mr-28">
             <ProductionStack
               delay={reduce ? 0 : 1.8}
               copy={{ hint: data.stackHint, nodes: data.stackNodes }}
