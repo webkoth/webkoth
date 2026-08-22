@@ -355,7 +355,7 @@ export const cvData: Record<"en" | "ru", CVData> = {
         stack: ["Next.js", "Hono", "Playwright", "pg-boss"],
         team: "1 fullstack (founder request → prod in 3 days)",
         functionality:
-          "Founder-driven sprint exemplar: request, architecture, implementation, handover to prod in 3 days. Stock sync across 3 marketplaces (WB, Ozon, Yandex Market) for a HubMarket customer. Full writeup: webkoth.com/cases/hubmarket-stocksync",
+          "Founder-driven sprint exemplar: request, architecture, implementation, handover to prod in 3 days. Stock sync across 3 marketplaces (WB, Ozon, Yandex Market) for a HubMarket customer",
         technologies: ["Playwright", "pg-boss", "PostgreSQL"],
         aiTag: null,
       },
@@ -713,7 +713,7 @@ export const cvData: Record<"en" | "ru", CVData> = {
         stack: ["Next.js", "Hono", "Playwright", "pg-boss"],
         team: "1 fullstack (от запроса фаундера до прода — 3 дня)",
         functionality:
-          "Production-кейс founder-driven спринта: запрос, архитектура, реализация, передача в прод за 3 дня. Синхронизация остатков по 3 маркетплейсам (WB, Ozon, Yandex Market) для клиента HubMarket. Полный writeup: webkoth.com/cases/hubmarket-stocksync",
+          "Production-кейс founder-driven спринта: запрос, архитектура, реализация, передача в прод за 3 дня. Синхронизация остатков по 3 маркетплейсам (WB, Ozon, Yandex Market) для клиента HubMarket",
         technologies: ["Playwright", "pg-boss", "PostgreSQL"],
         aiTag: null,
       },

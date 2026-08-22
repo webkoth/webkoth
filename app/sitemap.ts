@@ -8,6 +8,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/ru`, lastModified: new Date(), changeFrequency: "monthly", priority: 1.0 },
     { url: `${baseUrl}/en/minasarkisyan`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
     { url: `${baseUrl}/ru/minasarkisyan`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
-    { url: `${baseUrl}/marketplaces`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.9 },
   ];
 }

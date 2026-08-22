@@ -145,7 +145,7 @@
       "dependencies": ["framer-motion"],
       "files": [
         {
-          "path": "components/dev-presentation/animated-metric.tsx",
+          "path": "components/animated-metric.tsx",
           "type": "registry:component",
           "target": "components/animated-metric.tsx"
         }

@@ -37,7 +37,7 @@ import { ModeToggle } from "@/components/mode-toggle"
 import { PaletteToggle } from "@/components/palette-toggle"
 import { LanguageToggle } from "@/components/language-toggle"
 import { Magnetic } from "@/components/landing/magnetic"
-import { AnimatedMetric } from "@/components/dev-presentation/animated-metric"
+import { AnimatedMetric } from "@/components/animated-metric"
 
 const REGISTRY = "https://webkoth.com/r"
 
