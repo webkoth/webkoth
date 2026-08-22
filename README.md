@@ -75,6 +75,14 @@ Built with Next.js 16 (Turbopack), React 19, Tailwind v4, shadcn/ui (base-vega +
 
 ## Changelog
 
+### 2026-08-22 — Landing «Эволюция бизнеса» (`/evolution`)
+
+- New RU-only landing at `/evolution`, outside `[lang]` (whitelisted in `proxy.ts`, added to sitemap)
+- Structure follows `../docs/2026-08-22-landing-evolyuciya-biznesa.md`: Hero → 6 postulate blocks (system / money / decisions / automation / speed / resources) → finale with manifesto, «graveyard» table (4 attempts, 3 stopped, 1 alive) and lead form
+- One visual metaphor across the page — «chaos becomes order»: canvas particle field that settles into a living grid (`components/evolution/particle-field.tsx`) + 7 one-shot SVG/framer-motion scenes in `components/evolution/animations/` (play once on viewport entry, final state under `prefers-reduced-motion`, deterministic seeded layouts for SSR)
+- All copy in `app/data/evolution.ts` («я»-form). Case facts are anonymised git numbers — no client names, no employee names, no revenue
+- Lead form (name · contact · «Что уже пробовали с ИИ и что из этого работает?») → `POST /api/evolution/lead` → Telegram + email-relay, same protections as `/marketplaces` (honeypot, min-fill-time, rate limit); schema + Telegram text covered by vitest
+
 ### 2026-05-20 — Pet-projects Tier 1 Task 1 (in-repo portion)
 
 - New case page at `/[lang]/cases/hubmarket-stocksync` — backs the founder-tagged case card on landing and the «B-Sprint case» portfolio entry on CV

@@ -30,6 +30,7 @@ export function proxy(request: NextRequest) {
       pathname.startsWith('/_next') ||
       pathname.startsWith('/images') ||
       pathname.startsWith('/favicon.ico') ||
+      pathname.startsWith('/evolution') ||
       pathname.startsWith('/ui-kit') ||
       pathname.includes('.')
     ) {
