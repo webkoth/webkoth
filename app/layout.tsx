@@ -6,13 +6,14 @@ import { LandingPreferencesScript } from "@/components/landing-preferences-scrip
 import { Toaster } from "@/components/ui/sonner"
 import { cn } from "@/lib/utils";
 
+// Два набора шрифтов по тумблеру в шапке (класс `mono-geist` на <html>, см.
+// globals.css и FontToggle): по умолчанию JetBrains Mono везде — заголовки,
+// текст и моно-слот; альтернатива — Geist + Geist Mono.
 const fontSans = Geist({
   subsets: ["latin"],
-  variable: "--font-sans",
+  variable: "--font-geist-sans",
 })
 
-// Два моноширинных шрифта: JetBrains Mono — дефолт, Geist Mono — альтернатива по
-// тумблеру в шапке (класс `mono-geist` на <html>, см. globals.css и FontToggle).
 const fontMono = Geist_Mono({
   subsets: ["latin"],
   variable: "--font-geist-mono",

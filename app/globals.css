@@ -5,8 +5,8 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-    --font-heading: var(--font-sans);
-    --font-sans: var(--font-sans);
+    --font-heading: var(--font-sans-active);
+    --font-sans: var(--font-sans-active);
     --font-mono: var(--font-mono-active);
     --color-sidebar-ring: var(--sidebar-ring);
     --color-sidebar-border: var(--sidebar-border);
@@ -49,7 +49,9 @@
 }
 
 :root {
-    /* Моно-слот: JetBrains Mono по умолчанию, Geist Mono — по классу .mono-geist (тумблер в шапке). */
+    /* Шрифты: по умолчанию JetBrains Mono везде (текст, заголовки, моно-слот);
+       по классу .mono-geist (тумблер в шапке) — Geist + Geist Mono. */
+    --font-sans-active: var(--font-jetbrains-mono);
     --font-mono-active: var(--font-jetbrains-mono);
 
     /* Нейтрали — одна семья на оттенке 267 (#02003f = oklch(0.168 0.114 266.6)):
@@ -89,6 +91,7 @@
 }
 
 :root.mono-geist {
+    --font-sans-active: var(--font-geist-sans);
     --font-mono-active: var(--font-geist-mono);
 }
 

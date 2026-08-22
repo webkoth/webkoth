@@ -26,7 +26,7 @@ export const en: EvolutionData = {
     },
   },
 
-  nav: { cta: 'Review my situation', stepsAria: 'Steps', palette: 'Palette', theme: 'Theme', font: 'Mono font' },
+  nav: { cta: 'Review my situation', stepsAria: 'Steps', palette: 'Palette', theme: 'Theme', font: 'Font' },
   labels: {
     step: 'Step',
     symptom: 'How it hurts today',
@@ -39,8 +39,8 @@ export const en: EvolutionData = {
   },
 
   hero: {
-    line1: 'From chaos to system: transparent money, precise decisions.',
-    line2: 'From routine to automation: faster processes, freer resources.',
+    line1: 'From chaos to system.\nFrom routine to automation.',
+    line2: 'Transparent finances. Precise decisions. Faster processes. Freer resources.',
     seal: 'Business evolution',
     sub: 'I solve business problems once — with a system, not a hire.',
     cta: 'Review my situation',

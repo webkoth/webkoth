@@ -1,5 +1,6 @@
 'use client'
 
+import { Fragment } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
 import { ArrowRight, ChevronDown } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -45,8 +46,8 @@ export function Hero({ data }: { data: EvolutionData['hero'] }) {
   return (
     <section id="hero" className="mx-auto max-w-6xl px-4 md:px-8">
       {/* Классы высоты — литералами: Tailwind не видит собранные из строк имена. */}
-      <div className="relative lg:grid lg:min-h-[calc(100svh-var(--header-h,6rem))] lg:grid-cols-12 lg:items-center lg:gap-10 lg:pb-14">
-        <div className="relative flex min-h-[calc(100svh-var(--header-h,6rem))] flex-col justify-center py-12 lg:col-span-7 lg:min-h-0 lg:py-0">
+      <div className="relative lg:grid lg:min-h-[calc(100svh-var(--header-h,6rem))] lg:grid-cols-12 lg:items-center lg:gap-10 lg:pb-12">
+        <div className="@container relative flex min-h-[calc(100svh-var(--header-h,6rem))] flex-col justify-center py-8 sm:py-12 lg:col-span-7 lg:min-h-0 lg:py-0">
           <motion.p
             className="font-mono text-xs uppercase tracking-[0.22em] text-primary md:text-sm"
             initial={{ opacity: 0, y: 12 }}
@@ -56,9 +57,13 @@ export function Hero({ data }: { data: EvolutionData['hero'] }) {
             {data.seal}
           </motion.p>
 
-          <h1 className="mt-5 text-[clamp(1.75rem,min(4.5vw,5.2svh),3.25rem)] leading-[1.1] font-bold tracking-tight text-balance">
+          {/* Размер: от ширины и высоты окна (один экран) и от ширины колонки (5.9cqw) —
+              чтобы самая длинная из первых двух фраз (28 знаков моноширинным) не ломалась
+              на две строки. На телефоне это невыполнимо при читаемом размере — там перенос. */}
+          <h1 className="mt-5 text-[clamp(1.5rem,min(4.6vw,5.8svh,5.9cqw),3.5rem)] leading-[1.12] font-bold tracking-tight">
+            {/* whitespace-pre-line: \n в данных — это перенос, два предложения на двух строках. */}
             <motion.span
-              className="block"
+              className="block whitespace-pre-line"
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={tr(0.45)}
@@ -66,12 +71,19 @@ export function Hero({ data }: { data: EvolutionData['hero'] }) {
               {data.line1}
             </motion.span>
             <motion.span
-              className="mt-2 block md:mt-3"
+              className="mt-3 block md:mt-4"
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={tr(0.85)}
             >
-              {data.line2}
+              {/* Каждый результат — неделимая фраза: переносы только между фразами,
+                  чтобы «—» не оказывалось в начале строки. */}
+              {data.line2.split(/(?<=\.)\s+/).map((sentence, i) => (
+                <Fragment key={sentence}>
+                  {i > 0 ? ' ' : null}
+                  <span className="whitespace-nowrap">{sentence}</span>
+                </Fragment>
+              ))}
             </motion.span>
           </h1>
 

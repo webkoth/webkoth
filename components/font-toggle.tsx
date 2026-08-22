@@ -5,10 +5,10 @@ import { Type } from "lucide-react";
 
 type Mono = "jetbrains" | "geist";
 
-// Тумблер моноширинного шрифта — по той же схеме, что палитра: класс
-// `mono-geist` на <html> — источник истины, inline-скрипт ставит его до
-// гидратации, кнопка переключает и пишет в localStorage('mono').
-// По умолчанию — JetBrains Mono (без класса).
+// Тумблер набора шрифтов — по той же схеме, что палитра: класс `mono-geist`
+// на <html> — источник истины, inline-скрипт ставит его до гидратации, кнопка
+// переключает и пишет в localStorage('mono'). По умолчанию (без класса) —
+// JetBrains Mono везде: текст, заголовки, моно-слот; с классом — Geist + Geist Mono.
 function getMono(): Mono {
   return document.documentElement.classList.contains("mono-geist") ? "geist" : "jetbrains";
 }
@@ -35,7 +35,7 @@ export function FontToggle() {
   };
 
   const isGeist = mono === "geist";
-  const label = isGeist ? "Switch to JetBrains Mono" : "Switch to Geist Mono";
+  const label = isGeist ? "Switch to JetBrains Mono everywhere" : "Switch to Geist fonts";
 
   return (
     <button
