@@ -1,8 +1,9 @@
 'use client'
 
 import { useRef } from 'react'
-import { useInView, useReducedMotion } from 'framer-motion'
+import { useInView } from 'framer-motion'
 import { EASE } from './seeded'
+import { useReducedMotionSafe } from './use-reduced-motion'
 
 /**
  * Сцена проигрывается один раз — когда блок входит во viewport.
@@ -12,7 +13,8 @@ import { EASE } from './seeded'
 export function useReveal<T extends Element = SVGSVGElement>(amount = 0.35) {
   const ref = useRef<T>(null)
   const inView = useInView(ref, { once: true, amount })
-  const reduce = !!useReducedMotion()
+  // SSR-безопасно: от active зависит разметка и текст сцен, иначе гидратация расходится.
+  const reduce = useReducedMotionSafe()
   const active = reduce || inView
 
   const tr = (duration: number, delay = 0) =>

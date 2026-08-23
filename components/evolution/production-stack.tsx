@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useMemo, useRef, useState } from "react"
-import { motion, useInView, useReducedMotion } from "framer-motion"
+import { motion, useInView } from "framer-motion"
 import {
   Tooltip,
   TooltipContent,
@@ -11,6 +11,7 @@ import {
 import { cn } from "@/lib/utils"
 import type { StackNodeKey } from "@/app/data/evolution/types"
 import { EASE } from "./animations/seeded"
+import { useReducedMotionSafe } from "./animations/use-reduced-motion"
 
 // Hero, правая колонка: «живая» схема работающей системы — Client → Frontend →
 // Backend → ИИ-каскад → Queue → Worker → DB с бегущими метриками. Подписи узлов
@@ -708,7 +709,7 @@ export function ProductionStack({
   const inView = useInView(ref, { once: true, amount: 0.4 })
   const visible = useInView(ref, { amount: 0.2 })
   const active = inView && visible
-  const reduce = useReducedMotion()
+  const reduce = useReducedMotionSafe()
   const liveState = useLiveState(active, reduce)
   const initial = useMemo(() => initialState(), [])
   const { phase, downRef } = useIncident(active, reduce)

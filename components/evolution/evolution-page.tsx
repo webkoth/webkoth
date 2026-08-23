@@ -40,7 +40,14 @@ export function EvolutionPage({ lang }: { lang: Lang }) {
       <TooltipProvider delay={200}>
         <LeadDialogProvider copy={data.finale.form} lang={lang}>
           <main className="relative z-[1] min-h-screen" lang={lang}>
-            <HeaderNav lang={lang} brand={data.brand} nav={data.nav} labels={data.labels} items={navItems} />
+            <HeaderNav
+              lang={lang}
+              brand={data.brand}
+              owner={data.footer.owner}
+              nav={data.nav}
+              labels={data.labels}
+              items={navItems}
+            />
 
             <Hero data={data.hero} />
 

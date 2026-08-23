@@ -2,11 +2,11 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
-import { useReducedMotion } from 'framer-motion'
 import { Badge } from '@/components/ui/badge'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import { cn } from '@/lib/utils'
 import type { EvolutionData, HubNodeKey } from '@/app/data/evolution/types'
+import { useReducedMotionSafe } from './animations/use-reduced-motion'
 
 // Именованный кейс — собственный продукт. Ненумерованная секция после шага 06:
 // в нумерацию 01–06 («план работ») он не входит. Интерактивная схема архитектуры
@@ -110,7 +110,7 @@ const BADGE_TONES: Record<Variant, string> = {
 }
 
 export function HubmarketCase({ data }: { data: EvolutionData['hubmarket'] }) {
-  const reduce = useReducedMotion()
+  const reduce = useReducedMotionSafe()
   const [hovered, setHovered] = useState<HubNodeKey | null>(null)
   const titleParts = data.title.split(data.linkText)
 

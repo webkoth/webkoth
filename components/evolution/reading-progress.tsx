@@ -1,6 +1,6 @@
 'use client'
 
-import { motion, useReducedMotion, useScroll, useSpring } from 'framer-motion'
+import { motion, useScroll, useSpring, useReducedMotion } from 'framer-motion'
 
 // Тонкая полоса прогресса чтения под шапкой: scaleX от 0 до 1 по scrollYProgress.
 // Пружина сглаживает рывки; при reduced-motion — без пружины.

@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import Image from 'next/image'
 import { ModeToggle } from '@/components/mode-toggle'
 import { PaletteToggle } from '@/components/palette-toggle'
 import { LanguageToggle } from '@/components/language-toggle'
@@ -22,12 +23,15 @@ export type NavItem = { id: string; label: string }
 export function HeaderNav({
   lang,
   brand,
+  owner,
   nav,
   labels,
   items,
 }: {
   lang: Lang
   brand: string
+  /** Имя владельца — alt фото в шапке. */
+  owner: string
   nav: EvolutionData['nav']
   labels: EvolutionData['labels']
   items: NavItem[]
@@ -81,8 +85,22 @@ export function HeaderNav({
   return (
     <header ref={headerRef} className="sticky top-0 z-40 border-b border-border bg-background/80 backdrop-blur-md">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3 md:px-8">
-        <a href="#hero" className="font-mono text-sm text-foreground/80 transition hover:text-primary">
-          {brand}
+        {/* Вместо текстового бренда — фото владельца: то же, что в профилях соцсетей
+            (public/images/avatar). Подпись бренда остаётся для скринридеров и title. */}
+        <a
+          href="#hero"
+          title={brand}
+          className="inline-flex items-center gap-2 rounded-full transition hover:opacity-90 focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:outline-none"
+        >
+          <Image
+            src="/images/avatar/avatar-256.webp"
+            alt={owner}
+            width={36}
+            height={36}
+            priority
+            className="size-9 rounded-full object-cover ring-1 ring-border"
+          />
+          <span className="sr-only">{brand}</span>
         </a>
         <div className="flex items-center gap-1.5">
           <LanguageToggle currentLang={lang} />

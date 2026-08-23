@@ -12,11 +12,11 @@ export const en: EvolutionData = {
   meta: {
     title: 'Business evolution: from chaos to system, from routine to automation | Minas Sarkisyan',
     description:
-      'I solve business problems once - with a system, not a hire. Transparent money, precise decisions, faster processes, freer resources. First step - an audit: a review of your prototypes and a process map.',
+      'I solve business problems once - with a system. Finances - more transparent, decisions - more precise, processes - faster, resources - freer. First step - an audit: a review of your prototypes and a process map.',
     ogTitle: 'Business evolution: from chaos to system, from routine to automation',
     ogDescription:
-      'I solve business problems once - with a system, not a hire. Systems are built by the company’s own domain experts under engineering supervision.',
-    twitterDescription: 'I solve business problems once - with a system, not a hire.',
+      'I solve business problems once - with a system, not a hire. Systems are built by the company’s own specialists; I own the engineering side.',
+    twitterDescription: 'I solve business problems once - with a system',
     jsonLd: {
       name: 'Business evolution: from chaos to system, from routine to automation',
       serviceType: 'Audit and building of AI-powered business systems by the company’s own domain experts',
@@ -29,7 +29,7 @@ export const en: EvolutionData = {
   nav: { cta: 'Book a free audit', stepsAria: 'Steps', palette: 'Palette', theme: 'Theme', font: 'Font' },
   labels: {
     step: 'Step',
-    symptom: 'How it hurts today',
+    symptom: 'What hurt the business',
     caseTag: 'Case',
     readingProgress: 'Read',
     copy: 'Copy',
@@ -41,8 +41,8 @@ export const en: EvolutionData = {
   hero: {
     line1: 'From chaos to system\nFrom routine to automation',
     lead: '**Finances** become transparent, **decisions** more precise, **processes** faster - and **resources** are freed up.',
-    seal: 'Business evolution',
-    sub: 'I solve business problems once - with a system, not a hire.',
+    seal: 'AI business evolution',
+    sub: 'I solve business problems by putting AI where it actually helps.',
     cta: 'Book a free audit',
     scrollHint: 'This page is the work plan itself: six steps, in the order they happen',
     stackHint: 'hover a node to see what it does',
@@ -67,9 +67,9 @@ export const en: EvolutionData = {
       step: '01',
       slogan: 'From chaos to system',
       symptom:
-        'Data is smeared across ten Google Sheets, Telegram DMs and people’s heads. When a key person leaves, access and context leave with them.',
+        'The whole IT setup is scattered across different services. Data is smeared across ten Google Sheets, Telegram DMs and people’s heads. When key people leave, access and context leave with them.',
       description: [
-        'Order comes first - without it nothing else makes sense: automated chaos is just faster chaos.',
+        'In that kind of mess everything else becomes pointless. Order first, then the rest: automating chaos only gives you faster chaos.',
         'Scattered spreadsheets, chats and «someone knows» turn into one system with roles, permissions and a single source of truth.',
       ],
       caseLabel: 'Company IT-infrastructure inventory',
@@ -87,7 +87,7 @@ export const en: EvolutionData = {
     money: {
       id: 'money',
       step: '02',
-      slogan: 'Transparent money',
+      slogan: 'Transparent finances',
       symptom:
         'Nobody knows today’s real account balances or net profit for sure. Payment requests get approved in chats, and the risk of a cash gap never goes away.',
       description: [
@@ -468,9 +468,9 @@ export const en: EvolutionData = {
       legendPeople: 'stays with people - and moves to growth',
     },
     sprouts: {
-      aria: 'Four sprouts: three wilt, the fourth grows into a tree with six branches - system, money, decisions, automation, speed, resources',
+      aria: 'Four sprouts: three wilt, the fourth grows into a tree with six branches: system, finances, decisions, automation, speed, resources',
       attempt: '#',
-      branches: ['system', 'money', 'decisions', 'automation', 'speed', 'resources'],
+      branches: ['system', 'finances', 'decisions', 'automation', 'speed', 'resources'],
     },
   },
 
