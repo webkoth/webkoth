@@ -1,7 +1,7 @@
 "use client"
 
 import { motion, useReducedMotion } from "framer-motion"
-import { ArrowRight, ChevronDown } from "lucide-react"
+import { ChevronDown } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import type { EvolutionData } from "@/app/data/evolution/types"
 import { cn } from "@/lib/utils"
@@ -155,7 +155,6 @@ export function Hero({ data }: { data: EvolutionData["hero"] }) {
               className="h-auto w-full px-6 py-3 text-base whitespace-normal sm:h-12 sm:w-auto sm:py-0 sm:whitespace-nowrap lg:h-12 lg:px-6 lg:text-base"
             >
               {data.cta}
-              <ArrowRight aria-hidden />
             </Button>
           </motion.div>
 

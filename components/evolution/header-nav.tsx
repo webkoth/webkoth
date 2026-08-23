@@ -13,7 +13,7 @@ import { STEP_ICONS, isStepKey } from './step-icons'
 import { ReadingProgress } from './reading-progress'
 import { LlmDocsButton } from './llm-docs-button'
 import { SOCIAL_ICONS } from './social-icons'
-import { SOCIAL_LINKS } from '@/lib/landing/social'
+import { SOCIAL_LINKS_HEADER } from '@/lib/landing/social'
 
 export type NavItem = { id: string; label: string }
 
@@ -110,7 +110,7 @@ export function HeaderNav({
         </a>
         {/* Соцсети рядом с фото — те же, что в футере; на узких экранах их показывает футер. */}
         <nav aria-label={nav.socialAria} className="ml-2 hidden items-center gap-0.5 md:flex">
-          {SOCIAL_LINKS.map((s) => {
+          {SOCIAL_LINKS_HEADER.map((s) => {
             const Icon = SOCIAL_ICONS[s.key]
             const label = s.label[lang]
             return (
