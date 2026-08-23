@@ -99,7 +99,17 @@ export type EvolutionData = {
     twitterDescription: string
     jsonLd: { name: string; serviceType: string; description: string; area: string }
   }
-  nav: { cta: string; stepsAria: string; palette: string; theme: string; font: string }
+  nav: {
+    cta: string
+    stepsAria: string
+    palette: string
+    theme: string
+    font: string
+    /** Подпись ряда соцсетей у фото в шапке (aria). */
+    socialAria: string
+    /** Кнопка и модалка «документация для LLM». */
+    llm: { title: string; description: string; openRaw: string; copyFailed: string }
+  }
   labels: {
     step: string
     symptom: string

@@ -26,7 +26,20 @@ export const ru: EvolutionData = {
     },
   },
 
-  nav: { cta: 'Записаться на бесплатный аудит', stepsAria: 'Шаги', palette: 'Палитра', theme: 'Тема', font: 'Шрифт' },
+  nav: {
+    cta: 'Записаться на бесплатный аудит',
+    stepsAria: 'Шаги',
+    palette: 'Палитра',
+    theme: 'Тема',
+    font: 'Шрифт',
+    socialAria: 'Соцсети',
+    llm: {
+      title: 'Документация для LLM',
+      description: 'Содержание страницы в Markdown для AI-агентов и LLM. То же самое отдаёт /llms.txt.',
+      openRaw: 'Открыть llms.txt',
+      copyFailed: 'Не удалось скопировать, откройте llms.txt',
+    },
+  },
   labels: {
     step: 'Шаг',
     symptom: 'Как была боль для бизнеса',

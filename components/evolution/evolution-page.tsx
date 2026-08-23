@@ -1,6 +1,7 @@
 import { evolutionBlockOrder, evolutionData } from '@/app/data/evolution'
 import type { Lang } from '@/app/data/evolution/types'
 import { TooltipProvider } from '@/components/ui/tooltip'
+import { buildEvolutionMarkdown } from '@/lib/evolution/llms-markdown'
 import { ParticleField } from './particle-field'
 import { HeaderNav } from './header-nav'
 import { Hero } from './hero'
@@ -27,6 +28,8 @@ import { CellsGrid } from './animations/cells-grid'
 export function EvolutionPage({ lang }: { lang: Lang }) {
   const data = evolutionData[lang]
   const a = data.animations
+  // Markdown для модалки «документация для LLM» — тот же текст, что отдаёт /llms.txt.
+  const llmMarkdown = buildEvolutionMarkdown(data)
   const navItems = evolutionBlockOrder.map((key) => ({
     id: data.blocks[key].id,
     label: data.blocks[key].slogan,
@@ -47,6 +50,7 @@ export function EvolutionPage({ lang }: { lang: Lang }) {
               nav={data.nav}
               labels={data.labels}
               items={navItems}
+              llmMarkdown={llmMarkdown}
             />
 
             <Hero data={data.hero} />

@@ -11,6 +11,9 @@ import { cn } from '@/lib/utils'
 import type { EvolutionData, Lang } from '@/app/data/evolution/types'
 import { STEP_ICONS, isStepKey } from './step-icons'
 import { ReadingProgress } from './reading-progress'
+import { LlmDocsButton } from './llm-docs-button'
+import { SOCIAL_ICONS } from './social-icons'
+import { SOCIAL_LINKS } from '@/lib/landing/social'
 
 export type NavItem = { id: string; label: string }
 
@@ -27,11 +30,14 @@ export function HeaderNav({
   nav,
   labels,
   items,
+  llmMarkdown,
 }: {
   lang: Lang
   brand: string
   /** Имя владельца — alt фото в шапке. */
   owner: string
+  /** Markdown страницы для модалки «документация для LLM» (то же, что /llms.txt). */
+  llmMarkdown: string
   nav: EvolutionData['nav']
   labels: EvolutionData['labels']
   items: NavItem[]
@@ -102,7 +108,27 @@ export function HeaderNav({
           />
           <span className="sr-only">{brand}</span>
         </a>
-        <div className="flex items-center gap-1.5">
+        {/* Соцсети рядом с фото — те же, что в футере; на узких экранах их показывает футер. */}
+        <nav aria-label={nav.socialAria} className="ml-2 hidden items-center gap-0.5 md:flex">
+          {SOCIAL_LINKS.map((s) => {
+            const Icon = SOCIAL_ICONS[s.key]
+            const label = s.label[lang]
+            return (
+              <a
+                key={s.key}
+                href={s.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={label}
+                title={label}
+                className="inline-flex size-8 items-center justify-center rounded-md text-muted-foreground transition hover:bg-muted hover:text-primary"
+              >
+                <Icon className="size-4" />
+              </a>
+            )
+          })}
+        </nav>
+        <div className="ml-auto flex items-center gap-1.5">
           <LanguageToggle currentLang={lang} />
           <Tooltip>
             <TooltipTrigger render={<span className="inline-flex" />}>
@@ -121,6 +147,12 @@ export function HeaderNav({
               <FontToggle />
             </TooltipTrigger>
             <TooltipContent side="bottom">{nav.font}</TooltipContent>
+          </Tooltip>
+          <Tooltip>
+            <TooltipTrigger render={<span className="inline-flex" />}>
+              <LlmDocsButton markdown={llmMarkdown} copy={nav.llm} labels={labels} />
+            </TooltipTrigger>
+            <TooltipContent side="bottom">{nav.llm.title}</TooltipContent>
           </Tooltip>
         </div>
       </div>

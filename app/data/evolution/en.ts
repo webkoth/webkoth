@@ -26,7 +26,20 @@ export const en: EvolutionData = {
     },
   },
 
-  nav: { cta: 'Book a free audit', stepsAria: 'Steps', palette: 'Palette', theme: 'Theme', font: 'Font' },
+  nav: {
+    cta: 'Book a free audit',
+    stepsAria: 'Steps',
+    palette: 'Palette',
+    theme: 'Theme',
+    font: 'Font',
+    socialAria: 'Social links',
+    llm: {
+      title: 'LLM documentation',
+      description: 'Page content in Markdown for AI agents and LLMs. The same text is served at /llms.txt.',
+      openRaw: 'Open llms.txt',
+      copyFailed: 'Could not copy, open llms.txt instead',
+    },
+  },
   labels: {
     step: 'Step',
     symptom: 'What hurt the business',
