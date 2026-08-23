@@ -8,7 +8,7 @@ export function GET() {
   const sections = LANGS.map((lang) => buildEvolutionMarkdown(evolutionData[lang]))
 
   const body = [
-    '# webkoth.com — Business evolution / Эволюция бизнеса',
+    '# webkoth.com - Business evolution / Эволюция бизнеса',
     '',
     '> Home page content in Markdown, optimised for LLM ingestion.',
     '> Russian (https://webkoth.com/) and English (https://webkoth.com/en) versions are included.',

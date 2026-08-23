@@ -3,6 +3,9 @@ import { FileText, Send } from 'lucide-react'
 import { contacts } from '@/lib/landing/contacts'
 import { cvPath } from '@/app/data/evolution'
 import type { EvolutionData } from '@/app/data/evolution/types'
+import { CopyButton } from './copy-button'
+
+const telegramHandle = '@' + contacts.telegram.replace(/\/$/, '').split('/').pop()
 
 type IconProps = { className?: string }
 
@@ -41,10 +44,15 @@ export function Footer({ data }: { data: EvolutionData }) {
             {data.footer.cv}
           </Link>
           {SOCIAL.map(({ key, href, label, Icon }) => (
-            <a key={key} href={href} target="_blank" rel="noopener noreferrer" className={linkCls}>
-              <Icon className="size-4" aria-hidden />
-              {label}
-            </a>
+            <span key={key} className="inline-flex items-center gap-1.5">
+              <a href={href} target="_blank" rel="noopener noreferrer" className={linkCls}>
+                <Icon className="size-4" aria-hidden />
+                {label}
+              </a>
+              {key === 'telegram' ? (
+                <CopyButton value={telegramHandle} label={data.labels.copy} done={data.labels.copied} className="size-7" />
+              ) : null}
+            </span>
           ))}
           <a href="/llms.txt" className={`${linkCls} font-mono text-xs`}>
             {data.footer.llms}

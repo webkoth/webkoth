@@ -2,7 +2,7 @@ import { ru } from './ru'
 import { en } from './en'
 import type { EvolutionData, Lang } from './types'
 
-export type { EvolutionData, EvolutionBlock, Fact, HubNodeKey, HubNodeCopy, Lang, RoadmapStep } from './types'
+export type { EvolutionData, EvolutionBlock, Fact, HubNodeKey, HubNodeCopy, Lang, RoadmapStep, StackNodeKey } from './types'
 
 export const evolutionData: Record<Lang, EvolutionData> = { ru, en }
 

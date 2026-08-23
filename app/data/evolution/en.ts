@@ -1,6 +1,6 @@
 // English copy of the home page (`/en`). Mirrors `ru.ts` block for block; the
-// structure is enforced by `EvolutionData`. Tone — first person («I»), same as RU.
-// Case figures are the same anonymised git numbers; ₽ amounts stay in rubles —
+// structure is enforced by `EvolutionData`. Tone - first person («I»), same as RU.
+// Case figures are the same anonymised git numbers; ₽ amounts stay in rubles -
 // it is a Russian case.
 
 import type { EvolutionData } from './types'
@@ -12,30 +12,53 @@ export const en: EvolutionData = {
   meta: {
     title: 'Business evolution: from chaos to system, from routine to automation | Minas Sarkisyan',
     description:
-      'I solve business problems once — with a system, not a hire. Transparent money, precise decisions, faster processes, freer resources. First step — an audit: a review of your prototypes and a process map.',
+      'I solve business problems once - with a system, not a hire. Transparent money, precise decisions, faster processes, freer resources. First step - an audit: a review of your prototypes and a process map.',
     ogTitle: 'Business evolution: from chaos to system, from routine to automation',
     ogDescription:
-      'I solve business problems once — with a system, not a hire. Systems are built by the company’s own domain experts under engineering supervision.',
-    twitterDescription: 'I solve business problems once — with a system, not a hire.',
+      'I solve business problems once - with a system, not a hire. Systems are built by the company’s own domain experts under engineering supervision.',
+    twitterDescription: 'I solve business problems once - with a system, not a hire.',
     jsonLd: {
       name: 'Business evolution: from chaos to system, from routine to automation',
       serviceType: 'Audit and building of AI-powered business systems by the company’s own domain experts',
       description:
-        'I solve business problems once — with a system, not a hire. First step — an audit: a review of existing prototypes and a process map.',
+        'I solve business problems once - with a system, not a hire. First step - an audit: a review of existing prototypes and a process map.',
       area: 'Worldwide, remote',
     },
   },
 
-  nav: { cta: 'Review my situation', stepsAria: 'Steps' },
-  labels: { step: 'Step', symptom: 'How it hurts today', caseTag: 'Case' },
+  nav: { cta: 'Book a free audit', stepsAria: 'Steps', palette: 'Palette', theme: 'Theme', font: 'Font' },
+  labels: {
+    step: 'Step',
+    symptom: 'How it hurts today',
+    caseTag: 'Case',
+    readingProgress: 'Read',
+    copy: 'Copy',
+    copied: 'Copied',
+    all: 'All',
+    factHint: 'how it was counted',
+  },
 
   hero: {
-    line1: 'From chaos to system: transparent money, precise decisions.',
-    line2: 'From routine to automation: faster processes, freer resources.',
+    line1: 'From chaos to system\nFrom routine to automation',
+    lead: '**Finances** become transparent, **decisions** more precise, **processes** faster - and **resources** are freed up.',
     seal: 'Business evolution',
-    sub: 'I solve business problems once — with a system, not a hire.',
-    cta: 'Review my situation',
+    sub: 'I solve business problems once - with a system, not a hire.',
+    cta: 'Book a free audit',
     scrollHint: 'This page is the work plan itself: six steps, in the order they happen',
+    stackHint: 'hover a node to see what it does',
+    stackNodes: {
+      client: 'Users: browser, extension, Telegram - wherever requests come from.',
+      frontend: 'Next.js: UI and server routes; changes ship the same day.',
+      backend: 'Business logic and orchestration: queues, access, integrations.',
+      api: 'External APIs: marketplaces, banks, payments - unstable, hence behind a queue with retries.',
+      ai: 'AI router: picks the model for the task and budget, watches the limits.',
+      ai1: 'Primary model (Claude): hard tasks, generation and document parsing.',
+      ai2: 'Fallback (Gemini): kicks in on an error or rate limit of the primary.',
+      ai3: 'Fast cheap lane (Groq): bulk simple requests and RAG over database data.',
+      queue: 'Job queue on top of Postgres: nothing is lost, a failure means a retry.',
+      worker: 'Workers: drain the queue, write results to the database.',
+      db: 'Postgres: the single source of truth for every screen and report.',
+    },
   },
 
   blocks: {
@@ -46,18 +69,18 @@ export const en: EvolutionData = {
       symptom:
         'Data is smeared across ten Google Sheets, Telegram DMs and people’s heads. When a key person leaves, access and context leave with them.',
       description: [
-        'Order comes first — without it nothing else makes sense: automated chaos is just faster chaos.',
+        'Order comes first - without it nothing else makes sense: automated chaos is just faster chaos.',
         'Scattered spreadsheets, chats and «someone knows» turn into one system with roles, permissions and a single source of truth.',
       ],
       caseLabel: 'Company IT-infrastructure inventory',
       caseBody:
-        'The inventory lived in a legacy system and scattered notes. In one month a new system was built: data models, pages, roles and permissions. Production delivery pipeline — on launch day.',
-      mainFact: { value: '1 month', label: 'from first commit to a working system' },
+        'The inventory lived in a legacy system and scattered notes. In one month a new system was built: data models, pages, roles and permissions. Production delivery pipeline - on launch day.',
+      mainFact: { value: '1 month', label: 'from first commit to a working system', note: 'From the first commit in the repository to the day the system went into daily use.' },
       facts: [
-        { value: '16', label: 'data models' },
-        { value: '23', label: 'pages' },
-        { value: '432', label: 'commits' },
-        { value: '29,643', label: 'lines of code' },
+        { value: '16', label: 'data models', note: 'Entities in the database schema: servers, services, access, owners and the links between them.' },
+        { value: '23', label: 'pages', note: 'Application screens: lists, cards, forms, reports - counted by routes in code.' },
+        { value: '432', label: 'commits', note: 'Commits on the main branch over one month, from git history.' },
+        { value: '29,643', label: 'lines of code', note: 'Lines of TypeScript/TSX, excluding dependencies and generated code.' },
       ],
     },
 
@@ -68,17 +91,17 @@ export const en: EvolutionData = {
       symptom:
         'Nobody knows today’s real account balances or net profit for sure. Payment requests get approved in chats, and the risk of a cash gap never goes away.',
       description: [
-        'The first thing a system gives you is visibility of money. Cash flow, budget, payment requests with an approval route, reconciliation — not in ten files held by three people, but on one screen that adds up.',
+        'The first thing a system gives you is visibility of money. Cash flow, budget, payment requests with an approval route, reconciliation - not in ten files held by three people, but on one screen that adds up.',
       ],
       caseLabel: 'Management finance loop of a trading company',
       caseBody:
-        'Built in a month: cash flow, budget vs actuals with variances, payment requests with an approval route, «Day summary», reconciliation, reference books. The market alternative — a custom-built system from 3–8M ₽ and 7–13 weeks for a single basic module.',
-      mainFact: { value: '48', label: 'data models — and all of it adds up on one screen' },
+        'Built in a month: cash flow, budget vs actuals with variances, payment requests with an approval route, «Day summary», reconciliation, reference books. The market alternative - a custom-built system from 3–8M ₽ and 7–13 weeks for a single basic module.',
+      mainFact: { value: '48', label: 'data models - and all of it adds up on one screen', note: 'Models in the schema: accounts, line items, payment requests, approval routes, reconciliation, reference books.' },
       facts: [
-        { value: '40', label: 'pages' },
-        { value: '14', label: 'API routes' },
-        { value: '19', label: 'test files' },
-        { value: '3–8M ₽', label: 'market alternative' },
+        { value: '40', label: 'pages', note: 'Screens: cash flow, budget, payment requests, daily summary, reconciliation, reference books and their cards.' },
+        { value: '14', label: 'API routes', note: 'Server integration points: statement import, approvals, exports.' },
+        { value: '19', label: 'test files', note: 'Automated tests on calculations and approval routes - that is what trust in the numbers rests on.' },
+        { value: '3–8M ₽', label: 'market alternative', note: 'Custom-development benchmark for one basic finance module: 7–13 weeks and 3–8M ₽ by public contractor estimates.' },
       ],
     },
 
@@ -90,15 +113,15 @@ export const en: EvolutionData = {
         'Margins are estimated roughly or after the fact. Hidden marketplace fees and penalties quietly burn through net profit.',
       description: [
         'When data reconciles down to a single unit, decisions stop being a clash of opinions.',
-        'Margin per marketplace account and per SKU is not a feeling but a number you can trust — because it is reconciled with the source.',
+        'Margin per marketplace account and per SKU is not a feeling but a number you can trust - because it is reconciled with the source.',
       ],
       caseLabel: 'Sales data warehouse + margin calculation',
       caseBody:
-        'A sales data warehouse reconciled with the marketplace down to a single unit. On top of it — margin calculation per account with honest edge-case handling: cost lines never disappear, and the per-account view warns when something is missing.',
-      mainFact: { value: 'to the unit', label: 'reconciliation with the marketplace matches' },
+        'A sales data warehouse reconciled with the marketplace down to a single unit. On top of it - margin calculation per account with honest edge-case handling: cost lines never disappear, and the per-account view warns when something is missing.',
+      mainFact: { value: 'to the unit', label: 'reconciliation with the marketplace matches', note: 'Every sales row is matched to the marketplace report by SKU and quantity - discrepancies are visible line by line.' },
       facts: [
-        { value: '57', label: 'test files guarantee the numbers add up' },
-        { value: '53,618', label: 'lines in the data warehouse' },
+        { value: '57', label: 'test files guarantee the numbers add up', note: 'Test files covering ingestion, reconciliation and margin calculation.' },
+        { value: '53,618', label: 'lines in the data warehouse', note: 'Rows in the warehouse tables at the time of measurement.' },
       ],
     },
 
@@ -109,16 +132,16 @@ export const en: EvolutionData = {
       symptom:
         'Managers spend hours copying product cards, assembling labels and PDFs by hand. Human error and typos in SKUs cost penalties and returns.',
       description: [
-        'Only what is ordered can be automated — that is why this step comes second, not first.',
-        'Repetitive manual operations — cards, labels, documents, file conversion — go to the system entirely: what was done by hand every day starts happening by itself.',
+        'Only what is ordered can be automated - that is why this step comes second, not first.',
+        'Repetitive manual operations - cards, labels, documents, file conversion - go to the system entirely: what was done by hand every day starts happening by itself.',
       ],
       caseLabel: 'Product portal instead of an external PLM',
       caseBody:
-        'Catalogue, label printing, PDF generation, image conversion. Built in days, production pipeline — on launch day. A detail that builds trust: the colour reference runs on the PowerShell built into Windows — used by people with no IT environment at all.',
-      mainFact: { value: 'days', label: 'to replace an external PLM system' },
+        'Catalogue, label printing, PDF generation, image conversion. Built in days, production pipeline - on launch day. A detail that builds trust: the colour reference runs on the PowerShell built into Windows - used by people with no IT environment at all.',
+      mainFact: { value: 'days', label: 'to replace an external PLM system', note: 'From the first commit to using the portal instead of the external PLM - a few days.' },
       facts: [
-        { value: '1 day', label: 'to the production pipeline' },
-        { value: '0', label: 'dependencies for the colour reference: built-in PowerShell' },
+        { value: '1 day', label: 'to the production pipeline', note: 'The delivery pipeline - CI, auto-deploy, auto-rollback - was assembled on day one.' },
+        { value: '0', label: 'dependencies for the colour reference: built-in PowerShell', note: 'The colour reference is a script on PowerShell built into Windows: nothing to install.' },
       ],
     },
 
@@ -130,16 +153,16 @@ export const en: EvolutionData = {
         'Any IT change drags on for months. Contractors miss deadlines and inflate estimates, and the business loses its pace of testing hypotheses.',
       description: [
         'Speed is a consequence, not a slogan: it appears once the system sits on a pipeline.',
-        'From idea to an application running in production — a day, not months. Changes reach users the same day, with automated checks and automatic rollback.',
+        'From idea to an application running in production - a day, not months. Changes reach users the same day, with automated checks and automatic rollback.',
       ],
       caseLabel: 'Project generator and delivery pipeline',
       caseBody:
-        'One command scaffolds an application with a database, auth and roles, tests, CI and auto-deploy to two environments — with a smoke check and automatic rollback. The result over one month: seven applications, three of them in production on their very first day.',
-      mainFact: { value: '1 day', label: 'from first commit to production' },
+        'One command scaffolds an application with a database, auth and roles, tests, CI and auto-deploy to two environments - with a smoke check and automatic rollback. The result over one month: seven applications, three of them in production on their very first day.',
+      mainFact: { value: '1 day', label: 'from first commit to production', note: 'Of seven applications in a month, three reached production on the day of their first commit.' },
       facts: [
-        { value: '7', label: 'applications in a month' },
-        { value: '~217,000', label: 'lines of code' },
-        { value: '1,808', label: 'commits' },
+        { value: '7', label: 'applications in a month', note: 'Applications scaffolded by the generator within one calendar month.' },
+        { value: '~217,000', label: 'lines of code', note: 'Total lines of code across seven repositories, excluding dependencies.' },
+        { value: '1,808', label: 'commits', note: 'Total commits across seven repositories in a month.' },
       ],
     },
 
@@ -151,15 +174,15 @@ export const en: EvolutionData = {
         'Growth runs into the scarcity and cost of developers. Payroll swells while tasks pile up in an endless backlog.',
       description: [
         'The main resource set free is people.',
-        'Systems are built not by hired programmers but by the company’s own domain experts — a finance analyst, a product specialist, a content manager — under engineering supervision. Growth stops depending on hiring.',
+        'Systems are built not by hired programmers but by the company’s own domain experts - a finance analyst, a product specialist, a content manager - under engineering supervision. Growth stops depending on hiring.',
       ],
       caseLabel: 'Three working systems, three domain experts',
       caseBody:
         'In three working systems, 43–73 % of changes are made not by programmers but by domain specialists. One of them went from a first commit with reference-book schemas to margin calculation in a single month.',
-      mainFact: { value: '43–73 %', label: 'of changes are made by domain experts, not programmers' },
+      mainFact: { value: '43–73 %', label: 'of changes are made by domain experts, not programmers', note: 'Share of commits by domain experts across three systems: 339 of 784, 67 of 92, 11 of 15.' },
       facts: [
-        { value: '1 month', label: 'from reference-book schemas to margin calculation' },
-        { value: '3', label: 'roles: finance analyst, product specialist, content manager' },
+        { value: '1 month', label: 'from reference-book schemas to margin calculation', note: 'One finance analyst’s path: first commit with reference-book schemas → working margin calculation.' },
+        { value: '3', label: 'roles: finance analyst, product specialist, content manager', note: 'Three roles - three different systems; the domain part was done by no hired programmer.' },
       ],
     },
   },
@@ -167,7 +190,7 @@ export const en: EvolutionData = {
   exhibits: {
     dataFlow: {
       nodes: ['Marketplace accounts', 'Data warehouse', 'Unit-level reconciliation', 'Margin per account'],
-      note: '57 test files stand between the source and the report — a number in the report cannot silently diverge from the source.',
+      note: '57 test files stand between the source and the report - a number in the report cannot silently diverge from the source.',
     },
     beforeAfter: {
       beforeTitle: 'Before: by hand, every day',
@@ -203,16 +226,16 @@ export const en: EvolutionData = {
     url: 'https://hubmarket.ru',
     sub: 'AI SaaS for marketplace sellers',
     frame: [
-      'My own product, which I run as founder and sole developer. Everything described in the six steps above — queues, an AI cascade with fallback, a data warehouse with reconciliation, a production pipeline from day one — runs here for external users.',
+      'My own product, which I run as founder and sole developer. Everything described in the six steps above - queues, an AI cascade with fallback, a data warehouse with reconciliation, a production pipeline from day one - runs here for external users.',
     ],
-    hint: 'hover any node — a description appears',
+    hint: 'hover any node - a description appears',
     flowLabel: 'data flow',
     diagramAria: 'HubMarket architecture',
     nodes: {
       chrome: {
         label: 'Chrome MV3',
         sub: 'Seller extension',
-        description: 'Chrome extension — snapshots data from marketplace dashboards.',
+        description: 'Chrome extension - snapshots data from marketplace dashboards.',
       },
       next: {
         label: 'Next.js 16',
@@ -223,7 +246,7 @@ export const en: EvolutionData = {
       queue: {
         label: 'pg-boss',
         sub: 'Queues on top of Postgres',
-        description: 'Job queues on top of Postgres — no separate infrastructure.',
+        description: 'Job queues on top of Postgres - no separate infrastructure.',
       },
       parser: {
         label: 'hubmarket-parser',
@@ -246,12 +269,12 @@ export const en: EvolutionData = {
       bronze: {
         label: 'Bronze lake',
         sub: 'raw JSON',
-        description: 'Raw JSON from marketplaces — append-only, nothing is lost.',
+        description: 'Raw JSON from marketplaces - append-only, nothing is lost.',
       },
       silver: {
         label: 'Silver lake',
         sub: 'Prisma tables',
-        description: 'Normalised Prisma tables — the source for analytics and AI.',
+        description: 'Normalised Prisma tables - the source for analytics and AI.',
       },
       telegram: {
         label: 'Telegram bot',
@@ -279,22 +302,22 @@ export const en: EvolutionData = {
     screenshots: [
       {
         src: '/images/hubmarket-dashboard-summary.png',
-        alt: 'HubMarket — summary: revenue, profit, business health',
+        alt: 'HubMarket - summary: revenue, profit, business health',
         caption: 'Summary: revenue, profit, business health',
       },
       {
         src: '/images/hubmarket-unit-economics.png',
-        alt: 'HubMarket — unit economics per SKU',
+        alt: 'HubMarket - unit economics per SKU',
         caption: 'Unit economics per SKU',
       },
       {
         src: '/images/hubmarket-reviews-ai-replies.png',
-        alt: 'HubMarket — reviews with AI-drafted replies',
+        alt: 'HubMarket - reviews with AI-drafted replies',
         caption: 'Reviews: AI-drafted replies',
       },
       {
         src: '/images/hubmarket-seasonality-forecast.png',
-        alt: 'HubMarket — seasonality and demand forecast',
+        alt: 'HubMarket - seasonality and demand forecast',
         caption: 'Seasonality: demand forecast',
       },
     ],
@@ -308,13 +331,13 @@ export const en: EvolutionData = {
       {
         num: '01',
         title: 'Review',
-        body: 'Three questions: what you have already tried with AI and what of it works; who you plan to hire and why you haven’t yet; who in the company understands the painful process best. If the scheme doesn’t fit you — I’ll say so right away.',
+        body: 'Three questions: what you have already tried with AI and what of it works; who you plan to hire and why you haven’t yet; who in the company understands the painful process best. If the scheme doesn’t fit you - I’ll say so right away.',
         pill: 'free · 30–45 min',
       },
       {
         num: '02',
         title: 'Audit and map',
-        body: 'A review of the prototype graveyard: what works, who owns it, on what data, what breaks. A process map: what goes into an application, what to an agent, what to a person with AI, what not to touch at all. Choosing the first process and measuring the baseline. Some prototypes get fixed in hours — quick wins already during the audit.',
+        body: 'A review of the prototype graveyard: what works, who owns it, on what data, what breaks. A process map: what goes into an application, what to an agent, what to a person with AI, what not to touch at all. Choosing the first process and measuring the baseline. Some prototypes get fixed in hours - quick wins already during the audit.',
         pill: '2–3 weeks · a document with a map and priorities',
       },
       {
@@ -326,7 +349,7 @@ export const en: EvolutionData = {
       {
         num: '04',
         title: 'Support',
-        body: 'Reviewing the changes your specialists make, shipping to production, the next processes. The only path to production is through review — so the system doesn’t fall apart when non-programmers grow it.',
+        body: 'Reviewing the changes your specialists make, shipping to production, the next processes. The only path to production is through review - so the system doesn’t fall apart when non-programmers grow it.',
         pill: 'ongoing · growth without hiring',
       },
     ],
@@ -336,7 +359,7 @@ export const en: EvolutionData = {
     step: '07',
     slogan: 'This is what business evolution is',
     description: [
-      'An honest line to set me apart: the path did not work the first time. Of four attempts at one task, three were stopped — and I know exactly why the fourth one lives: methodology, not technology.',
+      'An honest line to set me apart: the path did not work the first time. Of four attempts at one task, three were stopped - and I know exactly why the fourth one lives: methodology, not technology.',
       'That is why I sell not «AI adoption» but getting to the result.',
     ],
     manifesto:
@@ -350,7 +373,7 @@ export const en: EvolutionData = {
         ['#3', '9 Jul – 25 Jul', '53', 'stopped'],
         ['#4', '13 Jul – 14 Aug', '784', 'running and growing'],
       ],
-      note: 'In attempt #2 most changes were already made by domain experts — and the project still stopped. The difference between it and the fourth: strict stack boundaries, mandatory design before code, a single path to production through review, and a delivery pipeline from day one.',
+      note: 'In attempt #2 most changes were already made by domain experts - and the project still stopped. The difference between it and the fourth: strict stack boundaries, mandatory design before code, a single path to production through review, and a delivery pipeline from day one.',
     },
     form: {
       label: 'Request',
@@ -377,21 +400,30 @@ export const en: EvolutionData = {
       errors: {
         name_min: 'At least 2 characters',
         contact_min: 'Telegram, email or phone',
-        answer_min: 'A couple of words is enough — even «nothing»',
+        answer_min: 'A couple of words is enough - even «nothing»',
         no_newline: 'No line breaks',
       },
       rateLimited: {
         before:
-          'Too many submissions from your address. The limit is temporary, but retrying now is pointless — message me on ',
+          'Too many submissions from your address. The limit is temporary, but retrying now is pointless - message me on ',
         link: 'Telegram',
         after: ', I will answer there.',
       },
       failed: { before: 'Could not send. Try again or message me on ', link: 'Telegram', after: '.' },
+      toast: {
+        success: 'Request received',
+        successBody: 'I will reply within a day to agree on a time for the review.',
+        action: 'Message on Telegram',
+        error: 'Could not send',
+        errorBody: 'Try again or message me on Telegram.',
+        rateLimited: 'Too many submissions',
+        rateLimitedBody: 'Retrying now is pointless - message me on Telegram.',
+      },
       submit: 'Book a review',
       submitting: 'Sending…',
       success: {
         title: 'Request received',
-        body: 'I will get in touch within a day to agree on a convenient time for the review. If you need it faster —',
+        body: 'I will get in touch within a day to agree on a convenient time for the review. If you need it faster -',
         link: 'Telegram',
       },
     },
@@ -433,10 +465,10 @@ export const en: EvolutionData = {
       aria: 'A grid of operations: most cells switch to «auto» mode, and the people from them move to the growth cells',
       growth: 'growth',
       legendSystem: 'done by the system',
-      legendPeople: 'stays with people — and moves to growth',
+      legendPeople: 'stays with people - and moves to growth',
     },
     sprouts: {
-      aria: 'Four sprouts: three wilt, the fourth grows into a tree with six branches — system, money, decisions, automation, speed, resources',
+      aria: 'Four sprouts: three wilt, the fourth grows into a tree with six branches - system, money, decisions, automation, speed, resources',
       attempt: '#',
       branches: ['system', 'money', 'decisions', 'automation', 'speed', 'resources'],
     },

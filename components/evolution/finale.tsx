@@ -1,8 +1,13 @@
-import { MessageSquare, CheckCircle2, Send } from 'lucide-react'
+import { CheckCircle2, Send, Sprout, Skull, FormInput } from 'lucide-react'
 import { contacts } from '@/lib/landing/contacts'
 import type { EvolutionData } from '@/app/data/evolution/types'
 import { SproutsTree } from './animations/sprouts-tree'
 import { LeadForm } from './lead-form'
+import { StepChip } from './step-chip'
+import { CopyButton } from './copy-button'
+
+// Хэндл для кнопки «скопировать»: последний сегмент ссылки t.me/…
+const telegramHandle = '@' + contacts.telegram.replace(/\/$/, '').split('/').pop()
 
 // Финал: честная строка про кладбище, манифест, мини-таблица четырёх заходов
 // и форма. Первый продукт — бесплатный диагностический разбор: карта процессов и план.
@@ -25,8 +30,10 @@ export function Finale({
     >
       <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-14">
         <div className="min-w-0 lg:col-span-5">
-          <p className="font-mono text-xs uppercase tracking-[0.18em] text-primary">
-            {labels.step} {data.step}
+          <p className="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.18em] text-primary">
+            <Sprout className="size-4" aria-hidden />
+            <span>{labels.step}</span>
+            <StepChip>{data.step}</StepChip>
           </p>
           <h2 id="finale-title" className="mt-3 text-3xl font-bold tracking-tight md:text-5xl">
             {data.slogan}
@@ -52,7 +59,10 @@ export function Finale({
 
       <div className="mt-12 grid gap-8 lg:grid-cols-12 lg:gap-14">
         <div className="min-w-0 lg:col-span-5">
-          <h3 className="text-base font-semibold md:text-lg">{data.graveyard.title}</h3>
+          <h3 className="flex items-center gap-2 text-base font-semibold md:text-lg">
+            <Skull className="size-4 text-muted-foreground" aria-hidden />
+            {data.graveyard.title}
+          </h3>
           <div className="mt-4 overflow-x-auto rounded-2xl border border-border bg-card/70">
             <table className="w-full min-w-[20rem] text-sm">
               <thead>
@@ -93,7 +103,7 @@ export function Finale({
 
         <div id="form" className="min-w-0 scroll-mt-28 lg:col-span-7">
           <div className="mb-6 inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-[0.18em] text-primary">
-            <MessageSquare className="size-3.5" aria-hidden />
+            <FormInput className="size-3.5" aria-hidden />
             <span>{data.form.label}</span>
           </div>
           <h3 className="text-xl font-bold tracking-tight md:text-2xl">{data.form.title}</h3>
@@ -121,6 +131,7 @@ export function Finale({
               <Send className="size-3.5 text-primary" aria-hidden />
               <span>{data.form.telegramCta}</span>
             </a>
+            <CopyButton value={telegramHandle} label={labels.copy} done={labels.copied} />
             <span className="text-xs text-muted-foreground">{data.form.orBelow}</span>
           </div>
 

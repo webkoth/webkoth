@@ -2,16 +2,22 @@
 
 import { useTheme } from "next-themes";
 import { Toaster as Sonner, type ToasterProps } from "sonner";
+import { useMediaQuery } from "@/hooks/use-media-query";
 
+// Тосты: справа снизу на десктопе, сверху по центру на мобильном (чтобы не
+// перекрывать плавающую кнопку и клавиатуру). richColors + closeButton.
 const Toaster = ({ ...props }: ToasterProps) => {
   const { theme = "system" } = useTheme();
+  const mobile = useMediaQuery("(max-width: 639px)");
 
   return (
     <Sonner
       theme={theme as ToasterProps["theme"]}
       className="toaster group"
-      position="bottom-right"
+      position={mobile ? "top-center" : "bottom-right"}
       offset={20}
+      richColors
+      closeButton
       toastOptions={{
         classNames: {
           toast:
