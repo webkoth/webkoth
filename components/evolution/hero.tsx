@@ -18,6 +18,8 @@ import { useLeadDialog } from "./lead-dialog"
 // непрозрачная. Размер h1 привязан к ширине окна, его высоте и ширине контейнера,
 // чтобы самая длинная фраза (27 знаков моноширинным) не ломалась на две строки.
 // Ширина описания ограничена ~50 знаками — так читается комфортнее.
+// Пропорции — как у обложек для соцсетей (banner-specs.ts): заголовок ≈3% ширины
+// окна, описание ≈1.4%, схема ≈44% ширины целиком в кадре с прозрачностью 30%.
 
 /** «**слово**» в тексте → <strong>. Нужен только для описания под заголовком. */
 function renderBold(text: string) {
@@ -80,14 +82,14 @@ export function Hero({ data }: { data: EvolutionData["hero"] }) {
             узлы, и переход от текста к схеме выглядит цельно. Строки статуса нет —
             она упиралась в подсказку «листай». */}
         <motion.div
-          className="order-last pt-12 lg:absolute lg:top-1/2 lg:right-0 lg:z-0 lg:w-[min(60%,calc((100svh-var(--header-h,6rem)-3.5rem)/0.744))] lg:-translate-y-1/2 lg:pt-0 xl:-right-12 2xl:-right-24"
+          className="order-last pt-12 lg:absolute lg:top-1/2 lg:right-0 lg:z-0 lg:w-[min(44%,calc((100svh-var(--header-h,6rem)-3.5rem)/0.744))] lg:-translate-y-1/2 lg:pt-0"
           initial={{ opacity: 0, x: -140 }}
           animate={{ opacity: 1, x: 0 }}
           transition={
             reduce ? { duration: 0 } : { duration: 2.2, delay: 1.7, ease: EASE }
           }
         >
-          <div className="lg:[mask-image:linear-gradient(to_right,transparent,black_34%)] lg:opacity-35 lg:[-webkit-mask-image:linear-gradient(to_right,transparent,black_34%)]">
+          <div className="lg:[mask-image:linear-gradient(to_right,transparent,black_30%)] lg:opacity-30 lg:[-webkit-mask-image:linear-gradient(to_right,transparent,black_30%)]">
             <ProductionStack
               delay={0}
               showStatus={false}
@@ -111,7 +113,7 @@ export function Hero({ data }: { data: EvolutionData["hero"] }) {
             моноширинным) не ломалась. whitespace-pre-line: \n в данных — перенос.
             На телефоне вторая фраза при читаемом размере переносится — это ожидаемо. */}
           <motion.h1
-            className="mt-4 text-[clamp(1.5rem,min(5.2vw,8.5svh,6.5cqw),4.75rem)] leading-[1.06] font-bold tracking-[-0.04em] whitespace-pre-line"
+            className="mt-3 text-[clamp(1.5rem,min(3vw,7svh,6.5cqw),3.5rem)] leading-[1.08] font-bold tracking-[-0.04em] whitespace-pre-line"
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={tr(0.45)}
@@ -120,7 +122,7 @@ export function Hero({ data }: { data: EvolutionData["hero"] }) {
           </motion.h1>
 
           <motion.p
-            className="mt-6 max-w-[34ch] text-lg font-medium text-balance md:mt-8 md:max-w-[46ch] md:text-xl lg:text-2xl lg:leading-snug xl:text-[1.75rem]"
+            className="mt-5 max-w-[34ch] text-lg font-medium text-balance md:mt-6 md:max-w-[46ch] md:text-xl lg:text-[clamp(1.05rem,1.4vw,1.7rem)] lg:leading-snug"
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
             transition={tr(0.85)}
@@ -129,7 +131,7 @@ export function Hero({ data }: { data: EvolutionData["hero"] }) {
           </motion.p>
 
           <motion.p
-            className="mt-4 max-w-[52ch] text-base text-muted-foreground md:mt-5 md:text-lg lg:text-xl"
+            className="mt-4 max-w-[52ch] text-base text-muted-foreground md:text-lg lg:text-[clamp(1rem,1.15vw,1.25rem)]"
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
             transition={tr(1.2)}
@@ -138,7 +140,7 @@ export function Hero({ data }: { data: EvolutionData["hero"] }) {
           </motion.p>
 
           <motion.div
-            className="mt-7 flex flex-col gap-4 sm:flex-row sm:items-center md:mt-9"
+            className="mt-7 flex flex-col gap-4 sm:flex-row sm:items-center md:mt-8"
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
             transition={tr(1.5)}
@@ -148,7 +150,7 @@ export function Hero({ data }: { data: EvolutionData["hero"] }) {
             <Button
               size="lg"
               onClick={open}
-              className="h-auto w-full px-6 py-3 text-base whitespace-normal sm:h-12 sm:w-auto sm:py-0 sm:whitespace-nowrap lg:h-13 lg:px-7 lg:text-lg"
+              className="h-auto w-full px-6 py-3 text-base whitespace-normal sm:h-12 sm:w-auto sm:py-0 sm:whitespace-nowrap lg:h-12 lg:px-6 lg:text-base"
             >
               {data.cta}
               <ArrowRight aria-hidden />
