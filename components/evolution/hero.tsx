@@ -80,7 +80,7 @@ export function Hero({ data }: { data: EvolutionData["hero"] }) {
             узлы, и переход от текста к схеме выглядит цельно. Строки статуса нет —
             она упиралась в подсказку «листай». */}
         <motion.div
-          className="order-last pt-12 lg:absolute lg:top-1/2 lg:right-0 lg:z-0 lg:w-[min(81%,calc((100svh-var(--header-h,6rem)-3.5rem)/0.744))] lg:-translate-y-1/2 lg:pt-0 xl:-right-12 2xl:-right-24"
+          className="order-last pt-12 lg:absolute lg:top-1/2 lg:right-0 lg:z-0 lg:w-[min(60%,calc((100svh-var(--header-h,6rem)-3.5rem)/0.744))] lg:-translate-y-1/2 lg:pt-0 xl:-right-12 2xl:-right-24"
           initial={{ opacity: 0, x: -140 }}
           animate={{ opacity: 1, x: 0 }}
           transition={
