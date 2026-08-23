@@ -19,7 +19,9 @@ import { useLeadDialog } from "./lead-dialog"
 // чтобы самая длинная фраза (27 знаков моноширинным) не ломалась на две строки.
 // Ширина описания ограничена ~50 знаками — так читается комфортнее.
 // Пропорции — как у обложек для соцсетей (banner-specs.ts): заголовок ≈3% ширины
-// окна, описание ≈1.4%, схема ≈44% ширины целиком в кадре с прозрачностью 30%.
+// окна, описание ≈1.4%; схема ≈44% ширины ОКНА (не контейнера), правый край
+// ≈3.5% от края окна (right считается от контейнера: 3.5vw минус поле контейнера),
+// целиком в кадре, прозрачность 30%.
 
 /** «**слово**» в тексте → <strong>. Нужен только для описания под заголовком. */
 function renderBold(text: string) {
@@ -82,7 +84,7 @@ export function Hero({ data }: { data: EvolutionData["hero"] }) {
             узлы, и переход от текста к схеме выглядит цельно. Строки статуса нет —
             она упиралась в подсказку «листай». */}
         <motion.div
-          className="order-last pt-12 lg:absolute lg:top-1/2 lg:right-0 lg:z-0 lg:w-[min(44%,calc((100svh-var(--header-h,6rem)-3.5rem)/0.744))] lg:-translate-y-1/2 lg:pt-0"
+          className="order-last pt-12 lg:absolute lg:top-1/2 lg:right-[calc(3.5vw_-_(100vw_-_100%)/2)] lg:z-0 lg:w-[min(44vw,calc((100svh-var(--header-h,6rem)-3.5rem)/0.744))] lg:-translate-y-1/2 lg:pt-0"
           initial={{ opacity: 0, x: -140 }}
           animate={{ opacity: 1, x: 0 }}
           transition={
