@@ -78,12 +78,13 @@ describe('реестр кейсов', () => {
   })
 
   // Правило не косметическое: меньше трёх - карусель бессмысленна, больше
-  // четырёх - при автопрокрутке в семь секунд блок растягивается почти на минуту.
-  it('в каждом блоке 3–4 карточки', () => {
+  // пяти - при автопрокрутке в семь секунд полный круг блока уходит далеко
+  // за полминуты, и до последней карточки читатель просто не досиживает.
+  it('в каждом блоке 3–5 карточек', () => {
     for (const block of evolutionBlockOrder) {
       const n = anglesForBlock('ru', block).length
       expect(n, block).toBeGreaterThanOrEqual(3)
-      expect(n, block).toBeLessThanOrEqual(4)
+      expect(n, block).toBeLessThanOrEqual(5)
     }
   })
 

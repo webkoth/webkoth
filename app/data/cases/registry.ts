@@ -20,6 +20,11 @@ export const CASE_SLUGS = [
   'stock-sync',
   'deploy-from-chat',
   'seller-workspace',
+  'agents-platform',
+  'frontend-factory',
+  'content-factory',
+  'data-marts',
+  'yandex-mcp',
 ] as const
 
 export type CaseSlug = (typeof CASE_SLUGS)[number]
@@ -129,6 +134,54 @@ export const caseMeta = {
     blocks: ['resources'],
     links: { github: 'https://github.com/webkoth/sellerai' },
     stack: ['Claude Code', 'MCP', 'TypeScript', 'Node.js', 'Markdown'],
+    screenshots: [],
+  },
+  // Пилот, а не прод: в расписании один агент, в файле крона вместо путей
+  // стоят плейсхолдеры, контура доставки у репозитория нет.
+  'agents-platform': {
+    kind: 'internal',
+    status: 'pilot',
+    blocks: ['automation'],
+    links: {},
+    stack: ['Python 3.14', 'uv', 'FastAPI', 'Anthropic SDK', 'PostgreSQL', 'Next.js 16', 'React 19', 'Base UI', 'React Flow', 'cron'],
+    screenshots: [],
+  },
+  // Репозиторий набора закрыт, поэтому не `oss`. Ссылка ведёт на открытый
+  // реестр этого сайта - единственную часть набора, доступную снаружи.
+  'frontend-factory': {
+    kind: 'product',
+    status: 'production',
+    blocks: ['speed'],
+    links: { site: 'https://webkoth.com/r' },
+    stack: ['Next.js 16', 'React 19', 'TypeScript', 'Tailwind 4', 'shadcn/ui', 'Base UI', 'recharts', 'TanStack Table', 'ESLint', 'Prettier'],
+    screenshots: [],
+  },
+  // `product`, а не `internal`: `internal` в этом реестре означает обезличенную
+  // клиентскую систему, а это моя мастерская. Ссылки нет - не опубликована.
+  'content-factory': {
+    kind: 'product',
+    status: 'production',
+    blocks: ['resources'],
+    links: {},
+    stack: ['Remotion 4', 'React 19', 'TypeScript', 'Tailwind 4', 'Claude Code', 'Whisper', 'FFmpeg', 'Excalidraw', 'Python', 'Telethon'],
+    screenshots: [],
+  },
+  // Пилот: контур описан, но следов выката в репозитории нет - только CI.
+  'data-marts': {
+    kind: 'internal',
+    status: 'pilot',
+    blocks: ['decisions'],
+    links: {},
+    stack: ['Python 3.14', 'uv', 'FastAPI', 'SQLAlchemy 2.0', 'Alembic', 'PostgreSQL 18', 'procrastinate', 'python-tds', 'React 19', 'TanStack Query', 'Playwright'],
+    screenshots: [],
+  },
+  // Пакет `@webkoth/yandex-mcp` в npm ещё не выложен, поэтому ссылка одна.
+  'yandex-mcp': {
+    kind: 'oss',
+    status: 'production',
+    blocks: ['money'],
+    links: { github: 'https://github.com/webkoth/yandex-mcp' },
+    stack: ['TypeScript', 'Node.js 22', 'MCP', 'zod', 'Yandex Direct API', 'Yandex Metrika API', 'Yandex Webmaster API'],
     screenshots: [],
   },
 } as const satisfies Record<CaseSlug, CaseMeta>

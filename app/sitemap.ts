@@ -6,7 +6,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://webkoth.com";
   const now = new Date();
 
-  // Страницы кейсов: 13 систем × 2 локали. Собираются из реестра, а не
+  // Страницы кейсов: 18 систем × 2 локали. Собираются из реестра, а не
   // перечисляются руками - иначе новая система появится на сайте, но не в карте.
   const cases: MetadataRoute.Sitemap = LANGS.flatMap((lang) =>
     CASE_SLUGS.map((slug) => ({

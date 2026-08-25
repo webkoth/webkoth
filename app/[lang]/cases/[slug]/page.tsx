@@ -7,7 +7,7 @@ import { buildCaseMetadata } from '@/lib/evolution/metadata'
 
 type Params = { lang: string; slug: string }
 
-// 13 систем x 2 локали = 26 статических страниц. Чужой язык или чужой слаг
+// 18 систем x 2 локали = 36 статических страниц. Чужой язык или чужой слаг
 // сюда попадают только запросом руками - на них 404, а не пустая страница.
 export function generateStaticParams() {
   return LANGS.flatMap((lang) => CASE_SLUGS.map((slug) => ({ lang, slug })))

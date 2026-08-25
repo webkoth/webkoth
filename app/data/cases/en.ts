@@ -834,4 +834,318 @@ export const en: CasesCopy = {
         'An open Claude Code template for a seller: connectors to three marketplaces, seven commands from the weekly report to ABC analysis, keys stay with the owner.',
     },
   },
+
+  // ── agents-platform ──
+  'agents-platform': {
+    title: 'The company’s agent platform',
+    angles: {
+      automation: {
+        headline: 'Routine is ordered on a form, not filed as a developer’s task',
+        pain: 'Repetitive manual work settled in chat threads: someone asked for it to be automated, the request got lost between people, and nobody saw the next team asking for the same.',
+        outcome: 'An employee files a request on a form, in the language of their own work. An agent is one file with a prompt and no code of its own, and requests are visible to all, so identical asks stop drifting apart.',
+        chips: [
+          {
+            icon: 'auto',
+            label: 'A new agent',
+            value: 'a file with a prompt and no code',
+            note: 'An agent is a file: settings in the header, the prompt in the body. It runs through the core’s shared loop - call the model, run a tool, take the next step - so no code is written for a particular agent at all.',
+          },
+          {
+            icon: 'trust',
+            label: 'The audit gate',
+            value: 'held by the database, not the interface',
+            note: 'A request cannot be taken into work until three questions about it are answered and a verdict is set: an agent, a script, split it, or decline. The rule is a constraint on the requests table, so it cannot be walked around outside the application.',
+          },
+          {
+            icon: 'coverage',
+            label: 'What agents may do',
+            value: 'read and notify; writing is forbidden',
+            note: 'Every tool in the registry carries its own access mode. Agents are allowed to read and to send messages only; a config asking for write access is rejected by the loader - until there is a queue where a human confirms.',
+          },
+        ],
+      },
+    },
+    detail: {
+      lead: 'The agent platform of a company trading on marketplaces: a core with one shared agent loop, a tool registry with access modes, a dashboard over the database and a request flow with a mandatory audit. A new agent here is a file with a prompt, not a new service.',
+      effects: [{ block: 'automation', text: 'An employee’s routine becomes an agent through a request rather than through the queue to a developer' }],
+      value: [
+        'The request is written by the person it hurts, in the language of their work, not in the terms of a developer’s ticket.',
+        'Requests are visible to every employee: someone else’s request shows what is already being automated, and that removes duplicates.',
+        'The audit is mandatory, so some asks are honestly closed by a script or split up instead of becoming an agent for the sake of it.',
+        'A new agent needs neither its own service nor code written for it - only a file and a release.',
+        'An agent cannot change data in an account: reading and notifications are all it has.',
+      ],
+      diagramNodes: ['An employee’s request', 'Audit and verdict', 'The agent file with its prompt', 'The tool registry', 'Scheduled runs and the log'],
+      diagramNote: 'Runs and model calls are written to the database, and the dashboard reads it directly: spend, model routing and task status live on the same screens instead of three separate consoles.',
+      how: [
+        'There are two levels of execution. The everyday «watch X, count Y, report to Z» is a file with a prompt; heavy data processing stays a pipeline in code. To the schedule and the dashboard the two are indistinguishable: one run log and one model-call log.',
+        'A broken agent file fails the core on start-up deliberately: falling over at release beats silently losing an agent from the schedule.',
+        'A tool error does not kill the agent: the model receives the error text and decides what to do next, while an oversized response is truncated - otherwise it eats both the context and the cost of the run.',
+        'Having the model draft a config from the request was dropped on purpose: a request should be nothing more than a record in the database, visible to all. The implementation is still in the repository history and can be brought back if the decision changes.',
+      ],
+      owner: 'An engineer. Agents are written by the IT team; employees order them on a form and use the results.',
+      facts: [
+        { label: 'Stage', value: 'a pilot: one agent on the schedule' },
+        { label: 'Maintained by', value: 'the company’s IT team' },
+        { label: 'Replaced', value: 'asking for automation in chat threads' },
+      ],
+      screenshots: [],
+      metaTitle: 'Case: a company’s agent platform | Minas Sarkisyan',
+      metaDescription:
+        'An employee orders automation on a form; the agent is a file with a prompt. The audit gate is held by the database, and agents may only read and notify.',
+    },
+  },
+
+  // ── frontend-factory ──
+  'frontend-factory': {
+    title: 'Frontend factory',
+    angles: {
+      speed: {
+        headline: 'A screen is assembled from ready blocks, not drawn from scratch',
+        pain: 'Every new screen started from nothing: its own components, colours and spacing. A block that worked did not travel to the next project - it was nailed to its own theme.',
+        outcome: 'A library of authored sections and template pages on top of stock shadcn components. A block transfers as a file: data arrives through props and the colour comes from the receiving app’s theme.',
+        chips: [
+          {
+            icon: 'scale',
+            label: 'In the kit',
+            value: '143 blocks and 76 template pages',
+            note: 'Blocks are authored sections across ten areas, from the storefront and dashboards to billing and ops. Template pages wire them together and own their data. All of it stands on 60 stock shadcn components that are never edited.',
+          },
+          {
+            icon: 'trust',
+            label: 'Portability',
+            value: 'checked on every build',
+            note: 'Blocks and pages may use semantic theme tokens only. Raw palette classes, hex colours and literal oklch() are forbidden and fail the check - that is exactly what lets a block repaint itself into the receiving app’s theme.',
+          },
+          {
+            icon: 'auto',
+            label: 'A project’s foundation',
+            value: 'one command, a byte-identical config',
+            note: 'One command with the kit’s own preset reproduces its foundation: the style, the base colour, the theme, the icons and the radius scale. The resulting config is byte-identical to the kit’s, so the components and primitives of the new project line up with the blocks.',
+          },
+        ],
+      },
+    },
+    detail: {
+      lead: 'A personal frontend kit: the full set of stock shadcn components, an authored library of blocks and template pages on top of it, and a gallery to preview all of it. The kit sits on disk next to the project rather than being installed from a remote registry.',
+      effects: [{ block: 'speed', text: 'A new screen is assembled from ready blocks instead of being built from scratch on every project' }],
+      value: [
+        'A block transfers by copying a file: it drags along neither fixtures nor a foreign theme.',
+        'Stock components are never edited, so an update from the official registry stays a safe operation rather than turning into conflict resolution.',
+        'The theme is the parameter and the structure is the product: the same block looks its own way in every application.',
+        'A new project’s foundation is reproduced by one command instead of being assembled from memory.',
+        'Two other systems have already taken the theme and the layer model from here: this is a kit already in use, not an ideal for the future.',
+      ],
+      diagramNodes: ['A description of the screen', 'The nearest reference page', 'Blocks and stock components', 'The token check', 'The screen in the project'],
+      diagramNote: 'A description of a screen is first matched to the nearest of some two hundred reference pages and only then assembled from blocks: that way the screen has a model to follow rather than only an idea of one.',
+      how: [
+        'The layers are kept strictly apart: stock components are never customized, authored blocks take data through props only and never import fixtures, and template pages own their data. Customization is blocks and pages, never an edit to the stock layer.',
+        'Token discipline is not a matter of taste but the condition of portability: a block with a raw colour inside stays foreign in someone else’s theme. So the ban is enforced by a separate command over blocks and pages, while the stock layer is exempt.',
+        'The primitives here are Base UI, not Radix, and a separate warning says so: examples from training data are almost always Radix. A button rendered as a link without the right flag only complains in a live browser - neither types nor the linter will catch it.',
+        'The kit is not installed from a remote registry: it lies on disk nearby, and Claude Code reads the block source and carries it into the project by the recipe - reinstalling the stock components on the receiving side.',
+      ],
+      owner: 'Me. The kit repository is private; what is open is this site’s registry - the theme and the components, installed by one command.',
+      facts: [
+        { label: 'In the kit', value: '143 blocks, 76 template pages' },
+        { label: 'Maintained by', value: 'an engineer' },
+        { label: 'Replaced', value: 'building every screen from scratch' },
+      ],
+      screenshots: [],
+      metaTitle: 'Case: a frontend factory for assembling screens | Minas Sarkisyan',
+      metaDescription:
+        '143 authored blocks and 76 template pages on top of stock shadcn components. A block transfers as a file and repaints itself into the target project’s theme.',
+    },
+  },
+
+  // ── content-factory ──
+  'content-factory': {
+    title: 'Content factory',
+    angles: {
+      resources: {
+        headline: 'A video from script to subtitles - without contractors',
+        pain: 'Video means a scriptwriter, a motion designer, an editor and someone to lay the text out across platforms. For one author that is a contract per video, or no videos at all.',
+        outcome: 'A workshop in a repository: commands write the script in blocks, overlays and diagrams are built in code, and a local Whisper does the transcription. Filming, editing and publishing stay with the human.',
+        chips: [
+          {
+            icon: 'coverage',
+            label: 'In the workshop',
+            value: '7 commands and 6 skills',
+            note: 'The commands cover a script draft and its review, finding a topic, research, taking a site apart, and laying the texts out per platform. The skills cover Remotion production, motion design and image generation for thumbnails.',
+          },
+          {
+            icon: 'scale',
+            label: 'The graphics library',
+            value: '110 Remotion compositions',
+            note: 'Sources for overlays, cards, thumbnails and titles; most have a horizontal and a vertical variant, 234 entries in the registry in total. Heavy renders are not kept in the repository - only the sources are.',
+          },
+          {
+            icon: 'auto',
+            label: 'Subtitles',
+            value: 'a local Whisper, no keys and no billing',
+            note: 'Transcription runs through a local Whisper command, then Remotion draws the captions and ffmpeg composites them. No external recognition service is wired in at all.',
+          },
+        ],
+        bar: {
+          filled: 9,
+          total: 11,
+          caption: 'nine videos taken through to publication, two still in progress',
+        },
+      },
+    },
+    detail: {
+      lead: 'My video workshop: a repository holding the scripts, the Remotion graphics sources, the diagrams and the platform rules. Claude Code writes the script and assembles the materials, filming and editing stay with the human, and publishing is done by hand.',
+      effects: [{ block: 'resources', text: 'The work of a scriptwriter, a motion designer and a social media manager is gathered into one repository with commands' }],
+      value: [
+        'A video does not hinge on a contractor: script, graphics and subtitles are put together on the spot.',
+        'Graphics are reused: branded overlays are rendered once and laid over any footage.',
+        'Transcription runs locally, so subtitles cost neither a per-minute fee nor an API key.',
+        'A command prepares the texts per platform, but a human posts them - there is no auto-posting at all.',
+      ],
+      diagramNodes: ['A description of the video', 'A script in blocks', 'Overlays, diagrams, slides', 'Filming and editing', 'Subtitles and platform texts'],
+      diagramNote: 'The script marks every block with its recording mode: a voiced block carries the words verbatim, a screen block carries what is open and which actions to show. One shared template would give either an unreadable script or improvisation off a sheet of paper.',
+      how: [
+        'Each kind of material has its own tool, and a table says which: a branded overlay is Remotion, a diagram is a single Excalidraw canvas, a list of points is slides, an interface is a live walkthrough. Otherwise one tool gets dragged where another works better.',
+        'Auto-posting was removed deliberately: the social posting servers are gone and the command only prepares the texts per platform. One external connection is left - Telegram search for research, not distribution.',
+        'Heavy renders are not tracked in the repository: what is published lives on the platforms, and what stays here are the composition sources and the scripts - the things everything is rebuilt from.',
+        'After publication a video’s folder moves to a separate directory: its state is visible from where it sits rather than from a status line someone forgets to change.',
+      ],
+      owner: 'Me. This is my own workshop rather than a service for sale: the repository is not published.',
+      facts: [
+        { label: 'Coverage', value: 'script, graphics, subtitles, platform texts' },
+        { label: 'Maintained by', value: 'the author' },
+        { label: 'Replaced', value: 'contracting out the script, graphics and editing' },
+      ],
+      screenshots: [],
+      metaTitle: 'Case: a content factory for video | Minas Sarkisyan',
+      metaDescription:
+        'Scripts, Remotion graphics and subtitles by a local Whisper in one repository. Seven commands, six skills, 110 compositions; publishing stays by hand.',
+    },
+  },
+
+  // ── data-marts ──
+  'data-marts': {
+    title: 'Marts on top of the data lake',
+    angles: {
+      decisions: {
+        headline: 'Margin per product - and, separately, what does not land on it',
+        pain: 'Product economics were counted off the marketplace report. Cost price sits on logistics rows too, and there are far more of those - it came out an order of magnitude high.',
+        outcome: 'Two marts: one holds what honestly lands on a product, the other storage, intake, penalties and withholdings that do not spread across items. On screen they are a separate block, not profit that is absent.',
+        chips: [
+          {
+            icon: 'trust',
+            label: 'The operation-type filter',
+            value: 'without it cost price is an order of magnitude high',
+            note: 'Cost price is filled in on every row of the report, logistics rows included, and there are about five times more of those than product rows. The list of operation types is taken from a working script over the legacy warehouse rather than invented.',
+          },
+          {
+            icon: 'time',
+            label: 'What the dashboard answers from',
+            value: 'its own mart, not the source',
+            note: 'A background job moves the aggregates into the application’s own database once an hour. That buys an answer in tens of milliseconds instead of seconds, a dashboard that works while the source is down, and a freshness date the user can see.',
+          },
+          {
+            icon: 'coverage',
+            label: 'The period ceiling',
+            value: 'equal to the depth of the mart',
+            note: 'The mart holds a hundred-day window, and the maximum period in the API equals it. Allowing a year while storing a hundred days would mean silently handing back a truncated series instead of an honest refusal.',
+          },
+        ],
+        bar: {
+          filled: 57,
+          total: 387,
+          caption: '15 % of the source’s non-empty tables have stopped updating, and the catalogue does not tell them from the live ones',
+        },
+      },
+    },
+    detail: {
+      lead: 'An application with dashboards over two sources: the data lake and the corporate warehouse. It does not compute on the fly - background jobs move aggregates into its own database, and the screen reads a mart whose freshness date is visible.',
+      effects: [{ block: 'decisions', text: 'A decision about a product rests on a figure that carries both its date and what was left out of it' }],
+      value: [
+        'The dashboard answers even while the source is unavailable, and it always shows what moment the data is from.',
+        'A product with no cost price does not look like a product with a great margin: revenue without cost price travels to the screen as a metric of its own.',
+        'Costs that do not land on an item are shown separately rather than smeared across products by an invented rule.',
+        'A request for a period deeper than the mart gets an honest refusal instead of a silently truncated series.',
+        'The application builds no data collection of its own: it takes the ready lake and keeps a short mart on top of it for the speed of the screen.',
+      ],
+      diagramNodes: ['The data lake', 'The corporate warehouse', 'Scheduled background jobs', 'Marts of our own', 'Dashboards with a freshness date'],
+      diagramNote: 'Only the background job reaches into the sources - it sits inside the protected perimeter. The interface and the API read nothing but their own database, so where they run does not depend on the source’s network.',
+      how: [
+        'There are two marts on purpose. Storage, intake, penalties and withholdings are zero on product rows, and the withholdings themselves are tied to no item on any row. Spreading them across products takes an invented rule; staying silent means showing profit that is not there.',
+        'The source is read from a view rather than the base table: the view normalises the signs on returns and adds the cost price and the link to the accounting system’s item, neither of which the table itself carries.',
+        'The source was surveyed before anything was built, and the survey checked not only metadata but freshness, dependencies and schedules. One in seven non-empty tables turned out to be dead - the catalogue does not tell those from the live ones.',
+        'The job queue lives in the same database as the application’s data: enqueueing a job and the business change land in one transaction, so «saved it, lost the job» cannot happen. No separate storage for the queue was needed.',
+      ],
+      owner: 'An engineer. Both sources are connected read-only; the application can write to its own database and nowhere else.',
+      facts: [
+        { label: 'Rhythm', value: 'the mart refreshes on a schedule' },
+        { label: 'Maintained by', value: 'an engineer' },
+        { label: 'Replaced', value: 'counting off the raw marketplace report' },
+      ],
+      screenshots: [],
+      metaTitle: 'Case: marts and dashboards on top of a data lake | Minas Sarkisyan',
+      metaDescription:
+        'The dashboard reads its own mart with a freshness date, not the source. Two marts: what lands on a product and what does not - storage, penalties, withholdings.',
+    },
+  },
+
+  // ── yandex-mcp ──
+  'yandex-mcp': {
+    title: 'Ads and SEO from chat',
+    angles: {
+      money: {
+        headline: 'The ad budget changes by the rules, not by guesswork',
+        pain: 'Budgets and bids live in an account where an edit applies at once. A mistake costs a weekly budget burned over the days that are left, and a strategy’s training reset halfway.',
+        outcome: 'An open MCP server: 125 tools across Direct, Metrika and Webmaster. A writing call shows the difference first, the maximum change percentage is set per project, and the weekend rule brings its own warning.',
+        chips: [
+          {
+            icon: 'scale',
+            label: 'Tools',
+            value: '125: ads, analytics, search',
+            note: '52 Webmaster tools, 46 for Direct, 25 for Metrika and two for switching projects. On top of them, six ready workflows - from a campaign audit to a training check - and an autostrategy playbook handed to the assistant as a server resource.',
+          },
+          {
+            icon: 'trust',
+            label: 'A writing call',
+            value: 'the difference first, confirmation after',
+            note: 'Without an explicit confirmation the tool returns a «before → after» difference and sends nothing. On top of that, each project sets maximum change percentages for budgets and bids; going past them takes a separate flag.',
+          },
+          {
+            icon: 'money',
+            label: 'The weekend rule',
+            value: 'a warning from Friday through Sunday',
+            note: 'Direct recalculates the weekly budget over the days left in the calendar week and ignores what has already been spent. A significant edit on Friday to Sunday means trying to burn the sum over the remainder of the week, so the server names the day before sending.',
+          },
+        ],
+      },
+    },
+    detail: {
+      lead: 'An open MCP server for three Yandex accounts - Direct, Metrika and Webmaster - with 125 tools in a single process. The assistant answers about ads, traffic and search in words, while edits to an account pass through a preview, limits and warnings.',
+      effects: [{ block: 'money', text: 'Ad spend becomes visible in words, and a budget edit passes through a preview and a limit' }],
+      value: [
+        'An answer about spend, bids and conversions is assembled from the API right now, not from yesterday’s export.',
+        'A budget or bid edit does not go through on the first call: what exactly will change is visible first.',
+        'The maximum change percentage is set per project, so a typo that multiplies a number does not pass silently.',
+        'One process serves several accounts: each has its own token and its own maximum change percentages.',
+        'Until access to the ads API is approved, the project switches to the marketplace sandbox and the whole workflow can still be checked.',
+      ],
+      diagramNodes: ['A question in words', 'The MCP server', 'Direct · Metrika · Webmaster', 'Preview and limits', 'An answer or a confirmed edit'],
+      diagramNote: 'The token lives in the project settings and never reaches the conversation: the tool calls the API itself, and the assistant only sees the result of the call.',
+      how: [
+        'The methodology is split into two layers. Platform mechanics are hard rules that must not be broken; heuristics are starting values to be tested against the project’s own data. Some of the hard rules are wired into the server as checks rather than left to the assistant’s discipline.',
+        'Direct returns partial failures inside a successful response: a 200 code with some rows carrying errors. So the result of a writing call is summarised per item, and a partial failure shows up separately instead of hiding behind the word «applied».',
+        'The playbook is handed to the assistant as a server resource, and six workflows come as ready prompts: a campaign audit, a weekly report, a launch, budget scaling, an SEO audit and a strategy training check.',
+        'The tools cover the working surface of each account rather than one scenario: the recrawl queue and diagnostics in Webmaster, raw visit logs and offline conversion uploads in Metrika, campaigns, bids and reports in Direct.',
+      ],
+      owner: 'Me. Open source under the MIT licence; the repository is published, the npm package is not out yet.',
+      facts: [
+        { label: 'Coverage', value: '125 tools across three accounts' },
+        { label: 'Maintained by', value: 'an engineer' },
+        { label: 'Replaced', value: 'walking the Yandex accounts by hand' },
+      ],
+      screenshots: [],
+      metaTitle: 'Case: Yandex ads, analytics and SEO from chat | Minas Sarkisyan',
+      metaDescription:
+        'An MCP server for Direct, Metrika and Webmaster: 125 tools, a preview before writing, a per-project change limit and a warning about the weekend rule.',
+    },
+  },
 }
