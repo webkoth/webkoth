@@ -146,13 +146,14 @@ export const caseMeta = {
     stack: ['Python 3.14', 'uv', 'FastAPI', 'Anthropic SDK', 'PostgreSQL', 'Next.js 16', 'React 19', 'Base UI', 'React Flow', 'cron'],
     screenshots: [],
   },
-  // Репозиторий набора закрыт, поэтому не `oss`. Ссылка ведёт на открытый
-  // реестр этого сайта - единственную часть набора, доступную снаружи.
+  // Репозиторий набора закрыт, поэтому не `oss`. Ссылка ведёт на витрину темы
+  // и компонентов этого сайта - живую страницу, а не на `/r/registry.json`:
+  // сам реестр отдаётся статикой, по `/r` маршрута нет, и ссылка была бы 404.
   'frontend-factory': {
     kind: 'product',
     status: 'production',
     blocks: ['speed'],
-    links: { site: 'https://webkoth.com/r' },
+    links: { site: 'https://webkoth.com/ui-kit' },
     stack: ['Next.js 16', 'React 19', 'TypeScript', 'Tailwind 4', 'shadcn/ui', 'Base UI', 'recharts', 'TanStack Table', 'ESLint', 'Prettier'],
     screenshots: [],
   },

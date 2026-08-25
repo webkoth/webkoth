@@ -880,12 +880,12 @@ export const en: CasesCopy = {
       how: [
         'There are two levels of execution. The everyday «watch X, count Y, report to Z» is a file with a prompt; heavy data processing stays a pipeline in code. To the schedule and the dashboard the two are indistinguishable: one run log and one model-call log.',
         'A broken agent file fails the core on start-up deliberately: falling over at release beats silently losing an agent from the schedule.',
-        'A tool error does not kill the agent: the model receives the error text and decides what to do next, while an oversized response is truncated - otherwise it eats both the context and the cost of the run.',
+        'A tool error does not kill the agent: the model receives the error text and decides what to do next, while an oversized response is not truncated but returned as an error that forbids drawing conclusions from it: out of a broken fragment the model would compute a total and report a plausible wrong number as a success.',
         'Having the model draft a config from the request was dropped on purpose: a request should be nothing more than a record in the database, visible to all. The implementation is still in the repository history and can be brought back if the decision changes.',
       ],
       owner: 'An engineer. Agents are written by the IT team; employees order them on a form and use the results.',
       facts: [
-        { label: 'Stage', value: 'a pilot: one agent on the schedule' },
+        { label: 'On the schedule', value: 'one agent' },
         { label: 'Maintained by', value: 'the company’s IT team' },
         { label: 'Replaced', value: 'asking for automation in chat threads' },
       ],
@@ -942,9 +942,9 @@ export const en: CasesCopy = {
         'The layers are kept strictly apart: stock components are never customized, authored blocks take data through props only and never import fixtures, and template pages own their data. Customization is blocks and pages, never an edit to the stock layer.',
         'Token discipline is not a matter of taste but the condition of portability: a block with a raw colour inside stays foreign in someone else’s theme. So the ban is enforced by a separate command over blocks and pages, while the stock layer is exempt.',
         'The primitives here are Base UI, not Radix, and a separate warning says so: examples from training data are almost always Radix. A button rendered as a link without the right flag only complains in a live browser - neither types nor the linter will catch it.',
-        'The kit is not installed from a remote registry: it lies on disk nearby, and Claude Code reads the block source and carries it into the project by the recipe - reinstalling the stock components on the receiving side.',
+        'The kit is not installed from a remote registry: it lies on disk nearby, and Claude Code reads the block source and carries it into the project by the recipe - reinstalling the stock components on the receiving side. What is published as an open registry is something else - this site’s theme and components: the showcase behind the link shows them live, while a machine reads them at /r/registry.json.',
       ],
-      owner: 'Me. The kit repository is private; what is open is this site’s registry - the theme and the components, installed by one command.',
+      owner: 'Me. The kit repository is private; what is open is this site’s showcase of the theme and the components - it carries the install command too.',
       facts: [
         { label: 'In the kit', value: '143 blocks, 76 template pages' },
         { label: 'Maintained by', value: 'an engineer' },
@@ -969,8 +969,8 @@ export const en: CasesCopy = {
           {
             icon: 'coverage',
             label: 'In the workshop',
-            value: '7 commands and 6 skills',
-            note: 'The commands cover a script draft and its review, finding a topic, research, taking a site apart, and laying the texts out per platform. The skills cover Remotion production, motion design and image generation for thumbnails.',
+            value: '7 commands and 3 video skills',
+            note: 'The commands cover a script draft and its review, finding a topic, research, taking a site apart, and laying the texts out per platform. The main-flow skills cover Remotion production, motion design and writing composition scripts. Four image-generation skills sit alongside them but are not part of the main flow right now.',
           },
           {
             icon: 'scale',
@@ -1018,7 +1018,7 @@ export const en: CasesCopy = {
       screenshots: [],
       metaTitle: 'Case: a content factory for video | Minas Sarkisyan',
       metaDescription:
-        'Scripts, Remotion graphics and subtitles by a local Whisper in one repository. Seven commands, six skills, 110 compositions; publishing stays by hand.',
+        'Scripts, Remotion graphics and subtitles by a local Whisper in one repository. Seven commands, three video skills, 110 compositions; publishing stays by hand.',
     },
   },
 
@@ -1041,7 +1041,7 @@ export const en: CasesCopy = {
             icon: 'time',
             label: 'What the dashboard answers from',
             value: 'its own mart, not the source',
-            note: 'A background job moves the aggregates into the application’s own database once an hour. That buys an answer in tens of milliseconds instead of seconds, a dashboard that works while the source is down, and a freshness date the user can see.',
+            note: 'Background jobs move the aggregates into the application’s own database on a schedule: the product-economics mart refreshes once a day, the sales mart once an hour. That buys an answer in tens of milliseconds instead of seconds, a dashboard that works while the source is down, and a freshness date the user can see.',
           },
           {
             icon: 'coverage',
@@ -1053,7 +1053,7 @@ export const en: CasesCopy = {
         bar: {
           filled: 57,
           total: 387,
-          caption: '15 % of the source’s non-empty tables have stopped updating, and the catalogue does not tell them from the live ones',
+          caption: '15 % of the source’s non-empty tables serve data older than a week, and the catalogue does not tell them from the live ones',
         },
       },
     },
@@ -1072,7 +1072,7 @@ export const en: CasesCopy = {
       how: [
         'There are two marts on purpose. Storage, intake, penalties and withholdings are zero on product rows, and the withholdings themselves are tied to no item on any row. Spreading them across products takes an invented rule; staying silent means showing profit that is not there.',
         'The source is read from a view rather than the base table: the view normalises the signs on returns and adds the cost price and the link to the accounting system’s item, neither of which the table itself carries.',
-        'The source was surveyed before anything was built, and the survey checked not only metadata but freshness, dependencies and schedules. One in seven non-empty tables turned out to be dead - the catalogue does not tell those from the live ones.',
+        'The source was surveyed before anything was built, and the survey checked not only metadata but freshness, dependencies and schedules. One in seven non-empty tables turned out to carry data older than a week - the catalogue does not tell those from the live ones, because monitoring watches the job status rather than the completeness of the data.',
         'The job queue lives in the same database as the application’s data: enqueueing a job and the business change land in one transaction, so «saved it, lost the job» cannot happen. No separate storage for the queue was needed.',
       ],
       owner: 'An engineer. Both sources are connected read-only; the application can write to its own database and nowhere else.',
@@ -1095,7 +1095,7 @@ export const en: CasesCopy = {
       money: {
         headline: 'The ad budget changes by the rules, not by guesswork',
         pain: 'Budgets and bids live in an account where an edit applies at once. A mistake costs a weekly budget burned over the days that are left, and a strategy’s training reset halfway.',
-        outcome: 'An open MCP server: 125 tools across Direct, Metrika and Webmaster. A writing call shows the difference first, the maximum change percentage is set per project, and the weekend rule brings its own warning.',
+        outcome: 'An open MCP server: 125 tools across Direct, Metrika and Webmaster. A writing call previews what would be sent, the change percentage is capped per project, and the weekend rule brings its own warning.',
         chips: [
           {
             icon: 'scale',
@@ -1106,8 +1106,8 @@ export const en: CasesCopy = {
           {
             icon: 'trust',
             label: 'A writing call',
-            value: 'the difference first, confirmation after',
-            note: 'Without an explicit confirmation the tool returns a «before → after» difference and sends nothing. On top of that, each project sets maximum change percentages for budgets and bids; going past them takes a separate flag.',
+            value: 'a preview first, confirmation after',
+            note: 'Without a confirmation the tool sends nothing: it returns the request itself - the method and its parameters - along with the declared budget and bid changes and any limits they break. The current values in that answer come from the caller, not from the account. Maximum change percentages are set per project; going past them takes a separate flag.',
           },
           {
             icon: 'money',
