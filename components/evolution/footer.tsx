@@ -13,7 +13,11 @@ export function Footer({ data }: { data: EvolutionData }) {
   const linkCls = 'inline-flex items-center gap-1.5 text-foreground/80 transition hover:text-primary'
   return (
     <footer className="border-t border-border">
-      <div className="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-10 md:flex-row md:items-center md:justify-between md:px-8">
+      {/* pb-20 до lg - место под плавающую кнопку: она висит в 16 px от низа
+          и высотой около 43 px, а прежние 40 px отступа закрывались ею вместе
+          со строкой копирайта. От lg кнопки на странице кейса нет, а на главной
+          внизу её прячет inline-форма - там отступ прежний. */}
+      <div className="mx-auto flex max-w-6xl flex-col gap-4 px-4 pt-10 pb-20 md:flex-row md:items-center md:justify-between md:px-8 lg:pb-10">
         <div className="flex flex-wrap items-center gap-4 text-sm">
           {/* <Link href={cvPath(data.lang)} className={linkCls}>
             <FileText className="size-4" aria-hidden />

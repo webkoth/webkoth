@@ -4,36 +4,19 @@ import { ArrowRight, GitCommitHorizontal, Hand, MousePointerClick, Rocket, Table
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import type { EvolutionData } from '@/app/data/evolution/types'
 
-// Экспонаты плашек кейсов — то, что в документе концепции помечено «Показать: …».
-
-export function DataFlowExhibit({ data }: { data: EvolutionData['exhibits']['dataFlow'] }) {
-  const { nodes, note } = data
-  return (
-    <div>
-      <ol className="flex flex-wrap items-center gap-2 text-sm">
-        {nodes.map((n, i) => (
-          <li key={n} className="flex items-center gap-2">
-            <span
-              className={
-                i === nodes.length - 1
-                  ? 'rounded-lg border border-primary/50 bg-primary/10 px-3 py-1.5 font-medium text-primary'
-                  : 'rounded-lg border border-border bg-background/60 px-3 py-1.5'
-              }
-            >
-              {n}
-            </span>
-            {i < nodes.length - 1 ? <ArrowRight className="size-3.5 text-muted-foreground" aria-hidden /> : null}
-          </li>
-        ))}
-      </ol>
-      <p className="mt-3 text-xs text-muted-foreground">{note}</p>
-    </div>
-  )
-}
+// Экспонаты - то, что в документе концепции помечено «Показать: …».
+// Таблица запусков и доли остаются на лендинге: они про несколько систем сразу.
+// «Было / стало» переехало на страницу кейса, поэтому берёт данные пропом.
 
 // «Было / стало» — две вкладки: сначала список ручных шагов, переключение —
 // и та же операция одной кнопкой. Переключение само по себе и есть экспонат.
-export function BeforeAfterExhibit({ data }: { data: EvolutionData['exhibits']['beforeAfter'] }) {
+// Подписи вкладок приходят снаружи: в данных кейса их нет, они общие для всех
+// кейсов и живут в `labels`. `readonly` - потому что шаги кейса это константа.
+export function BeforeAfterExhibit({
+  data,
+}: {
+  data: { beforeTitle: string; before: readonly string[]; afterTitle: string; after: string }
+}) {
   const { beforeTitle, before, afterTitle, after } = data
   return (
     <Tabs defaultValue="before">

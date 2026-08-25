@@ -11,7 +11,7 @@ interface LanguageToggleProps {
   currentLang: Lang
 }
 
-// Главная: RU в корне, EN под /en. Остальные страницы (CV) — /[lang]/… .
+// Главная: RU в корне, EN под /en. Остальные страницы (CV и страницы кейсов) - /[lang]/… .
 export function buildPath(pathname: string, currentLang: Lang, newLang: Lang): string {
   const segments = pathname.split("/").filter(Boolean)
   const isHome = segments.length === 0 || (segments.length === 1 && (segments[0] === "en" || segments[0] === "ru"))

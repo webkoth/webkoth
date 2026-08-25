@@ -18,7 +18,7 @@
     },
     {
       "path": "components/landing-preferences-script.tsx",
-      "content": "const SCRIPT = `\n(function() {\n  try {\n    var html = document.documentElement;\n    var palette = localStorage.getItem('palette');\n    if (palette === 'classic') html.classList.add('palette-classic');\n  } catch (e) {}\n})();\n`;\n\nexport function LandingPreferencesScript() {\n  return (\n    <script\n      // No-flash: runs before paint. Inline + sync.\n      dangerouslySetInnerHTML={{ __html: SCRIPT }}\n    />\n  );\n}\n",
+      "content": "// Предпочтения посетителя, которые должны примениться до первой отрисовки:\n// палитра (warm/classic) и моноширинный шрифт (jetbrains/geist). Оба живут\n// классами на <html>; тумблеры в шапке меняют класс и пишут в localStorage.\nconst SCRIPT = `\n(function() {\n  try {\n    var html = document.documentElement;\n    var palette = localStorage.getItem('palette');\n    if (palette === 'classic') html.classList.add('palette-classic');\n    var mono = localStorage.getItem('mono');\n    if (mono === 'geist') html.classList.add('mono-geist');\n  } catch (e) {}\n})();\n`;\n\nexport function LandingPreferencesScript() {\n  return (\n    <script\n      // No-flash: runs before paint. Inline + sync.\n      dangerouslySetInnerHTML={{ __html: SCRIPT }}\n    />\n  );\n}\n",
       "type": "registry:component",
       "target": "components/palette-preferences-script.tsx"
     }

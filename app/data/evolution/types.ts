@@ -30,11 +30,6 @@ export type EvolutionBlock = {
   /** Симптом: как проблема болит у клиента сейчас. */
   symptom: string
   description: string[]
-  /** Плашка кейса: главная цифра крупно, остальные — мельче. */
-  caseLabel: string
-  caseBody: string
-  mainFact: Fact
-  facts: Fact[]
 }
 
 export type HubNodeKey =
@@ -113,7 +108,6 @@ export type EvolutionData = {
   labels: {
     step: string
     symptom: string
-    caseTag: string
     /** aria-подпись полосы прогресса чтения под шапкой. */
     readingProgress: string
     copy: string
@@ -122,6 +116,46 @@ export type EvolutionData = {
     all: string
     /** Подсказка у цифры факта: «как считалось». */
     factHint: string
+    // Подписи карточки кейса.
+    /** Заголовок «болело» над болью угла. */
+    casePain: string
+    /** Заголовок «стало» над результатом. */
+    caseOutcome: string
+    /** Футер-ссылка карточки на страницу кейса. */
+    caseMore: string
+    /** Пометка связи углов; `{n}` подставляется числом (2 и 3). */
+    caseAlsoIn: string
+    /** Она же для одного шага: «ещё по 1 шагам» - не по-русски, а такой угол каждый четвёртый. */
+    caseAlsoInOne: string
+    // Подписи управления каруселью.
+    /** Начало подписи дорожки: блок дописывает к ней свой слоган, иначе все шесть каруселей зовутся одинаково. */
+    carouselAria: string
+    carouselPrev: string
+    carouselNext: string
+    /** «{i} из {n}» - оба плейсхолдера обязательны, их наличие проверяет тест. */
+    carouselCounter: string
+    /** «Кейс {i}» - `{i}` обязателен по той же причине. */
+    carouselGoTo: string
+    // Подписи страницы кейса.
+    /** Подпись навигации-возврата над заголовком кейса: сама ссылка названа слоганом шага, и без неё не слышно, что она ведёт назад. */
+    caseBackAria: string
+    /** Ряды панели фактов, которые выводятся из `meta`, а не пишутся у каждой системы. */
+    caseKindRow: string
+    caseStatusRow: string
+    /** Заголовок таблицы «эффект по постулатам»: она рисуется только у систем с несколькими углами. */
+    caseEffectsTitle: string
+    caseValueTitle: string
+    /** Заголовок схемы: без него раздел выходит безымянной рамкой между двумя названными. */
+    caseDiagramTitle: string
+    /** Заголовок раздела вкладок; сами вкладки подписаны парой ниже. */
+    caseBeforeAfterTitle: string
+    /** Подписи вкладок «было руками / стало кнопкой» - общие, а не свои у каждой системы. */
+    caseBeforeTitle: string
+    caseAfterTitle: string
+    caseScreensTitle: string
+    caseHowTitle: string
+    caseOwnerTitle: string
+    caseSiblingsTitle: string
   }
   hero: {
     /** Заголовок: две фразы через \n — каждая на своей строке. */
@@ -144,10 +178,6 @@ export type EvolutionData = {
     resources: EvolutionBlock
   }
   exhibits: {
-    /** Блок 3: схема «источники → хранилище → отчёт». */
-    dataFlow: { nodes: string[]; note: string }
-    /** Блок 4: до/после — ручная операция и та же операция кнопкой. */
-    beforeAfter: { beforeTitle: string; before: string[]; afterTitle: string; after: string }
     /** Блок 5: таблица «первый коммит → прод-конвейер». */
     launchTable: { head: [string, string, string, string]; rows: [string, string, string, string][] }
     /** Блок 6: три доли крупно, без имён. */

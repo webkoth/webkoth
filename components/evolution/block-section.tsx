@@ -1,27 +1,42 @@
 import type { ReactNode } from 'react'
 import { AlertCircle } from 'lucide-react'
-import type { EvolutionBlock, EvolutionData } from '@/app/data/evolution/types'
-import { CasePlaque } from './case-plaque'
+import { anglesForBlock } from '@/app/data/cases'
+import type { EvolutionBlock, EvolutionData, Lang } from '@/app/data/evolution/types'
+import { CaseCard } from './case-card'
+import { CaseCarousel, type CarouselLabels } from './case-carousel'
 import { STEP_ICONS, type StepKey } from './step-icons'
 import { StepChip } from './step-chip'
 
-// Ритм каждого блока: eyebrow (иконка шага · «Шаг» · чип 01) → слоган крупно →
-// плашка симптома → 2–3 предложения → анимация → плашка кейса. На широких
-// экранах текст и анимация стоят рядом, плашка — под ними на всю ширину.
+// Ритм блока: eyebrow → слоган → плашка симптома → 2–3 предложения → анимация
+// → экспонат (только там, где он говорит сразу о нескольких системах)
+// → карусель кейсов этого шага.
 export function BlockSection({
   stepKey,
   block,
   labels,
+  lang,
   animation,
   exhibit,
 }: {
   stepKey: StepKey
   block: EvolutionBlock
   labels: EvolutionData['labels']
+  lang: Lang
   animation: ReactNode
   exhibit?: ReactNode
 }) {
   const Icon = STEP_ICONS[stepKey]
+  const items = anglesForBlock(lang, stepKey)
+  const carouselLabels: CarouselLabels = {
+    // Каруселей на странице шесть, и подпись у всех одна: читатель,
+    // идущий по списку регионов, услышал бы «Кейсы шага» шесть раз подряд
+    // и не понял бы, какого шага. Слоган блока - его единственное имя.
+    aria: `${labels.carouselAria}: ${block.slogan}`,
+    prev: labels.carouselPrev,
+    next: labels.carouselNext,
+    counter: labels.carouselCounter,
+    goTo: labels.carouselGoTo,
+  }
   return (
     <section
       id={block.id}
@@ -60,9 +75,16 @@ export function BlockSection({
         </div>
       </div>
 
-      <CasePlaque block={block} tag={labels.caseTag} factHint={labels.factHint}>
-        {exhibit}
-      </CasePlaque>
+      {exhibit ? (
+        <div className="mt-10 rounded-2xl border border-border bg-card/70 p-5 backdrop-blur-sm md:mt-14 md:p-6">{exhibit}</div>
+      ) : null}
+
+      <CaseCarousel
+        labels={carouselLabels}
+        items={items.map((item) => (
+          <CaseCard key={item.slug} entry={item} lang={lang} labels={labels} />
+        ))}
+      />
     </section>
   )
 }

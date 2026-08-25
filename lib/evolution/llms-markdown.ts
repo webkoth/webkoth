@@ -1,3 +1,4 @@
+import { CASE_KIND_LABELS, CASE_STATUS_LABELS, anglesForBlock, casePath } from '@/app/data/cases'
 import type { EvolutionData } from '@/app/data/evolution/types'
 import { evolutionBlockOrder } from '@/app/data/evolution'
 
@@ -9,7 +10,7 @@ const H = {
     lang: '## Русская версия',
     steps: 'Шаги',
     symptom: 'Симптом',
-    caseTag: 'Кейс',
+    casesTag: 'Кейсы шага',
     namedCase: 'Именованный кейс',
     stack: 'Стек',
     process: 'Как это происходит',
@@ -22,7 +23,7 @@ const H = {
     lang: '## English version',
     steps: 'Steps',
     symptom: 'Symptom',
-    caseTag: 'Case',
+    casesTag: 'Cases for this step',
     namedCase: 'Named case',
     stack: 'Stack',
     process: 'How it happens',
@@ -36,6 +37,8 @@ const H = {
 export function buildEvolutionMarkdown(d: EvolutionData): string {
   const h = H[d.lang]
   const out: string[] = []
+  // Адреса кейсов абсолютные: этот текст читают вне сайта, относительная ссылка там никуда не ведёт.
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://webkoth.com'
 
   out.push(h.lang, '')
   out.push(`# ${d.hero.seal}`, '')
@@ -50,10 +53,27 @@ export function buildEvolutionMarkdown(d: EvolutionData): string {
     out.push(`### ${b.step} · ${b.slogan}`, '')
     out.push(`_${h.symptom}:_ ${b.symptom}`, '')
     for (const p of b.description) out.push(p, '')
-    out.push(`**${h.caseTag}: ${b.caseLabel}** - ${b.caseBody}`, '')
-    out.push(`- **${b.mainFact.value}** ${b.mainFact.label}`)
-    for (const f of b.facts) out.push(`- ${f.value} ${f.label}`)
-    out.push('')
+    const angles = anglesForBlock(d.lang, key)
+    if (angles.length > 0) {
+      out.push(`**${h.casesTag}:**`, '')
+      for (const a of angles) {
+        out.push(`- **${a.angle.headline}** (${a.copy.title})`)
+        // Тип и статус - те же, что в бейдже карточки. Без них открытый код
+        // в этом тексте неотличим от обезличенной клиентской системы, а на
+        // странице он подписан и ведёт на репозиторий.
+        out.push(`  - ${d.labels.caseKindRow}: ${CASE_KIND_LABELS[d.lang][a.meta.kind]} · ${CASE_STATUS_LABELS[d.lang][a.meta.status]}`)
+        out.push(`  - ${d.labels.casePain}: ${a.angle.pain}`)
+        out.push(`  - ${d.labels.caseOutcome}: ${a.angle.outcome}`)
+        for (const c of a.angle.chips) out.push(`  - ${c.label}: ${c.value}`)
+        // Ссылки перечисляются значениями `meta.links`, а не тремя полями по
+        // имени: четвёртый вид ссылки тогда доедет сюда сам. У клиентских
+        // систем список пуст - строки не будет.
+        const links = Object.values(a.meta.links).filter((l): l is string => Boolean(l))
+        if (links.length > 0) out.push(`  - ${links.join(' · ')}`)
+        out.push(`  - ${baseUrl}${casePath(d.lang, a.slug)}`)
+      }
+      out.push('')
+    }
   }
 
   out.push(`## ${h.namedCase}: ${d.hubmarket.linkText} - ${d.hubmarket.sub}`, '')

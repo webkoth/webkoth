@@ -59,9 +59,9 @@ AI OCR ⇢ GPT (Skolkovo) · AI Landing builder · Lenderkit fintech (50+ engine
 
 ## About this repo
 
-This is the source for **[webkoth.com](https://webkoth.com)** — the bilingual (RU at `/`, EN at `/en`) landing «Эволюция бизнеса / Business evolution» plus CV at `/ru/minasarkisyan` · `/en/minasarkisyan`.
+This is the source for **[webkoth.com](https://webkoth.com)** — the bilingual (RU at `/`, EN at `/en`) landing «Эволюция бизнеса / Business evolution», case pages at `/ru/cases/…` · `/en/cases/…` and CV at `/ru/minasarkisyan` · `/en/minasarkisyan`.
 
-Layout: all page copy lives in `app/data/evolution/{ru,en}.ts` (shared type in `types.ts`), page composition in `components/evolution/evolution-page.tsx`, one-shot SVG scenes in `components/evolution/animations/`, lead API at `app/api/evolution/lead`. Redirects (`/ru`, `/evolution`, `/minasarkisyan`) are in `next.config.mjs`; `/llms.txt` is generated from the same data.
+Layout: all page copy lives in `app/data/evolution/{ru,en}.ts` (shared type in `types.ts`), case copy in `app/data/cases/{ru,en}.ts` over the language-neutral `registry.ts`, page composition in `components/evolution/evolution-page.tsx`, one-shot SVG scenes in `components/evolution/animations/`, lead API at `app/api/evolution/lead`. Redirects (`/ru`, `/evolution`, `/minasarkisyan`, `/cases/:slug`) are in `next.config.mjs`; `/llms.txt` and `sitemap.xml` are generated from the same data.
 
 Built with Next.js 16 (Turbopack), React 19, Tailwind v4, shadcn/ui (base-vega + Base UI primitives), Framer Motion, Shiki, Mermaid.
 
@@ -76,6 +76,16 @@ Built with Next.js 16 (Turbopack), React 19, Tailwind v4, shadcn/ui (base-vega +
 ---
 
 ## Changelog
+
+### 2026-08-23 — Cases: business-level cards, carousels, case pages
+
+- Cases no longer belong to a single block. The unit of data is a **system** (13 of them, one case page per language), the unit of display is an **angle** — a system × block pair with its own pain/outcome and characteristics (23 angles). A system shown in several blocks carries a «the same system pays off across N more steps» badge, with its own wording when there is exactly one
+- Card characteristics are business-level and come from a closed vocabulary of eight icons (scale, timeline, who maintains it, what it replaced, money, trust in the numbers, what now runs itself, coverage), 2–3 per angle — lines of code, commits and DB models are gone. Optional share bar renders only where a real ratio exists (4 angles of 23)
+- New `app/data/cases/`: `registry.ts` (language-neutral structure), `types.ts`, `ru.ts`/`en.ts` (copy), `index.ts` (selectors), `cases.test.ts` — locale parity of shape, 2–3 chips with length caps, block balance 3–4, blocks in page order, effects table matching `meta.blocks`, oss/internal links, screenshot captions, `metaDescription` ≤ 160, `{i}`/`{n}` placeholders
+- `components/evolution/case-card.tsx` + `case-carousel.tsx` — one card per view, autoplay every 7 s; paused on hover, on focus within, while under 20 % in view and while the tab is in the background; never starts under `prefers-reduced-motion`; stopped for good once the reader takes over (arrow, dot, horizontal swipe or focus landing inside a card). CSS scroll-snap, no new dependency. Each of the six carousels is named after its own step for screen readers
+- Case pages at `/[lang]/cases/[slug]` (26 static pages): facts panel (sticky from `lg`, right under the heading on narrow screens), effects-across-steps table for systems with more than one angle, diagram, before/after tabs, screenshots section (wired, the anonymised shots come separately), stack, links, sibling cases of the same step. `/cases/:slug` → `/ru/cases/:slug` (308)
+- Data-flow and before/after exhibits moved into case data (`components/cases/case-diagram.tsx` draws the flow from `detail.diagramNodes`); the launch table (step 05) and the 43/73/73 % shares (step 06) stay on the landing and moved **above** the carousel
+- `case-plaque.tsx` and the per-block `caseLabel` / `caseBody` / `mainFact` / `facts` copy fields are gone; `/llms.txt` lists every angle under its step — with its type · status and repository / product links, so open-source work reads as an equal there too — and `sitemap.xml` grew to 30 URLs
 
 ### 2026-08-22 — «Эволюция бизнеса» becomes the home page (`/`, `/en`); old landing removed
 

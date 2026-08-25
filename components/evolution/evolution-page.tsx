@@ -14,7 +14,7 @@ import { StickyCta } from './sticky-cta'
 import { JsonLdEvolution } from './json-ld'
 import { HtmlLang } from './html-lang'
 import { LeadDialogProvider } from './lead-dialog'
-import { BeforeAfterExhibit, DataFlowExhibit, LaunchTableExhibit, SharesExhibit } from './exhibits'
+import { LaunchTableExhibit, SharesExhibit } from './exhibits'
 import { FragmentsToStructure } from './animations/fragments-to-structure'
 import { FogToDashboard } from './animations/fog-to-dashboard'
 import { NoiseToSignal } from './animations/noise-to-signal'
@@ -59,32 +59,35 @@ export function EvolutionPage({ lang }: { lang: Lang }) {
               stepKey="system"
               block={data.blocks.system}
               labels={data.labels}
+              lang={lang}
               animation={<FragmentsToStructure copy={a.fragments} />}
             />
             <BlockSection
               stepKey="money"
               block={data.blocks.money}
               labels={data.labels}
+              lang={lang}
               animation={<FogToDashboard copy={a.fog} />}
             />
             <BlockSection
               stepKey="decisions"
               block={data.blocks.decisions}
               labels={data.labels}
+              lang={lang}
               animation={<NoiseToSignal copy={a.noise} />}
-              exhibit={<DataFlowExhibit data={data.exhibits.dataFlow} />}
             />
             <BlockSection
               stepKey="automation"
               block={data.blocks.automation}
               labels={data.labels}
+              lang={lang}
               animation={<Conveyor copy={a.conveyor} />}
-              exhibit={<BeforeAfterExhibit data={data.exhibits.beforeAfter} />}
             />
             <BlockSection
               stepKey="speed"
               block={data.blocks.speed}
               labels={data.labels}
+              lang={lang}
               animation={<TimelineCompress copy={a.timeline} />}
               exhibit={<LaunchTableExhibit data={data.exhibits.launchTable} labels={data.labels} />}
             />
@@ -92,6 +95,7 @@ export function EvolutionPage({ lang }: { lang: Lang }) {
               stepKey="resources"
               block={data.blocks.resources}
               labels={data.labels}
+              lang={lang}
               animation={<CellsGrid copy={a.cells} />}
               exhibit={<SharesExhibit data={data.exhibits.shares} />}
             />

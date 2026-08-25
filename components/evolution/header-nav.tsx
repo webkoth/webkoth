@@ -31,6 +31,7 @@ export function HeaderNav({
   labels,
   items,
   llmMarkdown,
+  anchorBase = '',
 }: {
   lang: Lang
   brand: string
@@ -41,6 +42,11 @@ export function HeaderNav({
   nav: EvolutionData['nav']
   labels: EvolutionData['labels']
   items: NavItem[]
+  /**
+   * База для якорей шагов: пусто на главной, `homePath(lang)` на странице кейса.
+   * Голый `#system` со страницы кейса скроллил бы её саму в никуда - там этих секций нет.
+   */
+  anchorBase?: string
 }) {
   const [activeId, setActiveId] = useState<string | null>(null)
   const headerRef = useRef<HTMLElement>(null)
@@ -94,7 +100,7 @@ export function HeaderNav({
         {/* Вместо текстового бренда — фото владельца: то же, что в профилях соцсетей
             (public/images/avatar). Подпись бренда остаётся для скринридеров и title. */}
         <a
-          href="#hero"
+          href={`${anchorBase}#hero`}
           title={brand}
           className="inline-flex items-center gap-2 rounded-full transition hover:opacity-90 focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:outline-none"
         >
@@ -165,7 +171,7 @@ export function HeaderNav({
               <li key={item.id} className="shrink-0">
                 <Tooltip>
                   <TooltipTrigger
-                    render={<a href={`#${item.id}`} aria-current={active ? 'location' : undefined} />}
+                    render={<a href={`${anchorBase}#${item.id}`} aria-current={active ? 'location' : undefined} />}
                     className={cn(
                       'inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs whitespace-nowrap transition xl:text-[13px]',
                       active
