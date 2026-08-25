@@ -25,7 +25,12 @@ export const casePath = (lang: Lang, slug: CaseSlug): string => `/${lang}/cases/
  */
 export function linkLabel(url: string): string {
   try {
-    return new URL(url).hostname
+    const { hostname, pathname } = new URL(url)
+    // Голого хоста мало, когда ссылка ведёт на раздел того же сайта: подпись
+    // «webkoth.com» на странице webkoth.com не говорит читателю ничего. Путь
+    // добавляем, только если он есть, - у ссылок на чужие продукты его нет.
+    const path = pathname.replace(/\/+$/, '')
+    return path ? `${hostname}${path}` : hostname
   } catch {
     return url
   }
