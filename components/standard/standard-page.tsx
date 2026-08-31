@@ -9,6 +9,7 @@ import {
   AIAS_REPO_URL,
   standardData,
 } from '@/app/data/standard'
+import { verdictPath, verdictQuizData } from '@/app/data/standard-quiz'
 import { buildEvolutionMarkdown } from '@/lib/evolution/llms-markdown'
 import { ParticleField } from '@/components/evolution/particle-field'
 import { HeaderNav } from '@/components/evolution/header-nav'
@@ -116,6 +117,10 @@ export function StandardPage({ lang }: { lang: Lang }) {
                 <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted-foreground">
                   {s.diagram.note}
                 </p>
+                <Link href={verdictPath(lang)} className={`mt-3 ${externalLink}`}>
+                  {verdictQuizData[lang].pageLinkLabel}
+                  <ArrowUpRight className="size-3.5" aria-hidden />
+                </Link>
                 <div className="mt-4 overflow-hidden rounded-2xl border border-border bg-card/70 backdrop-blur-sm">
                   <iframe
                     src={AIAS_DIAGRAM_PATH}
