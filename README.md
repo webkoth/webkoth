@@ -1,8 +1,9 @@
-# webkoth · AI Integration
+# webkoth · Business Evolution
 
-> I ship AI into products. From idea to production. One person, end-to-end.
+> Из хаоса — в систему, из рутины — в автоматизацию. From chaos to system, from routine to automation.
+> «ИИ у вас уже есть. Он просто не работает.» — I make it work.
 
-**Audit in 1 day · MVP in 1 week.**
+**Free 30-min breakdown of one process · [webkoth.com](https://webkoth.com)**
 
 [![webkoth.com](https://img.shields.io/badge/site-webkoth.com-007492?style=flat-square)](https://webkoth.com)
 [![CV](https://img.shields.io/badge/CV-webkoth.com%2Fminasarkisyan-007492?style=flat-square)](https://webkoth.com/minasarkisyan)
@@ -11,15 +12,22 @@
 
 ---
 
-I'm **Minas Sarkisyan** — senior fullstack engineer, 9+ years in production, 2.5+ years shipping AI features into real products.
+I'm **Minas Sarkisyan** — senior fullstack engineer, 9+ years in production, 2.5+ years shipping AI into real products. I work end-to-end, one person, no agency handoffs.
 
-I work as a single contractor from idea to prod — no agency handoffs, no account managers. The code you see is my code.
+What I sell is not "AI implementation" — it is **reachability of the result**: order first, automation second. The sequence is the site's six steps: system → transparent money → precise decisions → automation → speed → freed people.
 
-## What I solve
+## AIAS — AI Automation Standard
 
+I maintain an open standard for deciding which step of a business process goes to deterministic code, an LLM step, an agent, or a human — and what separates a production system from an abandoned prototype.
+
+- Spec, owner's guide, templates, 15 process cards: [github.com/webkoth/ai-automation-standard](https://github.com/webkoth/ai-automation-standard)
+- Standard page: [webkoth.com/standard](https://webkoth.com/standard) · verdict quiz (8 questions, no AI involved — it's a decision table): [webkoth.com/ru/standard/verdict](https://webkoth.com/ru/standard/verdict)
+
+## Technical toolbox
+
+- **LLM agents** — tool use, orchestration, autonomous workflows with budgets, logs and kill switches
 - **RAG** — search across your docs and knowledge base
-- **LLM agents** — tool use, orchestration, autonomous workflows
-- **MCP servers** — connect your API/service to Claude and other agents (3 published on npm)
+- **MCP servers** — connect your API/service to Claude and other agents (published on npm)
 - **Multi-provider cascade** — Claude → Gemini → Groq fallback, no vendor lock-in
 - **Document pipelines** — OCR → LLM → structured data
 - **AI features in existing products** — no rewrites, clean integration
@@ -76,6 +84,12 @@ Built with Next.js 16 (Turbopack), React 19, Tailwind v4, shadcn/ui (base-vega +
 ---
 
 ## Changelog
+
+### 2026-08-31 — AIAS standard page + verdict quiz
+
+- New `/[lang]/standard` (RU/EN, static): showcase of the open standard — spec modules, owner's guide with downloadable PDF, process library, templates, reference stack; the interactive verdict diagram embedded from `public/standard/verdikt.html`. Copy in `app/data/standard.ts`, metadata builder in `lib/evolution/metadata.ts`, `/standard` → `/ru/standard` (308), both locales in sitemap
+- New `/[lang]/standard/verdict` — the eight AIAS questions as an interactive quiz. Pure decision-table logic in `lib/standard/verdict.ts` (13 vitest tests), deliberately **no LLM at runtime** — the standard's own verdict applied to itself (rule written in full → code). Result screen: form F0–F5/split/stop, autonomy profile A0–A5, flags (irreversible / personal data / the rope), acceptance demands, library links; CTA through the shared lead dialog. Quiz copy in `app/data/standard-quiz.ts`
+- README: positioning aligned with the site («Эволюция бизнеса»), AIAS section added
 
 ### 2026-08-23 — Cases: business-level cards, carousels, case pages
 
