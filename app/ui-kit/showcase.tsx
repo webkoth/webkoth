@@ -353,7 +353,7 @@ export function Showcase() {
           <Section
             id="custom"
             title="Мои компоненты"
-            description="То, чего нет в базовом shadcn — публикуется в реестре."
+            description="То, чего нет в базовом shadcn; публикуется в реестре."
           >
             <div className="grid gap-8 md:grid-cols-2">
               <Card>

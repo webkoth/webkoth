@@ -23,7 +23,7 @@ export const en: CasesCopy = {
     title: 'Management finance loop',
     angles: {
       system: {
-        headline: 'Every number the company has - in one system',
+        headline: 'Every number the company has lives in one system',
         pain: 'The numbers lived in ten spreadsheets, private chats and the heads of three people. When key people left, both access and context left with them.',
         outcome: 'One source: cash flow, budget, payment requests, reconciliation and reference books in a single application with roles and permissions.',
         chips: [
@@ -110,7 +110,7 @@ export const en: CasesCopy = {
       system: {
         headline: 'One source of truth instead of everyone’s own report',
         pain: 'Every department exported marketplace data its own way, so meetings started with an argument about whose spreadsheet was right. Last year’s history did not exist at all.',
-        outcome: 'The platform collects data on a schedule and takes it through layers up to ready-made data marts. From there everyone - people, applications and agents - takes the numbers from the same marts.',
+        outcome: 'The platform collects data on a schedule and takes it through layers up to ready-made data marts. From there everyone (people, applications and agents) takes the numbers from the same marts.',
         chips: [
           { icon: 'scale', label: 'Collection', value: '33 data domains', note: 'A domain is a separate marketplace entity: orders, sales, stock, supplies, deductions, advertising, reviews and so on. Each is collected on a schedule, each with its own pagination strategy.' },
           { icon: 'coverage', label: 'Coverage', value: '4 doors out', note: 'BI and direct SQL, a REST API for applications, Claude Code, MCP tools for AI agents. Each door has its own database role, all of them read-only.' },
@@ -122,7 +122,7 @@ export const en: CasesCopy = {
         pain: 'Fees, logistics, storage and penalties are only visible in the marketplace’s own reports. There was nothing to check them against, so margin was taken on faith.',
         outcome: 'A dedicated data mart compares our weekly totals with the totals the marketplace itself calculated. An empty result means everything matches; a row with a difference shows exactly where it does not.',
         chips: [
-          { icon: 'trust', label: 'Verified against', value: 'buyouts and returns - to the kopeck', note: 'Buyouts, returns and the payable amount were checked against the marketplace response for a full day: an exact match on every figure.' },
+          { icon: 'trust', label: 'Verified against', value: 'buyouts and returns, to the kopeck', note: 'Buyouts, returns and the payable amount were checked against the marketplace response for a full day: an exact match on every figure.' },
           { icon: 'auto', label: 'Reconciliation', value: 'runs itself, every week' },
         ],
       },
@@ -131,7 +131,7 @@ export const en: CasesCopy = {
         pain: 'Data went through four processing layers and nobody compared the result with what the marketplace shows. Decisions rested on a number with nothing to check it against.',
         outcome: 'Orders, cancellations and stock reconcile with the marketplace down to a single unit, money down to the kopeck, and the check can be repeated any day with one command.',
         chips: [
-          { icon: 'trust', label: 'Verified against', value: 'the marketplace, unit by unit', note: 'Orders, cancellations and warehouse stock were checked against a direct marketplace response for a full day - an exact match, not «within tolerance».' },
+          { icon: 'trust', label: 'Verified against', value: 'the marketplace, unit by unit', note: 'Orders, cancellations and warehouse stock were checked against a direct marketplace response for a full day: an exact match, not «within tolerance».' },
           { icon: 'coverage', label: 'Data marts', value: 'sales, stock, presence, P&L, reconciliation' },
         ],
       },
@@ -154,8 +154,8 @@ export const en: CasesCopy = {
       diagramNote: 'Every marketplace response goes into the archive before parsing: if a field is parsed wrong, we re-read the archive instead of begging the marketplace for history again. It keeps 90 days; our archive keeps everything.',
       how: [
         'The layers are separated deliberately: raw is an «as it arrived» journal, the next layer removes duplicates, then business entities, and only then data marts. Counting on raw is wrong, so raw is closed by permissions rather than by agreement.',
-        'The response format is validated on the way in: a new marketplace field does not break collection, while a disappeared one raises a Telegram alert - and the load still does not stop.',
-        'Automatic reconciliation appeared after a real miss: one logistics field was read from a key the current API no longer has and was silently zero - margin was overstated by the entire delivery cost. The error survived unnoticed precisely because the system was only ever checked against itself.',
+        'The response format is validated on the way in: a new marketplace field does not break collection, while a disappeared one raises a Telegram alert, and the load still does not stop.',
+        'Automatic reconciliation appeared after a real miss: one logistics field was read from a key the current API no longer has and was silently zero, so margin was overstated by the entire delivery cost. The error survived unnoticed precisely because the system was only ever checked against itself.',
         'Four doors lead outward and all four are read-only: writing is blocked both by permissions and by the database mode. An AI agent gets a set of tools with a row limit and a timeout, not raw access.',
       ],
       owner: 'The engineer. The company’s analysts and applications are connected read-only, each with its own account.',
@@ -177,7 +177,7 @@ export const en: CasesCopy = {
     title: 'Product portal',
     angles: {
       automation: {
-        headline: 'Catalogue, labels and PDFs - one button',
+        headline: 'Catalogue, labels and PDFs: one button',
         pain: 'Every label was assembled by hand, in five steps through the external PLM. A typo in an SKU turned into a penalty and a return.',
         outcome: 'The product catalogue, label printing, PDF generation and image conversion live in one portal. Five manual steps collapsed into a single «Print label» button.',
         chips: [
@@ -199,7 +199,7 @@ export const en: CasesCopy = {
       resources: {
         headline: 'A product specialist runs it: 73 % of changes are theirs',
         pain: 'A fix in product data had to be ordered: from the PLM vendor as a paid modification, internally as a ticket to a developer. Either way it meant a queue.',
-        outcome: 'The portal is run by the product specialist - the person who fills in the product cards every day. The engineer owns review and the release to production, not the next card attribute.',
+        outcome: 'The portal is run by the product specialist, the person who fills in the product cards every day. The engineer owns review and the release to production, not the next card attribute.',
         chips: [
           { icon: 'people', label: 'Maintained by', value: 'a product specialist' },
           { icon: 'time', label: 'Specialist’s path', value: 'days to a working portal' },
@@ -222,7 +222,7 @@ export const en: CasesCopy = {
         'Product data belongs to the company, not to the vendor of someone else’s system.',
         'A label is printed by a button, so there is nowhere for an SKU typo to come from.',
         'A missing attribute or export format is added by the person who needs it, not by a queue to a developer.',
-        'The colour reference runs on the PowerShell built into Windows - used by people with no IT environment at all.',
+        'The colour reference runs on the PowerShell built into Windows: used by people with no IT environment at all.',
       ],
       diagramNodes: ['Product card', 'Portal catalogue', 'Label template', 'Image conversion', 'PDF and printing'],
       diagramNote: 'Attributes come from the catalogue rather than being carried over by hand: the label and the PDF are assembled from the same card the product specialist maintains.',
@@ -238,7 +238,7 @@ export const en: CasesCopy = {
       },
       how: [
         'Database, auth with roles, tests and auto-deploy to two environments existed on the day of the first commit: the delivery pipeline was assembled before the domain part rather than bolted on after it.',
-        'The domain part - catalogue, label templates, export formats - is run by the product specialist through Claude Code; code reaches production only through engineering review.',
+        'The domain part (catalogue, label templates, export formats) is run by the product specialist through Claude Code; code reaches production only through engineering review.',
       ],
       owner: 'The company’s product specialist. The engineer owns review and the release to production.',
       facts: [
@@ -258,7 +258,7 @@ export const en: CasesCopy = {
     title: 'Starter application template',
     angles: {
       speed: {
-        headline: 'From the first commit to a production pipeline - one day',
+        headline: 'From the first commit to a production pipeline in one day',
         pain: 'Between «the first screen is written» and «people can use this» there are usually weeks of setup, and it is assembled again on every project.',
         outcome: 'One command scaffolds not an empty skeleton but a configured workspace: stack, database, auth with roles, tests, CI and two environments with automatic production rollback.',
         chips: [
@@ -268,7 +268,7 @@ export const en: CasesCopy = {
         bar: {
           filled: 2,
           total: 3,
-          caption: 'two of the three systems - on the day of the first commit',
+          caption: 'two of the three systems on the day of the first commit',
         },
       },
       resources: {
@@ -283,21 +283,21 @@ export const en: CasesCopy = {
       },
     },
     detail: {
-      lead: 'A starter application template: one command and there is a project with a database, login-and-password auth, roles and permissions, tests, CI and auto-deploy to two environments. It is not an invented ideal: the template was extracted from systems already running in production, and what it packages is not an idea but an order of work - the delivery pipeline is assembled before the domain part.',
+      lead: 'A starter application template: one command and there is a project with a database, login-and-password auth, roles and permissions, tests, CI and auto-deploy to two environments. It is not an invented ideal: the template was extracted from systems already running in production, and what it packages is not an idea but an order of work. The delivery pipeline is assembled before the domain part.',
       effects: [
-        { block: 'speed', text: 'The production delivery pipeline is ready on the day of the first commit - the order proven on three systems' },
+        { block: 'speed', text: 'The production delivery pipeline is ready on the day of the first commit, the order proven on three systems' },
         { block: 'resources', text: 'The order proven on three systems is folded into a single command; in that same month one team launched seven applications' },
       ],
       value: [
         'The «and how do we ship this» question is answered before the first page is written.',
         'Every application is released the same way, so one engineer can fix them all instead of one person per project.',
-        'A bad production release rolls itself back - on a smoke check, not on a user’s phone call.',
+        'A bad production release rolls itself back: on a smoke check, not on a user’s phone call.',
         'The stack rules arrive with the project, so a company specialist works inside boundaries instead of inventing their own.',
       ],
       diagramNodes: ['One command', 'Project with a stack and a database', 'Auth, roles and permissions', 'Tests and CI', 'Dev and production with auto-rollback'],
       diagramNote: 'Checks stand between the development branch and production: formatting, linting, types, unit tests and a smoke test on login. Production only updates through review, and a bad release rolls itself back.',
       how: [
-        'It is more than a generator - it is a configured workspace. The stack rules, skills and six everyday commands arrive with the project: /ship (release), /status (environment health), /logs (logs), /reset-dev (sandbox reset), /request-prod (a production request) and /onboarding (bringing a new person in).',
+        'It is more than a generator: it is a configured workspace. The stack rules, skills and six everyday commands arrive with the project: /ship (release), /status (environment health), /logs (logs), /reset-dev (sandbox reset), /request-prod (a production request) and /onboarding (bringing a new person in).',
         'The template was extracted from two systems already running in production rather than built as a «reference for the future»: when their approach changes, the template follows.',
         'The two environments are separate on purpose: the sandbox updates from the development branch, production only through review, with a smoke check and automatic rollback.',
       ],
@@ -386,7 +386,7 @@ export const en: CasesCopy = {
       how: [
         'The order of the modules was chosen after a real collapse in orders: the marketplace’s own signals move sales harder than our bids do, and aggressive edits during a crisis only deepen the spiral. So the first step is the market regime, and in a crisis regime raises and new campaign launches are forbidden.',
         'Duplicate statistics batches are cut off on the way in: without that, spend was overstated several times over and the whole decision tree counted on an invented number.',
-        'Some brands are declared untouchable: the agents change no bids, no pauses and no negative keywords on them. The filter is hard-wired into the pause and recommendation scripts, but not into the bid-apply path - there the rule rests on the operating procedure and the agent’s prompt. The repository’s own audit says so rather than papering over it.',
+        'Some brands are declared untouchable: the agents change no bids, no pauses and no negative keywords on them. The filter is hard-wired into the pause and recommendation scripts, but not into the bid-apply path: there the rule rests on the operating procedure and the agent’s prompt. The repository’s own audit says so rather than papering over it.',
         'Reading agents and writing ones are separated on purpose: the digest, the campaign check and the bid calculator never write to the account at all, and the writing commands are not on the allowed list, so the system’s confirmation prompt always comes up before them. The overnight contour is built differently: there is no human beside it, and instead of a confirmation it is held by permitted windows, a daily spend kill-switch and auto mode being off by default.',
       ],
       owner: 'The engineer owns the engines and the agents. The decision belongs to the advertising operator: the system proposes, the human confirms.',
@@ -407,9 +407,9 @@ export const en: CasesCopy = {
     title: 'Marketplace stores in Claude',
     angles: {
       decisions: {
-        headline: 'An answer about the store - in words, without a dashboard',
+        headline: 'An answer about the store in words, without a dashboard',
         pain: 'To understand what is happening in a store, a seller walks three marketplace accounts and merges reports in a spreadsheet. A dashboard answers only what was built into it.',
-        outcome: 'The seller asks in plain words - «what is running out», «is the advertising paying off», «how much will land on my account» - and Claude goes into the marketplace API with their key.',
+        outcome: 'The seller asks in plain words: «what is running out», «is the advertising paying off», «how much will land on my account». Claude goes into the marketplace API with their key.',
         chips: [
           {
             icon: 'coverage',
@@ -433,7 +433,7 @@ export const en: CasesCopy = {
       },
       automation: {
         headline: 'Routine checks close with a question in chat',
-        pain: 'The daily checks - what is running out, what is blocked, what arrived in payouts - mean walking three accounts by hand. Nobody does that every day, and problems surface late.',
+        pain: 'The daily checks (what is running out, what is blocked, what arrived in payouts) mean walking three accounts by hand. Nobody does that every day, and problems surface late.',
         outcome: 'A check turns into a question in chat: Claude calls the marketplace methods it needs and answers to the point. A writing call does not go out first time: a preview first, the send on a second call.',
         chips: [
           { icon: 'auto', label: 'Daily check', value: 'a question in chat instead of a round of accounts' },
@@ -461,17 +461,17 @@ export const en: CasesCopy = {
       value: [
         'The answer is assembled from the marketplace API right now, not from an export a week old.',
         'You can ask what no dashboard holds: the API catalogue opens almost any method of the specification.',
-        'One marketplace’s key opens no other marketplace’s stores - checked on every call, not declared.',
+        'One marketplace’s key opens no other marketplace’s stores: checked on every call, not declared.',
         'Even with full access to the database, other people’s keys cannot be extracted: they are stored encrypted.',
       ],
       diagramNodes: ['A question in plain words', 'The marketplace connector', 'Tools and the API catalogue', 'Marketplace API with the seller’s key', 'An answer as rows, not a file'],
       diagramNote: 'Each marketplace has its own connector with its own address and access key. A writing call does not go out first time: the tool returns a preview, and the send happens only on a second call.',
       how: [
         'The API catalogue is built from snapshots of the marketplace specifications, so almost any method is available to Claude: find it by words, inspect its parameters, call it.',
-        'Before every release, watchdogs compare the methods the service calls from code against the specification snapshots: if a method is marked deprecated or has disappeared, the release stops. The rule appeared after a method turned out to be deleted after the code for it was written - three times in a row: the tests went into a mock, the mock answered in the shape of a dead endpoint, and everything was green.',
+        'Before every release, watchdogs compare the methods the service calls from code against the specification snapshots: if a method is marked deprecated or has disappeared, the release stops. The rule appeared after a method turned out to be deleted after the code for it was written, three times in a row: the tests went into a mock, the mock answered in the shape of a dead endpoint, and everything was green.',
         'The marketplace hands tabular reports over as files; the service downloads them and shows them as rows: the first two hundred as text, up to five thousand in a structured answer, the rest by paging.',
       ],
-      owner: 'Me. This is an own product rather than a client system: the key stays under the seller’s control - held in the database encrypted and revocable by them at any moment - and access to the service is granted by an invite code.',
+      owner: 'Me. This is an own product rather than a client system: the key stays under the seller’s control (held in the database encrypted, revocable at any moment), and access to the service is granted by an invite code.',
       facts: [
         { label: 'Coverage', value: '3 marketplaces, 48 tools' },
         { label: 'Keys', value: 'encrypted in the database' },
@@ -489,7 +489,7 @@ export const en: CasesCopy = {
     title: 'IT infrastructure inventory',
     angles: {
       system: {
-        headline: 'Services, access and owners - in one place',
+        headline: 'Services, access and owners in one place',
         pain: 'The inventory lived in a legacy panel and scattered notes: who is connected to what, what runs where, who owns it. When a person left, access and context left with them.',
         outcome: 'One panel: a service tree, the «who has access to what» matrix, keys and portals, tasks, problems, changes and an audit log. Login under your own account, sections visible by role.',
         chips: [
@@ -503,7 +503,7 @@ export const en: CasesCopy = {
             icon: 'time',
             label: 'Timeline',
             value: '11 days to a working system',
-            note: 'From the first commit on 17 July to delivery into production on 28 July - 11 days; the system holds 16 data models and 23 pages. The production delivery pipeline came together on the day of the first commit: CI and both deployment environments appeared 2 hours 13 minutes after it.',
+            note: 'From the first commit on 17 July to delivery into production on 28 July took 11 days; the system holds 16 data models and 23 pages. The production delivery pipeline came together on the day of the first commit: CI and both deployment environments appeared 2 hours 13 minutes after it.',
           },
           { icon: 'replaced', label: 'Replaced', value: 'a legacy panel of 35 tabs' },
         ],
@@ -521,7 +521,7 @@ export const en: CasesCopy = {
       diagramNodes: ['Servers and services', 'People and roles', 'Access grants', 'Keys and portals', 'Tasks, problems, audit'],
       diagramNote: 'The service tree is curated by hand, while facts from the collector are laid over it as a separate layer: the gap between «what is declared» and «what is actually there» stays visible instead of being silently overwritten.',
       how: [
-        'The destructive operations of the panel - importing employees and importing facts - go into a separate database in tests, and without its address the tests simply refuse to run. The rule appeared after a run against the working database: it switched off every real person at once, and the people lists in tasks went empty.',
+        'The destructive operations of the panel (importing employees and importing facts) go into a separate database in tests, and without its address the tests simply refuse to run. The rule appeared after a run against the working database: it switched off every real person at once, and the people lists in tasks went empty.',
         'The delivery pipeline came together first: CI and deployment to both the sandbox and production appeared a little over two hours after the first commit, and auth with roles and tests the same day. The «how do we ship this» question was closed before the domain part existed.',
       ],
       owner: 'The engineer. The panel is run by the company’s IT team: tasks, problems and changes are entered by the people who work with them.',
@@ -618,7 +618,7 @@ export const en: CasesCopy = {
       diagramNodes: ['A year of marketplace documents', 'Parsing PDFs and spreadsheets', 'Amounts by month', 'Tax at 4 % and 6 %', 'Remainder of the limit'],
       diagramNote: 'Downloading runs with a pause between files and a retry when the marketplace refuses on its request limit: a year’s pile arrives whole instead of breaking off halfway.',
       how: [
-        'The calculation is arranged as a background task: the start returns a task id, the stage and progress are visible from there, and the result is fetched by a separate request - a year of documents does not run into a timeout.',
+        'The calculation is arranged as a background task: the start returns a task id, the stage and progress are visible from there, and the result is fetched by a separate request, so a year of documents does not run into a timeout.',
         'Documents are split by category: weekly reports go into income from individuals, buyout notifications into income from companies, and the tax rate is chosen by that split.',
       ],
       owner: 'Me. Part of my own platform for marketplace sellers, not a client system.',
@@ -671,9 +671,9 @@ export const en: CasesCopy = {
       diagramNodes: ['Marketplace specifications and help', 'Deterministic build', 'Markdown with a link to the source', 'Indexes for the agent', 'The git diff as a report'],
       diagramNote: 'A file is rewritten only when its content has changed, so the diff after an update is a list of real changes in the marketplace’s rules rather than noise from dates.',
       how: [
-        'The original idea - a vector database, embeddings, a reranker and a web service - was dropped during review: an agent with a well-structured corpus does fine with file search and reading, and determinism matters more here than recall.',
+        'The original idea (a vector database, embeddings, a reranker and a web service) was dropped during review: an agent with a well-structured corpus does fine with file search and reading, and determinism matters more here than recall.',
         'API documents are built from the specifications rather than scraped: two of the marketplaces’ portals are closed off by bot protection at the connection level, so the sources are an official repository and specification mirrors.',
-        'Help is taken from a curated list of sections - commissions, tariffs, penalties, returns, fulfilment schemes, card requirements - and tables are kept as tables. One marketplace’s help is behind bot protection entirely, so it is covered by API method descriptions alone; that is written down in the decisions rather than papered over.',
+        'Help is taken from a curated list of sections (commissions, tariffs, penalties, returns, fulfilment schemes, card requirements), and tables are kept as tables. One marketplace’s help is behind bot protection entirely, so it is covered by API method descriptions alone; that is written down in the decisions rather than papered over.',
       ],
       owner: 'Me. Open source, refreshed by one command from a working machine.',
       facts: [
@@ -715,14 +715,14 @@ export const en: CasesCopy = {
         'A buyer sees the availability the warehouse actually has, not what was left in the catalogue last week.',
         'Every run reads both sides afresh, so a missed day does not turn into an accumulated discrepancy.',
         'Only changed items are written: there are no needless writes into a live store.',
-        'Items with no counterpart are shown separately - that is a question for the business, not a silent sync error.',
+        'Items with no counterpart are shown separately: that is a question for the business, not a silent sync error.',
       ],
       diagramNodes: ['Warehouse feeds', 'Store catalogue', 'Comparison and delta', 'Circuit breaker', 'Writing the stock'],
       diagramNote: 'Without an explicit flag the run only shows the plan and writes nothing. A real write is a deliberate step, and on a suspicious share of changes the circuit breaker stops it until someone looks.',
       how: [
         'Barcodes are written differently on the two sides: fourteen digits with a leading zero in the store, thirteen without it in the feeds. Matching is done on strings with the zero stripped, and that is what makes them meet: without stripping, about 13 % of the catalogue matched, with it about 95 %.',
-        'Stock from the two legal entities is added up per barcode; if an item is in neither feed its stock goes to zero - the feed is authoritative.',
-        'The physical quantity from the warehouse is what gets written, while the reserve held by orders is the store’s own count - the sync does not touch it.',
+        'Stock from the two legal entities is added up per barcode; if an item is in neither feed its stock goes to zero, because the feed is authoritative.',
+        'The physical quantity from the warehouse is what gets written, while the reserve held by orders is the store’s own count: the sync does not touch it.',
         'A truncated feed never goes into work: the file is checked for completeness. An item the store rejects is pulled out of the batch and the rest are re-sent, and on a rate-limit refusal the run waits and retries.',
       ],
       owner: 'The company’s content manager. The warehouse operator is left with the run log: intervention is needed when the circuit breaker fires or the tokens expire.',
@@ -752,17 +752,17 @@ export const en: CasesCopy = {
             icon: 'coverage',
             label: 'In the plugin',
             value: '12 commands, 5 agents, 3 skills',
-            note: 'Commands - setup, a readiness check, release, logs, health, rollback, servers, SSH keys, DNS, certificates. Agents - for Node.js, Python, PHP and static sites, plus a validator. Skills - database, web server, certificates.',
+            note: 'Commands: setup, a readiness check, release, logs, health, rollback, servers, SSH keys, DNS, certificates. Agents: for Node.js, Python, PHP and static sites, plus a validator. Skills: database, web server, certificates.',
           },
-          { icon: 'auto', label: 'Infrastructure', value: 'server, database, DNS, certificate - by a tool call' },
+          { icon: 'auto', label: 'Infrastructure', value: 'server, database, DNS and certificate by a tool call' },
         ],
       },
     },
     detail: {
-      lead: 'Open source: a plugin for Claude Code and an MCP server for a cloud provider. Servers, database clusters, object storage, domains and DNS, SSH keys and the application release itself - by a tool call from chat, with no manual SSH. The package is published on npm, and the plugin installs from the plugin marketplace.',
+      lead: 'Open source: a plugin for Claude Code and an MCP server for a cloud provider. Servers, database clusters, object storage, domains and DNS, SSH keys and the application release itself are all done by a tool call from chat, with no manual SSH. The package is published on npm, and the plugin installs from the plugin marketplace.',
       effects: [{ block: 'speed', text: 'The path from finished code to a working address shrank to a command in chat' }],
       value: [
-        'The «how do we ship this» question is settled where the code was written - in the same chat.',
+        'The «how do we ship this» question is settled where the code was written: in the same chat.',
         'Infrastructure is created by a tool call, so the steps are neither forgotten nor done from memory.',
         'A readiness check runs before the release, health and logs after it, and a bad release is rolled back by a command.',
         'It is open source and a public package: anyone can plug it in, not only me.',
@@ -771,7 +771,7 @@ export const en: CasesCopy = {
       diagramNote: 'The provider token lives in the environment and never reaches the chat: the tool calls the API itself, and Claude only sees the result of the call.',
       how: [
         'The tools cover servers, database clusters, Kubernetes, object storage, domains and DNS, SSH keys, floating addresses, pricing and the account balance: the provider’s API in full, not a slice cut for one scenario.',
-        'The agents are split by stack - Node.js and Next.js, Python, PHP, static - and a separate agent checks that the release can go through at all before anything changes on the server.',
+        'The agents are split by stack (Node.js and Next.js, Python, PHP, static), and a separate agent checks that the release can go through at all before anything changes on the server.',
         'The MCP server runs through npx and takes its token from the environment, while the plugin installs from the Claude Code plugin marketplace with one command.',
       ],
       owner: 'Me. Open source under the MIT licence, with the package published on npm.',
@@ -793,14 +793,14 @@ export const en: CasesCopy = {
     angles: {
       resources: {
         headline: 'A seller runs sales without hiring an analyst',
-        pain: 'Going through sales, unit economics, the funnel, card SEO, ABC analysis, competitors - that is a job for a separate person. A small store has nothing to hire them with.',
+        pain: 'Going through sales, unit economics, the funnel, card SEO, ABC analysis and competitors is a job for a separate person. A small store has nothing to hire them with.',
         outcome: 'An open template: one clone per store, keys in the environment, connectors to three marketplaces and seven commands for those questions. Intended so; how far it replaces an analyst I have not measured.',
         chips: [
           { icon: 'coverage', label: 'Commands', value: 'report, unit economics, funnel, SEO, ABC, competitors' },
           {
             icon: 'people',
             label: 'Model',
-            value: 'one clone - one store',
+            value: 'one clone, one store',
             note: 'The purpose of the template rather than a measured result: how much analyst work it takes off is known from store owners’ own words, and I have no measurement of it.',
           },
           { icon: 'trust', label: 'Changing a price', value: '«before → after» first, confirmation after' },
@@ -808,7 +808,7 @@ export const en: CasesCopy = {
       },
     },
     detail: {
-      lead: 'An open Claude Code workspace template for a marketplace seller: connectors to three marketplaces, seven ready commands - from the weekly report to ABC analysis - and a knowledge base inside the repository itself. One clone, one store.',
+      lead: 'An open Claude Code workspace template for a marketplace seller: connectors to three marketplaces, seven ready commands (from the weekly report to ABC analysis) and a knowledge base inside the repository itself. One clone, one store.',
       effects: [{ block: 'resources', text: 'The questions people hire an analyst for are packaged as commands of the template' }],
       value: [
         'The report, unit economics, the funnel, an SEO audit, ABC and competitors are called by a command instead of being assembled from scratch each time.',
@@ -848,7 +848,7 @@ export const en: CasesCopy = {
             icon: 'auto',
             label: 'A new agent',
             value: 'a file with a prompt and no code',
-            note: 'An agent is a file: settings in the header, the prompt in the body. It runs through the core’s shared loop - call the model, run a tool, take the next step - so no code is written for a particular agent at all.',
+            note: 'An agent is a file: settings in the header, the prompt in the body. It runs through the core’s shared loop (call the model, run a tool, take the next step), so no code is written for a particular agent at all.',
           },
           {
             icon: 'trust',
@@ -860,7 +860,7 @@ export const en: CasesCopy = {
             icon: 'coverage',
             label: 'What agents may do',
             value: 'read and notify; writing is forbidden',
-            note: 'Every tool in the registry carries its own access mode. Agents are allowed to read and to send messages only; a config asking for write access is rejected by the loader - until there is a queue where a human confirms.',
+            note: 'Every tool in the registry carries its own access mode. Agents are allowed to read and to send messages only; a config asking for write access is rejected by the loader until there is a queue where a human confirms.',
           },
         ],
       },
@@ -872,7 +872,7 @@ export const en: CasesCopy = {
         'The request is written by the person it hurts, in the language of their work, not in the terms of a developer’s ticket.',
         'Requests are visible to every employee: someone else’s request shows what is already being automated, and that removes duplicates.',
         'The audit is mandatory, so some asks are honestly closed by a script or split up instead of becoming an agent for the sake of it.',
-        'A new agent needs neither its own service nor code written for it - only a file and a release.',
+        'A new agent needs neither its own service nor code written for it: only a file and a release.',
         'An agent cannot change data in an account: reading and notifications are all it has.',
       ],
       diagramNodes: ['An employee’s request', 'Audit and verdict', 'The agent file with its prompt', 'The tool registry', 'Scheduled runs and the log'],
@@ -902,7 +902,7 @@ export const en: CasesCopy = {
     angles: {
       speed: {
         headline: 'A screen is assembled from ready blocks, not drawn from scratch',
-        pain: 'Every new screen started from nothing: its own components, colours and spacing. A block that worked did not travel to the next project - it was nailed to its own theme.',
+        pain: 'Every new screen started from nothing: its own components, colours and spacing. A block that worked did not travel to the next project, because it was nailed to its own theme.',
         outcome: 'A library of authored sections and template pages on top of stock shadcn components. A block transfers as a file: data arrives through props and the colour comes from the receiving app’s theme.',
         chips: [
           {
@@ -915,7 +915,7 @@ export const en: CasesCopy = {
             icon: 'trust',
             label: 'Portability',
             value: 'checked on every build',
-            note: 'Blocks and pages may use semantic theme tokens only. Raw palette classes, hex colours and literal oklch() are forbidden and fail the check - that is exactly what lets a block repaint itself into the receiving app’s theme.',
+            note: 'Blocks and pages may use semantic theme tokens only. Raw palette classes, hex colours and literal oklch() are forbidden and fail the check: that is exactly what lets a block repaint itself into the receiving app’s theme.',
           },
           {
             icon: 'auto',
@@ -941,10 +941,10 @@ export const en: CasesCopy = {
       how: [
         'The layers are kept strictly apart: stock components are never customized, authored blocks take data through props only and never import fixtures, and template pages own their data. Customization is blocks and pages, never an edit to the stock layer.',
         'Token discipline is not a matter of taste but the condition of portability: a block with a raw colour inside stays foreign in someone else’s theme. So the ban is enforced by a separate command over blocks and pages, while the stock layer is exempt.',
-        'The primitives here are Base UI, not Radix, and a separate warning says so: examples from training data are almost always Radix. A button rendered as a link without the right flag only complains in a live browser - neither types nor the linter will catch it.',
-        'The kit is not installed from a remote registry: it lies on disk nearby, and Claude Code reads the block source and carries it into the project by the recipe - reinstalling the stock components on the receiving side. What is published as an open registry is something else - this site’s theme and components: the showcase behind the link shows them live, while a machine reads them at /r/registry.json.',
+        'The primitives here are Base UI, not Radix, and a separate warning says so: examples from training data are almost always Radix. A button rendered as a link without the right flag only complains in a live browser: neither types nor the linter will catch it.',
+        'The kit is not installed from a remote registry: it lies on disk nearby, and Claude Code reads the block source and carries it into the project by the recipe, reinstalling the stock components on the receiving side. What is published as an open registry is something else, this site’s theme and components: the showcase behind the link shows them live, while a machine reads them at /r/registry.json.',
       ],
-      owner: 'Me. The kit repository is private; what is open is this site’s showcase of the theme and the components - it carries the install command too.',
+      owner: 'Me. The kit repository is private; what is open is this site’s showcase of the theme and the components, and it carries the install command too.',
       facts: [
         { label: 'In the kit', value: '143 blocks, 76 template pages' },
         { label: 'Maintained by', value: 'an engineer' },
@@ -962,7 +962,7 @@ export const en: CasesCopy = {
     title: 'Content factory',
     angles: {
       resources: {
-        headline: 'A video from script to subtitles - without contractors',
+        headline: 'A video from script to subtitles, without contractors',
         pain: 'Video means a scriptwriter, a motion designer, an editor and someone to lay the text out across platforms. For one author that is a contract per video, or no videos at all.',
         outcome: 'A workshop in a repository: commands write the script in blocks, overlays and diagrams are built in code, and a local Whisper does the transcription. Filming, editing and publishing stay with the human.',
         chips: [
@@ -976,7 +976,7 @@ export const en: CasesCopy = {
             icon: 'scale',
             label: 'The graphics library',
             value: '110 Remotion compositions',
-            note: 'Sources for overlays, cards, thumbnails and titles; most have a horizontal and a vertical variant, 234 entries in the registry in total. Heavy renders are not kept in the repository - only the sources are.',
+            note: 'Sources for overlays, cards, thumbnails and titles; most have a horizontal and a vertical variant, 234 entries in the registry in total. Heavy renders are not kept in the repository: only the sources are.',
           },
           {
             icon: 'auto',
@@ -999,14 +999,14 @@ export const en: CasesCopy = {
         'A video does not hinge on a contractor: script, graphics and subtitles are put together on the spot.',
         'Graphics are reused: branded overlays are rendered once and laid over any footage.',
         'Transcription runs locally, so subtitles cost neither a per-minute fee nor an API key.',
-        'A command prepares the texts per platform, but a human posts them - there is no auto-posting at all.',
+        'A command prepares the texts per platform, but a human posts them: there is no auto-posting at all.',
       ],
       diagramNodes: ['A description of the video', 'A script in blocks', 'Overlays, diagrams, slides', 'Filming and editing', 'Subtitles and platform texts'],
       diagramNote: 'The script marks every block with its recording mode: a voiced block carries the words verbatim, a screen block carries what is open and which actions to show. One shared template would give either an unreadable script or improvisation off a sheet of paper.',
       how: [
         'Each kind of material has its own tool, and a table says which: a branded overlay is Remotion, a diagram is a single Excalidraw canvas, a list of points is slides, an interface is a live walkthrough. Otherwise one tool gets dragged where another works better.',
-        'Auto-posting was removed deliberately: the social posting servers are gone and the command only prepares the texts per platform. One external connection is left - Telegram search for research, not distribution.',
-        'Heavy renders are not tracked in the repository: what is published lives on the platforms, and what stays here are the composition sources and the scripts - the things everything is rebuilt from.',
+        'Auto-posting was removed deliberately: the social posting servers are gone and the command only prepares the texts per platform. One external connection is left, Telegram search for research, not distribution.',
+        'Heavy renders are not tracked in the repository: what is published lives on the platforms, and what stays here are the composition sources and the scripts: the things everything is rebuilt from.',
         'After publication a video’s folder moves to a separate directory: its state is visible from where it sits rather than from a status line someone forgets to change.',
       ],
       owner: 'Me. This is my own workshop rather than a service for sale: the repository is not published.',
@@ -1027,8 +1027,8 @@ export const en: CasesCopy = {
     title: 'Marts on top of the data lake',
     angles: {
       decisions: {
-        headline: 'Margin per product - and, separately, what does not land on it',
-        pain: 'Product economics were counted off the marketplace report. Cost price sits on logistics rows too, and there are far more of those - it came out an order of magnitude high.',
+        headline: 'Margin per product and, separately, what does not land on it',
+        pain: 'Product economics were counted off the marketplace report. Cost price sits on logistics rows too, and there are far more of those, so it came out an order of magnitude high.',
         outcome: 'Two marts: one holds what honestly lands on a product, the other storage, intake, penalties and withholdings that do not spread across items. On screen they are a separate block, not profit that is absent.',
         chips: [
           {
@@ -1058,7 +1058,7 @@ export const en: CasesCopy = {
       },
     },
     detail: {
-      lead: 'An application with dashboards over two sources: the data lake and the corporate warehouse. It does not compute on the fly - background jobs move aggregates into its own database, and the screen reads a mart whose freshness date is visible.',
+      lead: 'An application with dashboards over two sources: the data lake and the corporate warehouse. It does not compute on the fly. Background jobs move aggregates into its own database, and the screen reads a mart whose freshness date is visible.',
       effects: [{ block: 'decisions', text: 'A decision about a product rests on a figure that carries both its date and what was left out of it' }],
       value: [
         'The dashboard answers even while the source is unavailable, and it always shows what moment the data is from.',
@@ -1068,11 +1068,11 @@ export const en: CasesCopy = {
         'The application builds no data collection of its own: it takes the ready lake and keeps a short mart on top of it for the speed of the screen.',
       ],
       diagramNodes: ['The data lake', 'The corporate warehouse', 'Scheduled background jobs', 'Marts of our own', 'Dashboards with a freshness date'],
-      diagramNote: 'Only the background job reaches into the sources - it sits inside the protected perimeter. The interface and the API read nothing but their own database, so where they run does not depend on the source’s network.',
+      diagramNote: 'Only the background job reaches into the sources: it sits inside the protected perimeter. The interface and the API read nothing but their own database, so where they run does not depend on the source’s network.',
       how: [
         'There are two marts on purpose. Storage, intake, penalties and withholdings are zero on product rows, and the withholdings themselves are tied to no item on any row. Spreading them across products takes an invented rule; staying silent means showing profit that is not there.',
         'The source is read from a view rather than the base table: the view normalises the signs on returns and adds the cost price and the link to the accounting system’s item, neither of which the table itself carries.',
-        'The source was surveyed before anything was built, and the survey checked not only metadata but freshness, dependencies and schedules. One in seven non-empty tables turned out to carry data older than a week - the catalogue does not tell those from the live ones, because monitoring watches the job status rather than the completeness of the data.',
+        'The source was surveyed before anything was built, and the survey checked not only metadata but freshness, dependencies and schedules. One in seven non-empty tables turned out to carry data older than a week, and the catalogue does not tell those from the live ones, because monitoring watches the job status rather than the completeness of the data.',
         'The job queue lives in the same database as the application’s data: enqueueing a job and the business change land in one transaction, so «saved it, lost the job» cannot happen. No separate storage for the queue was needed.',
       ],
       owner: 'An engineer. Both sources are connected read-only; the application can write to its own database and nowhere else.',
@@ -1084,7 +1084,7 @@ export const en: CasesCopy = {
       screenshots: [],
       metaTitle: 'Case: marts and dashboards on top of a data lake | Minas Sarkisyan',
       metaDescription:
-        'The dashboard reads its own mart with a freshness date, not the source. Two marts: what lands on a product and what does not - storage, penalties, withholdings.',
+        'The dashboard reads its own mart with a freshness date, not the source. Two marts: what lands on a product and what does not (storage, penalties, withholdings).',
     },
   },
 
@@ -1101,13 +1101,13 @@ export const en: CasesCopy = {
             icon: 'scale',
             label: 'Tools',
             value: '125: ads, analytics, search',
-            note: '52 Webmaster tools, 46 for Direct, 25 for Metrika and two for switching projects. On top of them, six ready workflows - from a campaign audit to a training check - and an autostrategy playbook handed to the assistant as a server resource.',
+            note: '52 Webmaster tools, 46 for Direct, 25 for Metrika and two for switching projects. On top of them, six ready workflows (from a campaign audit to a training check) and an autostrategy playbook handed to the assistant as a server resource.',
           },
           {
             icon: 'trust',
             label: 'A writing call',
             value: 'a preview first, confirmation after',
-            note: 'Without a confirmation the tool sends nothing: it returns the request itself - the method and its parameters - along with the declared budget and bid changes and any limits they break. The current values in that answer come from the caller, not from the account. Maximum change percentages are set per project; going past them takes a separate flag.',
+            note: 'Without a confirmation the tool sends nothing: it returns the request itself (the method and its parameters) along with the declared budget and bid changes and any limits they break. The current values in that answer come from the caller, not from the account. Maximum change percentages are set per project; going past them takes a separate flag.',
           },
           {
             icon: 'money',
@@ -1119,7 +1119,7 @@ export const en: CasesCopy = {
       },
     },
     detail: {
-      lead: 'An open MCP server for three Yandex accounts - Direct, Metrika and Webmaster - with 125 tools in a single process. The assistant answers about ads, traffic and search in words, while edits to an account pass through a preview, limits and warnings.',
+      lead: 'An open MCP server for three Yandex accounts (Direct, Metrika and Webmaster) with 125 tools in a single process. The assistant answers about ads, traffic and search in words, while edits to an account pass through a preview, limits and warnings.',
       effects: [{ block: 'money', text: 'Ad spend becomes visible in words, and a budget edit passes through a preview and a limit' }],
       value: [
         'An answer about spend, bids and conversions is assembled from the API right now, not from yesterday’s export.',

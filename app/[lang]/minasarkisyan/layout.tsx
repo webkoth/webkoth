@@ -17,8 +17,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: {
       default: lang === "en"
-        ? "Minas Sarkisyan — Senior Fullstack & AI Engineer | Python, MCP, RAG, LLM"
-        : "Минас Саркисян — Senior Fullstack & AI Engineer | Python, MCP, RAG, LLM",
+        ? "Minas Sarkisyan · Senior Fullstack & AI Engineer | Python, MCP, RAG, LLM"
+        : "Минас Саркисян · Senior Fullstack & AI Engineer | Python, MCP, RAG, LLM",
       template: "%s | Minas Sarkisyan"
     },
     description: lang === "en"

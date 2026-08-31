@@ -12,16 +12,16 @@ export const en: EvolutionData = {
   meta: {
     title: 'Business evolution: from chaos to system, from routine to automation | Minas Sarkisyan',
     description:
-      'I solve business problems once - with a system. Finances - more transparent, decisions - more precise, processes - faster, resources - freer. First step - an audit: a review of your prototypes and a process map.',
+      'I solve business problems once: with a system. Finances become more transparent, decisions more precise, processes faster, resources freer. The first step is an audit: a review of your prototypes and a process map.',
     ogTitle: 'Business evolution: from chaos to system, from routine to automation',
     ogDescription:
-      'I solve business problems once - with a system, not a hire. Systems are built by the company’s own specialists; I own the engineering side.',
-    twitterDescription: 'I solve business problems once - with a system',
+      'I solve business problems once: with a system, not a hire. Systems are built by the company’s own specialists; I own the engineering side.',
+    twitterDescription: 'I solve business problems once: with a system',
     jsonLd: {
       name: 'Business evolution: from chaos to system, from routine to automation',
       serviceType: 'Audit and building of AI-powered business systems by the company’s own domain experts',
       description:
-        'I solve business problems once - with a system, not a hire. First step - an audit: a review of existing prototypes and a process map.',
+        'I solve business problems once: with a system, not a hire. The first step is an audit: a review of existing prototypes and a process map.',
       area: 'Worldwide, remote',
     },
   },
@@ -75,17 +75,17 @@ export const en: EvolutionData = {
 
   hero: {
     line1: 'From chaos to system\nFrom routine to automation',
-    lead: '**Finances** become transparent, **decisions** more precise, **processes** faster - and **resources** are freed up.',
+    lead: '**Finances** become transparent, **decisions** more precise, **processes** faster, and **resources** are freed up.',
     seal: 'AI business evolution',
     sub: 'I solve business problems by putting AI where it actually helps.',
     cta: 'Book a free audit',
     scrollHint: 'This page is the work plan itself: six steps, in the order they happen',
     stackHint: 'hover a node to see what it does',
     stackNodes: {
-      client: 'Users: browser, extension, Telegram - wherever requests come from.',
+      client: 'Users: browser, extension, Telegram: wherever requests come from.',
       frontend: 'Next.js: UI and server routes; changes ship the same day.',
       backend: 'Business logic and orchestration: queues, access, integrations.',
-      api: 'External APIs: marketplaces, banks, payments - unstable, hence behind a queue with retries.',
+      api: 'External APIs: marketplaces, banks, payments. They are unstable, hence behind a queue with retries.',
       ai: 'AI router: picks the model for the task and budget, watches the limits.',
       ai1: 'Primary model (Claude): hard tasks, generation and document parsing.',
       ai2: 'Fallback (Gemini): kicks in on an error or rate limit of the primary.',
@@ -116,7 +116,7 @@ export const en: EvolutionData = {
       symptom:
         'Nobody knows today’s real account balances or net profit for sure. Payment requests get approved in chats, and the risk of a cash gap never goes away.',
       description: [
-        'The first thing a system gives you is visibility of money. Cash flow, budget, payment requests with an approval route, reconciliation - not in ten files held by three people, but on one screen that adds up.',
+        'The first thing a system gives you is visibility of money. Cash flow, budget, payment requests with an approval route, reconciliation: not in ten files held by three people, but on one screen that adds up.',
       ],
     },
 
@@ -128,7 +128,7 @@ export const en: EvolutionData = {
         'Margins are estimated roughly or after the fact. Hidden marketplace fees and penalties quietly burn through net profit.',
       description: [
         'When data reconciles down to a single unit, decisions stop being a clash of opinions.',
-        'Margin per marketplace account and per SKU is not a feeling but a number you can trust - because it is reconciled with the source.',
+        'Margin per marketplace account and per SKU is not a feeling but a number you can trust, because it is reconciled with the source.',
       ],
     },
 
@@ -139,8 +139,8 @@ export const en: EvolutionData = {
       symptom:
         'Managers spend hours copying product cards, assembling labels and PDFs by hand. Human error and typos in SKUs cost penalties and returns.',
       description: [
-        'Only what is ordered can be automated - that is why this step comes second, not first.',
-        'Repetitive manual operations - cards, labels, documents, file conversion - go to the system entirely: what was done by hand every day starts happening by itself.',
+        'Only what is ordered can be automated; that is why this step comes second, not first.',
+        'Repetitive manual operations (cards, labels, documents, file conversion) go to the system entirely: what was done by hand every day starts happening by itself.',
       ],
     },
 
@@ -152,7 +152,7 @@ export const en: EvolutionData = {
         'Any IT change drags on for months. Contractors miss deadlines and inflate estimates, and the business loses its pace of testing hypotheses.',
       description: [
         'Speed is a consequence, not a slogan: it appears once the system sits on a pipeline.',
-        'From idea to an application running in production - a day, not months. Changes reach users the same day, with automated checks and automatic rollback.',
+        'From idea to an application running in production takes a day, not months. Changes reach users the same day, with automated checks and automatic rollback.',
       ],
     },
 
@@ -164,7 +164,7 @@ export const en: EvolutionData = {
         'Growth runs into the scarcity and cost of developers. Payroll swells while tasks pile up in an endless backlog.',
       description: [
         'The main resource set free is people.',
-        'Systems are built not by hired programmers but by the company’s own domain experts - a finance analyst, a product specialist, a content manager - under engineering supervision. Growth stops depending on hiring.',
+        'Systems are built not by hired programmers but by the company’s own domain experts (a finance analyst, a product specialist, a content manager) under engineering supervision. Growth stops depending on hiring.',
       ],
     },
   },
@@ -192,16 +192,16 @@ export const en: EvolutionData = {
     url: 'https://hubmarket.ru',
     sub: 'AI SaaS for marketplace sellers',
     frame: [
-      'My own product, which I run as founder and sole developer. Everything described in the six steps above - queues, an AI cascade with fallback, a data warehouse with reconciliation, a production pipeline from day one - runs here for external users.',
+      'My own product, which I run as founder and sole developer. Everything described in the six steps above (queues, an AI cascade with fallback, a data warehouse with reconciliation, a production pipeline from day one) runs here for external users.',
     ],
-    hint: 'hover any node - a description appears',
+    hint: 'hover any node and a description appears',
     flowLabel: 'data flow',
     diagramAria: 'HubMarket architecture',
     nodes: {
       chrome: {
         label: 'Chrome MV3',
         sub: 'Seller extension',
-        description: 'Chrome extension - snapshots data from marketplace dashboards.',
+        description: 'Chrome extension: snapshots data from marketplace dashboards.',
       },
       next: {
         label: 'Next.js 16',
@@ -212,7 +212,7 @@ export const en: EvolutionData = {
       queue: {
         label: 'pg-boss',
         sub: 'Queues on top of Postgres',
-        description: 'Job queues on top of Postgres - no separate infrastructure.',
+        description: 'Job queues on top of Postgres, no separate infrastructure.',
       },
       parser: {
         label: 'hubmarket-parser',
@@ -235,12 +235,12 @@ export const en: EvolutionData = {
       bronze: {
         label: 'Bronze lake',
         sub: 'raw JSON',
-        description: 'Raw JSON from marketplaces - append-only, nothing is lost.',
+        description: 'Raw JSON from marketplaces, append-only: nothing is lost.',
       },
       silver: {
         label: 'Silver lake',
         sub: 'Prisma tables',
-        description: 'Normalised Prisma tables - the source for analytics and AI.',
+        description: 'Normalised Prisma tables: the source for analytics and AI.',
       },
       telegram: {
         label: 'Telegram bot',
@@ -268,22 +268,22 @@ export const en: EvolutionData = {
     screenshots: [
       {
         src: '/images/hubmarket-dashboard-summary.png',
-        alt: 'HubMarket - summary: revenue, profit, business health',
+        alt: 'HubMarket, summary: revenue, profit, business health',
         caption: 'Summary: revenue, profit, business health',
       },
       {
         src: '/images/hubmarket-unit-economics.png',
-        alt: 'HubMarket - unit economics per SKU',
+        alt: 'HubMarket, unit economics per SKU',
         caption: 'Unit economics per SKU',
       },
       {
         src: '/images/hubmarket-reviews-ai-replies.png',
-        alt: 'HubMarket - reviews with AI-drafted replies',
+        alt: 'HubMarket, reviews with AI-drafted replies',
         caption: 'Reviews: AI-drafted replies',
       },
       {
         src: '/images/hubmarket-seasonality-forecast.png',
-        alt: 'HubMarket - seasonality and demand forecast',
+        alt: 'HubMarket, seasonality and demand forecast',
         caption: 'Seasonality: demand forecast',
       },
     ],
@@ -297,13 +297,13 @@ export const en: EvolutionData = {
       {
         num: '01',
         title: 'Review',
-        body: 'Three questions: what you have already tried with AI and what of it works; who you plan to hire and why you haven’t yet; who in the company understands the painful process best. If the scheme doesn’t fit you - I’ll say so right away.',
+        body: 'Three questions: what you have already tried with AI and what of it works; who you plan to hire and why you haven’t yet; who in the company understands the painful process best. If the scheme doesn’t fit you, I’ll say so right away.',
         pill: 'free · 30–45 min',
       },
       {
         num: '02',
         title: 'Audit and map',
-        body: 'A review of the prototype graveyard: what works, who owns it, on what data, what breaks. A process map: what goes into an application, what to an agent, what to a person with AI, what not to touch at all. Choosing the first process and measuring the baseline. Some prototypes get fixed in hours - quick wins already during the audit.',
+        body: 'A review of the prototype graveyard: what works, who owns it, on what data, what breaks. A process map: what goes into an application, what to an agent, what to a person with AI, what not to touch at all. Choosing the first process and measuring the baseline. Some prototypes get fixed in hours: quick wins already during the audit.',
         pill: '2–3 weeks · a document with a map and priorities',
       },
       {
@@ -315,7 +315,7 @@ export const en: EvolutionData = {
       {
         num: '04',
         title: 'Support',
-        body: 'Reviewing the changes your specialists make, shipping to production, the next processes. The only path to production is through review - so the system doesn’t fall apart when non-programmers grow it.',
+        body: 'Reviewing the changes your specialists make, shipping to production, the next processes. The only path to production is through review, so the system doesn’t fall apart when non-programmers grow it.',
         pill: 'ongoing · growth without hiring',
       },
     ],
@@ -325,7 +325,7 @@ export const en: EvolutionData = {
     step: '07',
     slogan: 'This is what business evolution is',
     description: [
-      'An honest line to set me apart: the path did not work the first time. Of four attempts at one task, three were stopped - and I know exactly why the fourth one lives: methodology, not technology.',
+      'An honest line to set me apart: the path did not work the first time. Of four attempts at one task, three were stopped, and I know exactly why the fourth one lives: methodology, not technology.',
       'That is why I sell not «AI adoption» but getting to the result.',
     ],
     manifesto:
@@ -339,7 +339,7 @@ export const en: EvolutionData = {
         ['#3', '9 Jul – 25 Jul', '53', 'stopped'],
         ['#4', '13 Jul – 14 Aug', '784', 'running and growing'],
       ],
-      note: 'In attempt #2 most changes were already made by domain experts - and the project still stopped. The difference between it and the fourth: strict stack boundaries, mandatory design before code, a single path to production through review, and a delivery pipeline from day one.',
+      note: 'In attempt #2 most changes were already made by domain experts, and the project still stopped. The difference between it and the fourth: strict stack boundaries, mandatory design before code, a single path to production through review, and a delivery pipeline from day one.',
     },
     form: {
       label: 'Request',
@@ -366,12 +366,12 @@ export const en: EvolutionData = {
       errors: {
         name_min: 'At least 2 characters',
         contact_min: 'Telegram, email or phone',
-        answer_min: 'A couple of words is enough - even «nothing»',
+        answer_min: 'A couple of words is enough, even «nothing»',
         no_newline: 'No line breaks',
       },
       rateLimited: {
         before:
-          'Too many submissions from your address. The limit is temporary, but retrying now is pointless - message me on ',
+          'Too many submissions from your address. The limit is temporary, but retrying now is pointless; message me on ',
         link: 'Telegram',
         after: ', I will answer there.',
       },
@@ -383,7 +383,7 @@ export const en: EvolutionData = {
         error: 'Could not send',
         errorBody: 'Try again or message me on Telegram.',
         rateLimited: 'Too many submissions',
-        rateLimitedBody: 'Retrying now is pointless - message me on Telegram.',
+        rateLimitedBody: 'Retrying now is pointless; message me on Telegram.',
       },
       submit: 'Book a review',
       submitting: 'Sending…',
@@ -431,7 +431,7 @@ export const en: EvolutionData = {
       aria: 'A grid of operations: most cells switch to «auto» mode, and the people from them move to the growth cells',
       growth: 'growth',
       legendSystem: 'done by the system',
-      legendPeople: 'stays with people - and moves to growth',
+      legendPeople: 'stays with people and moves to growth',
     },
     sprouts: {
       aria: 'Four sprouts: three wilt, the fourth grows into a tree with six branches: system, finances, decisions, automation, speed, resources',

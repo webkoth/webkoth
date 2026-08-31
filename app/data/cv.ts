@@ -108,9 +108,9 @@ export const cvData: Record<"en" | "ru", CVData> = {
       github: "github.com/webkoth",
     },
     about:
-      "10+ years of fullstack development in production. 2+ years deep with LLMs: cascades (Claude + Gemini + Groq), RAG, AI agents, 7 MCP servers on npm. Work effectively solo or in a team — from feature delivery to architecture design. Strong hard skills in business analysis and rapid prototyping. Currently building HubMarket — AI-SaaS for marketplace sellers.",
+      "10+ years of fullstack development in production. 2+ years deep with LLMs: cascades (Claude + Gemini + Groq), RAG, AI agents, 7 MCP servers on npm. Work effectively solo or in a team, from feature delivery to architecture design. Strong hard skills in business analysis and rapid prototyping. Currently building HubMarket, an AI-SaaS for marketplace sellers.",
     pitch:
-      "10+ years of fullstack development. 2+ years deep with LLMs. Work effectively solo or in a team. Handle every level — from feature delivery to architecture design. Strong hard skills in business analysis and rapid prototyping.",
+      "10+ years of fullstack development. 2+ years deep with LLMs. Work effectively solo or in a team. Handle every level, from feature delivery to architecture design. Strong hard skills in business analysis and rapid prototyping.",
     metrics: [
       { value: 10, suffix: "+", label: "yrs fullstack" },
       { value: 2, suffix: "+", label: "yrs production AI" },
@@ -241,7 +241,7 @@ export const cvData: Record<"en" | "ru", CVData> = {
       },
       {
         title: "Tool-calling agents with MTProto access",
-        body: "HubMarket Telegram bot on grammy + Pyrogram (MTProto) — tool-calling agent over marketplace data.",
+        body: "HubMarket Telegram bot on grammy + Pyrogram (MTProto): a tool-calling agent over marketplace data.",
         evidence: "HubMarket production",
       },
     ],
@@ -256,7 +256,7 @@ export const cvData: Record<"en" | "ru", CVData> = {
       },
       {
         name: "claude-code-plugins",
-        description: "Plugin marketplace for Claude Code — installable via /plugin install. Currently ships tw-deploy: commands, agents and skills for deploying applications to Timeweb Cloud directly from inside Claude Code.",
+        description: "Plugin marketplace for Claude Code, installable via /plugin install. Currently ships tw-deploy: commands, agents and skills for deploying applications to Timeweb Cloud directly from inside Claude Code.",
         ghOwner: "webkoth",
         ghRepo: "claude-code-plugins",
         highlights: ["Claude Code plugins", "Marketplace", "Commands + Agents + Skills", "tw-deploy included"],
@@ -264,46 +264,46 @@ export const cvData: Record<"en" | "ru", CVData> = {
     ],
     experience: [
       {
-        period: "2024-11 — 2026-04",
+        period: "2024-11 – 2026-04",
         role: "Senior Fullstack Engineer",
         company: "Skolkovo School of Management (skolkovo.ru)",
         type: "remote",
         responsibilities: [
           "Owned 5+ production products in the school's digital ecosystem",
-          "Maintained auth (SSO/LDAP), billing, marketplace integrations and internal services — daily ops and small features",
+          "Maintained auth (SSO/LDAP), billing, marketplace integrations and internal services: daily ops and small features",
           "Architecture decisions for new features (async patterns, AI integration)",
           "Code review and PR reviews across the team",
           "Production incident response and hotfixes",
         ],
         achievements: [
-          "Built AI document recognition service (Yandex OCR → Yandex GPT → DB) — replaced manual data entry end-to-end",
+          "Built AI document recognition service (Yandex OCR → Yandex GPT → DB); replaced manual data entry end-to-end",
           "Shipped AI landing-page builder with dual providers (GPT-4o-mini for text + NanoBanano for images)",
-          "Launched private alumni social network on Laravel 12 + Vue 3 — 100+ API endpoints",
+          "Launched private alumni social network on Laravel 12 + Vue 3: 100+ API endpoints",
           "Delivered high-load loyalty backend on Octane + Swoole + Reverb + Horizon + Pennant",
         ],
       },
       {
-        period: "2024-03 — 2024-11",
+        period: "2024-03 – 2024-11",
         role: "Backend Developer · Data-Intensive",
         company: "MPSTATS (mpstats.io)",
         type: "remote",
         responsibilities: [
-          "Built and maintained high-load Laravel microservices for marketplace e-commerce analytics — 1+ TB of data, PostgreSQL / ClickHouse / MongoDB / MySQL / Redis",
-          "Database performance tuning (PostgreSQL, ClickHouse) — indexes, query plans",
+          "Built and maintained high-load Laravel microservices for marketplace e-commerce analytics: 1+ TB of data, PostgreSQL / ClickHouse / MongoDB / MySQL / Redis",
+          "Database performance tuning (PostgreSQL, ClickHouse): indexes, query plans",
           "Writing unit and integration tests for critical data pipelines",
         ],
         achievements: [
-          "Cut critical API latency by 20% and raised throughput by 30% — SQL refactor, indexes, Redis caching",
+          "Cut critical API latency by 20% and raised throughput by 30% via SQL refactor, indexes and Redis caching",
           "Built ETL / ELT pipelines on Pandas + NumPy and BI-dashboard APIs from scratch",
         ],
       },
       {
-        period: "2022-06 — 2024-02",
+        period: "2022-06 – 2024-02",
         role: "Backend / Fullstack Developer",
         company: "Itpelag (itpelag.com)",
         type: "office",
         responsibilities: [
-          "Supported ERP for an oil & gas company (500+ users) — warehouse, procurement, sales, finance modules on Laravel + Oracle / PostgreSQL",
+          "Supported ERP for an oil & gas company (500+ users): warehouse, procurement, sales, finance modules on Laravel + Oracle / PostgreSQL",
           "Supported corporate medical software for 100+ doctors and admins",
           "3rd-party API integrations (auth providers, mobile clients, internal services)",
           "Refactoring legacy code and paying down technical debt",
@@ -315,23 +315,23 @@ export const cvData: Record<"en" | "ru", CVData> = {
         ],
       },
       {
-        period: "2020-05 — 2022-05",
+        period: "2020-05 – 2022-05",
         role: "PHP Developer (Laravel)",
         company: "Justcoded (justcoded.com)",
         type: "office",
         responsibilities: [
-          "Core engineer on the Lenderkit fintech platform — a 50+ engineer team",
+          "Core engineer on the Lenderkit fintech platform, a 50+ engineer team",
           "Mentoring junior PHP developers",
           "Tech documentation: READMEs, ADRs, integration guides",
         ],
         achievements: [
           "Shipped document validation modules, crypto wallet integration and REST API for web and mobile",
-          "Led a 5-developer team on a client project — delivered on time and on budget",
+          "Led a 5-developer team on a client project; delivered on time and on budget",
           "Integrated Polymesh blockchain and DocuSign into the platform",
         ],
       },
       {
-        period: "2017-10 — 2020-04",
+        period: "2017-10 – 2020-04",
         role: "Web Developer",
         company: "SpdLoad (spdload.com)",
         type: "office",
@@ -360,7 +360,7 @@ export const cvData: Record<"en" | "ru", CVData> = {
         aiTag: null,
       },
       {
-        title: "HubMarket — AI-SaaS for marketplace sellers",
+        title: "HubMarket: AI-SaaS for marketplace sellers",
         stack: ["Next.js 16", "Vercel AI SDK", "Hono", "Python / FastAPI", "PostgreSQL"],
         team: "Founder + sole developer",
         functionality:
@@ -442,9 +442,9 @@ export const cvData: Record<"en" | "ru", CVData> = {
       github: "github.com/webkoth",
     },
     about:
-      "10+ лет fullstack-разработки в продакшене. 2+ года плотно с LLM: каскады (Claude + Gemini + Groq), RAG, AI-агенты, 7 MCP-серверов на npm. Закрываю задачи всех уровней — от разработки фичей до проектирования архитектуры. Сильные hard skills в бизнес-анализе и запуске быстрых прототипов. Сейчас строю HubMarket — AI-SaaS для селлеров маркетплейсов.",
+      "10+ лет fullstack-разработки в продакшене. 2+ года плотно с LLM: каскады (Claude + Gemini + Groq), RAG, AI-агенты, 7 MCP-серверов на npm. Закрываю задачи всех уровней, от разработки фичей до проектирования архитектуры. Сильные hard skills в бизнес-анализе и запуске быстрых прототипов. Сейчас строю HubMarket, AI-SaaS для селлеров маркетплейсов.",
     pitch:
-      "10+ лет fullstack-разработки. 2+ года плотно с LLM. Могу работать автономно и в команде. Закрываю задачи всех уровней — от разработки фичей до проектирования архитектуры. Сильные hard skills в бизнес-анализе и запуске быстрых прототипов.",
+      "10+ лет fullstack-разработки. 2+ года плотно с LLM. Могу работать автономно и в команде. Закрываю задачи всех уровней, от разработки фичей до проектирования архитектуры. Сильные hard skills в бизнес-анализе и запуске быстрых прототипов.",
     metrics: [
       { value: 10, suffix: "+", label: "лет fullstack" },
       { value: 2, suffix: "+", label: "года production AI" },
@@ -599,7 +599,7 @@ export const cvData: Record<"en" | "ru", CVData> = {
       },
       {
         title: "Tool-calling агенты с MTProto-доступом",
-        body: "Telegram-бот HubMarket на grammy + Pyrogram (MTProto) — агент с tool calling над marketplace-данными.",
+        body: "Telegram-бот HubMarket на grammy + Pyrogram (MTProto): агент с tool calling над marketplace-данными.",
         evidence: "HubMarket production",
       },
     ],
@@ -614,7 +614,7 @@ export const cvData: Record<"en" | "ru", CVData> = {
       },
       {
         name: "claude-code-plugins",
-        description: "Marketplace плагинов для Claude Code — устанавливается через /plugin install. Сейчас включает tw-deploy: команды, агенты и skills для деплоя приложений в Timeweb Cloud прямо из Claude Code.",
+        description: "Marketplace плагинов для Claude Code, устанавливается через /plugin install. Сейчас включает tw-deploy: команды, агенты и skills для деплоя приложений в Timeweb Cloud прямо из Claude Code.",
         ghOwner: "webkoth",
         ghRepo: "claude-code-plugins",
         highlights: ["Claude Code plugins", "Marketplace", "Commands + Agents + Skills", "tw-deploy включён"],
@@ -622,46 +622,46 @@ export const cvData: Record<"en" | "ru", CVData> = {
     ],
     experience: [
       {
-        period: "2024-11 — 2026-04",
+        period: "2024-11 – 2026-04",
         role: "Senior Fullstack Engineer",
         company: "Школа управления Сколково (skolkovo.ru)",
         type: "удаленно",
         responsibilities: [
           "Вёл 5+ продуктов в цифровой экосистеме школы",
-          "Поддерживал auth (SSO/LDAP), биллинг, интеграции с маркетплейсами и внутренние сервисы — daily ops и небольшие фичи",
+          "Поддерживал auth (SSO/LDAP), биллинг, интеграции с маркетплейсами и внутренние сервисы: daily ops и небольшие фичи",
           "Архитектурные решения по новым фичам (асинхронные паттерны, AI-интеграция)",
           "Code review и PR-ревью в команде",
           "Production incident response и хотфиксы",
         ],
         achievements: [
-          "Запустил AI-сервис распознавания документов (Yandex OCR → Yandex GPT → запись в БД) — заменил ручной ввод end-to-end",
+          "Запустил AI-сервис распознавания документов (Yandex OCR → Yandex GPT → запись в БД); заменил ручной ввод end-to-end",
           "Сделал AI-конструктор лендингов с двумя провайдерами (GPT-4o-mini для текста + NanoBanano для изображений)",
-          "Поднял закрытую социальную сеть выпускников на Laravel 12 + Vue 3 — 100+ API-эндпоинтов",
+          "Поднял закрытую социальную сеть выпускников на Laravel 12 + Vue 3: 100+ API-эндпоинтов",
           "Реализовал high-load backend программы лояльности на Octane + Swoole + Reverb + Horizon + Pennant",
         ],
       },
       {
-        period: "2024-03 — 2024-11",
+        period: "2024-03 – 2024-11",
         role: "Backend Developer · Data-Intensive",
         company: "MPSTATS (mpstats.io)",
         type: "удалённо",
         responsibilities: [
-          "Разработал и поддерживал high-load Laravel-микросервисы для e-commerce-аналитики маркетплейсов — 1+ ТБ данных, PostgreSQL / ClickHouse / MongoDB / MySQL / Redis",
-          "Тюнинг производительности БД (PostgreSQL, ClickHouse) — индексы, query plans",
+          "Разработал и поддерживал high-load Laravel-микросервисы для e-commerce-аналитики маркетплейсов: 1+ ТБ данных, PostgreSQL / ClickHouse / MongoDB / MySQL / Redis",
+          "Тюнинг производительности БД (PostgreSQL, ClickHouse): индексы, query plans",
           "Юнит- и интеграционные тесты для критических пайплайнов",
         ],
         achievements: [
-          "Снизил latency критических API на 20% и поднял throughput на 30% — рефакторинг SQL, индексы, Redis-кэширование",
+          "Снизил latency критических API на 20% и поднял throughput на 30% за счёт рефакторинга SQL, индексов и Redis-кэширования",
           "С нуля построил ETL / ELT-пайплайны (Pandas + NumPy) и API для BI-дашбордов",
         ],
       },
       {
-        period: "2022-06 — 2024-02",
+        period: "2022-06 – 2024-02",
         role: "Backend / Fullstack Developer",
         company: "Itpelag (itpelag.com)",
         type: "офис",
         responsibilities: [
-          "Поддерживал ERP для нефтегазовой компании (500+ пользователей) — модули склад, закупки, продажи, финансы на Laravel + Oracle / PostgreSQL",
+          "Поддерживал ERP для нефтегазовой компании (500+ пользователей): модули склад, закупки, продажи, финансы на Laravel + Oracle / PostgreSQL",
           "Поддерживал корпоративное медицинское ПО для 100+ врачей и админов",
           "Интеграции со сторонними API (auth-провайдеры, мобильные клиенты, внутренние сервисы)",
           "Рефакторинг legacy-кода и работа с техническим долгом",
@@ -673,23 +673,23 @@ export const cvData: Record<"en" | "ru", CVData> = {
         ],
       },
       {
-        period: "2020-05 — 2022-05",
+        period: "2020-05 – 2022-05",
         role: "PHP-разработчик (Laravel)",
         company: "Justcoded (justcoded.com)",
         type: "офис",
         responsibilities: [
-          "Core-инженер финтех-платформы Lenderkit.com — команда 50+ инженеров",
+          "Core-инженер финтех-платформы Lenderkit.com, команда 50+ инженеров",
           "Менторство junior PHP-разработчиков",
           "Тех. документация: README, ADR, integration guides",
         ],
         achievements: [
           "Сдал модули валидации документов, интеграцию криптокошельков и REST API для web и mobile",
-          "Тимлид команды из 5 разработчиков на клиентском проекте — сдан в срок и в бюджете",
+          "Тимлид команды из 5 разработчиков на клиентском проекте; сдан в срок и в бюджете",
           "Интегрировал Polymesh blockchain и DocuSign в платформу",
         ],
       },
       {
-        period: "2017-10 — 2020-04",
+        period: "2017-10 – 2020-04",
         role: "Web Developer",
         company: "SpdLoad (spdload.com)",
         type: "офис",
@@ -711,14 +711,14 @@ export const cvData: Record<"en" | "ru", CVData> = {
       {
         title: "HubMarket: маркетплейс-синхронизация остатков (B-Sprint case)",
         stack: ["Next.js", "Hono", "Playwright", "pg-boss"],
-        team: "1 fullstack (от запроса фаундера до прода — 3 дня)",
+        team: "1 fullstack (от запроса фаундера до прода 3 дня)",
         functionality:
           "Production-кейс founder-driven спринта: запрос, архитектура, реализация, передача в прод за 3 дня. Синхронизация остатков по 3 маркетплейсам (WB, Ozon, Yandex Market) для клиента HubMarket",
         technologies: ["Playwright", "pg-boss", "PostgreSQL"],
         aiTag: null,
       },
       {
-        title: "HubMarket — AI-SaaS для селлеров маркетплейсов",
+        title: "HubMarket: AI-SaaS для селлеров маркетплейсов",
         stack: ["Next.js 16", "Vercel AI SDK", "Hono", "Python / FastAPI", "PostgreSQL"],
         team: "Founder + единственный разработчик",
         functionality:
