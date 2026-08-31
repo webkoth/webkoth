@@ -22,6 +22,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/en`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${baseUrl}/ru/minasarkisyan`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
     { url: `${baseUrl}/en/minasarkisyan`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${baseUrl}/ru/standard`, lastModified: now, changeFrequency: "weekly", priority: 0.8 },
+    { url: `${baseUrl}/en/standard`, lastModified: now, changeFrequency: "weekly", priority: 0.7 },
     ...cases,
   ];
 }

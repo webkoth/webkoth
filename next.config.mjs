@@ -10,6 +10,7 @@ const nextConfig = {
       { source: '/evolution', destination: '/', permanent: true },
       { source: '/minasarkisyan', destination: '/ru/minasarkisyan', permanent: true },
       { source: '/cases/:slug', destination: '/ru/cases/:slug', permanent: true },
+      { source: '/standard', destination: '/ru/standard', permanent: true },
     ]
   },
 }
