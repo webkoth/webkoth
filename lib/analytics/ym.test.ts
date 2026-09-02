@@ -4,6 +4,7 @@ import { ymGoal } from './ym'
 describe('ymGoal', () => {
   afterEach(() => {
     vi.unstubAllGlobals()
+    vi.unstubAllEnvs()
   })
 
   it('не падает без window (серверный рендер)', () => {
@@ -21,5 +22,13 @@ describe('ymGoal', () => {
     vi.stubEnv('NEXT_PUBLIC_YM_ID', '12345')
     ymGoal('quiz_result')
     expect(ym).toHaveBeenCalledWith(12345, 'reachGoal', 'quiz_result')
+  })
+
+  it('не вызывает ym, когда NEXT_PUBLIC_YM_ID не задан', () => {
+    const ym = vi.fn()
+    vi.stubGlobal('window', { ym })
+    vi.stubEnv('NEXT_PUBLIC_YM_ID', '')
+    ymGoal('lead_sent')
+    expect(ym).not.toHaveBeenCalled()
   })
 })
