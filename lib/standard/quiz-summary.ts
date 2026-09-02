@@ -38,7 +38,8 @@ export function summarizeAnswers(answers: Answers, _copy: QuizCopy): string {
     const value = answers[key]
     if (value === undefined) continue
     const table = LABELS[key] as Record<string, string>
-    parts.push(table[String(value)])
+    const label = table[String(value)]
+    if (label) parts.push(label)
   }
   return parts.join(' · ')
 }

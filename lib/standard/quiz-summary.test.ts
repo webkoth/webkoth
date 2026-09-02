@@ -18,6 +18,16 @@ describe('summarizeAnswers', () => {
     const s = summarizeAnswers({ sideEffect: 'write', irreversible: true, personalData: false }, copy)
     expect(s).toBe('пишет наружу · необратимое есть · персданных нет')
   })
+
+  it('check=expert и singleRun=false подписываются', () => {
+    const s = summarizeAnswers({ check: 'expert', singleRun: false }, copy)
+    expect(s).toBe('проверяет только эксперт · длинная цепочка')
+  })
+
+  it('check=quick и singleRun=true подписываются', () => {
+    const s = summarizeAnswers({ check: 'quick', singleRun: true }, copy)
+    expect(s).toBe('проверка человеком за 10 секунд · один прогон')
+  })
 })
 
 describe('buildLeadContext', () => {
