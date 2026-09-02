@@ -38,3 +38,6 @@ next-env.d.ts
 # brainstorm sessions
 /.superpowers/
 .gstack/
+
+# worktrees для изолированной работы (superpowers)
+/.worktrees/
