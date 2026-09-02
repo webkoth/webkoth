@@ -18,7 +18,8 @@ export function LeadSection({ copy, slug }: { copy: LandingCopy['lead']; slug: L
           <h2 className="mt-3 text-2xl font-bold tracking-tight md:text-4xl">{copy.title}</h2>
           <p className="mt-4 text-base text-muted-foreground">{copy.sub}</p>
         </div>
-        <div className="lg:col-span-7">
+        {/* id="form": по нему липкая кнопка прячется, когда форма на экране (sticky-cta.tsx). */}
+        <div id="form" className="min-w-0 scroll-mt-28 lg:col-span-7">
           <LeadForm copy={form} lang="ru" startedAt={startedAt} source={{ landing: slug }} />
         </div>
       </div>
