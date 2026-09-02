@@ -14,6 +14,7 @@ export type {
   QuizQuestionKey,
 } from './types'
 export { LANDING_SLUGS, isLandingSlug, landingMeta } from './registry'
+export { presetsForLanding, quizPresets, resolvePresetParam } from './presets'
 
 /** Лендинги живут в корне, латиницей: `/kontur`, `/finance`. */
 export const landingPath = (slug: LandingSlug): string => `/${slug}`
