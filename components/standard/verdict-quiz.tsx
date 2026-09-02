@@ -1,16 +1,32 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ArrowLeft, ArrowUpRight, RotateCcw } from 'lucide-react'
 import type { Lang } from '@/app/data/evolution/types'
 import { verdictQuizData } from '@/app/data/standard-quiz'
 import { decideVerdict, type QuizInput, type Verdict } from '@/lib/standard/verdict'
 import { useLeadDialog } from '@/components/evolution/lead-dialog'
+import type { LandingCopy, LandingSlug, QuizPreset, QuizPresetId } from '@/app/data/landings'
+import { ymGoal } from '@/lib/analytics/ym'
+import { buildLeadContext, summarizeAnswers } from '@/lib/standard/quiz-summary'
 
 // Квиз вердикта: экраны — вопросы схемы, порядок и пропуски повторяют лестницу
 // стандарта. Логика вынесена в lib/standard/verdict.ts и покрыта тестами; здесь
 // только последовательность экранов и отрисовка. Ответы живут в состоянии
 // компонента и никуда не отправляются.
+
+// Режим лендинга: шаг 0 «какой процесс разбираем», подсказки пресета, абзац
+// «что это значит для вас» и заявка с контекстом. Без него квиз работает как
+// на странице стандарта.
+export type QuizLandingMode = {
+  slug: LandingSlug
+  title: string
+  copy: LandingCopy['quiz']
+  presets: QuizPreset[]
+  initialPresetId?: QuizPresetId
+}
+
+type ChosenPreset = { id?: QuizPresetId; label: string; hints: QuizPreset['hints']; library: QuizPreset['library'] }
 
 type Step =
   | 'hasEtalon'
@@ -109,13 +125,98 @@ function QuestionShell({
   )
 }
 
-function ResultView({ lang, answers, ctaLabel, onRestart }: { lang: Lang; answers: Answers; ctaLabel: string; onRestart: () => void }) {
+function PresetStep({
+  copy,
+  presets,
+  onPick,
+}: {
+  copy: LandingCopy['quiz']
+  presets: QuizPreset[]
+  onPick: (p: ChosenPreset) => void
+}) {
+  const [own, setOwn] = useState('')
+  return (
+    <div>
+      <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground">0 / {TOTAL_STEPS}</p>
+      <h2 className="mt-2 text-xl font-semibold tracking-tight md:text-2xl">{copy.presetQuestion}</h2>
+      <div className="mt-5 grid gap-3">
+        {presets.map((p) => (
+          <OptionButton key={p.id} label={p.label} onClick={() => onPick({ id: p.id, label: p.label, hints: p.hints, library: p.library })} />
+        ))}
+        <form
+          className="rounded-xl border border-dashed border-border p-4"
+          onSubmit={(e) => {
+            e.preventDefault()
+            const label = own.trim()
+            if (label.length < 3) return
+            onPick({ label, hints: {}, library: [] })
+          }}
+        >
+          <label htmlFor="quiz-own-process" className="block text-sm font-medium">
+            {copy.ownLabel}
+          </label>
+          <div className="mt-2 flex gap-2">
+            <input
+              id="quiz-own-process"
+              value={own}
+              onChange={(e) => setOwn(e.target.value)}
+              placeholder={copy.ownPlaceholder}
+              maxLength={120}
+              className="min-w-0 flex-1 rounded-lg border border-border bg-background px-3 py-2 text-sm"
+            />
+            <button type="submit" className="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground">
+              {copy.ownSubmit}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  )
+}
+
+function ResultView({
+  lang,
+  answers,
+  ctaLabel,
+  onRestart,
+  landing,
+  preset,
+}: {
+  lang: Lang
+  answers: Answers
+  ctaLabel: string
+  onRestart: () => void
+  landing?: QuizLandingMode
+  preset?: ChosenPreset | null
+}) {
   const copy = verdictQuizData[lang].result
   const verdict: Verdict = decideVerdict(toInput(answers))
   const form = copy.forms[verdict.form]
   const lead = useLeadDialog()
   const linkCls =
     'inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-[0.16em] text-foreground/80 transition hover:text-primary'
+
+  useEffect(() => {
+    ymGoal('quiz_result')
+  }, [])
+
+  const library = preset && preset.library.length > 0 ? preset.library : form.library
+  const openLead = () => {
+    if (!landing || !preset) {
+      lead.open()
+      return
+    }
+    lead.open({
+      answer: buildLeadContext({
+        landingTitle: landing.title,
+        presetLabel: preset.label,
+        formTag: form.tag,
+        formTitle: form.title,
+        summary: summarizeAnswers(answers, verdictQuizData[lang]),
+      }),
+      source: { landing: landing.slug, preset: preset.id, verdict: form.tag },
+    })
+  }
 
   return (
     <div>
@@ -129,6 +230,11 @@ function ResultView({ lang, answers, ctaLabel, onRestart }: { lang: Lang; answer
         <h2 className="text-xl font-semibold tracking-tight md:text-2xl">{form.title}</h2>
       </div>
       <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{form.text}</p>
+      {landing ? (
+        <p className="mt-4 rounded-xl border border-primary/30 bg-primary/5 p-4 text-sm leading-relaxed">
+          {landing.copy.meaning[verdict.form]}
+        </p>
+      ) : null}
 
       {verdict.autonomy ? (
         <div className="mt-5">
@@ -178,7 +284,7 @@ function ResultView({ lang, answers, ctaLabel, onRestart }: { lang: Lang; answer
       </ul>
 
       <div className="mt-6 flex flex-col gap-2">
-        {form.library?.map((l) => (
+        {library?.map((l) => (
           <a key={l.href} href={l.href} target="_blank" rel="noopener noreferrer" className={linkCls}>
             {l.label}
             <ArrowUpRight className="size-3.5" aria-hidden />
@@ -194,10 +300,10 @@ function ResultView({ lang, answers, ctaLabel, onRestart }: { lang: Lang; answer
         <p className="text-sm text-muted-foreground">{copy.ctaHint}</p>
         <button
           type="button"
-          onClick={() => lead.open()}
+          onClick={openLead}
           className="mt-3 w-full rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground transition hover:opacity-90 focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:outline-none"
         >
-          {ctaLabel}
+          {landing ? landing.copy.cta : ctaLabel}
         </button>
       </div>
 
@@ -213,11 +319,17 @@ function ResultView({ lang, answers, ctaLabel, onRestart }: { lang: Lang; answer
   )
 }
 
-export function VerdictQuiz({ lang, ctaLabel }: { lang: Lang; ctaLabel: string }) {
+export function VerdictQuiz({ lang, ctaLabel, landing }: { lang: Lang; ctaLabel: string; landing?: QuizLandingMode }) {
   const copy = verdictQuizData[lang]
   const [answers, setAnswers] = useState<Answers>({})
   const [history, setHistory] = useState<Answers[]>([])
+  const [preset, setPreset] = useState<ChosenPreset | null>(() => {
+    const initial = landing?.presets.find((p) => p.id === landing.initialPresetId)
+    return initial ? { id: initial.id, label: initial.label, hints: initial.hints, library: initial.library } : null
+  })
+  const [started, setStarted] = useState(false)
 
+  const needPreset = !!landing && preset === null
   const step = nextStep(answers)
   const stepIndex =
     step === 'hasEtalon' ? 1
@@ -229,6 +341,10 @@ export function VerdictQuiz({ lang, ctaLabel }: { lang: Lang; ctaLabel: string }
     : 7
 
   const set = (patch: Answers) => {
+    if (!started) {
+      setStarted(true)
+      ymGoal('quiz_start')
+    }
     setHistory((h) => [...h, answers])
     setAnswers((a) => ({ ...a, ...patch }))
   }
@@ -240,69 +356,88 @@ export function VerdictQuiz({ lang, ctaLabel }: { lang: Lang; ctaLabel: string }
     })
   }
   const restart = () => {
+    if (landing) setPreset(null)
     setAnswers({})
     setHistory([])
   }
 
   const q = copy.questions
+  // Подсказка пресета перекрывает общую подсказку вопроса, если она есть.
+  const hint = (key: keyof QuizInput, fallback: string) => preset?.hints[key] ?? fallback
 
   return (
     <div className="rounded-2xl border border-border bg-card/70 p-5 backdrop-blur-sm md:p-8">
-      {step === 'hasEtalon' && (
-        <QuestionShell step={stepIndex} title={q.hasEtalon.title} hint={q.hasEtalon.hint} progressLabel={copy.progressLabel}>
+      {needPreset && landing ? (
+        <PresetStep
+          copy={landing.copy}
+          presets={landing.presets}
+          onPick={(p) => {
+            setPreset(p)
+            if (!started) {
+              setStarted(true)
+              ymGoal('quiz_start')
+            }
+          }}
+        />
+      ) : null}
+
+      {!needPreset && step === 'hasEtalon' && (
+        <QuestionShell step={stepIndex} title={q.hasEtalon.title} hint={hint('hasEtalon', q.hasEtalon.hint)} progressLabel={copy.progressLabel}>
           {q.hasEtalon.options.map((o) => (
             <OptionButton key={o.value} label={o.label} hint={o.hint} onClick={() => set({ hasEtalon: o.value === 'yes' })} />
           ))}
         </QuestionShell>
       )}
 
-      {step === 'dataReady' && (
-        <QuestionShell step={stepIndex} title={q.dataReady.title} hint={q.dataReady.hint} progressLabel={copy.progressLabel}>
+      {!needPreset && step === 'dataReady' && (
+        <QuestionShell step={stepIndex} title={q.dataReady.title} hint={hint('dataReady', q.dataReady.hint)} progressLabel={copy.progressLabel}>
           {q.dataReady.options.map((o) => (
             <OptionButton key={o.value} label={o.label} hint={o.hint} onClick={() => set({ dataReady: o.value === 'yes' })} />
           ))}
         </QuestionShell>
       )}
 
-      {step === 'useful' && (
-        <QuestionShell step={stepIndex} title={q.useful.title} hint={q.useful.hint} progressLabel={copy.progressLabel}>
+      {!needPreset && step === 'useful' && (
+        <QuestionShell step={stepIndex} title={q.useful.title} hint={hint('useful', q.useful.hint)} progressLabel={copy.progressLabel}>
           {q.useful.options.map((o) => (
             <OptionButton key={o.value} label={o.label} hint={o.hint} onClick={() => set({ useful: o.value })} />
           ))}
         </QuestionShell>
       )}
 
-      {step === 'rule' && (
-        <QuestionShell step={stepIndex} title={q.rule.title} hint={q.rule.hint} progressLabel={copy.progressLabel}>
+      {!needPreset && step === 'rule' && (
+        <QuestionShell step={stepIndex} title={q.rule.title} hint={hint('rule', q.rule.hint)} progressLabel={copy.progressLabel}>
           {q.rule.options.map((o) => (
             <OptionButton key={o.value} label={o.label} hint={o.hint} onClick={() => set({ rule: o.value })} />
           ))}
         </QuestionShell>
       )}
 
-      {step === 'check' && (
-        <QuestionShell step={stepIndex} title={q.check.title} hint={q.check.hint} progressLabel={copy.progressLabel}>
+      {!needPreset && step === 'check' && (
+        <QuestionShell step={stepIndex} title={q.check.title} hint={hint('check', q.check.hint)} progressLabel={copy.progressLabel}>
           {q.check.options.map((o) => (
             <OptionButton key={o.value} label={o.label} hint={o.hint} onClick={() => set({ check: o.value })} />
           ))}
         </QuestionShell>
       )}
 
-      {step === 'singleRun' && (
-        <QuestionShell step={stepIndex} title={q.singleRun.title} hint={q.singleRun.hint} progressLabel={copy.progressLabel}>
+      {!needPreset && step === 'singleRun' && (
+        <QuestionShell step={stepIndex} title={q.singleRun.title} hint={hint('singleRun', q.singleRun.hint)} progressLabel={copy.progressLabel}>
           {q.singleRun.options.map((o) => (
             <OptionButton key={o.value} label={o.label} hint={o.hint} onClick={() => set({ singleRun: o.value === 'yes' })} />
           ))}
         </QuestionShell>
       )}
 
-      {step === 'consequences' && (
+      {!needPreset && step === 'consequences' && (
         <QuestionShell step={stepIndex} title={q.consequences.title} hint={q.consequences.hint} progressLabel={copy.progressLabel}>
           <ConsequencesForm lang={lang} onDone={(patch) => set(patch)} />
         </QuestionShell>
       )}
 
-      {step === 'result' && <ResultView lang={lang} answers={answers} ctaLabel={ctaLabel} onRestart={restart} />}
+      {!needPreset && step === 'result' && (
+        <ResultView lang={lang} answers={answers} ctaLabel={ctaLabel} onRestart={restart} landing={landing} preset={preset} />
+      )}
 
       {step !== 'result' && history.length > 0 ? (
         <button
