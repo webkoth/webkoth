@@ -144,7 +144,8 @@ function PresetStep({
           <OptionButton key={p.id} label={p.label} onClick={() => onPick({ id: p.id, label: p.label, hints: p.hints, library: p.library })} />
         ))}
         <form
-          className="rounded-xl border border-dashed border-border p-4"
+          // min-w-0: иначе грид-колонка растягивается под min-content формы и на 375px страница едет вбок.
+          className="min-w-0 rounded-xl border border-dashed border-border p-4"
           onSubmit={(e) => {
             e.preventDefault()
             const label = own.trim()
