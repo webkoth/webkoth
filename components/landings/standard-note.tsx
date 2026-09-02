@@ -1,7 +1,7 @@
+import Link from 'next/link'
 import { ArrowUpRight } from 'lucide-react'
 import type { LandingCopy } from '@/app/data/landings'
-
-const STANDARD_URL = '/ru/standard'
+import { standardPath } from '@/app/data/standard'
 
 export function StandardNote({ copy }: { copy: LandingCopy['standardNote'] }) {
   return (
@@ -10,9 +10,9 @@ export function StandardNote({ copy }: { copy: LandingCopy['standardNote'] }) {
       <div>
         <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground">Стандарт</p>
         <p className="mt-2 text-sm leading-relaxed">{copy.standard}</p>
-        <a href={STANDARD_URL} className="mt-3 inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-[0.16em] text-primary">
+        <Link href={standardPath('ru')} className="mt-3 inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-[0.16em] text-primary">
           Открытый стандарт AIAS <ArrowUpRight className="size-3.5" aria-hidden />
-        </a>
+        </Link>
       </div>
       <div>
         <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground">Под вас</p>

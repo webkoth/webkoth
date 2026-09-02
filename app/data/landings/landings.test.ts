@@ -119,4 +119,15 @@ describe('тексты лендингов', () => {
       expect(rest.length, slug).toBeGreaterThanOrEqual(3)
     }
   })
+
+  // Заголовки шагов «как это работает» и цен, вопросы FAQ - ключи React-списков
+  // (задача 17): совпадение делает key неуникальным и молча ломает рендер.
+  it('заголовки и вопросы, используемые как ключи списков, не повторяются', () => {
+    for (const slug of LANDING_SLUGS) {
+      const copy = landingCopy[slug]
+      expect(new Set(copy.how.steps.map((s) => s.title)).size, `${slug}/how`).toBe(copy.how.steps.length)
+      expect(new Set(copy.pricing.steps.map((s) => s.title)).size, `${slug}/pricing`).toBe(copy.pricing.steps.length)
+      expect(new Set(copy.faq.items.map((i) => i.q)).size, `${slug}/faq`).toBe(copy.faq.items.length)
+    }
+  })
 })
