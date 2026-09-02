@@ -1,7 +1,7 @@
 import { evolutionData } from '@/app/data/evolution'
 import { landingCopy, landingMeta, landingPath, type LandingSlug } from '@/app/data/landings'
 import { TooltipProvider } from '@/components/ui/tooltip'
-import { buildEvolutionMarkdown } from '@/lib/evolution/llms-markdown'
+import { buildLandingMarkdown } from '@/lib/landings/llms-markdown'
 import { ParticleField } from '@/components/evolution/particle-field'
 import { HeaderNav } from '@/components/evolution/header-nav'
 import { Footer } from '@/components/evolution/footer'
@@ -25,7 +25,8 @@ export function LandingPage({ slug }: { slug: LandingSlug }) {
   const meta = landingMeta[slug]
   const copy = landingCopy[slug]
   const data = evolutionData.ru
-  const llmMarkdown = buildEvolutionMarkdown(data)
+  // В модалке «документация для LLM» показываем markdown этой страницы, а не главной.
+  const llmMarkdown = buildLandingMarkdown(slug, copy)
   const navItems = [
     { id: 'quiz', label: copy.nav.quiz },
     { id: 'how', label: copy.nav.how },

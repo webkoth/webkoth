@@ -1,5 +1,7 @@
 import { evolutionData, LANGS } from '@/app/data/evolution'
 import { buildEvolutionMarkdown } from '@/lib/evolution/llms-markdown'
+import { LANDING_SLUGS, landingCopy } from '@/app/data/landings'
+import { buildLandingMarkdown } from '@/lib/landings/llms-markdown'
 
 export const dynamic = 'force-static'
 
@@ -15,6 +17,10 @@ export function GET() {
     '> CV: https://webkoth.com/ru/minasarkisyan · https://webkoth.com/en/minasarkisyan',
     '',
     ...sections,
+    '',
+    '# Страницы услуг',
+    '',
+    ...LANDING_SLUGS.map((slug) => buildLandingMarkdown(slug, landingCopy[slug])),
   ].join('\n')
 
   return new Response(body, {
