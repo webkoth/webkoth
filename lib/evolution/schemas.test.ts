@@ -42,4 +42,20 @@ describe('evolutionLeadSchema', () => {
     void _omit
     expect(evolutionLeadSchema.safeParse(rest).success).toBe(false)
   })
+
+  it('принимает source с лендинга, пресетом и вердиктом', () => {
+    const r = evolutionLeadSchema.safeParse({
+      ...valid,
+      source: { landing: 'finance', preset: 'finance-pervichka', verdict: 'F4' },
+    })
+    expect(r.success).toBe(true)
+  })
+
+  it('принимает source только с лендингом', () => {
+    expect(evolutionLeadSchema.safeParse({ ...valid, source: { landing: 'agent' } }).success).toBe(true)
+  })
+
+  it('отклоняет source с неизвестным лендингом', () => {
+    expect(evolutionLeadSchema.safeParse({ ...valid, source: { landing: 'shop' } }).success).toBe(false)
+  })
 })

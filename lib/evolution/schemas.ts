@@ -1,5 +1,19 @@
 import { z } from 'zod'
 
+// Слаги лендингов дублируются здесь строкой, а не импортом из app/data:
+// схема живёт в lib и не должна тянуть за собой тексты страниц.
+export const LEAD_LANDINGS = ['kontur', 'it-director', 'agent', 'finance'] as const
+
+// Откуда пришла заявка с лендинга: страница, пресет квиза и тег вердикта.
+// Всё необязательное: заявка с главной идёт без source.
+export const leadSourceSchema = z.object({
+  landing: z.enum(LEAD_LANDINGS),
+  preset: z.string().trim().max(60).optional(),
+  verdict: z.string().trim().max(20).optional(),
+})
+
+export type LeadSource = z.infer<typeof leadSourceSchema>
+
 // Форма главной (RU `/`, EN `/en`) — минимум полей: имя, контакт и один
 // квалифицирующий вопрос оффера. Сообщения об ошибках — коды: текст на нужном
 // языке подставляет форма из `data.finale.form.errors`.
@@ -25,6 +39,7 @@ export const evolutionLeadSchema = z.object({
   filledAtMs: z.number().int().positive(),
   // Язык страницы, с которой пришла заявка, — только для пометки в уведомлении.
   lang: z.enum(['ru', 'en']).optional(),
+  source: leadSourceSchema.optional(),
 })
 
 export type EvolutionLeadInput = z.infer<typeof evolutionLeadSchema>
