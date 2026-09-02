@@ -4,6 +4,7 @@ import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { LandingPreferencesScript } from "@/components/landing-preferences-script"
 import { Toaster } from "@/components/ui/sonner"
+import { YandexMetrika } from "@/components/analytics/yandex-metrika"
 import { cn } from "@/lib/utils";
 
 // Два набора шрифтов по тумблеру в шапке (класс `mono-geist` на <html>, см.
@@ -54,6 +55,7 @@ export default function RootLayout({
           {children}
           <Toaster />
         </ThemeProvider>
+        <YandexMetrika />
       </body>
     </html>
   )
