@@ -32,7 +32,10 @@ export type LandingMeta = {
   skeleton: LandingSkeleton
   /** Главный кейс для case-first; у symptoms-first его нет. */
   heroCase?: CaseSlug
-  /** Порядок карусели. Минимум три, иначе карусель бессмысленна. */
+  /**
+   * Порядок карусели, включая главный кейс: карусель его исключает сама (см. LandingPage).
+   * После исключения должно остаться не меньше трёх, иначе карусель бессмысленна.
+   */
   cases: readonly [CaseSlug, CaseSlug, CaseSlug, ...CaseSlug[]]
   presets: readonly [QuizPresetId, ...QuizPresetId[]]
   /** Имя кампании Директа: попадает в utm_campaign и в отчёты. */

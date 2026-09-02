@@ -4,6 +4,9 @@ import { CASE_SLUGS } from '@/app/data/cases'
 import { LEAD_LANDINGS } from '@/lib/evolution/schemas'
 import { LANDING_SLUGS, landingMeta } from './index'
 import { presetsForLanding, quizPresets, resolvePresetParam } from './index'
+import { landingCopy } from './index'
+
+const NO_DASH = /—/
 
 describe('реестр лендингов', () => {
   it('у каждого лендинга есть запись, слаг совпадает с ключом', () => {
@@ -65,6 +68,55 @@ describe('пресеты квиза', () => {
   it('у каждого пресета есть подсказка хотя бы к эталону', () => {
     for (const p of Object.values(quizPresets)) {
       expect(p.hints.hasEtalon, p.id).toBeTruthy()
+    }
+  })
+})
+
+describe('тексты лендингов', () => {
+  it('у каждого лендинга есть тексты, скелет совпадает с наличием блоков', () => {
+    for (const slug of LANDING_SLUGS) {
+      const copy = landingCopy[slug]
+      const meta = landingMeta[slug]
+      expect(copy.meta.title.length, `${slug}/title`).toBeLessThanOrEqual(80)
+      expect(copy.meta.description.length, `${slug}/description`).toBeLessThanOrEqual(200)
+      if (meta.skeleton === 'symptoms-first') {
+        expect(copy.symptoms, slug).toBeDefined()
+        expect(copy.heroCase, slug).toBeUndefined()
+      } else {
+        expect(copy.heroCase, slug).toBeDefined()
+        expect(copy.symptoms, slug).toBeUndefined()
+      }
+    }
+  })
+
+  it('в текстах нет длинных тире', () => {
+    for (const slug of LANDING_SLUGS) {
+      expect(JSON.stringify(landingCopy[slug]), slug).not.toMatch(NO_DASH)
+    }
+  })
+
+  it('«что это значит для вас» задано для всех форм вердикта', () => {
+    const forms = ['stopEtalon', 'stopData', 'f0', 'f1', 'f3', 'f4', 'f1f2', 'split', 'f5'] as const
+    for (const slug of LANDING_SLUGS) {
+      for (const form of forms) {
+        expect(landingCopy[slug].quiz.meaning[form].length, `${slug}/${form}`).toBeGreaterThan(20)
+      }
+    }
+  })
+
+  it('первый экран трёх страниц не начинается со слова ИИ', () => {
+    for (const slug of ['kontur', 'it-director', 'finance'] as const) {
+      expect(landingCopy[slug].hero.title.startsWith('ИИ'), slug).toBe(false)
+    }
+  })
+
+  // ★ Главный кейс входит в `cases`, карусель его исключает (задача 19): после исключения
+  // должно остаться не меньше трёх, иначе карусель бессмысленна.
+  it('после исключения главного кейса в карусели остаётся не меньше трёх', () => {
+    for (const slug of LANDING_SLUGS) {
+      const meta = landingMeta[slug]
+      const rest = meta.cases.filter((c) => c !== meta.heroCase)
+      expect(rest.length, slug).toBeGreaterThanOrEqual(3)
     }
   })
 })
