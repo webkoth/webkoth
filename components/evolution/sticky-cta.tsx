@@ -60,7 +60,7 @@ export function StickyCta({ label, mobileOnly = false }: { label: string; mobile
 
   return (
     <div className={cn('fixed right-4 bottom-4 z-50 md:right-6 md:bottom-6', mobileOnly && 'lg:hidden')}>
-      <Button size="lg" className="shadow-lg" onClick={open}>
+      <Button size="lg" className="shadow-lg" onClick={() => open()}>
         <MessageSquare aria-hidden />
         {label}
       </Button>

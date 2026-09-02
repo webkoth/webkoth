@@ -7,9 +7,12 @@ import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from '
 import { useMediaQuery } from '@/hooks/use-media-query'
 import { contacts } from '@/lib/landing/contacts'
 import type { EvolutionData, Lang } from '@/app/data/evolution/types'
+import type { LeadSource } from '@/lib/evolution/schemas'
 import { LeadForm } from './lead-form'
 
-type LeadDialogApi = { open: () => void }
+export type LeadPrefill = { answer?: string; source?: LeadSource }
+
+type LeadDialogApi = { open: (prefill?: LeadPrefill) => void }
 
 const LeadDialogContext = createContext<LeadDialogApi | null>(null)
 
@@ -35,9 +38,13 @@ export function LeadDialogProvider({
 }) {
   const [open, setOpen] = useState(false)
   const [openedAt, setOpenedAt] = useState(0)
+  const [prefill, setPrefill] = useState<LeadPrefill>({})
   const mobile = useMediaQuery('(max-width: 639px)')
 
-  const openDialog = useCallback(() => {
+  // Квиз открывает форму с готовым паспортом: ответ и источник. Остальные
+  // кнопки открывают пустую; прошлое заполнение не наследуется.
+  const openDialog = useCallback((next?: LeadPrefill) => {
+    setPrefill(next ?? {})
     setOpenedAt(Date.now())
     setOpen(true)
   }, [])
@@ -56,7 +63,15 @@ export function LeadDialogProvider({
         <span>{copy.telegramCta}</span>
       </a>
       {/* key по openedAt: каждое открытие — чистая форма, без прошлого состояния */}
-      <LeadForm key={openedAt} copy={copy} lang={lang} startedAt={openedAt} onSuccess={close} />
+      <LeadForm
+        key={openedAt}
+        copy={copy}
+        lang={lang}
+        startedAt={openedAt}
+        defaultAnswer={prefill.answer}
+        source={prefill.source}
+        onSuccess={close}
+      />
     </>
   )
 

@@ -151,7 +151,7 @@ export function Hero({ data }: { data: EvolutionData["hero"] }) {
               горизонтальный скролл, поэтому на узких экранах — во всю ширину. */}
             <Button
               size="lg"
-              onClick={open}
+              onClick={() => open()}
               className="h-auto w-full px-6 py-3 text-base whitespace-normal sm:h-12 sm:w-auto sm:py-0 sm:whitespace-nowrap lg:h-12 lg:px-6 lg:text-base"
             >
               {data.cta}

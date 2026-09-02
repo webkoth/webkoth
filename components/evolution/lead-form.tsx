@@ -9,7 +9,8 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { contacts } from '@/lib/landing/contacts'
-import { evolutionLeadSchema, type EvolutionLeadInput } from '@/lib/evolution/schemas'
+import { ymGoal } from '@/lib/analytics/ym'
+import { evolutionLeadSchema, type EvolutionLeadInput, type LeadSource } from '@/lib/evolution/schemas'
 import type { EvolutionData, Lang, LinkedText } from '@/app/data/evolution/types'
 
 type SubmitState = 'idle' | 'submitting' | 'success' | 'error' | 'rate_limited'
@@ -37,12 +38,18 @@ export function LeadForm({
   copy,
   lang,
   startedAt,
+  defaultAnswer,
+  source,
   onSuccess,
 }: {
   copy: EvolutionData['finale']['form']
   lang: Lang
   /** Момент, с которого считается антибот-таймер: открытие модалки или монтирование. */
   startedAt?: number
+  /** Готовый ответ (из квиза): подставляется в поле вопроса при монтировании. */
+  defaultAnswer?: string
+  /** Откуда заявка: лендинг, пресет квиза, вердикт. Уходит в тело запроса как есть. */
+  source?: LeadSource
   onSuccess?: () => void
 }) {
   const [state, setState] = useState<SubmitState>('idle')
@@ -61,7 +68,7 @@ export function LeadForm({
     formState: { errors },
   } = useForm<EvolutionLeadInput>({
     resolver: zodResolver(evolutionLeadSchema),
-    defaultValues: { name: '', contact: '', answer: '', website: '', filledAtMs: 1, lang },
+    defaultValues: { name: '', contact: '', answer: defaultAnswer ?? '', website: '', filledAtMs: 1, lang },
   })
 
   const msg = (code?: string) => (code ? (copy.errors[code] ?? code) : undefined)
@@ -72,7 +79,7 @@ export function LeadForm({
       const res = await fetch('/api/evolution/lead', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...values, filledAtMs: filledAt, lang }),
+        body: JSON.stringify({ ...values, filledAtMs: filledAt, lang, source }),
       })
       // 429 — отдельное состояние: совет «попробуйте ещё раз» тут не сработает.
       if (res.status === 429) {
@@ -91,6 +98,8 @@ export function LeadForm({
         duration: 6000,
         action: { label: copy.toast.action, onClick: openTelegram },
       })
+      // Цель Метрики — только после того, как сервер принял заявку.
+      ymGoal('lead_sent')
       onSuccess?.()
     } catch {
       setState('error')

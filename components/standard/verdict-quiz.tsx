@@ -194,7 +194,7 @@ function ResultView({ lang, answers, ctaLabel, onRestart }: { lang: Lang; answer
         <p className="text-sm text-muted-foreground">{copy.ctaHint}</p>
         <button
           type="button"
-          onClick={lead.open}
+          onClick={() => lead.open()}
           className="mt-3 w-full rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground transition hover:opacity-90 focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:outline-none"
         >
           {ctaLabel}
