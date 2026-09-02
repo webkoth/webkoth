@@ -3,6 +3,7 @@ import { evolutionData, homePath } from '@/app/data/evolution'
 import { casePath, getCase, type CaseSlug } from '@/app/data/cases'
 import { standardData, standardPath } from '@/app/data/standard'
 import { verdictPath, verdictQuizData } from '@/app/data/standard-quiz'
+import { landingCopy, landingPath, type LandingSlug } from '@/app/data/landings'
 import type { Lang } from '@/app/data/evolution/types'
 
 // Metadata главной для обеих локалей: canonical на свой URL, hreflang на оба,
@@ -144,5 +145,30 @@ export function buildVerdictMetadata(lang: Lang): Metadata {
       siteName: d.brand,
     },
     twitter: { card: 'summary_large_image', title: q.meta.title, description: q.meta.description },
+  }
+}
+
+// Лендинги только RU: без alternates по языкам, канонический адрес без ?p=,
+// чтобы две кампании /finance не плодили дубли в индексе.
+export function buildLandingMetadata(slug: LandingSlug): Metadata {
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://webkoth.com'
+  const d = evolutionData.ru
+  const c = landingCopy[slug]
+  const url = `${baseUrl}${landingPath(slug)}`
+
+  return {
+    title: c.meta.title,
+    description: c.meta.description,
+    robots: { index: true, follow: true },
+    alternates: { canonical: url },
+    openGraph: {
+      type: 'website',
+      locale: 'ru_RU',
+      url,
+      title: c.meta.title,
+      description: c.meta.description,
+      siteName: d.brand,
+    },
+    twitter: { card: 'summary_large_image', title: c.meta.title, description: c.meta.description },
   }
 }
