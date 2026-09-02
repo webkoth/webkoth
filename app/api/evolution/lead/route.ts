@@ -64,6 +64,7 @@ export async function POST(req: NextRequest) {
     answer: parsed.data.answer,
     ip,
     lang: parsed.data.lang,
+    source: parsed.data.source,
   }
 
   // 6. Два независимых канала владельцу: email через релей + Telegram

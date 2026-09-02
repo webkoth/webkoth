@@ -42,4 +42,14 @@ describe('buildLeadTelegramText', () => {
     const tail = body.slice(body.lastIndexOf('&'))
     expect(tail === '' || tail.includes(';')).toBe(true)
   })
+
+  it('заявка с лендинга подписана страницей, пресетом и вердиктом', () => {
+    const text = buildLeadTelegramText({
+      ...lead,
+      source: { landing: 'finance', preset: 'finance-pervichka', verdict: 'F4' },
+    })
+    expect(text).toContain('Лендинг /finance')
+    expect(text).toContain('finance-pervichka')
+    expect(text).toContain('F4')
+  })
 })

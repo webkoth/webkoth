@@ -8,8 +8,10 @@ export const LEAD_LANDINGS = ['kontur', 'it-director', 'agent', 'finance'] as co
 // Всё необязательное: заявка с главной идёт без source.
 export const leadSourceSchema = z.object({
   landing: z.enum(LEAD_LANDINGS),
-  preset: z.string().trim().max(60).optional(),
-  verdict: z.string().trim().max(20).optional(),
+  // sourceLabel склеивает preset и verdict в одну строку через ' · ' -
+  // перенос строки здесь так же ломает подпись, как и в name/contact.
+  preset: z.string().trim().max(60).regex(/^[^\r\n]+$/, 'no_newline').optional(),
+  verdict: z.string().trim().max(20).regex(/^[^\r\n]+$/, 'no_newline').optional(),
 })
 
 export type LeadSource = z.infer<typeof leadSourceSchema>

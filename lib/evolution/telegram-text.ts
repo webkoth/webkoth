@@ -23,7 +23,7 @@ function trimDanglingEntity(s: string): string {
 
 export function buildLeadTelegramText(d: EvolutionLeadData): string {
   const base =
-    `<b>🌱 Заявка на разбор - ${escapeHtml(sourceLabel(d.lang))}</b>\n\n` +
+    `<b>🌱 Заявка на разбор - ${escapeHtml(sourceLabel(d.lang, d.source))}</b>\n\n` +
     `<b>Имя:</b> ${escapeHtml(d.name)}\n` +
     `<b>Контакт:</b> ${escapeHtml(d.contact)}\n` +
     `<b>IP:</b> ${escapeHtml(d.ip)}`

@@ -58,4 +58,17 @@ describe('evolutionLeadSchema', () => {
   it('отклоняет source с неизвестным лендингом', () => {
     expect(evolutionLeadSchema.safeParse({ ...valid, source: { landing: 'shop' } }).success).toBe(false)
   })
+
+  it('отклоняет preset с переносом строки — sourceLabel склеивает его в одну строку', () => {
+    const r = evolutionLeadSchema.safeParse({ ...valid, source: { landing: 'kontur', preset: 'a\nb' } })
+    expect(r.success).toBe(false)
+  })
+
+  it('отклоняет preset длиннее 60 символов', () => {
+    const r = evolutionLeadSchema.safeParse({
+      ...valid,
+      source: { landing: 'kontur', preset: 'x'.repeat(61) },
+    })
+    expect(r.success).toBe(false)
+  })
 })
