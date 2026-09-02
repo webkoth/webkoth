@@ -77,8 +77,8 @@ describe('тексты лендингов', () => {
     for (const slug of LANDING_SLUGS) {
       const copy = landingCopy[slug]
       const meta = landingMeta[slug]
-      expect(copy.meta.title.length, `${slug}/title`).toBeLessThanOrEqual(80)
-      expect(copy.meta.description.length, `${slug}/description`).toBeLessThanOrEqual(200)
+      expect(copy.meta.title.length, `${slug}/title`).toBeLessThanOrEqual(70)
+      expect(copy.meta.description.length, `${slug}/description`).toBeLessThanOrEqual(160)
       if (meta.skeleton === 'symptoms-first') {
         expect(copy.symptoms, slug).toBeDefined()
         expect(copy.heroCase, slug).toBeUndefined()

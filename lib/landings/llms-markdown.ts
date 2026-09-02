@@ -5,10 +5,11 @@ import { landingPath } from '@/app/data/landings'
 // Короткая markdown-версия лендинга для /llms.txt: заголовок, суть, шаги, цены.
 // Квиз и кейсы в текст не попадают: у них свои страницы.
 export function buildLandingMarkdown(slug: LandingSlug, c: LandingCopy): string {
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://webkoth.com'
   return [
     `## ${c.hero.title}`,
     '',
-    `URL: https://webkoth.com${landingPath(slug)}`,
+    `URL: ${baseUrl}${landingPath(slug)}`,
     '',
     c.hero.sub,
     '',

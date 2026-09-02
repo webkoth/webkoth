@@ -164,7 +164,11 @@ function PresetStep({
               maxLength={120}
               className="min-w-0 flex-1 rounded-lg border border-border bg-background px-3 py-2 text-sm"
             />
-            <button type="submit" className="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground">
+            <button
+              type="submit"
+              disabled={own.trim().length < 3}
+              className="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground disabled:opacity-40"
+            >
               {copy.ownSubmit}
             </button>
           </div>

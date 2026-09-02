@@ -67,7 +67,7 @@ AI OCR ⇢ GPT (Skolkovo) · AI Landing builder · Lenderkit fintech (50+ engine
 
 ## About this repo
 
-This is the source for **[webkoth.com](https://webkoth.com)** — the bilingual (RU at `/`, EN at `/en`) landing «Эволюция бизнеса / Business evolution», case pages at `/ru/cases/…` · `/en/cases/…` and CV at `/ru/minasarkisyan` · `/en/minasarkisyan`.
+This is the source for **[webkoth.com](https://webkoth.com)** — the bilingual (RU at `/`, EN at `/en`) landing «Эволюция бизнеса / Business evolution», case pages at `/ru/cases/…` · `/en/cases/…`, CV at `/ru/minasarkisyan` · `/en/minasarkisyan`, and four RU service landing pages for Yandex Direct at `/kontur` · `/it-director` · `/agent` · `/finance`.
 
 Layout: all page copy lives in `app/data/evolution/{ru,en}.ts` (shared type in `types.ts`), case copy in `app/data/cases/{ru,en}.ts` over the language-neutral `registry.ts`, page composition in `components/evolution/evolution-page.tsx`, one-shot SVG scenes in `components/evolution/animations/`, lead API at `app/api/evolution/lead`. Redirects (`/ru`, `/evolution`, `/minasarkisyan`, `/cases/:slug`) are in `next.config.mjs`; `/llms.txt` and `sitemap.xml` are generated from the same data.
 
@@ -84,6 +84,15 @@ Built with Next.js 16 (Turbopack), React 19, Tailwind v4, shadcn/ui (base-vega +
 ---
 
 ## Changelog
+
+### 2026-09-02 — Four Yandex Direct landing pages (`/kontur`, `/it-director`, `/agent`, `/finance`)
+
+- One engine, copy in data: `app/data/landings/{types,registry,presets,kontur,it-director,agent,finance}.ts`, assembled by `components/landings/landing-page.tsx`. Two skeletons — symptoms-first (`/agent`, `/it-director`) and case-first (`/kontur`, `/finance`; the hero case is excluded from the carousel)
+- Verdict quiz in landing mode: preset step 0 («какой процесс разбираем»), `?p=<preset>` skips it (`/finance?p=pervichka`, `/finance?p=otchet`, foreign presets are ignored), the result adds a «что это значит для вас» paragraph and opens the lead dialog prefilled with page / process / verdict
+- Lead source: optional `source {landing, preset, verdict}` in the lead schema; Telegram and email carry a line like «Лендинг /finance · finance-otchet · F3»
+- Yandex Metrika counter via `NEXT_PUBLIC_YM_ID` (`components/analytics/yandex-metrika.tsx`), goals `quiz_start`, `quiz_result`, `lead_sent` (`lib/analytics/ym.ts`, no-op without the id)
+- RU-only metadata (canonical without `?p=`), four entries in `sitemap.xml` and `/llms.txt` (`lib/landings/llms-markdown.ts`); header «docs for LLM» modal shows the landing's own markdown
+- Spec and plan: `docs/superpowers/specs/2026-09-02-chetyre-lendinga-pyat-kampaniy-design.md`, `docs/superpowers/plans/2026-09-02-chetyre-lendinga-pyat-kampaniy.md`
 
 ### 2026-08-31 — AIAS standard page + verdict quiz
 

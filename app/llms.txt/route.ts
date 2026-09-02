@@ -17,7 +17,6 @@ export function GET() {
     '> CV: https://webkoth.com/ru/minasarkisyan · https://webkoth.com/en/minasarkisyan',
     '',
     ...sections,
-    '',
     '# Страницы услуг',
     '',
     ...LANDING_SLUGS.map((slug) => buildLandingMarkdown(slug, landingCopy[slug])),

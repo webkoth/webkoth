@@ -203,4 +203,14 @@ describe('angleForCase', () => {
     expect(a.angle.headline.length).toBeGreaterThan(0)
     expect(a.otherBlocks.length).toBe(caseMeta['finance-loop'].blocks.length - 1)
   })
+
+  it('не падает ни на одном кейсе ни в одной локали', () => {
+    for (const lang of ['ru', 'en'] as const) {
+      for (const slug of CASE_SLUGS) {
+        const a = angleForCase(lang, slug)
+        expect(a.slug, `${lang}/${slug}`).toBe(slug)
+        expect(a.angle.headline.length, `${lang}/${slug}`).toBeGreaterThan(0)
+      }
+    }
+  })
 })
