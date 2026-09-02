@@ -70,6 +70,19 @@ export function anglesForBlock(lang: Lang, block: BlockKey): BlockAngle[] {
   return out
 }
 
+/**
+ * Угол системы для лендинга: карусель лендинга показывает каждую систему один
+ * раз, углом её первого блока. `blocks[0]` есть всегда, тип кортежа непустой.
+ */
+export function angleForCase(lang: Lang, slug: CaseSlug): BlockAngle {
+  const meta = caseMeta[slug]
+  const copy = casesCopy[lang][slug]
+  const block = meta.blocks[0]
+  const angle = copy.angles[block]
+  if (!angle) throw new Error(`angleForCase: ${lang}/${slug} has no angle for ${block}`)
+  return { slug, meta, copy, angle, otherBlocks: meta.blocks.filter((b) => b !== block) }
+}
+
 export function getCase(lang: Lang, slug: CaseSlug): { meta: CaseMeta; copy: CaseCopy } {
   return { meta: caseMeta[slug], copy: casesCopy[lang][slug] }
 }

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { evolutionBlockOrder, evolutionData } from '@/app/data/evolution'
-import { CASE_SLUGS, anglesForBlock, caseMeta, casesCopy, isCaseSlug } from './index'
+import { CASE_SLUGS, angleForCase, anglesForBlock, caseMeta, casesCopy, isCaseSlug } from './index'
 import type { CaseMeta } from './types'
 
 const LANGS = ['ru', 'en'] as const
@@ -193,5 +193,14 @@ describe('реестр кейсов', () => {
       })
       expect(shape(en), slug).toEqual(shape(ru))
     }
+  })
+})
+
+describe('angleForCase', () => {
+  it('отдаёт угол первого блока системы с полным набором полей', () => {
+    const a = angleForCase('ru', 'finance-loop')
+    expect(a.slug).toBe('finance-loop')
+    expect(a.angle.headline.length).toBeGreaterThan(0)
+    expect(a.otherBlocks.length).toBe(caseMeta['finance-loop'].blocks.length - 1)
   })
 })
