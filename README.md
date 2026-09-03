@@ -85,6 +85,11 @@ Built with Next.js 16 (Turbopack), React 19, Tailwind v4, shadcn/ui (base-vega +
 
 ## Changelog
 
+### 2026-09-03 — Lead delivery: Telegram only
+
+- `POST /api/evolution/lead` no longer sends the email copy through the hubmarket-ai relay: the relay fails SMTP login (`535 Incorrect authentication data`) and every lead logged `[evolead] email failed`. Telegram was and stays the working channel; `lib/evolution/email.ts` is kept for when the relay is fixed
+- Yandex Metrika counter live on the site (`NEXT_PUBLIC_YM_ID` in the server's `.env.local`), goals `quiz_start`, `quiz_result`, `lead_sent` verified from the landing pages
+
 ### 2026-09-02 — Four Yandex Direct landing pages (`/kontur`, `/it-director`, `/agent`, `/finance`)
 
 - One engine, copy in data: `app/data/landings/{types,registry,presets,kontur,it-director,agent,finance}.ts`, assembled by `components/landings/landing-page.tsx`. Two skeletons — symptoms-first (`/agent`, `/it-director`) and case-first (`/kontur`, `/finance`; the hero case is excluded from the carousel)
@@ -127,7 +132,7 @@ Built with Next.js 16 (Turbopack), React 19, Tailwind v4, shadcn/ui (base-vega +
 - Structure follows `../docs/2026-08-22-landing-evolyuciya-biznesa.md`: Hero → 6 postulate blocks (system / money / decisions / automation / speed / resources) → finale with manifesto, «graveyard» table (4 attempts, 3 stopped, 1 alive) and lead form
 - One visual metaphor across the page — «chaos becomes order»: canvas particle field that settles into a living grid (`components/evolution/particle-field.tsx`) + 7 one-shot SVG/framer-motion scenes in `components/evolution/animations/` (play once on viewport entry, final state under `prefers-reduced-motion`, deterministic seeded layouts for SSR)
 - All copy in `app/data/evolution.ts` («я»-form). Case facts are anonymised git numbers — no client names, no employee names, no revenue
-- Lead form (name · contact · «Что уже пробовали с ИИ и что из этого работает?») → `POST /api/evolution/lead` → Telegram + email-relay, same protections as `/marketplaces` (honeypot, min-fill-time, rate limit); schema + Telegram text covered by vitest
+- Lead form (name · contact · «Что уже пробовали с ИИ и что из этого работает?») → `POST /api/evolution/lead` → Telegram (email relay switched off 2026-09-03, see changelog), same protections as `/marketplaces` (honeypot, min-fill-time, rate limit); schema + Telegram text covered by vitest
 
 ### 2026-05-20 — Pet-projects Tier 1 Task 1 (in-repo portion)
 

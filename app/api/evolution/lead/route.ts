@@ -1,17 +1,12 @@
 import { NextResponse, type NextRequest } from 'next/server'
 import { evolutionLeadSchema } from '@/lib/evolution/schemas'
-import { buildLeadHtml, buildLeadSubject, buildLeadText, type EvolutionLeadData } from '@/lib/evolution/email'
+import type { EvolutionLeadData } from '@/lib/evolution/email'
 import { buildLeadTelegramText } from '@/lib/evolution/telegram-text'
-import { settleReturning, settleThrowing, summarize } from '@/lib/evolution/delivery'
-import { relaySend } from '@/lib/email-relay'
+import { settleReturning, summarize } from '@/lib/evolution/delivery'
 import { sendTelegramMessage } from '@/lib/landing/telegram'
 import { rateLimitTake } from '@/lib/landing/rate-limit'
 
 const MIN_FILL_MS = 1500
-
-// Поле контакта принимает «@ivan», «+7…» и «ivan@example.com». Reply-To ставим
-// только для email: хэндл или телефон в этом заголовке — невалидный адрес.
-const looksLikeEmail = (s: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s)
 
 export async function POST(req: NextRequest) {
   const ip =
@@ -67,25 +62,11 @@ export async function POST(req: NextRequest) {
     source: parsed.data.source,
   }
 
-  // 6. Два независимых канала владельцу: email через релей + Telegram
-  const from = process.env.SMTP_FROM
-  const to = process.env.OWNER_EMAIL
-
-  const emailPromise =
-    from && to
-      ? relaySend({
-          from,
-          to,
-          replyTo: looksLikeEmail(parsed.data.contact) ? parsed.data.contact : undefined,
-          subject: buildLeadSubject(lead),
-          text: buildLeadText(lead),
-          html: buildLeadHtml(lead),
-        })
-      : Promise.reject(new Error('SMTP_FROM or OWNER_EMAIL not configured'))
-
+  // 6. Один канал владельцу: Telegram. Почтовый канал через релей hubmarket-ai
+  // отключён 2026-09-03: релей не логинится в SMTP, письма не уходили. Письмо
+  // собирается в lib/evolution/email.ts, вернуть его - добавить второй settle* сюда.
   const deliveries = await Promise.all([
     settleReturning('telegram', sendTelegramMessage(buildLeadTelegramText(lead))),
-    settleThrowing('email', emailPromise),
   ])
 
   const result = summarize(deliveries)
