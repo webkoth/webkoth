@@ -8,6 +8,10 @@ import { Footer } from '@/components/evolution/footer'
 import { StickyCta } from '@/components/evolution/sticky-cta'
 import { LeadDialogProvider } from '@/components/evolution/lead-dialog'
 import { HtmlLang } from '@/components/evolution/html-lang'
+import { FragmentsToStructure } from '@/components/evolution/animations/fragments-to-structure'
+import { FogToDashboard } from '@/components/evolution/animations/fog-to-dashboard'
+import { NoiseToSignal } from '@/components/evolution/animations/noise-to-signal'
+import { CellsGrid } from '@/components/evolution/animations/cells-grid'
 import { LandingHero } from './landing-hero'
 import { Symptoms } from './symptoms'
 import { HeroCase } from './hero-case'
@@ -37,6 +41,15 @@ export function LandingPage({ slug }: { slug: LandingSlug }) {
 
   const quiz = <LandingQuiz slug={slug} title={copy.hero.title} copy={copy.quiz} />
   const how = <HowItWorks copy={copy.how} note={copy.standardNote} />
+  // Сцена первого экрана из анимаций главной, по смыслу страницы: обрывки собираются в
+  // контур, туман рассеивается в отчёт, шум становится сигналом, сетка систем заполняется.
+  const a = data.animations
+  const scene = {
+    kontur: <FragmentsToStructure copy={a.fragments} />,
+    finance: <FogToDashboard copy={a.fog} />,
+    agent: <NoiseToSignal copy={a.noise} />,
+    'it-director': <CellsGrid copy={a.cells} />,
+  }[slug]
 
   return (
     <>
@@ -54,9 +67,10 @@ export function LandingPage({ slug }: { slug: LandingSlug }) {
               items={navItems}
               llmMarkdown={llmMarkdown}
               anchorBase={landingPath(slug)}
+              minimal
             />
 
-            <LandingHero copy={copy.hero} skeleton={meta.skeleton} />
+            <LandingHero copy={copy.hero} skeleton={meta.skeleton} scene={scene} />
 
             {meta.skeleton === 'symptoms-first' ? (
               <>

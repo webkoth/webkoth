@@ -39,9 +39,16 @@ export function Footer({ data }: { data: EvolutionData }) {
             )
           })}
         </div>
-        <p className="font-mono text-xs text-muted-foreground">
-          &copy; {new Date().getFullYear()} {data.footer.owner}
-        </p>
+        <div className="flex flex-col gap-1 font-mono text-xs text-muted-foreground md:items-end">
+          <p>
+            &copy; {new Date().getFullYear()} {data.footer.owner} ·{' '}
+            <Link href="/privacy" className="underline underline-offset-2 transition hover:text-primary">
+              {data.footer.privacy}
+            </Link>
+          </p>
+          {/* Реквизиты рекламодателя: модерация Директа требует данные продавца на сайте. */}
+          <p>{data.footer.legal}</p>
+        </div>
       </div>
     </footer>
   )

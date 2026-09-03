@@ -35,6 +35,9 @@ export const evolutionLeadSchema = z.object({
     .max(200)
     .regex(/^[^\r\n]+$/, 'no_newline'),
   answer: z.string().trim().min(2, 'answer_min').max(4000),
+  // Согласие на обработку персональных данных (152-ФЗ): без него заявку не принимаем.
+  // boolean с проверкой, а не literal(true): форма стартует с false и должна типизироваться.
+  consent: z.boolean().refine((v) => v === true, 'consent_required'),
   // honeypot: пропускаем через Zod, непустое значение ловит роут тихой двухсоткой.
   // .max(0) роняет запрос до хендлера и подсказывает боту, что это ловушка.
   website: z.string().optional(),

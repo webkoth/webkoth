@@ -27,7 +27,6 @@ const COLS = {
   slTitles: 'AW', slDescs: 'AX', slHrefs: 'AY', callouts: 'BE', groupNeg: 'BF',
 }
 const FIRST_DATA_ROW = 12
-const CAMPAIGN_TYPE = 'Единая перфоманс-кампания'
 const AD_TYPE = 'Комбинаторное'
 const LIMITS = { h: 56, word: 22, t: 81, display: 20, slTitle: 30, slDesc: 60, callout: 25, kwWords: 7, kwPerGroup: 200 }
 const DISPLAY = { kontur: 'контур-1С', 'it-director': 'ИТ-директор', agent: 'ИИ-агент-вердикт', finance: 'финансы-1С', home: 'эволюция-бизнеса' }

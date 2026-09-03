@@ -363,11 +363,18 @@ export const en: EvolutionData = {
         contact: '@jane',
         answer: 'E.g.: margin per SKU doesn’t reconcile with the marketplace; we tried writing bots, nobody uses them…',
       },
+      consent: {
+        before: 'I agree to the processing of my personal data under the ',
+        link: 'privacy policy',
+        after: '',
+      },
+      privacyHref: '/privacy',
       errors: {
         name_min: 'At least 2 characters',
         contact_min: 'Telegram, email or phone',
         answer_min: 'A couple of words is enough, even «nothing»',
         no_newline: 'No line breaks',
+        consent_required: 'Consent is required to send the request',
       },
       rateLimited: {
         before:
@@ -440,5 +447,11 @@ export const en: EvolutionData = {
     },
   },
 
-  footer: { owner: 'Minas Sarkisyan', cv: 'CV', llms: 'llms.txt' },
+  footer: {
+    owner: 'Minas Sarkisyan',
+    cv: 'CV',
+    llms: 'llms.txt',
+    legal: 'Sole proprietor Olga Kotelnikova · TIN 667407630035 · OGRNIP 326237500323833',
+    privacy: 'Privacy policy',
+  },
 }

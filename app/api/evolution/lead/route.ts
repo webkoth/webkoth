@@ -60,6 +60,8 @@ export async function POST(req: NextRequest) {
     ip,
     lang: parsed.data.lang,
     source: parsed.data.source,
+    // Схема уже отклонила заявку без согласия; фиксируем момент как доказательство.
+    consentAt: new Date().toISOString(),
   }
 
   // 6. Один канал владельцу: Telegram. Почтовый канал через релей hubmarket-ai

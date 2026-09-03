@@ -228,6 +228,9 @@ export type EvolutionData = {
       orBelow: string
       fields: { name: string; contact: string; answer: string }
       placeholders: { name: string; contact: string; answer: string }
+      /** Согласие на обработку персональных данных: текст со ссылкой на политику (152-ФЗ). */
+      consent: LinkedText
+      privacyHref: string
       /** Ключи совпадают с кодами сообщений в `lib/evolution/schemas.ts`. */
       errors: Record<string, string>
       rateLimited: LinkedText
@@ -248,5 +251,12 @@ export type EvolutionData = {
     }
   }
   animations: AnimationCopy
-  footer: { owner: string; cv: string; llms: string }
+  footer: {
+    owner: string
+    cv: string
+    llms: string
+    /** Реквизиты рекламодателя: модерация Директа требует данные продавца на сайте. */
+    legal: string
+    privacy: string
+  }
 }

@@ -68,7 +68,7 @@ export function LeadForm({
     formState: { errors },
   } = useForm<EvolutionLeadInput>({
     resolver: zodResolver(evolutionLeadSchema),
-    defaultValues: { name: '', contact: '', answer: defaultAnswer ?? '', website: '', filledAtMs: 1, lang },
+    defaultValues: { name: '', contact: '', answer: defaultAnswer ?? '', consent: false, website: '', filledAtMs: 1, lang },
   })
 
   const msg = (code?: string) => (code ? (copy.errors[code] ?? code) : undefined)
@@ -205,6 +205,32 @@ export function LeadForm({
         {errors.answer ? (
           <p id={id('answer-error')} className="mt-1 text-xs text-destructive">
             {msg(errors.answer.message)}
+          </p>
+        ) : null}
+      </div>
+
+      {/* Согласие на обработку персональных данных (152-ФЗ): обязательный чекбокс со ссылкой на политику. */}
+      <div>
+        <label htmlFor={id('consent')} className="flex cursor-pointer items-start gap-2.5 text-sm text-muted-foreground">
+          <input
+            id={id('consent')}
+            type="checkbox"
+            {...register('consent')}
+            aria-invalid={!!errors.consent}
+            aria-describedby={errors.consent ? id('consent-error') : undefined}
+            className="mt-0.5 size-4 shrink-0 accent-primary"
+          />
+          <span>
+            {copy.consent.before}
+            <a href={copy.privacyHref} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-primary">
+              {copy.consent.link}
+            </a>
+            {copy.consent.after}
+          </span>
+        </label>
+        {errors.consent ? (
+          <p id={id('consent-error')} className="mt-1 text-xs text-destructive">
+            {msg(errors.consent.message)}
           </p>
         ) : null}
       </div>

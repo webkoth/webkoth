@@ -5,12 +5,22 @@ const valid = {
   name: 'Иван',
   contact: '@ivan',
   answer: 'Собрали бота для заявок, им никто не пользуется.',
+  consent: true,
   filledAtMs: 1_700_000_000_000,
 }
 
 describe('evolutionLeadSchema', () => {
   it('принимает минимально заполненную заявку', () => {
     expect(evolutionLeadSchema.safeParse(valid).success).toBe(true)
+  })
+
+  it('отклоняет заявку без согласия на обработку персональных данных (152-ФЗ)', () => {
+    const r = evolutionLeadSchema.safeParse({ ...valid, consent: false })
+    expect(r.success).toBe(false)
+    if (!r.success) expect(r.error.issues.map((i) => i.message)).toContain('consent_required')
+    const { consent: _omit, ...rest } = valid
+    void _omit
+    expect(evolutionLeadSchema.safeParse(rest).success).toBe(false)
   })
 
   it('принимает телефон как контакт — поле общее для Telegram, email и телефона', () => {

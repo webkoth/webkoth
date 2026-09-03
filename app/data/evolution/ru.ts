@@ -365,11 +365,18 @@ export const ru: EvolutionData = {
         contact: '@ivan',
         answer: 'Например: маржинальность по артикулам не сходится с маркетплейсом; пробовали писать ботов, никто не пользуется…',
       },
+      consent: {
+        before: 'Согласен на обработку персональных данных по ',
+        link: 'политике конфиденциальности',
+        after: '',
+      },
+      privacyHref: '/privacy',
       errors: {
         name_min: 'Минимум 2 символа',
         contact_min: 'Telegram, email или телефон',
         answer_min: 'Пары слов достаточно, даже «ничего»',
         no_newline: 'Без переносов строк',
+        consent_required: 'Без согласия заявку отправить нельзя',
       },
       rateLimited: {
         before:
@@ -442,5 +449,11 @@ export const ru: EvolutionData = {
     },
   },
 
-  footer: { owner: 'Минас Саркисян', cv: 'Резюме', llms: 'llms.txt' },
+  footer: {
+    owner: 'Минас Саркисян',
+    cv: 'Резюме',
+    llms: 'llms.txt',
+    legal: 'ИП Котельникова Ольга Сергеевна · ИНН 667407630035 · ОГРНИП 326237500323833',
+    privacy: 'Политика конфиденциальности',
+  },
 }

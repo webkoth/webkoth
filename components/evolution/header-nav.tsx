@@ -32,6 +32,7 @@ export function HeaderNav({
   items,
   llmMarkdown,
   anchorBase = '',
+  minimal = false,
 }: {
   lang: Lang
   brand: string
@@ -47,6 +48,8 @@ export function HeaderNav({
    * Голый `#system` со страницы кейса скроллил бы её саму в никуда - там этих секций нет.
    */
   anchorBase?: string
+  /** Рекламный лендинг: без соцсетей в шапке, чтобы не уводить платный трафик со страницы. */
+  minimal?: boolean
 }) {
   const [activeId, setActiveId] = useState<string | null>(null)
   const headerRef = useRef<HTMLElement>(null)
@@ -115,7 +118,7 @@ export function HeaderNav({
           <span className="sr-only">{brand}</span>
         </a>
         {/* Соцсети рядом с фото — те же, что в футере; на узких экранах их показывает футер. */}
-        <nav aria-label={nav.socialAria} className="ml-2 hidden items-center gap-0.5 md:flex">
+        <nav aria-label={nav.socialAria} className={minimal ? 'hidden' : 'ml-2 hidden items-center gap-0.5 md:flex'}>
           {SOCIAL_LINKS_HEADER.map((s) => {
             const Icon = SOCIAL_ICONS[s.key]
             const label = s.label[lang]

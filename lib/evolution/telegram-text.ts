@@ -26,7 +26,8 @@ export function buildLeadTelegramText(d: EvolutionLeadData): string {
     `<b>🌱 Заявка на разбор - ${escapeHtml(sourceLabel(d.lang, d.source))}</b>\n\n` +
     `<b>Имя:</b> ${escapeHtml(d.name)}\n` +
     `<b>Контакт:</b> ${escapeHtml(d.contact)}\n` +
-    `<b>IP:</b> ${escapeHtml(d.ip)}`
+    `<b>IP:</b> ${escapeHtml(d.ip)}` +
+    (d.consentAt ? `\n<b>Согласие на обработку ПДн:</b> ${escapeHtml(d.consentAt)}` : '')
 
   const escaped = escapeHtml(d.answer)
   const room = Math.max(

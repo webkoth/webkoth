@@ -85,6 +85,14 @@ Built with Next.js 16 (Turbopack), React 19, Tailwind v4, shadcn/ui (base-vega +
 
 ## Changelog
 
+### 2026-09-03 — Ad readiness: consent, privacy policy, advertiser details, hero scenes on landings
+
+- Lead form requires a personal-data consent checkbox (152-ФЗ): `consent` in `lib/evolution/schemas.ts`, copy `finale.form.consent` + `privacyHref` in both locales, consent timestamp goes to the Telegram notification (`consentAt`)
+- New `/privacy` page (RU): operator details, what is collected, purposes, third parties (Telegram, Yandex Metrika), retention, rights; linked from the form and the footer; in `sitemap.xml`
+- Footer shows the advertiser's legal details (sole proprietor, ИНН, ОГРНИП) for Yandex Direct moderation, plus the privacy link
+- Landings: hero is two-column with a scene reused from the home animations (`/kontur` fragments → structure, `/finance` fog → dashboard, `/agent` noise → signal, `/it-director` cells grid); header in `minimal` mode hides social links so paid traffic stays on the page; language toggle no longer links to non-existent `/en/<slug>`
+- Home hero: the CTA moved above the subtitle so it stays in the first mobile screen
+
 ### 2026-09-03 — Lead delivery: Telegram only
 
 - `POST /api/evolution/lead` no longer sends the email copy through the hubmarket-ai relay: the relay fails SMTP login (`535 Incorrect authentication data`) and every lead logged `[evolead] email failed`. Telegram was and stays the working channel; `lib/evolution/email.ts` is kept for when the relay is fixed

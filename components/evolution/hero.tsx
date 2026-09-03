@@ -132,20 +132,12 @@ export function Hero({ data }: { data: EvolutionData["hero"] }) {
             {renderBold(data.lead)}
           </motion.p>
 
-          <motion.p
-            className="mt-4 max-w-[52ch] text-base text-muted-foreground md:text-lg lg:text-[clamp(1rem,1.15vw,1.25rem)]"
-            initial={{ opacity: 0, y: 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={tr(1.2)}
-          >
-            {data.sub}
-          </motion.p>
-
+          {/* Кнопка выше подтекста: с рекламы на мобильном она должна попадать в первый экран. */}
           <motion.div
             className="mt-7 flex flex-col gap-4 sm:flex-row sm:items-center md:mt-8"
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={tr(1.5)}
+            transition={tr(1.2)}
           >
             {/* Button несёт whitespace-nowrap: на 320px длинная подпись даёт
               горизонтальный скролл, поэтому на узких экранах — во всю ширину. */}
@@ -157,6 +149,15 @@ export function Hero({ data }: { data: EvolutionData["hero"] }) {
               {data.cta}
             </Button>
           </motion.div>
+
+          <motion.p
+            className="mt-6 max-w-[52ch] text-base text-muted-foreground md:text-lg lg:text-[clamp(1rem,1.15vw,1.25rem)]"
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={tr(1.5)}
+          >
+            {data.sub}
+          </motion.p>
 
           {/* Мобильный индикатор — сразу под кнопкой */}
           <motion.div
