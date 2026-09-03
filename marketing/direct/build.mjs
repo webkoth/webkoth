@@ -8,7 +8,7 @@ import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync
 import { tmpdir } from 'node:os'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { COUNTER, NEGATIVES_COMMON, REGION, SITE, campaigns } from './kampanii.mjs'
+import { COUNTER, NEGATIVES_COMMON, NETWORK_ADS, REGION, SITE, campaigns } from './kampanii.mjs'
 
 const here = dirname(fileURLToPath(import.meta.url))
 const out = join(here, 'dist')
@@ -30,7 +30,24 @@ const FIRST_DATA_ROW = 12
 const CAMPAIGN_TYPE = 'Единая перфоманс-кампания'
 const AD_TYPE = 'Комбинаторное'
 const LIMITS = { h: 56, word: 22, t: 81, display: 20, slTitle: 30, slDesc: 60, callout: 25, kwWords: 7, kwPerGroup: 200 }
-const DISPLAY = { kontur: 'контур-1С', 'it-director': 'ИТ-директор', agent: 'ИИ-агент-вердикт', finance: 'финансы-1С' }
+const DISPLAY = { kontur: 'контур-1С', 'it-director': 'ИТ-директор', agent: 'ИИ-агент-вердикт', finance: 'финансы-1С', home: 'эволюция-бизнеса' }
+
+// РСЯ-зеркало поисковой кампании: те же группы и фразы, к объявлению группы добавляется
+// объявление страницы из NETWORK_ADS (вопрос-боль для сетей). UTM-кампания с суффиксом -rsya,
+// utm_term = площадка.
+function networkMirror(c) {
+  const netAd = NETWORK_ADS[c.id]
+  return {
+    ...c,
+    id: `${c.id}-rsya`,
+    base: c.id,
+    name: c.name.replace(/^Поиск · /, 'РСЯ · '),
+    kind: 'network',
+    utm: { campaign: `${c.utm.campaign}-rsya` },
+    groups: c.groups.map((g) => ({ ...g, ads: netAd ? [...g.ads, netAd] : g.ads })),
+  }
+}
+const allCampaigns = campaigns.flatMap((c) => (c.kind === 'search' ? [c, networkMirror(c)] : [c]))
 
 const errors = []
 const check = (cond, msg) => { if (!cond) errors.push(msg) }
@@ -137,8 +154,8 @@ const templateSheet = (() => {
 
 const summary = []
 let groupNo = 0
-for (const c of campaigns) {
-  const display = DISPLAY[c.id] ?? DISPLAY[c.path?.slice(1)] ?? ''
+for (const c of allCampaigns) {
+  const display = DISPLAY[c.base ?? c.id] ?? DISPLAY[c.path?.slice(1)] ?? ''
   const campaignNegatives = [...new Set([...NEGATIVES_COMMON, ...(c.negatives ?? [])])]
   const bid = c.kind === 'network' ? 10 : 30
   const bidNet = 10
