@@ -42,7 +42,7 @@ const numCell = (ref, v) => `<c r="${ref}"><v>${v}</v></c>`
 
 function utmLink(c, g) {
   const path = g.path ?? c.path
-  const q = new URLSearchParams({ ...(c.query ?? {}), utm_source: 'yandex', utm_medium: 'cpc', utm_campaign: c.utm.campaign, utm_content: g.slug })
+  const q = new URLSearchParams({ ...(g.query ?? c.query ?? {}), utm_source: 'yandex', utm_medium: 'cpc', utm_campaign: c.utm.campaign, utm_content: g.slug })
   // {keyword} и {source} подставляет Директ, поэтому они вне URLSearchParams.
   const term = c.kind === 'network' ? '{source}' : '{keyword}'
   return `${SITE}${path}?${q.toString()}&utm_term=${term}`
@@ -50,7 +50,7 @@ function utmLink(c, g) {
 
 function sitelinkHref(c, g, href) {
   const [p, anchor] = href.split('#')
-  const q = new URLSearchParams({ ...(p === c.path ? c.query ?? {} : {}), utm_source: 'yandex', utm_medium: 'cpc', utm_campaign: c.utm.campaign, utm_content: `${g.slug}-sitelink` })
+  const q = new URLSearchParams({ ...(p === (g.path ?? c.path) ? g.query ?? c.query ?? {} : {}), utm_source: 'yandex', utm_medium: 'cpc', utm_campaign: c.utm.campaign, utm_content: `${g.slug}-sitelink` })
   return `${SITE}${p}?${q.toString()}${anchor ? `#${anchor}` : ''}`
 }
 
@@ -139,7 +139,7 @@ const summary = []
 let groupNo = 0
 for (const c of campaigns) {
   const display = DISPLAY[c.id] ?? DISPLAY[c.path?.slice(1)] ?? ''
-  const campaignNegatives = [...NEGATIVES_COMMON, ...(c.negatives ?? [])]
+  const campaignNegatives = [...new Set([...NEGATIVES_COMMON, ...(c.negatives ?? [])])]
   const bid = c.kind === 'network' ? 10 : 30
   const bidNet = 10
   const rows = []
