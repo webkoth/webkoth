@@ -41,3 +41,6 @@ next-env.d.ts
 
 # worktrees для изолированной работы (superpowers)
 /.worktrees/
+
+# Скачанные шаблоны Яндекса для генератора импорта Директа
+/marketing/direct/ref/
