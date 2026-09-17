@@ -206,6 +206,7 @@ export const clarifyCopy = {
   general: (title: string) => `Уточнить: ${title}`,
   deep: (title: string, process: string) => `Уточнить: ${title} (${process})`,
   needed: (process: string) => `Уточнить: нужен ли шаг вообще (${process})`,
+  service: (process: string) => `Уточнить: какой сервис уже это делает и чем не устраивает (${process})`,
 }
 
 export const deliverCopy = {

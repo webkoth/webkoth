@@ -3,11 +3,9 @@ import { outcomeCopy } from '@/app/data/brief/copy'
 import { processCatalog, type ProcessEntry } from '@/app/data/brief/processes'
 import { decideVerdict } from '@/lib/standard/verdict'
 import { prepareFor, whyFirst } from './explain'
-import { clarifyFor, flagsFor } from './flags'
 import type { HoursBand, ReadyToolKey } from './ids'
 import { processLabel } from './labels'
 import type { BriefMap, DynamicOutcome, MapBranch, MapItem, MapStep, ReadyMadeView, StageInfo } from './map-types'
-import { offerStepOf } from './offer-step'
 import { fitness, pickStart, returnedHours, sortByPriority } from './priority'
 import type { BriefAnswers } from './schema'
 import { stageOf } from './stage'
@@ -121,8 +119,5 @@ export function buildMap(a: BriefAnswers): BriefMap {
     notDeep: a.picked
       .filter((p) => !deep.includes(p.id))
       .map((p) => ({ processId: p.id, label: processLabel(p.id, a), hours: HOURS_VALUE[p.hours] })),
-    offer: offerStepOf(a, items, startId),
-    flags: flagsFor(a, items),
-    clarify: clarifyFor(a, items),
   }
 }

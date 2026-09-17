@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { clarifyCopy, explainCopy, flagCopy, outcomeCopy } from '@/app/data/brief/copy'
+import { explainCopy, outcomeCopy } from '@/app/data/brief/copy'
 import { processCatalog } from '@/app/data/brief/processes'
 import { buildMap, usesReadyTool } from './build-map'
 import { demoShop, headShop, soloRareShop } from './fixtures'
@@ -42,16 +42,13 @@ describe('демо-магазин', () => {
     expect(p.prepare).toEqual([explainCopy.prepare.data])
   })
 
-  it('итог, не разобранные, ступень, стадия, флаги', () => {
+  it('итог, не разобранные, стадия', () => {
     expect(map.totalReturnedHours).toBeCloseTo(6.3)
     expect(map.notDeep.map((n) => [n.processId, n.hours])).toEqual([
       ['ads', 2],
       ['supply', 2],
     ])
-    expect(map.offer).toBe('firstProcess')
     expect(map.stage.key).toBe('stage1')
-    expect(map.flags).toEqual([flagCopy.category('Одежда и обувь'), flagCopy.budget('150–400 тыс ₽')])
-    expect(map.clarify).toEqual([])
   })
 })
 
@@ -67,13 +64,11 @@ describe('«всё в голове»', () => {
     expect(map.items[0].dataReason).toBe('cost')
   })
 
-  it('старта нет, начинать с порядка; ступень аудит', () => {
+  it('старта нет, начинать с порядка', () => {
     expect(map.startId).toBeUndefined()
     expect(map.startFallback).toEqual({ processId: 'unit', text: explainCopy.prepare.cost })
-    expect(map.offer).toBe('audit')
     expect(map.stage.key).toBe('stage0')
     expect(map.totalReturnedHours).toBe(0)
-    expect(map.clarify).toEqual([clarifyCopy.general('Выпускали ключи доступа к кабинету?')])
   })
 })
 
@@ -92,10 +87,9 @@ describe('один владелец, редкие задачи', () => {
     })
   })
 
-  it('итог меньше часа, ступень разбор', () => {
+  it('итог меньше часа', () => {
     expect(map.totalReturnedHours).toBeCloseTo(0.1)
     expect(formatHours(map.totalReturnedHours)).toBe('<1')
-    expect(map.offer).toBe('review')
   })
 })
 
@@ -103,7 +97,6 @@ describe('частичные ответы и особые случаи', () => {
   it('пустой бриф: пустая карта без падения', () => {
     const map = buildMap(emptyAnswers())
     expect([map.items, map.notDeep, map.startId, map.totalReturnedHours]).toEqual([[], [], undefined, 0])
-    expect(map.flags).toEqual([flagCopy.category('не указана')])
   })
 
   it('процесс отмечен, подробностей нет: пункт ждёт', () => {

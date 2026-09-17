@@ -1,6 +1,7 @@
 import { offerCopy } from '@/app/data/brief/copy'
 import { optionLabel, shopQuestions } from '@/app/data/brief/questions'
 import { escapeHtml } from '@/lib/landing/telegram'
+import type { BriefInternal } from './internal'
 import { categoryText, marketplacesText } from './labels'
 import type { BriefMap } from './map-types'
 import { formatHours } from './priority'
@@ -24,7 +25,7 @@ function trimDanglingEntity(s: string): string {
   return s.slice(amp).includes(';') ? s : s.slice(0, amp)
 }
 
-export function renderTelegramSummary(a: BriefAnswers, map: BriefMap, k?: string): string {
+export function renderTelegramSummary(a: BriefAnswers, map: BriefMap, internal: BriefInternal, k?: string): string {
   const start = map.items.find((i) => i.processId === map.startId)
   const startLine = start
     ? `Начать с: ${start.label} (≈ ${formatHours(start.returnedHours)} ч/нед)`
@@ -45,7 +46,7 @@ export function renderTelegramSummary(a: BriefAnswers, map: BriefMap, k?: string
   const rest = [
     shop,
     startLine,
-    `Ступень: ${offerCopy[map.offer]}`,
+    `Ступень: ${offerCopy[internal.offer]}`,
     `⚠ категория: ${categoryText(a)}, проверить по правилу 1.6`,
     ...(k ? [`метка: ${k}`] : []),
   ].map(escapeHtml)

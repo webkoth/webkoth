@@ -1,6 +1,7 @@
 import { colorShort, deliverCopy, offerCopy } from '@/app/data/brief/copy'
 import { deepQuestions, goalsQuestions, nowQuestions, optionLabel, shopQuestions, type QuestionDef } from '@/app/data/brief/questions'
 import { casePath } from '@/app/data/cases'
+import type { BriefInternal } from './internal'
 import { answerText } from './labels'
 import type { BriefMap, MapItem } from './map-types'
 import { formatHours } from './priority'
@@ -71,9 +72,16 @@ function itemLines(item: MapItem, a: BriefAnswers, isStart: boolean): string[] {
   return out
 }
 
-export type MarkdownInput = { answers: BriefAnswers; map: BriefMap; k?: string; startedAtMs: number; now: Date }
+export type MarkdownInput = {
+  answers: BriefAnswers
+  map: BriefMap
+  internal: BriefInternal
+  k?: string
+  startedAtMs: number
+  now: Date
+}
 
-export function renderMarkdown({ answers: a, map, k, startedAtMs, now }: MarkdownInput): string {
+export function renderMarkdown({ answers: a, map, internal, k, startedAtMs, now }: MarkdownInput): string {
   const t = moscow(now)
   const minutes = Math.max(1, Math.round((now.getTime() - startedAtMs) / 60_000))
   return [
@@ -86,7 +94,7 @@ export function renderMarkdown({ answers: a, map, k, startedAtMs, now }: Markdow
     '',
     '## 1. Флаги',
     '',
-    ...bullets(map.flags),
+    ...bullets(internal.flags),
     '',
     '## 2. Магазин и стадия',
     '',
@@ -102,7 +110,7 @@ export function renderMarkdown({ answers: a, map, k, startedAtMs, now }: Markdow
     ...(map.startFallback ? [`Старта нет, начать с порядка: ${map.startFallback.text}`, ''] : []),
     '## 4. Уточнить на созвоне',
     '',
-    ...bullets(map.clarify),
+    ...bullets(internal.clarify),
     '',
     '## 5. Отмечены, но не разобраны',
     '',
@@ -115,7 +123,7 @@ export function renderMarkdown({ answers: a, map, k, startedAtMs, now }: Markdow
     '',
     '## 7. Ступень',
     '',
-    `- ${offerCopy[map.offer]}`,
+    `- ${offerCopy[internal.offer]}`,
     `- Итог по разобранным процессам: ≈ ${formatHours(map.totalReturnedHours)} ч/нед`,
     '',
     '## 8. Ответы (JSON для /task-verdict)',

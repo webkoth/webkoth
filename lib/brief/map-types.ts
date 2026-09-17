@@ -3,6 +3,7 @@ import type { QuizInput, Verdict } from '@/lib/standard/verdict'
 import type { HoursBand, ProcessId } from './ids'
 
 // Типы карты. Карта - результат buildMap: и для экрана селлера, и для файла нам.
+// Ступень, флаги и «что уточнить» в карту не входят: они в BriefInternal (internal.ts).
 
 /** Цвет шага для владельца (AIAS-01): сам, ИИ готовит, человек, не трогать. */
 export type StepColor = 'auto' | 'ai' | 'human' | 'skip'
@@ -71,7 +72,4 @@ export type BriefMap = {
   startFallback?: { processId: ProcessId; text: string }
   totalReturnedHours: number
   notDeep: { processId: ProcessId; label: string; hours: number }[]
-  offer: OfferStep
-  flags: string[]
-  clarify: string[]
 }

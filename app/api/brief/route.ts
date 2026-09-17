@@ -1,6 +1,7 @@
 import { NextResponse, type NextRequest } from 'next/server'
 import { buildMap } from '@/lib/brief/build-map'
 import { deliverBrief } from '@/lib/brief/deliver'
+import { buildInternal } from '@/lib/brief/internal'
 import { briefFilename, renderMarkdown } from '@/lib/brief/render-markdown'
 import { renderTelegramSummary } from '@/lib/brief/render-telegram'
 import { briefSubmitSchema } from '@/lib/brief/schema'
@@ -54,12 +55,13 @@ export async function POST(req: NextRequest) {
   if (now - startedAtMs < MIN_FILL_MS) return NextResponse.json({ ok: true }, { status: 200 })
 
   const map = buildMap(answers)
+  const internal = buildInternal(answers, map)
   const nowDate = new Date(now)
   const result = await deliverBrief(
     {
-      summary: renderTelegramSummary(answers, map, k),
+      summary: renderTelegramSummary(answers, map, internal, k),
       filename: briefFilename(k, nowDate),
-      markdown: renderMarkdown({ answers, map, k, startedAtMs, now: nowDate }),
+      markdown: renderMarkdown({ answers, map, internal, k, startedAtMs, now: nowDate }),
     },
     { sendDocument: sendTelegramDocument, sendMessage: sendTelegramMessage },
   )

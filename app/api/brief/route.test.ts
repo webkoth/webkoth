@@ -40,6 +40,8 @@ describe('POST /api/brief', () => {
     expect(filename).toMatch(/^brief-anna-\d{4}-\d{2}-\d{2}-\d{4}\.md$/)
     expect(content).toContain('### Ответы на отзывы (начать с этого)')
     expect(caption).toContain('Начать с: Ответы на отзывы')
+    expect(caption).toContain('Ступень: первый процесс до production')
+    expect(content).toContain('- Проверить категорию по правилу 1.6: Одежда и обувь')
   })
 
   it('ловушка для ботов и слишком быстрое заполнение: тихий 200 без отправки', async () => {

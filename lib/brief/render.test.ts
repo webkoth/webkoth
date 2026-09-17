@@ -1,15 +1,26 @@
 import { describe, expect, it } from 'vitest'
 import { buildMap } from './build-map'
 import { demoShop, headShop } from './fixtures'
+import { buildInternal } from './internal'
 import { briefFilename, renderMarkdown } from './render-markdown'
 import { renderTelegramSummary, SUMMARY_MAX } from './render-telegram'
-import { emptyAnswers } from './schema'
+import { emptyAnswers, type BriefAnswers } from './schema'
 
 const now = new Date('2026-09-18T09:05:00Z')
 
+/** Карта и внутренняя часть, как их строит маршрут. */
+const built = (a: BriefAnswers) => {
+  const map = buildMap(a)
+  return { map, internal: buildInternal(a, map) }
+}
+const summary = (a: BriefAnswers, k?: string) => {
+  const { map, internal } = built(a)
+  return renderTelegramSummary(a, map, internal, k)
+}
+
 describe('renderTelegramSummary', () => {
   it('демо-магазин: кто, магазин, с чего начать, ступень, категория, метка', () => {
-    const text = renderTelegramSummary(demoShop(), buildMap(demoShop()), 'anna')
+    const text = summary(demoShop(), 'anna')
     expect(text.split('\n')).toEqual([
       '<b>Бриф: Анна · @anna_shop</b>',
       'Wildberries + Ozon · 300–1000 артикулов · 10–100 заказов в день',
@@ -21,7 +32,7 @@ describe('renderTelegramSummary', () => {
   })
 
   it('без старта: начать с порядка', () => {
-    const text = renderTelegramSummary(headShop(), buildMap(headShop()))
+    const text = summary(headShop())
     expect(text).toContain('Начать с порядка: Посчитайте себестоимость каждого товара.')
     expect(text).not.toContain('метка:')
   })
@@ -36,7 +47,7 @@ describe('renderTelegramSummary', () => {
       category: 'other' as const,
       categoryOther: 'я'.repeat(60),
     }
-    const text = renderTelegramSummary(a, buildMap(a), 'a'.repeat(32))
+    const text = summary(a, 'a'.repeat(32))
     expect(text).toContain('A&lt;b&gt;&amp;')
     expect(text.length).toBeLessThanOrEqual(SUMMARY_MAX)
   })
@@ -44,11 +55,21 @@ describe('renderTelegramSummary', () => {
 
 describe('renderMarkdown', () => {
   const answers = demoShop()
-  const md = renderMarkdown({ answers, map: buildMap(answers), k: 'anna', startedAtMs: now.getTime() - 17 * 60_000, now })
+  const md = renderMarkdown({ answers, ...built(answers), k: 'anna', startedAtMs: now.getTime() - 17 * 60_000, now })
 
   it('имя файла по московскому времени', () => {
     expect(briefFilename('anna', now)).toBe('brief-anna-2026-09-18-1205.md')
     expect(briefFilename(undefined, now)).toBe('brief-nolabel-2026-09-18-1205.md')
+  })
+
+  it('ступень, флаги и «уточнить» берутся из внутренней части', () => {
+    const map = buildMap(answers)
+    const internal = { offer: 'pilot' as const, flags: ['флаг для проверки'], clarify: ['уточнить для проверки'] }
+    const text = renderMarkdown({ answers, map, internal, startedAtMs: now.getTime(), now })
+    expect(text).toContain('- флаг для проверки')
+    expect(text).toContain('- уточнить для проверки')
+    expect(text).toContain('- доведение пилота до production')
+    expect(renderTelegramSummary(answers, map, internal)).toContain('Ступень: доведение пилота до production')
   })
 
   it('шапка и разделы на месте', () => {
@@ -69,7 +90,7 @@ describe('renderMarkdown', () => {
 
   it('незаполненный процесс помечен', () => {
     const a = { ...emptyAnswers(), picked: [{ id: 'reviews' as const, hours: '1to3' as const }] }
-    expect(renderMarkdown({ answers: a, map: buildMap(a), startedAtMs: now.getTime(), now })).toContain('- Подробности не заполнены')
+    expect(renderMarkdown({ answers: a, ...built(a), startedAtMs: now.getTime(), now })).toContain('- Подробности не заполнены')
   })
 
   it('снимок файла демо-магазина', () => {
