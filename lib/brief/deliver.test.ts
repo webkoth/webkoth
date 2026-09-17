@@ -5,7 +5,7 @@ import { CHUNK_PAUSE_MS, chunkEscaped, deliverBrief, TELEGRAM_CHUNK } from './de
 type Sent = { ok: boolean; error?: string }
 const ok = async (..._args: unknown[]): Promise<Sent> => ({ ok: true })
 const fail = async (..._args: unknown[]): Promise<Sent> => ({ ok: false, error: 'boom' })
-const noSleep = async (_ms: number) => {}
+const noSleep = async () => {}
 const payload = { summary: '<b>Бриф</b>', filename: 'brief.md', markdown: '# Бриф\n<тест> & ok' }
 const longPayload = { ...payload, markdown: 'строка\n'.repeat(1500) }
 
