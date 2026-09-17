@@ -24,6 +24,7 @@ import { StepQuestions } from './step-questions'
 // Оболочка брифа: состояние, сохранение в браузере, шаги, отправка. Логика шагов и карты
 // живёт в lib/brief и покрыта тестами; здесь только последовательность экранов.
 // Рисуется только в браузере (brief-page-client.tsx): черновик читается при первом рендере.
+// data-brief-page на корне: по нему globals.css включает стили печати только на странице брифа.
 
 const STEP_GOALS = ['brief_step_1', 'brief_step_2', 'brief_step_3', 'brief_step_4'] as const
 
@@ -188,7 +189,7 @@ export function BriefPage({ k, caseLinks }: { k?: string; caseLinks: CaseLinks }
 
   if (state.step === 'intro') {
     return (
-      <div ref={rootRef} className="mx-auto max-w-3xl px-4 pb-24 md:px-8">
+      <div ref={rootRef} data-brief-page className="mx-auto max-w-3xl px-4 pb-24 md:px-8">
         <StepIntro
           canResume={inProgress || boot.status === 'ok'}
           outdated={boot.status === 'outdated'}
@@ -202,7 +203,7 @@ export function BriefPage({ k, caseLinks }: { k?: string; caseLinks: CaseLinks }
 
   if (state.step === 'map') {
     return (
-      <div ref={rootRef} className="mx-auto max-w-3xl px-4 pb-24 md:px-8">
+      <div ref={rootRef} data-brief-page className="mx-auto max-w-3xl px-4 pb-24 md:px-8">
         <BriefMapView
           map={map}
           answers={state.answers}
@@ -251,7 +252,7 @@ export function BriefPage({ k, caseLinks }: { k?: string; caseLinks: CaseLinks }
   }
 
   return (
-    <div ref={rootRef} className="mx-auto max-w-6xl px-4 pb-28 md:px-8 lg:pb-16">
+    <div ref={rootRef} data-brief-page className="mx-auto max-w-6xl px-4 pb-28 md:px-8 lg:pb-16">
       <Progress step={state.step} saved={saved} />
       <div className="grid gap-8 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)]">
         <div ref={formRef} className="min-w-0">

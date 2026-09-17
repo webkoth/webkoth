@@ -215,15 +215,15 @@
   }
 }
 
-/* Печать карты брифа в PDF: без фонового узора, всегда в светлых цветах (и из тёмной темы).
-   Остальное прячется классами print:hidden. */
+/* Печать карты брифа в PDF, только на странице брифа (у корня брифа data-brief-page):
+   без фонового узора, всегда в светлых цветах (и из тёмной темы). Остальное прячется
+   классами print:hidden. */
 @media print {
-  body::before {
+  html:has([data-brief-page]) body::before {
     display: none;
   }
 
-  :root,
-  .dark {
+  html:has([data-brief-page]) {
     color-scheme: light;
     --background: oklch(1 0 0);
     --foreground: oklch(0.168 0.114 266.6);
@@ -240,5 +240,11 @@
     --brief-auto-fg: oklch(0.46 0.1 160);
     --brief-ai-fg: oklch(0.52 0.18 35);
     --brief-human-fg: var(--brief-human);
+  }
+
+  /* Браузеры по умолчанию не печатают фоны: без этого пропадут точки легенды и заливки шагов. */
+  [data-brief-page] {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
   }
 }
