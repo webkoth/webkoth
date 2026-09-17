@@ -12,6 +12,8 @@ function setup() {
 
 describe('telegram', () => {
   afterEach(() => {
+    vi.useRealTimers()
+    vi.restoreAllMocks()
     vi.unstubAllEnvs()
     vi.unstubAllGlobals()
   })
@@ -48,12 +50,34 @@ describe('telegram', () => {
     expect(await file.text()).toBe('# Бриф')
   })
 
-  it('ошибка Telegram после повтора возвращается строкой', async () => {
+  it('повтор через 600 мс; ошибка после повтора возвращается строкой', async () => {
+    vi.useFakeTimers()
+    vi.spyOn(console, 'warn').mockImplementation(() => {})
     const fetchMock = setup()
     fetchMock.mockImplementation(async () => new Response('Bad Request', { status: 400 }))
-    const r = await sendTelegramDocument('brief.md', 'x', 'c')
+    const pending = sendTelegramDocument('brief.md', 'x', 'c')
+    await vi.advanceTimersByTimeAsync(599)
+    expect(fetchMock).toHaveBeenCalledTimes(1)
+    await vi.advanceTimersByTimeAsync(1)
+    const r = await pending
     expect(r.ok).toBe(false)
-    expect(r.error).toContain('Telegram 400')
+    expect(r.error).toContain('#1: Telegram 400')
+    expect(r.error).toContain('#2: Telegram 400')
     expect(fetchMock).toHaveBeenCalledTimes(2)
+  })
+
+  it('документ со второй попытки: на каждую попытку новый FormData', async () => {
+    vi.useFakeTimers()
+    vi.spyOn(console, 'warn').mockImplementation(() => {})
+    const fetchMock = setup()
+    fetchMock.mockImplementationOnce(async () => new Response('Bad Gateway', { status: 502 }))
+    const pending = sendTelegramDocument('brief.md', '# Бриф', '<b>Бриф</b>')
+    await vi.advanceTimersByTimeAsync(600)
+    expect(await pending).toEqual({ ok: true })
+    expect(fetchMock).toHaveBeenCalledTimes(2)
+    const [first, second] = (fetchMock.mock.calls as unknown as [string, RequestInit][]).map(([, init]) => init.body as FormData)
+    expect(second).toBeInstanceOf(FormData)
+    expect(second).not.toBe(first)
+    expect(await (second.get('document') as File).text()).toBe('# Бриф')
   })
 })

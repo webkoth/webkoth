@@ -51,6 +51,30 @@ describe('renderTelegramSummary', () => {
     expect(text).toContain('A&lt;b&gt;&amp;')
     expect(text.length).toBeLessThanOrEqual(SUMMARY_MAX)
   })
+
+  it('все однострочные поля из «&» на максимум: обрезка без висящей сущности, первая строка цела', () => {
+    // Сдвиг на 0–4 символа в имени: срез по лимиту попадает в каждую позицию внутри «&amp;».
+    const lengths: number[] = []
+    for (let shift = 0; shift < 5; shift++) {
+      const a = {
+        ...emptyAnswers(),
+        name: 'x'.repeat(shift) + '&'.repeat(80 - shift),
+        contact: '&'.repeat(120),
+        marketplaces: ['other' as const],
+        marketplacesOther: '&'.repeat(60),
+        category: 'other' as const,
+        categoryOther: '&'.repeat(60),
+      }
+      const text = summary(a, '&'.repeat(32))
+      lengths.push(text.length)
+      expect(text.length, `shift ${shift}`).toBeLessThanOrEqual(SUMMARY_MAX)
+      expect(text.length, `shift ${shift}`).toBeGreaterThan(SUMMARY_MAX - 5)
+      expect(text, `shift ${shift}`).not.toMatch(/&[a-z#0-9]*$/)
+      expect(text.split('\n')[0], `shift ${shift}`).toMatch(/<\/b>$/)
+    }
+    // Короче лимита только там, где срез пришёлся внутрь сущности и её хвост убран.
+    expect(lengths.filter((l) => l < SUMMARY_MAX)).toHaveLength(4)
+  })
 })
 
 describe('renderMarkdown', () => {

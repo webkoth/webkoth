@@ -100,6 +100,15 @@ describe('POST /api/brief', () => {
     expect(sendTelegramMessage).not.toHaveBeenCalled()
   })
 
+  it('документ не прошёл, сводка и текст частями прошли: 200', async () => {
+    vi.mocked(sendTelegramDocument).mockResolvedValue({ ok: false, error: 'proxy' })
+    const res = await send(valid())
+    expect(res.status).toBe(200)
+    expect(await res.json()).toEqual({ ok: true })
+    expect(vi.mocked(sendTelegramMessage).mock.calls.length).toBeGreaterThan(1)
+    expect(console.warn).toHaveBeenCalledWith('[brief] document rejected, delivered as text chunks')
+  })
+
   it('документ не прошёл, сводка ушла, часть текста нет: 200 и частичная доставка в логе', async () => {
     vi.mocked(sendTelegramDocument).mockResolvedValue({ ok: false, error: 'proxy' })
     vi.mocked(sendTelegramMessage).mockResolvedValueOnce({ ok: true }).mockResolvedValueOnce({ ok: false, error: 'flood' })
