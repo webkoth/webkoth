@@ -14,7 +14,7 @@ export type CaseLinks = Partial<Record<CaseSlug, { title: string; href: string }
 
 function hoursTag(item: MapItem): string {
   if (item.status === 'pending') return briefCopy.map.pending
-  if (item.returnedHours > 0) return `≈ ${formatHours(item.returnedHours)} ч/нед`
+  if (item.returnedHours > 0) return `≈ ${briefCopy.hours.perWeek(formatHours(item.returnedHours))}`
   return item.outcome?.caption ?? ''
 }
 
@@ -65,12 +65,17 @@ export function MapItemView({
       {highlight && !compact ? (
         <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-primary">{briefCopy.map.startHere}</p>
       ) : null}
-      <h3 className={cn('flex flex-wrap items-baseline gap-2 font-semibold', compact ? 'text-sm' : 'mt-1 text-base')}>
+      <h3 className={cn('flex flex-wrap items-baseline gap-2 font-semibold [overflow-wrap:anywhere]', compact ? 'text-sm' : 'mt-1 text-base')}>
         {index !== undefined ? `${index}. ` : null}
         {item.label}
         <span className="rounded-full border border-border px-2 py-0.5 font-mono text-[11px] font-normal text-muted-foreground">
           {hoursTag(item)}
         </span>
+        {highlight && compact ? (
+          <span className="rounded-full border border-primary/60 px-2 py-0.5 font-mono text-[11px] font-normal text-brief-ai-fg">
+            {briefCopy.map.startShort}
+          </span>
+        ) : null}
       </h3>
       <ProcessChain chain={item.chain} branches={item.branches} compact={compact} />
 

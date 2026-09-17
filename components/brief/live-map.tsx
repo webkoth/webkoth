@@ -16,7 +16,7 @@ function LiveMapBody({ map }: { map: BriefMap }) {
     <div className="space-y-2">
       {map.totalReturnedHours > 0 ? (
         <p className="text-sm">
-          ≈ {formatHours(map.totalReturnedHours)} ч · {briefCopy.map.kpiHours}
+          ≈ {briefCopy.hours.total(formatHours(map.totalReturnedHours))} · {briefCopy.map.kpiHours}
         </p>
       ) : null}
       {map.items.map((i) => (
@@ -37,7 +37,10 @@ export function LiveMap({ map }: { map: BriefMap }) {
 
   return (
     <>
-      <aside className="hidden lg:block lg:sticky lg:top-6 lg:self-start print:hidden" aria-label={briefCopy.live.title}>
+      <aside
+        className="hidden lg:sticky lg:top-6 lg:block lg:max-h-[calc(100dvh-3rem)] lg:self-start lg:overflow-y-auto print:hidden"
+        aria-label={briefCopy.live.title}
+      >
         <div className="rounded-2xl border border-border bg-muted/40 p-4">
           <p className="mb-3 font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground">{briefCopy.live.title}</p>
           <LiveMapBody map={map} />
@@ -47,11 +50,14 @@ export function LiveMap({ map }: { map: BriefMap }) {
       <div className="fixed inset-x-4 bottom-4 z-40 lg:hidden print:hidden">
         <Sheet open={open} onOpenChange={setOpen}>
           <SheetTrigger className="w-full rounded-xl border border-border bg-card/95 px-4 py-3 text-left text-sm shadow-lg backdrop-blur">
-            {briefCopy.live.bar(count)} ↑
+            {briefCopy.live.bar(count)} <span aria-hidden>↑</span>
           </SheetTrigger>
-          <SheetContent side="bottom" className="max-h-[80vh] overflow-y-auto p-4">
+          <SheetContent side="bottom" className="max-h-[80dvh] p-4">
             <SheetTitle>{briefCopy.live.title}</SheetTitle>
-            <LiveMapBody map={map} />
+            {/* Прокручивается тело, а не вся панель: заголовок и кнопка закрытия остаются на месте. */}
+            <div className="min-h-0 overflow-y-auto overscroll-contain">
+              <LiveMapBody map={map} />
+            </div>
           </SheetContent>
         </Sheet>
       </div>
