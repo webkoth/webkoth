@@ -79,8 +79,10 @@ function buildItem(entry: ProcessEntry, band: HoursBand, a: BriefAnswers, stage:
   if (!d || !isDeepComplete(d)) {
     return { ...common, status: 'pending', returnedHours: 0, priority: 0, chain: chainOf(entry, PENDING), prepare: [] }
   }
-  const { input, dataReason } = toQuizInput(entry, d, band, a)
+  const { input, dataReason: reason } = toQuizInput(entry, d, band, a)
   const verdict = decideVerdict(input)
+  // Причина нужна только остановке по данным: при остановке по образцу она ничего не объясняет.
+  const dataReason = verdict.form === 'stopData' ? reason : undefined
   const outcome = dynamicOutcome(verdict, d.handover)
   const returned = returnedHours(hours, outcome)
   return {

@@ -12,7 +12,11 @@ const n = outcomeCopy.notes
 function base(v: Verdict): DynamicOutcome {
   switch (v.form) {
     case 'f3':
-      return { color: 'auto', caption: c.program, notes: [n.program], shareKey: 'f3', showApproval: false }
+      // Необратимое действие (деньги, публикация) утверждает человек и у программы:
+      // по AIAS «исполняет код, утверждает человек».
+      return v.flags.includes('irreversible')
+        ? { color: 'auto', caption: c.program, notes: [n.program, n.irreversible], shareKey: 'f3', showApproval: true }
+        : { color: 'auto', caption: c.program, notes: [n.program], shareKey: 'f3', showApproval: false }
     case 'f4':
     case 'f5':
       return v.autonomy?.act === 'A2'

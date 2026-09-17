@@ -28,6 +28,8 @@ export function pickStart(sorted: readonly MapItem[]): ProcessId | undefined {
   )?.processId
 }
 
+/** Ноль честно нулём: «<1» при нуле обещал бы часы, которых карта не возвращает. */
 export function formatHours(n: number): string {
+  if (n === 0) return '0'
   return n < 1 ? '<1' : String(Math.round(n))
 }

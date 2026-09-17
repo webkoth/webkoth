@@ -16,6 +16,21 @@ describe('dynamicOutcome', () => {
     expect(dynamicOutcome(v('f3'), 'give')).toEqual({ color: 'auto', caption: c.program, notes: [n.program], shareKey: 'f3', showApproval: false })
   })
 
+  it('F3 с необратимым действием: программа исполняет, вы утверждаете', () => {
+    expect(dynamicOutcome(v('f3', undefined, ['irreversible']), 'give')).toEqual({
+      color: 'auto',
+      caption: c.program,
+      notes: [n.program, n.irreversible],
+      shareKey: 'f3',
+      showApproval: true,
+    })
+    expect(dynamicOutcome(v('f3', undefined, ['irreversible', 'personalData']), undefined).notes).toEqual([
+      n.program,
+      n.irreversible,
+      n.personalData,
+    ])
+  })
+
   it('F4 с действием A2: ИИ готовит, шаг утверждения показан', () => {
     expect(dynamicOutcome(v('f4', 'A2', ['irreversible', 'rope']), undefined)).toEqual({
       color: 'ai',
@@ -49,6 +64,15 @@ describe('dynamicOutcome', () => {
 
   it('«оставить себе»: человек; при F3 пометка, что могла бы программа', () => {
     expect(dynamicOutcome(v('f3'), 'keep')).toEqual({ color: 'human', caption: c.human, notes: [n.kept], shareKey: 'human', showApproval: false })
+    expect(dynamicOutcome(v('f3', undefined, ['irreversible']), 'keep')).toEqual({
+      color: 'human',
+      caption: c.human,
+      notes: [n.kept],
+      shareKey: 'human',
+      showApproval: false,
+    })
+    expect(dynamicOutcome(v('f5', 'A4'), 'keep').notes).toEqual([n.kept])
+    expect(n.kept).toBe('Могла бы программа или ИИ: оставили вам по вашему выбору.')
     expect(dynamicOutcome(v('f1'), 'keep').notes).toEqual([])
     expect(dynamicOutcome(v('stopData'), 'keep').color).toBe('skip')
   })

@@ -90,6 +90,12 @@ describe('вопросы', () => {
 })
 
 describe('тексты брифа', () => {
+  it('заголовок карты без площадок, площадки отдельной строкой', () => {
+    expect(briefCopy.map.title).toBe('Что отдать программе, что ИИ, а что оставить себе')
+    expect(briefCopy.map.shops('Wildberries + Ozon')).toBe('Площадки: Wildberries + Ozon')
+    expect(briefCopy.map.zeroHoursNote).toBe('Пока ноль: сначала подготовка из пунктов ниже, потом автоматизация.')
+  })
+
   it('без длинных тире', () => {
     const texts = JSON.stringify({
       glossary,
@@ -105,7 +111,7 @@ describe('тексты брифа', () => {
       stageCopy,
       offerCopy,
       samples: [
-        briefCopy.map.title('Wildberries'),
+        briefCopy.map.shops('Wildberries'),
         briefCopy.time.deepBanner(4),
         briefCopy.live.bar(2),
         explainCopy.prepare.etalon('x'),

@@ -69,7 +69,7 @@ describe('sortByPriority и pickStart', () => {
 })
 
 describe('formatHours', () => {
-  it('меньше часа и округление', () => {
-    expect([formatHours(0), formatHours(0.4), formatHours(1.8), formatHours(6.3)]).toEqual(['<1', '<1', '2', '6'])
+  it('ноль, меньше часа и округление', () => {
+    expect([formatHours(0), formatHours(0.4), formatHours(1.8), formatHours(6.3)]).toEqual(['0', '<1', '2', '6'])
   })
 })

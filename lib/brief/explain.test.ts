@@ -39,6 +39,12 @@ describe('whyFirst', () => {
     expect(whyFirst(start, [start, base('stocks', 2)], d)).toEqual([w.mostHours, w.hasEtalon, w.approval])
   })
 
+  it('«больше всего часов» только у единственного максимума среди заполненных', () => {
+    const start = base('reviews', 2, { verdict: { form: 'f4', flags: [] }, outcome: outcome({ color: 'ai', showApproval: true }) })
+    expect(whyFirst(start, [start, base('stocks', 2)], d)).toEqual([w.hasEtalon, w.approval])
+    expect(whyFirst(start, [start, base('stocks', 2, { status: 'pending' })], d)).toEqual([w.mostHours, w.hasEtalon, w.approval])
+  })
+
   it('программа без ИИ и не самый долгий процесс', () => {
     const start = base('stocks', 2, { verdict: { form: 'f3', flags: [] }, outcome: outcome({}) })
     expect(whyFirst(start, [start, base('reviews', 7.5)], { etalon: 'few' })).toEqual([w.program])

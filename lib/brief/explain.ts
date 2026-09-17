@@ -10,8 +10,12 @@ const MAX_PHRASES = 3
 
 export function whyFirst(item: MapItem, items: readonly MapItem[], d: DeepAnswers): string[] {
   const out: string[] = []
-  const maxHours = Math.max(...items.filter((i) => i.status === 'ready').map((i) => i.hours))
-  if (item.hours === maxHours) out.push(explainCopy.why.mostHours)
+  const hours = items.filter((i) => i.status === 'ready').map((i) => i.hours)
+  const maxHours = Math.max(...hours)
+  // При равенстве «больше всего» неправда: фразу пишем только единственному максимуму.
+  if (item.hours === maxHours && hours.filter((h) => h === maxHours).length === 1) {
+    out.push(explainCopy.why.mostHours)
+  }
   if (d.etalon === 'many') out.push(explainCopy.why.hasEtalon)
   if (item.outcome?.showApproval) out.push(explainCopy.why.approval)
   if (item.verdict?.form === 'f3' && item.outcome?.color === 'auto') out.push(explainCopy.why.program)

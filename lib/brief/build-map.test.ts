@@ -26,12 +26,12 @@ describe('демо-магазин', () => {
     expect(r.readyMade).toEqual({ kind: 'cabinet', text: processCatalog.reviews.readyMade!.text, alreadyUsing: false })
   })
 
-  it('остатки: программа, без шага утверждения', () => {
+  it('остатки: программа исполняет, вы утверждаете', () => {
     const s = map.items[1]
     expect(s.verdict?.form).toBe('f3')
-    expect(s.chain.map((x) => x.color)).toEqual(['auto', 'auto', 'auto'])
+    expect(s.chain.map((x) => x.color)).toEqual(['auto', 'auto', 'human', 'auto'])
     expect(s.returnedHours).toBeCloseTo(1.8)
-    expect(s.prepare).toEqual([explainCopy.prepare.moreEtalons])
+    expect(s.prepare).toEqual([explainCopy.prepare.moreEtalons, explainCopy.prepare.approver])
     expect(s.readyMade?.alreadyUsing).toBe(true)
     expect(s.why).toEqual([])
   })
@@ -134,6 +134,18 @@ describe('частичные ответы и особые случаи', () => {
     expect(early.returnedHours).toBeCloseTo(6)
     expect(early.priority).toBeCloseTo(3)
     expect(later.priority).toBeCloseTo(6)
+  })
+
+  it('причина «нет данных» хранится только у остановки по данным', () => {
+    const map = buildMap({
+      ...emptyAnswers(),
+      picked: [{ id: 'reviews', hours: '1to3' }],
+      deepAnswers: {
+        reviews: { frequency: 'daily', who: 'me', etalon: 'no', rule: 'readInput', risk: 'buyersSee', data: 'head' },
+      },
+    })
+    expect([map.items[0].verdict?.form, map.items[0].dataReason]).toEqual(['stopEtalon', undefined])
+    expect(map.items[0].prepare).toEqual([explainCopy.prepare.etalon(processCatalog.reviews.hints.etalon)])
   })
 
   it('своё: название селлера и пометка', () => {
