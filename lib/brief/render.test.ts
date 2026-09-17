@@ -32,6 +32,18 @@ describe('renderTelegramSummary', () => {
     ])
   })
 
+  it('быстрое заполнение: второй строкой пометка с секундами', () => {
+    const a = demoShop()
+    const map = buildMap(a)
+    const text = renderTelegramSummary(a, map, buildInternal(a, map, { fillSeconds: 7 }), 'anna')
+    expect(text.split('\n').slice(0, 3)).toEqual([
+      '<b>Бриф: Анна · @anna_shop</b>',
+      '⚠ заполнено за 7 с',
+      'Wildberries + Ozon · 300–1000 артикулов · 10–100 заказов в день',
+    ])
+    expect(summary(a)).not.toContain('заполнено за')
+  })
+
   it('без старта: начать с порядка', () => {
     const text = summary(headShop())
     expect(text).toContain('Начать с порядка: Посчитайте себестоимость каждого товара.')

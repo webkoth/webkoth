@@ -63,12 +63,21 @@ describe('POST /api/brief', () => {
     expect(content).not.toContain('"ads": {')
   })
 
-  it('ловушка для ботов и слишком быстрое заполнение: тихий 200 без отправки, причина в логе', async () => {
+  it('ловушка для ботов: тихий 200 без отправки, причина в логе', async () => {
     expect((await send({ ...valid(), website: 'http://spam' })).status).toBe(200)
     expect(console.warn).toHaveBeenLastCalledWith('[brief] dropped: honeypot')
-    expect((await send({ ...valid(), startedAtMs: Date.now() - 5_000 })).status).toBe(200)
-    expect(console.warn).toHaveBeenLastCalledWith('[brief] dropped: too_fast')
     expect(sendTelegramDocument).not.toHaveBeenCalled()
+  })
+
+  it('заполнено быстрее минуты: бриф доставляется с пометкой, секунды в логе', async () => {
+    const res = await send({ ...valid(), startedAtMs: Date.now() - 5_000 })
+    expect(res.status).toBe(200)
+    expect(await res.json()).toEqual({ ok: true })
+    expect(sendTelegramDocument).toHaveBeenCalledTimes(1)
+    const [, content, caption] = vi.mocked(sendTelegramDocument).mock.calls[0]
+    expect(caption).toMatch(/\n⚠ заполнено за \d+ с\n/)
+    expect(content).toMatch(/- Заполнено за \d+ с: проверить, не бот ли/)
+    expect(console.warn).toHaveBeenCalledWith(expect.stringMatching(/^\[brief\] fast fill: \d+ s$/))
   })
 
   it('часы устройства спешат: бриф с будущим startedAtMs доставляется', async () => {

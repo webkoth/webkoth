@@ -1,7 +1,7 @@
 import { NextResponse, type NextRequest } from 'next/server'
 import { buildMap } from '@/lib/brief/build-map'
 import { deliverBrief } from '@/lib/brief/deliver'
-import { buildInternal } from '@/lib/brief/internal'
+import { buildInternal, MIN_FILL_SECONDS } from '@/lib/brief/internal'
 import { normalizeAnswers } from '@/lib/brief/normalize'
 import { briefFilename, renderMarkdown } from '@/lib/brief/render-markdown'
 import { renderTelegramSummary } from '@/lib/brief/render-telegram'
@@ -11,11 +11,12 @@ import { rateLimitTake } from '@/lib/landing/rate-limit'
 import { sendTelegramDocument, sendTelegramMessage } from '@/lib/landing/telegram'
 
 // Приём брифа. Порядок защиты как у заявок (app/api/evolution/lead/route.ts):
-// лимит → размер → JSON → zod → ловушка → время заполнения. Карту сервер строит сам:
+// лимит → размер → JSON → zod → ловушка → пометка о быстром заполнении. Карту сервер строит сам:
 // карте из браузера не доверяем. На сервере ничего не храним.
 
-// Бриф заполняется минутами; быстрее минуты - бот.
-const MIN_FILL_MS = 60_000
+// Быстрее минуты похоже на бота, но живой продавец тоже бывает быстрым:
+// такой бриф доставляем с пометкой, а решаем вручную.
+const MIN_FILL_MS = MIN_FILL_SECONDS * 1000
 const MAX_BODY_CHARS = 64_000
 
 // Для лога ошибок валидации только пути полей: значения могут содержать имя и контакт.
@@ -55,7 +56,7 @@ export async function POST(req: NextRequest) {
   }
   const { k, startedAtMs, website } = parsed.data
 
-  // Ловушка и слишком быстрое заполнение: тихая двухсотка, бот не должен понять, что попался.
+  // Ловушка: тихая двухсотка, бот не должен понять, что попался.
   // В лог только причина, без данных брифа.
   if (website) {
     console.warn('[brief] dropped: honeypot')
@@ -63,16 +64,16 @@ export async function POST(req: NextRequest) {
   }
   const now = Date.now()
   const elapsedMs = now - startedAtMs
-  // Начало в будущем значит, что часы устройства спешат: такой бриф не отбрасываем.
+  // Начало в будущем значит, что часы устройства спешат: длительность неизвестна, пометки нет.
+  const fillSeconds = elapsedMs >= 0 ? Math.floor(elapsedMs / 1000) : undefined
   if (elapsedMs >= 0 && elapsedMs < MIN_FILL_MS) {
-    console.warn('[brief] dropped: too_fast')
-    return NextResponse.json({ ok: true }, { status: 200 })
+    console.warn(`[brief] fast fill: ${fillSeconds} s`)
   }
 
   // Скрытые сменой ответа поля в карту и файл не идут.
   const answers = normalizeAnswers(parsed.data.answers)
   const map = buildMap(answers)
-  const internal = buildInternal(answers, map)
+  const internal = buildInternal(answers, map, { fillSeconds })
   const nowDate = new Date(now)
   const result = await deliverBrief(
     {

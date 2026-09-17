@@ -44,6 +44,7 @@ export function renderTelegramSummary(a: BriefAnswers, map: BriefMap, internal: 
 
   const head = `<b>Бриф: ${escapeHtml((a.name ?? '').slice(0, NAME_MAX))} · ${escapeHtml((a.contact ?? '').slice(0, CONTACT_MAX))}</b>`
   const rest = [
+    ...(internal.fastFillSeconds !== undefined ? [`⚠ заполнено за ${internal.fastFillSeconds} с`] : []),
     shop,
     startLine,
     `Ступень: ${offerCopy[internal.offer]}`,

@@ -34,4 +34,22 @@ describe('buildInternal', () => {
   it('пустой бриф: только флаг категории', () => {
     expect(internal(emptyAnswers()).flags).toEqual([flagCopy.category('не указана')])
   })
+
+  it('заполнено быстрее минуты: секунды в поле и первым флагом', () => {
+    const a = demoShop()
+    const r = buildInternal(a, buildMap(a), { fillSeconds: 5 })
+    expect(r.fastFillSeconds).toBe(5)
+    expect(flagCopy.fastFill(5)).toBe('Заполнено за 5 с: проверить, не бот ли')
+    expect(r.flags).toEqual([flagCopy.fastFill(5), flagCopy.category('Одежда и обувь'), flagCopy.budget('150–400 тыс ₽')])
+    expect(buildInternal(a, buildMap(a), { fillSeconds: 0 }).flags[0]).toBe(flagCopy.fastFill(0))
+  })
+
+  it('минута и дольше, время неизвестно: пометки нет', () => {
+    const a = demoShop()
+    for (const opts of [{ fillSeconds: 60 }, { fillSeconds: 600 }, { fillSeconds: -1 }, {}, undefined]) {
+      const r = buildInternal(a, buildMap(a), opts)
+      expect(Object.keys(r)).not.toContain('fastFillSeconds')
+      expect(r.flags[0]).toBe(flagCopy.category('Одежда и обувь'))
+    }
+  })
 })
