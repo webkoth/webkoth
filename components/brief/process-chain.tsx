@@ -9,12 +9,12 @@ import { STEP_CLS } from './colors'
 
 function Step({ step, compact }: { step: MapStep; compact?: boolean }) {
   return (
-    <span className={cn('inline-block rounded-lg border px-2 py-1 text-xs leading-snug', STEP_CLS[step.color])}>
+    <span className={cn('inline-block rounded-lg border px-2 py-1 text-xs leading-snug [overflow-wrap:anywhere]', STEP_CLS[step.color])}>
       {step.label}
       {compact ? (
         <span className="sr-only">: {step.caption ?? colorShort[step.color]}</span>
       ) : (
-        <span className="block text-[11px] opacity-80">{step.caption ?? colorShort[step.color]}</span>
+        <span className="block text-[11px]">{step.caption ?? colorShort[step.color]}</span>
       )}
     </span>
   )

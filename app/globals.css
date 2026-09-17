@@ -42,6 +42,9 @@
     --color-brief-auto: var(--brief-auto);
     --color-brief-human: var(--brief-human);
     --color-brief-skip: var(--brief-skip);
+    --color-brief-auto-fg: var(--brief-auto-fg);
+    --color-brief-ai-fg: var(--brief-ai-fg);
+    --color-brief-human-fg: var(--brief-human-fg);
     --radius-sm: calc(var(--radius) * 0.6);
     --radius-md: calc(var(--radius) * 0.8);
     --radius-lg: var(--radius);
@@ -96,6 +99,10 @@
     --brief-auto: oklch(0.55 0.12 160);
     --brief-human: oklch(0.48 0.14 285);
     --brief-skip: oklch(0.65 0.02 267);
+    /* Текст шагов на светлом фоне темнее заливки: мелкий шрифт читается (контраст от 4.5:1). */
+    --brief-auto-fg: oklch(0.46 0.1 160);
+    --brief-ai-fg: oklch(0.52 0.18 35);
+    --brief-human-fg: var(--brief-human);
 }
 
 :root.mono-geist {
@@ -139,6 +146,9 @@
     --brief-auto: oklch(0.76 0.13 160);
     --brief-human: oklch(0.74 0.1 285);
     --brief-skip: oklch(0.58 0.02 267);
+    --brief-auto-fg: var(--brief-auto);
+    --brief-ai-fg: var(--primary);
+    --brief-human-fg: var(--brief-human);
 }
 
 /* Classic palette override (teal/blue) — toggled via .palette-classic on <html> */
@@ -146,6 +156,8 @@
     --primary: oklch(0.52 0.105 223.128);
     --primary-foreground: oklch(0.984 0.019 200.873);
     --ring: oklch(0.723 0.014 214.4);
+    /* Шаг «ИИ готовит» в цвете палитры: классический primary и так тёмный. */
+    --brief-ai-fg: var(--primary);
 }
 
 :root.palette-classic.dark,
@@ -203,9 +215,30 @@
   }
 }
 
-/* Печать карты брифа в PDF: без фонового узора. Остальное прячется классами print:hidden. */
+/* Печать карты брифа в PDF: без фонового узора, всегда в светлых цветах (и из тёмной темы).
+   Остальное прячется классами print:hidden. */
 @media print {
   body::before {
     display: none;
+  }
+
+  :root,
+  .dark {
+    color-scheme: light;
+    --background: oklch(1 0 0);
+    --foreground: oklch(0.168 0.114 266.6);
+    --card: oklch(1 0 0);
+    --card-foreground: oklch(0.168 0.114 266.6);
+    --muted: oklch(0.962 0.01 267);
+    --muted-foreground: oklch(0.48 0.055 267);
+    --border: oklch(0.912 0.014 267);
+    --primary: oklch(0.62 0.21 35);
+    --primary-foreground: oklch(0.985 0 0);
+    --brief-auto: oklch(0.55 0.12 160);
+    --brief-human: oklch(0.48 0.14 285);
+    --brief-skip: oklch(0.65 0.02 267);
+    --brief-auto-fg: oklch(0.46 0.1 160);
+    --brief-ai-fg: oklch(0.52 0.18 35);
+    --brief-human-fg: var(--brief-human);
   }
 }
