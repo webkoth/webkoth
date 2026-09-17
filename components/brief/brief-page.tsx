@@ -92,7 +92,7 @@ export function BriefPage({ k, caseLinks }: { k?: string; caseLinks: CaseLinks }
   const start = () => {
     clearState(browserStorage())
     setBoot(forgetDraft)
-    dispatch({ type: 'start', now: Date.now() })
+    dispatch({ type: 'start', now: Date.now(), k })
     goal('brief_start')
     scrollToTop()
   }
@@ -125,7 +125,8 @@ export function BriefPage({ k, caseLinks }: { k?: string; caseLinks: CaseLinks }
 
   const submitBody = (): BriefSubmit => ({
     answers: state.answers,
-    k,
+    // Метка из ссылки, иначе запомненная в черновике: вернуться можно и по ссылке без метки.
+    k: k ?? state.k,
     startedAtMs: state.startedAtMs,
     website: honeypot.current,
   })

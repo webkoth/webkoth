@@ -1,5 +1,6 @@
 import { z } from 'zod'
 import { deepList } from './deep'
+import { LABEL_RE } from './ids'
 import { briefAnswersSchema } from './schema'
 import { SEND_STATUSES, STEP_KEYS, type BriefState } from './state'
 
@@ -18,6 +19,8 @@ const storedSchema = z.object({
   startedAtMs: z.number().int().positive(),
   answers: briefAnswersSchema,
   send: z.enum(SEND_STATUSES),
+  // Метка добавлена без смены версии ключа: черновики без неё читаются как раньше.
+  k: z.string().regex(LABEL_RE).optional(),
 })
 
 export type LoadResult =

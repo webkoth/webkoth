@@ -28,6 +28,15 @@ describe('старт и сброс', () => {
     const s = briefReducer(pick(started(), ['reviews']), { type: 'reset' })
     expect(s).toEqual(initialState(0))
   })
+
+  it('метка из ссылки запоминается в черновике при старте, сброс её забывает', () => {
+    const s = briefReducer(initialState(0), { type: 'start', now: 1000, k: 'anna' })
+    expect(s.k).toBe('anna')
+    expect('k' in started()).toBe(false)
+    expect('k' in briefReducer(s, { type: 'reset' })).toBe(false)
+    const restored = briefReducer(initialState(0), { type: 'restore', state: { ...pick(s, ['reviews']), step: 'time' } })
+    expect(restored.k).toBe('anna')
+  })
 })
 
 describe('выбор процессов', () => {

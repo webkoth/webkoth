@@ -30,13 +30,15 @@ export type BriefState = {
   startedAtMs: number
   answers: BriefAnswers
   send: SendStatus
+  /** Метка из ссылки (?k=): черновик помнит её, даже если вернулись по ссылке без метки. */
+  k?: string
 }
 
 /** Поля ответов, которые меняются одним действием setField. */
 export type GeneralField = Exclude<keyof BriefAnswers, 'picked' | 'deepChoice' | 'deepAnswers' | 'consent'>
 
 export type BriefAction =
-  | { type: 'start'; now: number }
+  | { type: 'start'; now: number; k?: string }
   | { type: 'reset' }
   | { type: 'restore'; state: BriefState }
   | { type: 'setField'; field: GeneralField; value: string | string[] | undefined }
@@ -160,7 +162,7 @@ function reduce(s: BriefState, action: BriefAction): BriefState {
   const a = s.answers
   switch (action.type) {
     case 'start':
-      return { ...initialState(action.now), step: 'shop' }
+      return { ...initialState(action.now), step: 'shop', ...(action.k ? { k: action.k } : {}) }
     case 'reset':
       return initialState(0)
     case 'restore':

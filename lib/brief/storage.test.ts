@@ -32,6 +32,22 @@ describe('storage', () => {
     expect(loadState(store)).toEqual({ status: 'ok', state: state() })
   })
 
+  it('метка из ссылки сохраняется с черновиком; черновик без метки читается', () => {
+    const store = memory()
+    saveState(store, { ...state(), k: 'anna-01' })
+    expect(loadState(store)).toEqual({ status: 'ok', state: { ...state(), k: 'anna-01' } })
+    saveState(store, state())
+    const r = loadState(store)
+    expect(r.status === 'ok' && 'k' in r.state).toBe(false)
+    expect(STORAGE_KEY).toBe('webkoth-brief-v1')
+  })
+
+  it('метка не по формату: черновик устарел', () => {
+    const store = memory()
+    store.data.set(STORAGE_KEY, JSON.stringify({ ...state(), k: 'Анна <script>' }))
+    expect(loadState(store)).toEqual({ status: 'outdated' })
+  })
+
   it('пусто, недоступно, повреждено', () => {
     expect(loadState(memory())).toEqual({ status: 'empty' })
     expect(loadState(undefined)).toEqual({ status: 'unavailable' })
