@@ -1,11 +1,15 @@
 import type { HoursBand } from '@/lib/brief/ids'
 import type { BriefAnswers, DeepAnswers, DeepQuestionId } from '@/lib/brief/schema'
-import { needsCheck, type GeneralField } from '@/lib/brief/state'
+import { needsCheck } from '@/lib/brief/deep'
+import type { GeneralField } from '@/lib/brief/state'
 import type { TermId } from './glossary'
 
 // Вопросы брифа. Значения вариантов совпадают с ids.ts (проверяет brief-data.test.ts).
 
 export type Option = { value: string; label: string; hint?: string }
+
+/** Поля строки «другое»: появляются при выборе варианта trigger. */
+export type OtherField = 'marketplacesOther' | 'categoryOther' | 'ledgerOther' | 'aiTried'
 
 export type QuestionDef = {
   id: GeneralField
@@ -18,7 +22,7 @@ export type QuestionDef = {
   exclusive?: readonly string[]
   options: readonly Option[]
   /** Строка, которая появляется при выборе варианта trigger. */
-  other?: { trigger: string; field: GeneralField; placeholder: string; max: number }
+  other?: { trigger: string; field: OtherField; placeholder: string; max: number }
   showIf?: (a: BriefAnswers) => boolean
 }
 

@@ -1,4 +1,5 @@
 import { z } from 'zod'
+import { deepList, isDeepComplete, MAX_DEEP } from './deep'
 import * as ids from './ids'
 
 // Схема ответов брифа. Одна на браузер (черновик, localStorage) и сервер (отправка).
@@ -45,14 +46,15 @@ export const briefAnswersSchema = z.object({
   tools: z.array(z.enum(ids.TOOLS)).max(ids.TOOLS.length),
   apiTokens: z.enum(ids.API_TOKENS).optional(),
   aiNow: z.enum(ids.AI_NOW).optional(),
-  aiTried: line(500).optional(),
+  // Свободный рассказ о неудачном пилоте: переносы строк допустимы, в заголовки он не идёт.
+  aiTried: z.string().trim().max(500).optional(),
   docs: z.enum(ids.DOCS).optional(),
   // Шаг 3: порядок массива - порядок, в котором селлер отмечал процессы
   picked: z
     .array(z.object({ id: z.enum(ids.PROCESS_IDS), hours: z.enum(ids.HOURS_BANDS) }))
     .max(ids.PROCESS_IDS.length),
   customLabel: line(80).optional(),
-  deepChoice: z.array(z.enum(ids.PROCESS_IDS)).max(3),
+  deepChoice: z.array(z.enum(ids.PROCESS_IDS)).max(MAX_DEEP),
   // Шаг 4
   deepAnswers: z.partialRecord(z.enum(ids.PROCESS_IDS), deepAnswersSchema),
   // Шаг 5
@@ -66,6 +68,13 @@ export const briefAnswersSchema = z.object({
   name: line(80).optional(),
   contact: line(120).optional(),
   consent: z.boolean(),
+}).superRefine((a, ctx) => {
+  // Повторы ломают порядок разбора и счёт часов: процесс считается один раз.
+  const unique = (xs: readonly string[], path: string) => {
+    if (new Set(xs).size !== xs.length) ctx.addIssue({ code: 'custom', path: [path], message: 'duplicate' })
+  }
+  unique(a.picked.map((p) => p.id), 'picked')
+  unique(a.deepChoice, 'deepChoice')
 })
 export type BriefAnswers = z.infer<typeof briefAnswersSchema>
 
@@ -91,6 +100,15 @@ export const briefSubmitSchema = z.object({
     }
     need(a.marketplaces.length > 0, 'marketplaces', 'required')
     need(a.picked.length > 0, 'picked', 'required')
+    // Карта строится по подробным ответам: без них сервер собрал бы пустую карту.
+    const deep = deepList(a)
+    need(deep.length > 0, 'deepChoice', 'required')
+    for (const id of deep) {
+      if (isDeepComplete(a.deepAnswers[id])) continue
+      ctx.addIssue({ code: 'custom', path: ['deepAnswers', id], message: 'incomplete' })
+    }
+    const custom = a.picked.some((p) => p.id === 'custom')
+    need(!custom || Boolean(a.customLabel?.trim()), 'customLabel', 'required')
     need((a.name ?? '').length >= 2, 'name', 'name_min')
     need((a.contact ?? '').length >= 3, 'contact', 'contact_min')
     need(a.consent, 'consent', 'consent_required')

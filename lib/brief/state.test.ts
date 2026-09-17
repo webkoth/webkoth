@@ -65,6 +65,25 @@ describe('выбор процессов', () => {
   })
 })
 
+describe('значения проверяются схемой', () => {
+  it('setField с неподходящим значением не меняет состояние, подходящее применяется', () => {
+    const s = started()
+    expect(briefReducer(s, { type: 'setField', field: 'tools', value: 'bidder' })).toBe(s)
+    expect(briefReducer(s, { type: 'setField', field: 'category', value: 'cars' })).toBe(s)
+    expect(briefReducer(s, { type: 'setField', field: 'tools', value: ['bidder'] }).answers.tools).toEqual(['bidder'])
+    expect(briefReducer(s, { type: 'setField', field: 'category', value: 'home' }).answers.category).toBe('home')
+    expect(briefReducer(s, { type: 'setField', field: 'category', value: undefined }).answers.category).toBeUndefined()
+  })
+
+  it('setDeep с неподходящим значением не меняет состояние, подходящее применяется', () => {
+    const s = pick(started(), ['reviews'])
+    expect(briefReducer(s, { type: 'setDeep', id: 'reviews', field: 'etalon', value: 'maybe' })).toBe(s)
+    expect(briefReducer(s, { type: 'setDeep', id: 'reviews', field: 'etalon', value: 'few' }).answers.deepAnswers.reviews).toEqual({
+      etalon: 'few',
+    })
+  })
+})
+
 describe('isDeepComplete', () => {
   it('нужны шесть ответов, проверка только при суждении', () => {
     expect(isDeepComplete(completeDeep)).toBe(true)

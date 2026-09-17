@@ -23,7 +23,7 @@ export function answerText(q: QuestionDef, a: BriefAnswers, separator = ', '): s
     .map((v) => {
       const label = optionLabel(q, v) ?? v
       if (q.other && v === q.other.trigger) {
-        const extra = (a[q.other.field] as string | undefined)?.trim()
+        const extra = a[q.other.field]?.trim()
         return extra ? `${label}: ${extra}` : label
       }
       return label

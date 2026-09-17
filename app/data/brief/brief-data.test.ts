@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest'
+import { describe, expect, expectTypeOf, it } from 'vitest'
 import { CASE_SLUGS } from '@/app/data/cases'
 import { PROCESS_IDS } from '@/lib/brief/ids'
 import { briefAnswersSchema, deepAnswersSchema } from '@/lib/brief/schema'
@@ -6,7 +6,7 @@ import { READY_MADE_MAX_AGE_MONTHS } from './coefficients'
 import { briefCopy, clarifyCopy, colorCopy, explainCopy, flagCopy, offerCopy, outcomeCopy, readyMadeCopy, stageCopy } from './copy'
 import { glossary, TERM_IDS } from './glossary'
 import { processCatalog } from './processes'
-import { deepQuestions, goalsQuestions, nowQuestions, shopQuestions } from './questions'
+import { deepQuestions, goalsQuestions, nowQuestions, shopQuestions, type OtherField, type QuestionDef } from './questions'
 
 const entries = Object.values(processCatalog)
 
@@ -70,6 +70,14 @@ describe('вопросы', () => {
         const value = q.multi ? [o.value] : o.value
         expect(shape[q.id].safeParse(value).success, `${q.id}=${o.value}`).toBe(true)
       }
+    }
+  })
+
+  it('строка «другое» пишет только в текстовые поля', () => {
+    expectTypeOf<NonNullable<QuestionDef['other']>['field']>().toEqualTypeOf<OtherField>()
+    const shape = briefAnswersSchema.shape
+    for (const q of [...shopQuestions, ...nowQuestions, ...goalsQuestions]) {
+      if (q.other) expect(shape[q.other.field].safeParse('свой ответ').success, q.id).toBe(true)
     }
   })
 

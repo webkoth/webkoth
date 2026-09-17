@@ -1,5 +1,15 @@
+import { deepList, MAX_DEEP, missingDeep, needsCheck } from './deep'
 import type { HoursBand, ProcessId } from './ids'
-import { emptyAnswers, type BriefAnswers, type DeepAnswers, type DeepQuestionId } from './schema'
+import {
+  briefAnswersSchema,
+  deepAnswersSchema,
+  emptyAnswers,
+  type BriefAnswers,
+  type DeepAnswers,
+  type DeepQuestionId,
+} from './schema'
+
+export { MAX_DEEP, deepList, isDeepComplete, needsCheck } from './deep'
 
 // Состояние брифа и переходы между шагами. Чистые функции: компонент только
 // рисует и диспатчит, проверка шагов и порядок экранов тестируются здесь.
@@ -10,9 +20,7 @@ export type StepKey = (typeof STEP_KEYS)[number]
 export const SEND_STATUSES = ['idle', 'sending', 'sent', 'failed', 'rateLimited'] as const
 export type SendStatus = (typeof SEND_STATUSES)[number]
 
-export const MAX_DEEP = 3
 const DEFAULT_HOURS: HoursBand = '1to3'
-const REQUIRED_DEEP: readonly DeepQuestionId[] = ['frequency', 'who', 'etalon', 'rule', 'risk', 'data']
 
 export type BriefState = {
   version: 1
@@ -46,23 +54,6 @@ export function initialState(startedAtMs: number): BriefState {
   return { version: 1, step: 'intro', deepIndex: 0, startedAtMs, answers: emptyAnswers(), send: 'idle' }
 }
 
-export function needsCheck(d: DeepAnswers): boolean {
-  return d.rule === 'experience' || d.rule === 'unknown'
-}
-
-export function isDeepComplete(d: DeepAnswers | undefined): boolean {
-  if (!d) return false
-  if (REQUIRED_DEEP.some((f) => d[f] === undefined)) return false
-  return !needsCheck(d) || d.check !== undefined
-}
-
-/** Процессы для подробного разбора, в порядке отметки или выбора. */
-export function deepList(a: BriefAnswers): ProcessId[] {
-  const picked = a.picked.map((p) => p.id)
-  if (picked.length <= MAX_DEEP) return picked
-  return a.deepChoice.filter((id) => picked.includes(id)).slice(0, MAX_DEEP)
-}
-
 export function stepNumber(step: StepKey): number {
   return STEP_KEYS.indexOf(step)
 }
@@ -82,10 +73,7 @@ export function invalidFields(s: BriefState): string[] {
     case 'deep': {
       const id = deepList(a)[s.deepIndex]
       if (!id) return []
-      const d = a.deepAnswers[id] ?? {}
-      const missing: string[] = REQUIRED_DEEP.filter((f) => d[f] === undefined)
-      if (needsCheck(d) && d.check === undefined) missing.push('check')
-      return missing
+      return missingDeep(a.deepAnswers[id] ?? {})
     }
     case 'goals': {
       const out: string[] = []
@@ -153,6 +141,8 @@ export function briefReducer(s: BriefState, action: BriefAction): BriefState {
     case 'restore':
       return action.state
     case 'setField':
+      // Значение из интерфейса проверяется той же схемой, что и отправка: мусор в черновик не попадает.
+      if (!briefAnswersSchema.shape[action.field].safeParse(action.value).success) return s
       return withAnswers(s, { ...a, [action.field]: action.value } as BriefAnswers)
     case 'setConsent':
       return withAnswers(s, { ...a, consent: action.value })
@@ -182,6 +172,7 @@ export function briefReducer(s: BriefState, action: BriefAction): BriefState {
       return withAnswers(s, { ...a, deepChoice: [...a.deepChoice, action.id] })
     }
     case 'setDeep': {
+      if (!deepAnswersSchema.shape[action.field].safeParse(action.value).success) return s
       const next = { ...(a.deepAnswers[action.id] ?? {}), [action.field]: action.value } as DeepAnswers
       if (!needsCheck(next)) delete next.check
       return withAnswers(s, { ...a, deepAnswers: { ...a.deepAnswers, [action.id]: next } })
