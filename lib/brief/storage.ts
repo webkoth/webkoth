@@ -1,4 +1,5 @@
 import { z } from 'zod'
+import { deepList } from './deep'
 import { briefAnswersSchema } from './schema'
 import { SEND_STATUSES, STEP_KEYS, type BriefState } from './state'
 
@@ -50,9 +51,12 @@ export function loadState(store: Store | undefined): LoadResult {
   }
   const parsed = storedSchema.safeParse(json)
   if (!parsed.success) return { status: 'outdated' }
-  // Перезагрузка посреди отправки: чем она кончилась, неизвестно, даём отправить ещё раз.
   const state = parsed.data
-  return { status: 'ok', state: state.send === 'sending' ? { ...state, send: 'failed' } : state }
+  // Номер подробного шага не выходит за список разбираемых процессов, иначе экран пустой.
+  const deepIndex = Math.min(state.deepIndex, Math.max(0, deepList(state.answers).length - 1))
+  // Перезагрузка посреди отправки: чем она кончилась, неизвестно, даём отправить ещё раз.
+  const send = state.send === 'sending' ? 'failed' : state.send
+  return { status: 'ok', state: { ...state, deepIndex, send } }
 }
 
 export function saveState(store: Store | undefined, state: BriefState): boolean {

@@ -12,6 +12,14 @@ describe('postBrief', () => {
     expect(f).toHaveBeenCalledWith('/api/brief', expect.objectContaining({ method: 'POST', body: JSON.stringify(body) }))
   })
 
+  it('запрос ограничен по времени; таймаут: не отправилось', async () => {
+    const f = reply(200, { ok: true })
+    await postBrief(body, f)
+    expect(f).toHaveBeenCalledWith('/api/brief', expect.objectContaining({ signal: expect.any(AbortSignal) }))
+    const timeout = vi.fn(async () => Promise.reject(new DOMException('The operation timed out', 'TimeoutError')))
+    expect(await postBrief(body, timeout)).toBe('failed')
+  })
+
   it('429: лимит; 502, 400 и сеть: не отправилось', async () => {
     expect(await postBrief(body, reply(429, { ok: false }))).toBe('rateLimited')
     expect(await postBrief(body, reply(502, { ok: false }))).toBe('failed')

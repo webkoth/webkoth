@@ -43,6 +43,19 @@ describe('storage', () => {
     expect(loadState(store)).toEqual({ status: 'outdated' })
   })
 
+  it('номер подробного шага зажат в пределы списка разбираемых процессов', () => {
+    const store = memory()
+    saveState(store, { ...state(), step: 'deep', deepIndex: 7 })
+    const r = loadState(store)
+    expect(r.status === 'ok' && r.state.deepIndex).toBe(2)
+    saveState(store, { ...state(), answers: { ...demoShop(), picked: [], deepChoice: [], deepAnswers: {} }, deepIndex: 4 })
+    const empty = loadState(store)
+    expect(empty.status === 'ok' && empty.state.deepIndex).toBe(0)
+    saveState(store, { ...state(), step: 'deep', deepIndex: 1 })
+    const inRange = loadState(store)
+    expect(inRange.status === 'ok' && inRange.state.deepIndex).toBe(1)
+  })
+
   it('перезагрузка посреди отправки превращается в «не отправилось»', () => {
     const store = memory()
     saveState(store, { ...state(), step: 'map', send: 'sending' })
