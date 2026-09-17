@@ -2,6 +2,7 @@ import { NextResponse, type NextRequest } from 'next/server'
 import { buildMap } from '@/lib/brief/build-map'
 import { deliverBrief } from '@/lib/brief/deliver'
 import { buildInternal } from '@/lib/brief/internal'
+import { normalizeAnswers } from '@/lib/brief/normalize'
 import { briefFilename, renderMarkdown } from '@/lib/brief/render-markdown'
 import { renderTelegramSummary } from '@/lib/brief/render-telegram'
 import { briefSubmitSchema } from '@/lib/brief/schema'
@@ -47,13 +48,15 @@ export async function POST(req: NextRequest) {
       { status: 400 },
     )
   }
-  const { answers, k, startedAtMs, website } = parsed.data
+  const { k, startedAtMs, website } = parsed.data
 
   // Ловушка и слишком быстрое заполнение: тихая двухсотка, бот не должен понять, что попался.
   if (website) return NextResponse.json({ ok: true }, { status: 200 })
   const now = Date.now()
   if (now - startedAtMs < MIN_FILL_MS) return NextResponse.json({ ok: true }, { status: 200 })
 
+  // Скрытые сменой ответа поля в карту и файл не идут.
+  const answers = normalizeAnswers(parsed.data.answers)
   const map = buildMap(answers)
   const internal = buildInternal(answers, map)
   const nowDate = new Date(now)

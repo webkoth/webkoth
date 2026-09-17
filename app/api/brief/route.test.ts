@@ -44,6 +44,21 @@ describe('POST /api/brief', () => {
     expect(content).toContain('- Проверить категорию по правилу 1.6: Одежда и обувь')
   })
 
+  it('карта и файл строятся по нормализованным ответам: скрытые ответы не уходят', async () => {
+    const a = demoShop()
+    const answers = {
+      ...a,
+      categoryOther: 'Скрытая категория',
+      aiTried: 'Скрытый пилот',
+      deepAnswers: { ...a.deepAnswers, ads: a.deepAnswers.reviews },
+    }
+    expect((await send({ ...valid(), answers })).status).toBe(200)
+    const [, content] = vi.mocked(sendTelegramDocument).mock.calls[0]
+    expect(content).not.toContain('Скрытая категория')
+    expect(content).not.toContain('Скрытый пилот')
+    expect(content).not.toContain('"ads": {')
+  })
+
   it('ловушка для ботов и слишком быстрое заполнение: тихий 200 без отправки', async () => {
     expect((await send({ ...valid(), website: 'http://spam' })).status).toBe(200)
     expect((await send({ ...valid(), startedAtMs: Date.now() - 5_000 })).status).toBe(200)

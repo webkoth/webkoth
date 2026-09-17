@@ -1,10 +1,12 @@
+import { readdirSync, readFileSync } from 'node:fs'
+import { join } from 'node:path'
 import { describe, expect, expectTypeOf, it } from 'vitest'
 import { CASE_SLUGS } from '@/app/data/cases'
 import { PROCESS_IDS } from '@/lib/brief/ids'
 import { briefAnswersSchema, deepAnswersSchema } from '@/lib/brief/schema'
 import { READY_MADE_MAX_AGE_MONTHS } from './coefficients'
-import { briefCopy, clarifyCopy, colorCopy, explainCopy, flagCopy, offerCopy, outcomeCopy, readyMadeCopy, stageCopy } from './copy'
-import { glossary, TERM_IDS } from './glossary'
+import { briefCopy } from './copy'
+import { TERM_IDS } from './glossary'
 import { processCatalog } from './processes'
 import { deepQuestions, goalsQuestions, nowQuestions, shopQuestions, type OtherField, type QuestionDef } from './questions'
 
@@ -96,32 +98,15 @@ describe('тексты брифа', () => {
     expect(briefCopy.map.zeroHoursNote).toBe('Пока ноль: сначала подготовка из пунктов ниже, потом автоматизация.')
   })
 
-  it('без длинных тире', () => {
-    const texts = JSON.stringify({
-      glossary,
-      processCatalog,
-      shopQuestions,
-      nowQuestions,
-      goalsQuestions,
-      deepQuestions,
-      briefCopy,
-      colorCopy,
-      outcomeCopy,
-      explainCopy,
-      stageCopy,
-      offerCopy,
-      samples: [
-        briefCopy.map.shops('Wildberries'),
-        briefCopy.time.deepBanner(4),
-        briefCopy.live.bar(2),
-        explainCopy.prepare.etalon('x'),
-        readyMadeCopy.cabinet('x'),
-        readyMadeCopy.service('x'),
-        flagCopy.category('x'),
-        flagCopy.stuckPilot('x'),
-        clarifyCopy.deep('x', 'y'),
-      ],
-    })
-    expect(texts).not.toMatch(/—/)
+  it('без длинных тире в исходниках данных и логики брифа', () => {
+    let checked = 0
+    for (const dir of ['app/data/brief', 'lib/brief']) {
+      const abs = join(process.cwd(), dir)
+      for (const file of readdirSync(abs).filter((f) => f.endsWith('.ts') && !f.endsWith('.test.ts'))) {
+        expect(readFileSync(join(abs, file), 'utf8'), `${dir}/${file}`).not.toMatch(/—/)
+        checked++
+      }
+    }
+    expect(checked).toBeGreaterThan(20)
   })
 })
