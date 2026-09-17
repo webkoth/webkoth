@@ -90,7 +90,9 @@ for (const c of plan) {
       UnifiedCampaign: {
         BiddingStrategy: { Search: { BiddingStrategyType: 'SERVING_OFF' }, Network: { BiddingStrategyType: 'WB_MAXIMUM_CLICKS', WbMaximumClicks: { WeeklySpendLimit: WEEKLY[c.base] * 1_000_000 } } },
         CounterIds: { Items: [COUNTER] },
-        Settings: [{ Option: 'ADD_METRICA_TAG', Value: 'YES' }],
+        Settings: [{ Option: 'ADD_METRICA_TAG', Value: 'YES' }, { Option: 'ENABLE_SITE_MONITORING', Value: 'YES' }],
+        // Метки поверх ссылки объявления: фраза, площадка, устройство, id (аудит 17.09.2026).
+        TrackingParams: 'utm_term={keyword}&placement={source}&source_type={source_type}&device={device_type}&region={region_id}&cid={campaign_id}&gid={gbid}&aid={ad_id}&pid={phrase_id}&match={match_type}',
       },
     }] }))[0]; save(); console.log('   кампания:', rec.campaignId)
   }
