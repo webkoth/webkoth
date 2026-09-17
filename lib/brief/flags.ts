@@ -1,6 +1,6 @@
-import { clarifyCopy, flagCopy } from '@/app/data/brief/copy'
 import { processCatalog } from '@/app/data/brief/processes'
 import { deepQuestions, goalsQuestions, nowQuestions, optionLabel, shopQuestions } from '@/app/data/brief/questions'
+import { clarifyCopy, flagCopy } from './internal-copy'
 import { answerValues, categoryText, processLabel } from './labels'
 import type { MapItem } from './map-types'
 import type { BriefAnswers } from './schema'

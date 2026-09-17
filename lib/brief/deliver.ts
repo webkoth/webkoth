@@ -1,5 +1,5 @@
-import { deliverCopy } from '@/app/data/brief/copy'
 import { escapeHtml } from '@/lib/landing/telegram'
+import { deliverCopy } from './internal-copy'
 
 // Доставка брифа (спека, 9.4): документ с подписью; если прокси не пропустил multipart,
 // та же сводка сообщением и файл текстом по частям. Лимит сообщения Telegram 4096,

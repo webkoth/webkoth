@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest'
-import { clarifyCopy, flagCopy } from '@/app/data/brief/copy'
 import { buildMap } from './build-map'
 import { demoShop, headShop, soloRareShop } from './fixtures'
 import { buildInternal } from './internal'
+import { clarifyCopy, flagCopy } from './internal-copy'
 import { emptyAnswers, type BriefAnswers } from './schema'
 
 const internal = (a: BriefAnswers) => buildInternal(a, buildMap(a))

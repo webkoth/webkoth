@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest'
-import { clarifyCopy, flagCopy } from '@/app/data/brief/copy'
 import { processCatalog } from '@/app/data/brief/processes'
 import { deepQuestions, goalsQuestions } from '@/app/data/brief/questions'
 import { buildMap } from './build-map'
 import { clarifyFor, flagsFor } from './flags'
+import { clarifyCopy, flagCopy } from './internal-copy'
 import { emptyAnswers, type BriefAnswers, type DeepAnswers } from './schema'
 
 const category = flagCopy.category('не указана')

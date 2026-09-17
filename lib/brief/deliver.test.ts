@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest'
-import { deliverCopy } from '@/app/data/brief/copy'
 import { type BriefTransport, CHUNK_PAUSE_MS, chunkEscaped, DELIVERY_DEADLINE_MS, deliverBrief, TELEGRAM_CHUNK } from './deliver'
+import { deliverCopy } from './internal-copy'
 
 type Sent = { ok: boolean; error?: string }
 const ok = async (..._args: unknown[]): Promise<Sent> => ({ ok: true })

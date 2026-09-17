@@ -3,7 +3,7 @@ import type { StageInfo } from './map-types'
 import type { BriefAnswers } from './schema'
 
 // Стадия магазина по самооценке (спека, 7.3). Стадии 3 и 4 лестницы AIAS из брифа
-// не определяются: их показывает только аудит. Внутренняя пометка стадии (stageCopy.forUs)
+// не определяются: их показывает только аудит. Внутренняя пометка стадии (stageForUsCopy в internal-copy.ts)
 // в карту не входит: карта уходит в браузер, пометку берёт только файл брифа.
 
 export function stageOf(aiNow: BriefAnswers['aiNow']): StageInfo {

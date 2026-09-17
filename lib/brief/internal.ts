@@ -1,5 +1,5 @@
-import { flagCopy } from '@/app/data/brief/copy'
 import { clarifyFor, flagsFor } from './flags'
+import { flagCopy } from './internal-copy'
 import type { BriefMap, OfferStep } from './map-types'
 import { offerStepOf } from './offer-step'
 import type { BriefAnswers } from './schema'

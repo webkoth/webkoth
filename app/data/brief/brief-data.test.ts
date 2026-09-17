@@ -1,5 +1,5 @@
-import { readdirSync, readFileSync } from 'node:fs'
-import { join } from 'node:path'
+import { existsSync, readdirSync, readFileSync } from 'node:fs'
+import { dirname, join, relative } from 'node:path'
 import { describe, expect, expectTypeOf, it } from 'vitest'
 import { CASE_SLUGS } from '@/app/data/cases'
 import { PROCESS_IDS } from '@/lib/brief/ids'
@@ -126,5 +126,46 @@ describe('тексты брифа', () => {
     }
     expect(checked.length).toBeGreaterThan(20)
     expect(checked.filter((f) => f.startsWith('components/brief/') && f.endsWith('.tsx')).length).toBeGreaterThan(5)
+  })
+})
+
+describe('внутренние тексты не уходят в браузер', () => {
+  const root = process.cwd()
+  const resolve = (from: string, spec: string): string | undefined => {
+    const base = spec.startsWith('@/') ? join(root, spec.slice(2)) : spec.startsWith('.') ? join(dirname(from), spec) : undefined
+    if (!base) return undefined
+    return [`${base}.ts`, `${base}.tsx`, join(base, 'index.ts')].find((f) => existsSync(f))
+  }
+  /** Модули брифа, до которых доходит импорт из стартовых файлов: только данные и логика брифа и соседи по папке. */
+  const reachable = (entries: readonly string[]): Set<string> => {
+    const seen = new Set<string>()
+    const queue = [...entries]
+    while (queue.length > 0) {
+      const file = queue.pop()!
+      if (seen.has(file)) continue
+      seen.add(file)
+      for (const [, spec] of readFileSync(file, 'utf8').matchAll(/from '((?:@\/lib\/brief|@\/app\/data\/brief|\.{1,2})\/[^']+)'/g)) {
+        const next = resolve(file, spec)
+        if (next) queue.push(next)
+      }
+    }
+    return new Set([...seen].map((f) => relative(root, f)))
+  }
+
+  it('компоненты брифа и всё, что они импортируют, не импортируют internal-copy', () => {
+    const dir = join(root, 'components/brief')
+    const components = readdirSync(dir)
+      .filter((f) => /\.tsx?$/.test(f) && !/\.test\.tsx?$/.test(f))
+      .map((f) => join(dir, f))
+    const files = reachable(components)
+    expect(files).toContain('lib/brief/build-map.ts')
+    expect(files).toContain('lib/brief/state.ts')
+    expect([...files].filter((f) => f.includes('internal'))).toEqual([])
+    for (const f of files) expect(readFileSync(join(root, f), 'utf8'), f).not.toMatch(/from '[^']*internal-copy'/)
+  })
+
+  it('обход находит internal-copy там, где он есть', () => {
+    expect(reachable([join(root, 'lib/brief/render-markdown.ts')])).toContain('lib/brief/internal-copy.ts')
+    expect(reachable([join(root, 'app/api/brief/route.ts')])).toContain('lib/brief/internal-copy.ts')
   })
 })

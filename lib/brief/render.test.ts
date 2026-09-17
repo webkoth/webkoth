@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest'
-import { stageCopy } from '@/app/data/brief/copy'
 import { buildMap } from './build-map'
 import { demoShop, headShop } from './fixtures'
 import { buildInternal } from './internal'
+import { stageForUsCopy } from './internal-copy'
 import { briefFilename, renderMarkdown } from './render-markdown'
 import { renderTelegramSummary, SUMMARY_MAX } from './render-telegram'
 import { emptyAnswers, type BriefAnswers } from './schema'
@@ -119,7 +119,7 @@ describe('renderMarkdown', () => {
   })
 
   it('внутренняя пометка стадии берётся из текстов по ключу, а не из карты браузера', () => {
-    expect(md).toContain(`- Стадия: ${stageCopy.stage1.forUs}`)
+    expect(md).toContain(`- Стадия: ${stageForUsCopy.stage1}`)
     expect(Object.keys(built(answers).map.stage)).not.toContain('forUs')
   })
 

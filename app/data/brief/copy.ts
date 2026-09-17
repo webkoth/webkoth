@@ -1,7 +1,8 @@
-import type { OfferStep, StageKey, StepColor } from '@/lib/brief/map-types'
+import type { StageKey, StepColor } from '@/lib/brief/map-types'
 import type { StepKey } from '@/lib/brief/state'
 
-// Все тексты брифа: экран, карта, правила. Без длинных тире (проверяет brief-data.test.ts).
+// Тексты брифа для экрана и карты. Без длинных тире (проверяет brief-data.test.ts).
+// Внутренние тексты (ступень, флаги, «уточнить», доставка) в lib/brief/internal-copy.ts: в браузер они не уходят.
 
 function plural(n: number, forms: readonly [string, string, string]): string {
   const mod10 = n % 10
@@ -188,41 +189,10 @@ export const readyMadeCopy = {
   using: 'Вы уже пользуетесь похожим: встроим, а не заменим.',
 }
 
-export const stageCopy: Record<StageKey, { label: string; forUs: string }> = {
-  stage0: { label: 'Стадия 0 · ИИ пока не пробовали', forUs: 'стадия 0 по лестнице AIAS' },
-  stage1: { label: 'Стадия 1 · ИИ пробуют в работе', forUs: 'стадия 1, стихийное использование' },
-  stage1to2: { label: 'Стадия 1–2 · уточним на разборе', forUs: 'стадия 1–2 по самоотчёту, уточняет аудит' },
-  stage1stuck: { label: 'Стадия 1 · есть опыт, который не взлетел', forUs: 'стадия 1, застрявший пилот' },
-  unknown: { label: 'Стадия не указана', forUs: 'стадия не указана' },
-}
-
-export const offerCopy: Record<OfferStep, string> = {
-  pilot: 'доведение пилота до production',
-  audit: 'аудит и карта',
-  firstProcess: 'первый процесс до production',
-  review: 'разбор процесса, 30 минут',
-}
-
-export const flagCopy = {
-  fastFill: (n: number) => `Заполнено за ${n} с: проверить, не бот ли`,
-  category: (c: string) => `Проверить категорию по правилу 1.6: ${c}`,
-  personalData: (list: string) => `Персональные данные покупателей: ${list}`,
-  ruOnly: 'Данные только в российских сервисах: обязательно',
-  noImplementer: 'С их стороны внедрением заняться некому: нужно под ключ',
-  noAccess: 'Доступ к кабинетам не дают',
-  stuckPilot: (text: string) => (text ? `Застрявший пилот: «${text}»` : 'Застрявший пилот, без описания'),
-  budget: (b: string) => `Бюджет: ${b}`,
-}
-
-export const clarifyCopy = {
-  general: (title: string) => `Уточнить: ${title}`,
-  deep: (title: string, process: string) => `Уточнить: ${title} (${process})`,
-  needed: (process: string) => `Уточнить: нужен ли шаг вообще (${process})`,
-  service: (process: string) => `Уточнить: какой сервис уже это делает и чем не устраивает (${process})`,
-}
-
-export const deliverCopy = {
-  documentFailed: 'Файл не прошёл, отправляю текстом частями.',
-  noDeep: 'Подробности не заполнены',
-  start: 'начать с этого',
+export const stageCopy: Record<StageKey, { label: string }> = {
+  stage0: { label: 'Стадия 0 · ИИ пока не пробовали' },
+  stage1: { label: 'Стадия 1 · ИИ пробуют в работе' },
+  stage1to2: { label: 'Стадия 1–2 · уточним на разборе' },
+  stage1stuck: { label: 'Стадия 1 · есть опыт, который не взлетел' },
+  unknown: { label: 'Стадия не указана' },
 }

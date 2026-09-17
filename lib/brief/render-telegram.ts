@@ -1,7 +1,7 @@
-import { offerCopy } from '@/app/data/brief/copy'
 import { optionLabel, shopQuestions } from '@/app/data/brief/questions'
 import { escapeHtml } from '@/lib/landing/telegram'
 import type { BriefInternal } from './internal'
+import { offerCopy } from './internal-copy'
 import { categoryText, marketplacesText } from './labels'
 import type { BriefMap } from './map-types'
 import { formatHours } from './priority'
