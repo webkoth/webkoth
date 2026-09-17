@@ -37,4 +37,21 @@ describe('chunkEscaped', () => {
     expect(joined.replace(/\n$/, '')).toBe(raw.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'))
     for (const p of parts) expect(p).not.toMatch(/&[a-z]{0,3}$/)
   })
+
+  it('частей из одних пробельных символов нет', () => {
+    const parts = chunkEscaped('b'.repeat(TELEGRAM_CHUNK - 1) + '\n')
+    expect(parts.length).toBeGreaterThan(0)
+    for (const p of parts) expect(p.trim()).not.toBe('')
+  })
+
+  it('суррогатная пара не рвётся между частями', () => {
+    const raw = 'a' + '😀'.repeat(TELEGRAM_CHUNK * 2)
+    const parts = chunkEscaped(raw)
+    expect(parts.length).toBeGreaterThan(1)
+    for (const p of parts) {
+      expect(p.length).toBeLessThanOrEqual(TELEGRAM_CHUNK)
+      expect(() => encodeURIComponent(p)).not.toThrow()
+    }
+    expect(parts.join('')).toBe(raw + '\n')
+  })
 })

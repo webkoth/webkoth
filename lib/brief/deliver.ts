@@ -14,30 +14,37 @@ export type BriefTransport = {
 }
 export type BriefDelivery = { ok: boolean; via?: 'document' | 'chunks'; error?: string }
 
-/** Экранированный текст частями не длиннее limit; сущность «&amp;» не рвётся. */
+/**
+ * Экранированный текст частями не длиннее limit. Сущность «&amp;» и суррогатная пара
+ * не рвутся; части из одних пробелов и переносов не отправляются: Telegram их не примет.
+ */
 export function chunkEscaped(raw: string, limit = TELEGRAM_CHUNK): string[] {
   const parts: string[] = []
+  const push = (part: string) => {
+    if (part.trim()) parts.push(part)
+  }
   let current = ''
   for (const line of raw.split('\n')) {
     let piece = escapeHtml(line) + '\n'
     while (piece.length > limit) {
-      if (current) {
-        parts.push(current)
-        current = ''
-      }
+      push(current)
+      current = ''
       let cut = limit
       const amp = piece.lastIndexOf('&', cut - 1)
       if (amp > cut - 5) cut = amp
-      parts.push(piece.slice(0, cut))
+      const code = piece.charCodeAt(cut - 1)
+      if (code >= 0xd800 && code <= 0xdbff) cut -= 1
+      if (cut <= 0) cut = limit
+      push(piece.slice(0, cut))
       piece = piece.slice(cut)
     }
     if (current.length + piece.length > limit) {
-      parts.push(current)
+      push(current)
       current = ''
     }
     current += piece
   }
-  if (current) parts.push(current)
+  push(current)
   return parts
 }
 
