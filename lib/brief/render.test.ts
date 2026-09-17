@@ -107,6 +107,11 @@ describe('renderMarkdown', () => {
     expect(text).toContain('- Застрявший пилот: «Бот ## 2. Магазин ~~~~»')
   })
 
+  it('часы устройства спешат: время заполнения неизвестно', () => {
+    const text = renderMarkdown({ answers, ...built(answers), startedAtMs: now.getTime() + 10 * 60_000, now })
+    expect(text).toContain('- Заполнение: неизвестно (часы устройства)')
+  })
+
   it('незаполненный процесс помечен', () => {
     const a = { ...emptyAnswers(), picked: [{ id: 'reviews' as const, hours: '1to3' as const }] }
     expect(renderMarkdown({ answers: a, ...built(a), startedAtMs: now.getTime(), now })).toContain('- Подробности не заполнены')

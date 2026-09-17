@@ -95,13 +95,15 @@ export type MarkdownInput = {
 
 export function renderMarkdown({ answers: a, map, internal, k, startedAtMs, now }: MarkdownInput): string {
   const t = moscow(now)
-  const minutes = Math.max(1, Math.round((now.getTime() - startedAtMs) / 60_000))
+  const elapsedMs = now.getTime() - startedAtMs
+  // Начало позже отправки: часы устройства спешат, длительность не посчитать.
+  const filled = elapsedMs < 0 ? 'неизвестно (часы устройства)' : `${Math.max(1, Math.round(elapsedMs / 60_000))} мин`
   return [
     `# Бриф: ${a.name ?? ''}`,
     '',
     `- Контакт: ${a.contact ?? ''}`,
     `- Дата: ${t.d}.${t.m}.${t.y} ${t.hh}:${t.mm} МСК`,
-    `- Заполнение: ${minutes} мин`,
+    `- Заполнение: ${filled}`,
     `- Метка: ${k ?? 'нет'}`,
     '',
     '## 1. Флаги',

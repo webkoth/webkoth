@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
 type Result = { ok: boolean; error?: string }
 
@@ -30,6 +30,10 @@ describe('POST /api/brief', () => {
   beforeEach(() => {
     vi.mocked(sendTelegramDocument).mockReset().mockResolvedValue({ ok: true })
     vi.mocked(sendTelegramMessage).mockReset().mockResolvedValue({ ok: true })
+    vi.spyOn(console, 'warn').mockImplementation(() => {})
+  })
+  afterEach(() => {
+    vi.restoreAllMocks()
   })
 
   it('принимает бриф, сам строит карту и шлёт документ', async () => {
@@ -59,15 +63,25 @@ describe('POST /api/brief', () => {
     expect(content).not.toContain('"ads": {')
   })
 
-  it('ловушка для ботов и слишком быстрое заполнение: тихий 200 без отправки', async () => {
+  it('ловушка для ботов и слишком быстрое заполнение: тихий 200 без отправки, причина в логе', async () => {
     expect((await send({ ...valid(), website: 'http://spam' })).status).toBe(200)
+    expect(console.warn).toHaveBeenLastCalledWith('[brief] dropped: honeypot')
     expect((await send({ ...valid(), startedAtMs: Date.now() - 5_000 })).status).toBe(200)
+    expect(console.warn).toHaveBeenLastCalledWith('[brief] dropped: too_fast')
     expect(sendTelegramDocument).not.toHaveBeenCalled()
   })
 
-  it('без согласия и битый JSON: 400', async () => {
-    const noConsent = await send({ ...valid(), answers: { ...demoShop(), consent: false } })
+  it('часы устройства спешат: бриф с будущим startedAtMs доставляется', async () => {
+    expect((await send({ ...valid(), startedAtMs: Date.now() + 10 * 60_000 })).status).toBe(200)
+    expect(sendTelegramDocument).toHaveBeenCalledTimes(1)
+    expect(vi.mocked(sendTelegramDocument).mock.calls[0][1]).toContain('- Заполнение: неизвестно (часы устройства)')
+  })
+
+  it('без согласия и битый JSON: 400; в логе пути ошибок без значений', async () => {
+    const noConsent = await send({ ...valid(), answers: { ...demoShop(), consent: false, contact: 'x' } })
     expect(noConsent.status).toBe(400)
+    expect(console.warn).toHaveBeenCalledWith('[brief] validation: answers.contact, answers.consent')
+    expect(JSON.stringify(vi.mocked(console.warn).mock.calls)).not.toContain('Анна')
     expect((await POST(request('{oops'))).status).toBe(400)
   })
 

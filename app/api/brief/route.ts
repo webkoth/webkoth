@@ -18,6 +18,12 @@ import { sendTelegramDocument, sendTelegramMessage } from '@/lib/landing/telegra
 const MIN_FILL_MS = 60_000
 const MAX_BODY_CHARS = 64_000
 
+// Для лога ошибок валидации только пути полей: значения могут содержать имя и контакт.
+function issuePaths(issues: readonly { path: readonly PropertyKey[] }[]): string {
+  const paths = issues.map((i) => i.path.map((p) => String(p).replace(/[^\w-]/g, '?').slice(0, 40)).join('.'))
+  return [...new Set(paths)].join(', ')
+}
+
 export async function POST(req: NextRequest) {
   const rl = rateLimitTake(`brief:${clientIp(req.headers)}`)
   if (!rl.allowed) {
@@ -41,6 +47,7 @@ export async function POST(req: NextRequest) {
 
   const parsed = briefSubmitSchema.safeParse(body)
   if (!parsed.success) {
+    console.warn(`[brief] validation: ${issuePaths(parsed.error.issues)}`)
     return NextResponse.json(
       { ok: false, error: 'validation', issues: parsed.error.flatten() },
       { status: 400 },
@@ -49,9 +56,18 @@ export async function POST(req: NextRequest) {
   const { k, startedAtMs, website } = parsed.data
 
   // Ловушка и слишком быстрое заполнение: тихая двухсотка, бот не должен понять, что попался.
-  if (website) return NextResponse.json({ ok: true }, { status: 200 })
+  // В лог только причина, без данных брифа.
+  if (website) {
+    console.warn('[brief] dropped: honeypot')
+    return NextResponse.json({ ok: true }, { status: 200 })
+  }
   const now = Date.now()
-  if (now - startedAtMs < MIN_FILL_MS) return NextResponse.json({ ok: true }, { status: 200 })
+  const elapsedMs = now - startedAtMs
+  // Начало в будущем значит, что часы устройства спешат: такой бриф не отбрасываем.
+  if (elapsedMs >= 0 && elapsedMs < MIN_FILL_MS) {
+    console.warn('[brief] dropped: too_fast')
+    return NextResponse.json({ ok: true }, { status: 200 })
+  }
 
   // Скрытые сменой ответа поля в карту и файл не идут.
   const answers = normalizeAnswers(parsed.data.answers)
