@@ -102,15 +102,16 @@ describe('тексты брифа', () => {
     expect(briefCopy.send.rateLimited).toBe('Слишком много попыток. Повторите через пару минут.')
   })
 
-  it('без длинных тире в исходниках данных и логики брифа', () => {
-    let checked = 0
-    for (const dir of ['app/data/brief', 'lib/brief']) {
+  it('без длинных тире в исходниках данных, логики и компонентов брифа', () => {
+    const checked: string[] = []
+    for (const dir of ['app/data/brief', 'lib/brief', 'components/brief']) {
       const abs = join(process.cwd(), dir)
-      for (const file of readdirSync(abs).filter((f) => f.endsWith('.ts') && !f.endsWith('.test.ts'))) {
+      for (const file of readdirSync(abs).filter((f) => /\.tsx?$/.test(f) && !/\.test\.tsx?$/.test(f))) {
         expect(readFileSync(join(abs, file), 'utf8'), `${dir}/${file}`).not.toMatch(/—/)
-        checked++
+        checked.push(`${dir}/${file}`)
       }
     }
-    expect(checked).toBeGreaterThan(20)
+    expect(checked.length).toBeGreaterThan(20)
+    expect(checked.filter((f) => f.startsWith('components/brief/') && f.endsWith('.tsx')).length).toBeGreaterThan(5)
   })
 })
