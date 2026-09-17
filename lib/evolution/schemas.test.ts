@@ -81,4 +81,15 @@ describe('evolutionLeadSchema', () => {
     })
     expect(r.success).toBe(false)
   })
+
+  it('принимает атрибуцию рекламы и отклоняет перенос строки в метке', () => {
+    const attribution = {
+      first: { landing: '/kontur', at: '2026-09-17T10:00:00.000Z', utm_campaign: 'kontur-rsya', yclid: '123' },
+      last: { landing: '/kontur', at: '2026-09-17T10:00:00.000Z', utm_term: '1c wb', placement: 'ya.ru' },
+      clientId: '1789632086123456789',
+    }
+    expect(evolutionLeadSchema.safeParse({ ...valid, attribution }).success).toBe(true)
+    const bad = { ...attribution, last: { ...attribution.last, utm_term: 'a\nb' } }
+    expect(evolutionLeadSchema.safeParse({ ...valid, attribution: bad }).success).toBe(false)
+  })
 })

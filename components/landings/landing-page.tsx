@@ -56,7 +56,7 @@ export function LandingPage({ slug }: { slug: LandingSlug }) {
       <HtmlLang lang="ru" />
       <ParticleField />
       <TooltipProvider delay={200}>
-        <LeadDialogProvider copy={data.finale.form} lang="ru">
+        <LeadDialogProvider copy={data.finale.form} lang="ru" defaultSource={{ landing: slug }}>
           <main className="relative z-[1] min-h-screen" lang="ru">
             <HeaderNav
               lang="ru"

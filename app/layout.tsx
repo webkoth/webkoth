@@ -1,3 +1,4 @@
+import { Suspense } from "react"
 import { Geist, Geist_Mono, JetBrains_Mono } from "next/font/google"
 
 import "./globals.css"
@@ -5,6 +6,7 @@ import { ThemeProvider } from "@/components/theme-provider"
 import { LandingPreferencesScript } from "@/components/landing-preferences-script"
 import { Toaster } from "@/components/ui/sonner"
 import { YandexMetrika } from "@/components/analytics/yandex-metrika"
+import { RouteTracker } from "@/components/analytics/route-tracker"
 import { cn } from "@/lib/utils";
 
 // Два набора шрифтов по тумблеру в шапке (класс `mono-geist` на <html>, см.
@@ -56,6 +58,10 @@ export default function RootLayout({
           <Toaster />
         </ThemeProvider>
         <YandexMetrika />
+        {/* Метки рекламы для заявки и хиты Метрики при переходах внутри сайта. */}
+        <Suspense fallback={null}>
+          <RouteTracker />
+        </Suspense>
       </body>
     </html>
   )

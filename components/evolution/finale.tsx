@@ -5,6 +5,7 @@ import { SproutsTree } from './animations/sprouts-tree'
 import { LeadForm } from './lead-form'
 import { StepChip } from './step-chip'
 import { CopyButton } from './copy-button'
+import { TelegramLink } from '@/components/analytics/telegram-link'
 
 // Хэндл для кнопки «скопировать»: последний сегмент ссылки t.me/…
 const telegramHandle = '@' + contacts.telegram.replace(/\/$/, '').split('/').pop()
@@ -122,7 +123,7 @@ export function Finale({
           </div>
 
           <div className="mb-6 flex flex-wrap items-center gap-3">
-            <a
+            <TelegramLink
               href={contacts.telegram}
               target="_blank"
               rel="noopener noreferrer"
@@ -130,7 +131,7 @@ export function Finale({
             >
               <Send className="size-3.5 text-primary" aria-hidden />
               <span>{data.form.telegramCta}</span>
-            </a>
+            </TelegramLink>
             <CopyButton value={telegramHandle} label={labels.copy} done={labels.copied} />
             <span className="text-xs text-muted-foreground">{data.form.orBelow}</span>
           </div>

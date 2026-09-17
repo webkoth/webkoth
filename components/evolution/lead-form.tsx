@@ -10,6 +10,7 @@ import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { contacts } from '@/lib/landing/contacts'
 import { ymGoal } from '@/lib/analytics/ym'
+import { getYmClientId, readAttribution } from '@/lib/analytics/attribution'
 import { evolutionLeadSchema, type EvolutionLeadInput, type LeadSource } from '@/lib/evolution/schemas'
 import type { EvolutionData, Lang, LinkedText } from '@/app/data/evolution/types'
 
@@ -19,7 +20,7 @@ function TelegramNote({ text }: { text: LinkedText }) {
   return (
     <span>
       {text.before}
-      <a href={contacts.telegram} className="text-primary hover:underline">
+      <a href={contacts.telegram} onClick={() => ymGoal('tg_click')} className="text-primary hover:underline">
         {text.link}
       </a>
       {text.after}
@@ -27,7 +28,10 @@ function TelegramNote({ text }: { text: LinkedText }) {
   )
 }
 
-const openTelegram = () => window.open(contacts.telegram, '_blank', 'noopener,noreferrer')
+const openTelegram = () => {
+  ymGoal('tg_click')
+  window.open(contacts.telegram, '_blank', 'noopener,noreferrer')
+}
 
 // Минимум полей: имя, контакт и один вопрос — он же первый квалифицирующий
 // вопрос оффера. Форма живёт в двух местах — inline в финале и в модалке —
@@ -76,10 +80,13 @@ export function LeadForm({
   const onSubmit = async (values: EvolutionLeadInput) => {
     setState('submitting')
     try {
+      // Метки рекламы и ClientID Метрики: по ним заявка связывается с кампанией и
+      // загружается офлайн-конверсией. ClientID ждём не дольше 800 мс.
+      const attribution = { ...readAttribution(), clientId: await getYmClientId() }
       const res = await fetch('/api/evolution/lead', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...values, filledAtMs: filledAt, lang, source }),
+        body: JSON.stringify({ ...values, filledAtMs: filledAt, lang, source, attribution }),
       })
       // 429 — отдельное состояние: совет «попробуйте ещё раз» тут не сработает.
       if (res.status === 429) {
@@ -91,6 +98,8 @@ export function LeadForm({
         return
       }
       if (!res.ok) throw new Error(String(res.status))
+      // skipped: роут отсеял бота (ловушка или слишком быстрое заполнение) — цель не засчитываем.
+      const body = (await res.json().catch(() => ({}))) as { skipped?: boolean }
       setState('success')
       reset()
       toast.success(copy.toast.success, {
@@ -98,8 +107,8 @@ export function LeadForm({
         duration: 6000,
         action: { label: copy.toast.action, onClick: openTelegram },
       })
-      // Цель Метрики — только после того, как сервер принял заявку.
-      ymGoal('lead_sent')
+      // Цель Метрики — только после того, как сервер принял заявку, и не для ботов.
+      if (!body.skipped) ymGoal('lead_sent')
       onSuccess?.()
     } catch {
       setState('error')
@@ -120,7 +129,7 @@ export function LeadForm({
         </div>
         <p className="mt-3 text-sm text-muted-foreground">
           {copy.success.body}{' '}
-          <a href={contacts.telegram} className="text-primary hover:underline">
+          <a href={contacts.telegram} onClick={() => ymGoal('tg_click')} className="text-primary hover:underline">
             {copy.success.link}
           </a>
           .

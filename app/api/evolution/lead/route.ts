@@ -41,14 +41,15 @@ export async function POST(req: NextRequest) {
     )
   }
 
-  // 4. Honeypot — тихая двухсотка, бот не должен понять, что попался
+  // 4. Honeypot — тихая двухсотка, бот не должен понять, что попался.
+  // skipped: форма не засчитывает цель lead_sent — иначе стратегия Директа учится на ботах.
   if (parsed.data.website && parsed.data.website.length > 0) {
-    return NextResponse.json({ ok: true }, { status: 200 })
+    return NextResponse.json({ ok: true, skipped: true }, { status: 200 })
   }
 
   // 5. Слишком быстрое заполнение — тоже тихая двухсотка
   if (Date.now() - parsed.data.filledAtMs < MIN_FILL_MS) {
-    return NextResponse.json({ ok: true }, { status: 200 })
+    return NextResponse.json({ ok: true, skipped: true }, { status: 200 })
   }
 
   const lead: EvolutionLeadData = {
@@ -58,6 +59,7 @@ export async function POST(req: NextRequest) {
     ip,
     lang: parsed.data.lang,
     source: parsed.data.source,
+    attribution: parsed.data.attribution,
     // Схема уже отклонила заявку без согласия; фиксируем момент как доказательство.
     consentAt: new Date().toISOString(),
   }

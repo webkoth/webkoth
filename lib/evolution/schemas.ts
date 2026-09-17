@@ -16,6 +16,37 @@ export const leadSourceSchema = z.object({
 
 export type LeadSource = z.infer<typeof leadSourceSchema>
 
+// Метки рекламы первого и последнего входа и ClientID Метрики (lib/analytics/attribution.ts).
+// Всё необязательное: заявка без рекламы приходит без них. Строки короткие и без
+// переносов — они уходят в уведомление.
+const attrValue = z.string().trim().max(200).regex(/^[^\r\n]*$/, 'no_newline').optional()
+export const leadTouchSchema = z.object({
+  landing: attrValue,
+  at: attrValue,
+  utm_source: attrValue,
+  utm_medium: attrValue,
+  utm_campaign: attrValue,
+  utm_content: attrValue,
+  utm_term: attrValue,
+  yclid: attrValue,
+  placement: attrValue,
+  source_type: attrValue,
+  device: attrValue,
+  region: attrValue,
+  cid: attrValue,
+  gid: attrValue,
+  aid: attrValue,
+  pid: attrValue,
+  match: attrValue,
+})
+export const leadAttributionSchema = z.object({
+  first: leadTouchSchema.optional(),
+  last: leadTouchSchema.optional(),
+  clientId: attrValue,
+})
+
+export type LeadAttribution = z.infer<typeof leadAttributionSchema>
+
 // Форма главной (RU `/`, EN `/en`) — минимум полей: имя, контакт и один
 // квалифицирующий вопрос оффера. Сообщения об ошибках — коды: текст на нужном
 // языке подставляет форма из `data.finale.form.errors`.
@@ -45,6 +76,7 @@ export const evolutionLeadSchema = z.object({
   // Язык страницы, с которой пришла заявка, — только для пометки в уведомлении.
   lang: z.enum(['ru', 'en']).optional(),
   source: leadSourceSchema.optional(),
+  attribution: leadAttributionSchema.optional(),
 })
 
 export type EvolutionLeadInput = z.infer<typeof evolutionLeadSchema>

@@ -52,4 +52,36 @@ describe('buildLeadTelegramText', () => {
     expect(text).toContain('finance-pervichka')
     expect(text).toContain('F4')
   })
+
+  it('пишет, что меток рекламы нет, если заявка без атрибуции', () => {
+    expect(buildLeadTelegramText(lead)).toContain('<b>Реклама:</b> меток нет')
+  })
+
+  it('выводит последний и первый вход, yclid и ClientID', () => {
+    const text = buildLeadTelegramText({
+      ...lead,
+      attribution: {
+        first: { landing: '/', at: '2026-09-10T08:00:00.000Z', utm_source: 'yandex', utm_medium: 'cpc', utm_campaign: 'home-rsya' },
+        last: {
+          landing: '/kontur',
+          at: '2026-09-17T10:00:00.000Z',
+          utm_source: 'yandex',
+          utm_medium: 'cpc',
+          utm_campaign: 'kontur-rsya',
+          utm_content: 'integraciya-1s-marketpleysy',
+          utm_term: '1c <wb>',
+          placement: 'ya.ru',
+          device: 'mobile',
+          cid: '714528958',
+          yclid: '777',
+        },
+        clientId: '1789632086123456789',
+      },
+    })
+    expect(text).toContain('<b>Последний вход:</b> yandex/cpc · кампания kontur-rsya · группа integraciya-1s-marketpleysy · фраза 1c &lt;wb&gt; · площадка ya.ru · mobile · /kontur · cid 714528958')
+    expect(text).toContain('<b>Первый вход:</b> yandex/cpc · кампания home-rsya')
+    expect(text).toContain('<b>yclid:</b> 777')
+    expect(text).toContain('<b>ClientID Метрики:</b> 1789632086123456789')
+    expect(text).not.toContain('меток нет')
+  })
 })

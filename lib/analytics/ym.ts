@@ -6,6 +6,8 @@ export type YmGoal =
   | 'quiz_start'
   | 'quiz_result'
   | 'lead_sent'
+  // Клик по Telegram: кнопки через window.open автоцель «Мессенджер» не ловит
+  | 'tg_click'
   // Бриф: где бросают заполнение (спека брифа, раздел 12)
   | 'brief_start'
   | 'brief_step_1'

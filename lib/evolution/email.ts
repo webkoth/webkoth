@@ -1,5 +1,5 @@
 import type { Lang } from '@/app/data/evolution/types'
-import type { LeadSource } from './schemas'
+import type { LeadAttribution, LeadSource } from './schemas'
 
 const escapeHtml = (s: string) =>
   s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
@@ -15,6 +15,8 @@ export type EvolutionLeadData = {
   source?: LeadSource
   /** Момент согласия на обработку персональных данных (ISO): доказательство по 152-ФЗ. */
   consentAt?: string
+  /** Метки рекламы первого и последнего входа и ClientID Метрики. */
+  attribution?: LeadAttribution
 }
 
 // Уведомления владельцу всегда на русском - меняется только пометка источника.
@@ -42,6 +44,7 @@ export function buildLeadText(d: EvolutionLeadData): string {
     d.answer,
     '',
     `Источник: ${sourceLabel(d.lang, d.source)}`,
+    ...(d.attribution ? ['', `Атрибуция: ${JSON.stringify(d.attribution)}`] : []),
   ].join('\n')
 }
 

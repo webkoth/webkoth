@@ -6,6 +6,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } f
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from '@/components/ui/sheet'
 import { useMediaQuery } from '@/hooks/use-media-query'
 import { contacts } from '@/lib/landing/contacts'
+import { ymGoal } from '@/lib/analytics/ym'
 import type { EvolutionData, Lang } from '@/app/data/evolution/types'
 import type { LeadSource } from '@/lib/evolution/schemas'
 import { LeadForm } from './lead-form'
@@ -30,10 +31,13 @@ export function useLeadDialog(): LeadDialogApi {
 export function LeadDialogProvider({
   copy,
   lang,
+  defaultSource,
   children,
 }: {
   copy: EvolutionData['finale']['form']
   lang: Lang
+  /** Источник по умолчанию: на лендинге кнопки первого экрана и плавающая открывают форму без него. */
+  defaultSource?: LeadSource
   children: ReactNode
 }) {
   const [open, setOpen] = useState(false)
@@ -43,11 +47,15 @@ export function LeadDialogProvider({
 
   // Квиз открывает форму с готовым паспортом: ответ и источник. Остальные
   // кнопки открывают пустую; прошлое заполнение не наследуется.
-  const openDialog = useCallback((next?: LeadPrefill) => {
-    setPrefill(next ?? {})
-    setOpenedAt(Date.now())
-    setOpen(true)
-  }, [])
+  // Без источника в вызове берём страницу лендинга: иначе заявка подписывалась «Главная».
+  const openDialog = useCallback(
+    (next?: LeadPrefill) => {
+      setPrefill({ ...next, source: next?.source ?? defaultSource })
+      setOpenedAt(Date.now())
+      setOpen(true)
+    },
+    [defaultSource],
+  )
   const api = useMemo(() => ({ open: openDialog }), [openDialog])
   const close = () => setOpen(false)
 
@@ -57,6 +65,7 @@ export function LeadDialogProvider({
         href={contacts.telegram}
         target="_blank"
         rel="noopener noreferrer"
+        onClick={() => ymGoal('tg_click')}
         className="mb-5 inline-flex w-fit items-center gap-2 justify-self-start rounded-lg border border-border bg-background px-3.5 py-2 text-xs font-medium text-foreground transition hover:border-primary/50 hover:bg-muted md:text-sm"
       >
         <Send className="size-3.5 text-primary" aria-hidden />
