@@ -56,7 +56,6 @@ export type StageKey = 'stage0' | 'stage1' | 'stage1to2' | 'stage1stuck' | 'unkn
 export type StageInfo = {
   key: StageKey
   label: string
-  forUs: string
   /** Стадии 0 и 1: агент не предлагается первым шагом. */
   early: boolean
   stuckPilot: boolean

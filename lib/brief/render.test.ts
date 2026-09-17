@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest'
+import { stageCopy } from '@/app/data/brief/copy'
 import { buildMap } from './build-map'
 import { demoShop, headShop } from './fixtures'
 import { buildInternal } from './internal'
@@ -103,6 +104,11 @@ describe('renderMarkdown', () => {
     expect(md).toContain('### Ответы на отзывы (начать с этого)')
     expect(md).toContain('- Вердикт: f4; автономия: сбор A5 · анализ A5 · решение A1 · действие A2; флаги: irreversible, rope')
     expect(md).toContain('- Реклама и ставки: 2 ч/нед')
+  })
+
+  it('внутренняя пометка стадии берётся из текстов по ключу, а не из карты браузера', () => {
+    expect(md).toContain(`- Стадия: ${stageCopy.stage1.forUs}`)
+    expect(Object.keys(built(answers).map.stage)).not.toContain('forUs')
   })
 
   const jsonBlock = (text: string) => JSON.parse(text.match(/~~~~json\n([\s\S]*?)\n~~~~/)?.[1] ?? 'null')

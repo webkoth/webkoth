@@ -1,4 +1,4 @@
-import { colorShort, deliverCopy, offerCopy } from '@/app/data/brief/copy'
+import { colorShort, deliverCopy, offerCopy, stageCopy } from '@/app/data/brief/copy'
 import { deepQuestions, goalsQuestions, nowQuestions, optionLabel, shopQuestions, type QuestionDef } from '@/app/data/brief/questions'
 import { casePath } from '@/app/data/cases'
 import type { BriefInternal } from './internal'
@@ -112,7 +112,7 @@ export function renderMarkdown({ answers: a, map, internal, k, startedAtMs, now 
     '',
     '## 2. Магазин и стадия',
     '',
-    `- Стадия: ${map.stage.forUs}`,
+    `- Стадия: ${stageCopy[map.stage.key].forUs}`,
     ...general(shopQuestions, a),
     ...general(nowQuestions, a),
     '',
