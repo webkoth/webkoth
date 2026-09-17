@@ -17,11 +17,11 @@ import { sendTelegramDocument, sendTelegramMessage } from '@/lib/landing/telegra
 import { POST } from './route'
 
 let ip = 0
-const request = (raw: string) =>
+const request = (raw: string, headers: Record<string, string> = { 'x-real-ip': `10.0.0.${++ip}` }) =>
   new NextRequest('http://localhost/api/brief', {
     method: 'POST',
     body: raw,
-    headers: { 'content-type': 'application/json', 'x-forwarded-for': `10.0.0.${++ip}` },
+    headers: { 'content-type': 'application/json', ...headers },
   })
 const valid = () => ({ answers: demoShop(), k: 'anna', startedAtMs: Date.now() - 10 * 60_000 })
 const send = (body: unknown) => POST(request(JSON.stringify(body)))
@@ -73,6 +73,17 @@ describe('POST /api/brief', () => {
 
   it('слишком большое тело: 413', async () => {
     expect((await POST(request('x'.repeat(70_000)))).status).toBe(413)
+  })
+
+  it('лимит по x-real-ip: шестой запрос 429, подделка x-forwarded-for не помогает', async () => {
+    const statuses: number[] = []
+    for (let i = 0; i < 6; i++) {
+      const headers = { 'x-real-ip': '203.0.113.77', 'x-forwarded-for': `6.6.6.${i}, 203.0.113.77` }
+      statuses.push((await POST(request(JSON.stringify(valid()), headers))).status)
+    }
+    expect(statuses).toEqual([200, 200, 200, 200, 200, 429])
+    expect(sendTelegramDocument).toHaveBeenCalledTimes(5)
+    expect(sendTelegramMessage).not.toHaveBeenCalled()
   })
 
   it('Telegram не принял ни документ, ни сообщение: 502', async () => {

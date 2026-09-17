@@ -6,8 +6,9 @@ import { normalizeAnswers } from '@/lib/brief/normalize'
 import { briefFilename, renderMarkdown } from '@/lib/brief/render-markdown'
 import { renderTelegramSummary } from '@/lib/brief/render-telegram'
 import { briefSubmitSchema } from '@/lib/brief/schema'
-import { sendTelegramDocument, sendTelegramMessage } from '@/lib/landing/telegram'
+import { clientIp } from '@/lib/landing/client-ip'
 import { rateLimitTake } from '@/lib/landing/rate-limit'
+import { sendTelegramDocument, sendTelegramMessage } from '@/lib/landing/telegram'
 
 // Приём брифа. Порядок защиты как у заявок (app/api/evolution/lead/route.ts):
 // лимит → размер → JSON → zod → ловушка → время заполнения. Карту сервер строит сам:
@@ -18,10 +19,7 @@ const MIN_FILL_MS = 60_000
 const MAX_BODY_CHARS = 64_000
 
 export async function POST(req: NextRequest) {
-  const ip =
-    req.headers.get('x-forwarded-for')?.split(',')[0].trim() || req.headers.get('x-real-ip') || 'unknown'
-
-  const rl = rateLimitTake(`brief:${ip}`)
+  const rl = rateLimitTake(`brief:${clientIp(req.headers)}`)
   if (!rl.allowed) {
     return NextResponse.json(
       { ok: false, error: 'rate_limit' },
