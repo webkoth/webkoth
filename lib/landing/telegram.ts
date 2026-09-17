@@ -1,8 +1,10 @@
 const MAX_ATTEMPTS = 2;
 const ATTEMPT_DELAY_MS = 600;
 const FETCH_TIMEOUT_MS = 6000;
-// Документ тяжелее сообщения и идёт через прокси: даём загрузке больше времени.
-const DOCUMENT_TIMEOUT_MS = 15000;
+// Документ тяжелее сообщения и идёт через прокси: одна попытка с запасом по времени.
+// Зависший прокси не ждём дважды: у брифа есть запасной путь сообщениями.
+const DOCUMENT_ATTEMPTS = 1;
+const DOCUMENT_TIMEOUT_MS = 10000;
 
 type TelegramResult = { ok: boolean; error?: string };
 type TelegramEnv = { baseUrl: string; token: string; chatId: string };
@@ -47,9 +49,13 @@ async function callTelegram(
   }
 }
 
-async function withRetries(env: TelegramEnv, attempt: () => Promise<void>): Promise<TelegramResult> {
+async function withRetries(
+  env: TelegramEnv,
+  attempt: () => Promise<void>,
+  maxAttempts = MAX_ATTEMPTS,
+): Promise<TelegramResult> {
   const errors: string[] = [];
-  for (let n = 1; n <= MAX_ATTEMPTS; n += 1) {
+  for (let n = 1; n <= maxAttempts; n += 1) {
     try {
       await attempt();
       return { ok: true };
@@ -57,7 +63,7 @@ async function withRetries(env: TelegramEnv, attempt: () => Promise<void>): Prom
       const desc = describeError(e);
       errors.push(`#${n}: ${desc}`);
       console.warn(`[telegram] attempt ${n} via ${env.baseUrl} failed: ${desc}`);
-      if (n < MAX_ATTEMPTS) {
+      if (n < maxAttempts) {
         await new Promise((r) => setTimeout(r, ATTEMPT_DELAY_MS));
       }
     }
@@ -91,15 +97,18 @@ export async function sendTelegramDocument(
   if (!env) {
     return { ok: false, error: "Telegram env not configured" };
   }
-  // FormData собирается на каждую попытку: тело запроса одноразовое.
-  return withRetries(env, () => {
-    const form = new FormData();
-    form.append("chat_id", env.chatId);
-    form.append("caption", caption);
-    form.append("parse_mode", "HTML");
-    form.append("document", new Blob([content], { type: "text/markdown;charset=utf-8" }), filename);
-    return callTelegram(env, "sendDocument", form, undefined, DOCUMENT_TIMEOUT_MS);
-  });
+  return withRetries(
+    env,
+    () => {
+      const form = new FormData();
+      form.append("chat_id", env.chatId);
+      form.append("caption", caption);
+      form.append("parse_mode", "HTML");
+      form.append("document", new Blob([content], { type: "text/markdown;charset=utf-8" }), filename);
+      return callTelegram(env, "sendDocument", form, undefined, DOCUMENT_TIMEOUT_MS);
+    },
+    DOCUMENT_ATTEMPTS,
+  );
 }
 
 export function escapeHtml(s: string): string {

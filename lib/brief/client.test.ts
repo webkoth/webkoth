@@ -7,6 +7,7 @@ const reply = (status: number, json: unknown) => vi.fn(async () => new Response(
 
 describe('postBrief', () => {
   afterEach(() => {
+    vi.restoreAllMocks()
     vi.unstubAllGlobals()
   })
 
@@ -16,12 +17,14 @@ describe('postBrief', () => {
     expect(f).toHaveBeenCalledWith('/api/brief', expect.objectContaining({ method: 'POST', body: JSON.stringify(body) }))
   })
 
-  it('запрос ограничен по времени; таймаут: не отправилось', async () => {
+  it('запрос ограничен 60 с; таймаут: не отправилось', async () => {
     const f = reply(200, { ok: true })
+    const timeout = vi.spyOn(AbortSignal, 'timeout')
     await postBrief(body, f)
+    expect(timeout).toHaveBeenCalledWith(60_000)
     expect(f).toHaveBeenCalledWith('/api/brief', expect.objectContaining({ signal: expect.any(AbortSignal) }))
-    const timeout = vi.fn(async () => Promise.reject(new DOMException('The operation timed out', 'TimeoutError')))
-    expect(await postBrief(body, timeout)).toBe('failed')
+    const timedOut = vi.fn(async () => Promise.reject(new DOMException('The operation timed out', 'TimeoutError')))
+    expect(await postBrief(body, timedOut)).toBe('failed')
   })
 
   it('429: лимит; 502, 400 и сеть: не отправилось', async () => {

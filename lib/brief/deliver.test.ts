@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest'
 import { deliverCopy } from '@/app/data/brief/copy'
-import { CHUNK_PAUSE_MS, chunkEscaped, deliverBrief, TELEGRAM_CHUNK } from './deliver'
+import { type BriefTransport, CHUNK_PAUSE_MS, chunkEscaped, DELIVERY_DEADLINE_MS, deliverBrief, TELEGRAM_CHUNK } from './deliver'
 
 type Sent = { ok: boolean; error?: string }
 const ok = async (..._args: unknown[]): Promise<Sent> => ({ ok: true })
@@ -52,6 +52,43 @@ describe('deliverBrief', () => {
     const r = await deliverBrief(payload, { sendDocument: vi.fn(fail), sendMessage, sleep: noSleep })
     expect(r).toEqual({ ok: false, error: 'document: boom; message: boom' })
     expect(sendMessage).toHaveBeenCalledTimes(1)
+  })
+
+  // Подставные часы: каждая отправка сдвигает время, как если бы ждала ответа Telegram.
+  const clockTransport = (docMs: number, messageMs: number) => {
+    let clock = 1_000_000
+    const sendDocument = vi.fn<BriefTransport['sendDocument']>(async () => {
+      clock += docMs
+      return { ok: false, error: 'timeout' }
+    })
+    const sendMessage = vi.fn<BriefTransport['sendMessage']>(async () => {
+      clock += messageMs
+      return { ok: true }
+    })
+    return { sendDocument, sendMessage, sleep: noSleep, now: () => clock }
+  }
+
+  it('общий дедлайн 20 с от начала: после сводки оставшиеся части не шлём', async () => {
+    expect(DELIVERY_DEADLINE_MS).toBe(20_000)
+    // Документ 10 с, сводка 6 с (16 с), первая часть 6 с (22 с): вторую уже не шлём.
+    const t = clockTransport(10_000, 6_000)
+    const r = await deliverBrief(longPayload, t)
+    expect(r).toEqual({ ok: true, via: 'chunks', partial: true, error: 'deadline' })
+    expect(t.sendMessage).toHaveBeenCalledTimes(2)
+  })
+
+  it('дедлайн прошёл до сводки: сводка всё равно уходит, частей нет', async () => {
+    const t = clockTransport(25_000, 1_000)
+    const r = await deliverBrief(payload, t)
+    expect(r).toEqual({ ok: true, via: 'chunks', partial: true, error: 'deadline' })
+    expect(t.sendMessage).toHaveBeenCalledTimes(1)
+    expect(t.sendMessage.mock.calls[0][0]).toContain(deliverCopy.documentFailed)
+  })
+
+  it('до дедлайна успели: все части доставлены', async () => {
+    const t = clockTransport(10_000, 2_000)
+    expect(await deliverBrief(longPayload, t)).toEqual({ ok: true, via: 'chunks' })
+    expect(t.sendMessage).toHaveBeenCalledTimes(4)
   })
 })
 

@@ -50,12 +50,12 @@ describe('telegram', () => {
     expect(await file.text()).toBe('# Бриф')
   })
 
-  it('повтор через 600 мс; ошибка после повтора возвращается строкой', async () => {
+  it('сообщение: повтор через 600 мс; ошибка после повтора возвращается строкой', async () => {
     vi.useFakeTimers()
     vi.spyOn(console, 'warn').mockImplementation(() => {})
     const fetchMock = setup()
     fetchMock.mockImplementation(async () => new Response('Bad Request', { status: 400 }))
-    const pending = sendTelegramDocument('brief.md', 'x', 'c')
+    const pending = sendTelegramMessage('hi')
     await vi.advanceTimersByTimeAsync(599)
     expect(fetchMock).toHaveBeenCalledTimes(1)
     await vi.advanceTimersByTimeAsync(1)
@@ -66,18 +66,22 @@ describe('telegram', () => {
     expect(fetchMock).toHaveBeenCalledTimes(2)
   })
 
-  it('документ со второй попытки: на каждую попытку новый FormData', async () => {
-    vi.useFakeTimers()
+  it('сообщение: таймаут 6 с на попытку', async () => {
+    setup()
+    const timeout = vi.spyOn(AbortSignal, 'timeout')
+    await sendTelegramMessage('hi')
+    expect(timeout).toHaveBeenCalledWith(6000)
+  })
+
+  it('документ: одна попытка с таймаутом 10 с, при ошибке сразу возврат без повтора', async () => {
     vi.spyOn(console, 'warn').mockImplementation(() => {})
     const fetchMock = setup()
-    fetchMock.mockImplementationOnce(async () => new Response('Bad Gateway', { status: 502 }))
-    const pending = sendTelegramDocument('brief.md', '# Бриф', '<b>Бриф</b>')
-    await vi.advanceTimersByTimeAsync(600)
-    expect(await pending).toEqual({ ok: true })
-    expect(fetchMock).toHaveBeenCalledTimes(2)
-    const [first, second] = (fetchMock.mock.calls as unknown as [string, RequestInit][]).map(([, init]) => init.body as FormData)
-    expect(second).toBeInstanceOf(FormData)
-    expect(second).not.toBe(first)
-    expect(await (second.get('document') as File).text()).toBe('# Бриф')
+    fetchMock.mockImplementation(async () => new Response('Bad Gateway', { status: 502 }))
+    const timeout = vi.spyOn(AbortSignal, 'timeout')
+    const r = await sendTelegramDocument('brief.md', '# Бриф', '<b>Бриф</b>')
+    expect(r).toEqual({ ok: false, error: '#1: Telegram 502: Bad Gateway' })
+    expect(fetchMock).toHaveBeenCalledTimes(1)
+    expect(timeout).toHaveBeenCalledTimes(1)
+    expect(timeout).toHaveBeenCalledWith(10_000)
   })
 })

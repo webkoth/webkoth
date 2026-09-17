@@ -5,9 +5,10 @@ import type { SendStatus } from './state'
 
 export type PostResult = Extract<SendStatus, 'sent' | 'failed' | 'rateLimited'>
 
-// Сервер сам ждёт Telegram с повторами и паузами между частями; дольше полминуты
-// экран «Отправляю карту…» висеть не должен: по таймауту даём отправить ещё раз.
-const POST_TIMEOUT_MS = 30_000
+// Сервер ждёт Telegram до 35 с в худшем случае (DELIVERY_DEADLINE_MS в lib/brief/deliver.ts).
+// Таймаут браузера с запасом больше: иначе доставленный бриф показался бы неотправленным.
+// По таймауту даём отправить ещё раз.
+const POST_TIMEOUT_MS = 60_000
 
 // AbortSignal.timeout есть только с Safari 16: в старых браузерах запрос уходит без таймаута.
 function timeoutSignal(): AbortSignal | undefined {
