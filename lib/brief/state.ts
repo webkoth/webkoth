@@ -131,7 +131,31 @@ function prevStep(s: BriefState): BriefState {
   }
 }
 
+/** Номер подробного шага в пределах списка разбираемых процессов. */
+function clampDeepIndex(index: number, answers: BriefAnswers): number {
+  return Math.min(Math.max(0, index), Math.max(0, deepList(answers).length - 1))
+}
+
+/** Черновик с вводного экрана открывается с шага 1: вводный экран его и предлагает. */
+function restored(saved: BriefState): BriefState {
+  const step = saved.step === 'intro' ? 'shop' : saved.step
+  const deepIndex = clampDeepIndex(saved.deepIndex, saved.answers)
+  return step === saved.step && deepIndex === saved.deepIndex ? saved : { ...saved, step, deepIndex }
+}
+
+/** На шаге «Подробно» всегда есть процесс: без них шаг 3, номер в пределах списка. */
+function withDeepInvariant(s: BriefState): BriefState {
+  if (s.step !== 'deep') return s
+  if (deepList(s.answers).length === 0) return { ...s, step: 'time', deepIndex: 0 }
+  const deepIndex = clampDeepIndex(s.deepIndex, s.answers)
+  return deepIndex === s.deepIndex ? s : { ...s, deepIndex }
+}
+
 export function briefReducer(s: BriefState, action: BriefAction): BriefState {
+  return withDeepInvariant(reduce(s, action))
+}
+
+function reduce(s: BriefState, action: BriefAction): BriefState {
   const a = s.answers
   switch (action.type) {
     case 'start':
@@ -139,7 +163,7 @@ export function briefReducer(s: BriefState, action: BriefAction): BriefState {
     case 'reset':
       return initialState(0)
     case 'restore':
-      return action.state
+      return restored(action.state)
     case 'setField':
       // Значение из интерфейса проверяется той же схемой, что и отправка: мусор в черновик не попадает.
       if (!briefAnswersSchema.shape[action.field].safeParse(action.value).success) return s

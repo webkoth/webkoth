@@ -141,3 +141,53 @@ describe('invalidFields', () => {
     expect(invalidFields(s)).toEqual(['name', 'contact', 'consent'])
   })
 })
+
+describe('восстановление черновика', () => {
+  it('черновик, сохранённый на вводном экране, открывается с шага 1 с ответами', () => {
+    const saved: BriefState = { ...pick(started(), ['reviews']), step: 'intro' }
+    const s = briefReducer(initialState(0), { type: 'restore', state: saved })
+    expect(s.step).toBe('shop')
+    expect(s.answers.picked).toEqual([{ id: 'reviews', hours: '1to3' }])
+    expect(s.startedAtMs).toBe(1000)
+  })
+
+  it('черновик с другого шага открывается там же', () => {
+    const saved: BriefState = { ...pick(started(), ['reviews']), step: 'time' }
+    expect(briefReducer(initialState(0), { type: 'restore', state: saved })).toEqual(saved)
+  })
+
+  it('номер подробного шага зажат в пределы списка разбираемых процессов', () => {
+    const two = pick(started(), ['reviews', 'stocks'])
+    const high = briefReducer(initialState(0), { type: 'restore', state: { ...two, step: 'deep', deepIndex: 5 } })
+    expect([high.step, high.deepIndex]).toEqual(['deep', 1])
+    const negative = briefReducer(initialState(0), { type: 'restore', state: { ...two, step: 'goals', deepIndex: -3 } })
+    expect([negative.step, negative.deepIndex]).toEqual(['goals', 0])
+    const none = briefReducer(initialState(0), { type: 'restore', state: { ...started(), step: 'goals', deepIndex: 2 } })
+    expect([none.step, none.deepIndex]).toEqual(['goals', 0])
+  })
+})
+
+describe('шаг «Подробно» всегда с процессом', () => {
+  it('снятая отметка со второго процесса возвращает на первый, снятые все: шаг 3', () => {
+    let s: BriefState = { ...pick(started(), ['reviews', 'stocks']), step: 'deep', deepIndex: 1 }
+    s = briefReducer(s, { type: 'toggleProcess', id: 'stocks' })
+    expect([s.step, s.deepIndex]).toEqual(['deep', 0])
+    s = briefReducer(s, { type: 'toggleProcess', id: 'reviews' })
+    expect([s.step, s.deepIndex]).toEqual(['time', 0])
+  })
+
+  it('переход на «Подробно» без процессов ведёт на шаг 3', () => {
+    const s = briefReducer(started(), { type: 'goto', step: 'deep' })
+    expect([s.step, s.deepIndex]).toEqual(['time', 0])
+  })
+
+  it('черновик на «Подробно» без процессов открывается на шаге 3', () => {
+    const s = briefReducer(initialState(0), { type: 'restore', state: { ...started(), step: 'deep', deepIndex: 0 } })
+    expect([s.step, s.deepIndex]).toEqual(['time', 0])
+  })
+
+  it('действие без изменений возвращает то же состояние', () => {
+    const s: BriefState = { ...pick(started(), ['reviews']), step: 'deep', deepIndex: 0 }
+    expect(briefReducer(s, { type: 'setDeep', id: 'reviews', field: 'etalon', value: 'maybe' })).toBe(s)
+  })
+})
