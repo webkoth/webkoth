@@ -46,6 +46,10 @@ describe('flagsFor', () => {
       flagCopy.stuckPilot('Бот не понял отзывы'),
     ])
     expect(flags({ aiNow: 'triedFailed' })).toEqual([category, flagCopy.stuckPilot('')])
+    expect(flags({ aiNow: 'triedFailed', aiTried: 'Бот\r\nне понял\n\nотзывы' })).toEqual([
+      category,
+      flagCopy.stuckPilot('Бот не понял отзывы'),
+    ])
   })
 
   it('бюджет подписью варианта', () => {

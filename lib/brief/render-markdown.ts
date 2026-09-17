@@ -2,7 +2,7 @@ import { colorShort, deliverCopy, offerCopy } from '@/app/data/brief/copy'
 import { deepQuestions, goalsQuestions, nowQuestions, optionLabel, shopQuestions, type QuestionDef } from '@/app/data/brief/questions'
 import { casePath } from '@/app/data/cases'
 import type { BriefInternal } from './internal'
-import { answerText } from './labels'
+import { answerText, answerValues } from './labels'
 import type { BriefMap, MapItem } from './map-types'
 import { formatHours } from './priority'
 import type { BriefAnswers } from './schema'
@@ -33,8 +33,20 @@ export function briefFilename(k: string | undefined, now: Date): string {
 
 const bullets = (xs: readonly string[]) => (xs.length > 0 ? xs.map((x) => `- ${x}`) : ['- нет'])
 
+// Многострочный текст селлера цитатой под пунктом: его строки не станут заголовками
+// файла и не закроют блок JSON.
+const quote = (text: string) => text.split(/\r\n|\r|\n/).map((l) => (l ? `  > ${l}` : '  >'))
+
 function general(qs: readonly QuestionDef[], a: BriefAnswers): string[] {
-  return qs.filter((q) => !q.showIf || q.showIf(a)).map((q) => `- ${q.title} ${answerText(q, a) ?? 'нет ответа'}`)
+  return qs
+    .filter((q) => !q.showIf || q.showIf(a))
+    .flatMap((q) => {
+      // Рассказ о пилоте многострочный: в пункте подпись варианта, сам рассказ цитатой.
+      const story =
+        q.other?.field === 'aiTried' && answerValues(q, a).includes(q.other.trigger) ? a.aiTried?.trim() : undefined
+      if (story) return [`- ${q.title} ${answerText(q, { ...a, aiTried: undefined })}:`, ...quote(story)]
+      return [`- ${q.title} ${answerText(q, a) ?? 'нет ответа'}`]
+    })
 }
 
 function itemLines(item: MapItem, a: BriefAnswers, isStart: boolean): string[] {
@@ -119,7 +131,7 @@ export function renderMarkdown({ answers: a, map, internal, k, startedAtMs, now 
     '## 6. Цели и рамки',
     '',
     ...general(goalsQuestions, a),
-    `- Что ещё важно знать: ${a.notes?.trim() || 'нет'}`,
+    ...(a.notes?.trim() ? ['- Что ещё важно знать:', ...quote(a.notes.trim())] : ['- Что ещё важно знать: нет']),
     '',
     '## 7. Ступень',
     '',
@@ -128,9 +140,11 @@ export function renderMarkdown({ answers: a, map, internal, k, startedAtMs, now 
     '',
     '## 8. Ответы (JSON для /task-verdict)',
     '',
-    '```json',
+    // Тильды, а не обратные кавычки: JSON.stringify экранирует переносы, строка «~~~~»
+    // внутри блока невозможна, а «```» из текста селлера блок не закроет.
+    '~~~~json',
     JSON.stringify(a, null, 2),
-    '```',
+    '~~~~',
     '',
   ].join('\n')
 }

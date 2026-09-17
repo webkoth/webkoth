@@ -75,17 +75,36 @@ describe('renderMarkdown', () => {
   it('шапка и разделы на месте', () => {
     expect(md).toContain('- Заполнение: 17 мин')
     expect(md).toContain('- Дата: 18.09.2026 12:05 МСК')
-    for (const h of ['## 1. Флаги', '## 2. Магазин и стадия', '## 3. Разобранные процессы', '## 4. Уточнить на созвоне', '## 5. Отмечены, но не разобраны', '## 6. Цели и рамки', '## 7. Ступень', '## 8. Ответы (JSON для /task-verdict)']) {
-      expect(md).toContain(h)
-    }
+    for (const h of headings) expect(md).toContain(h)
     expect(md).toContain('### Ответы на отзывы (начать с этого)')
     expect(md).toContain('- Вердикт: f4; автономия: сбор A5 · анализ A5 · решение A1 · действие A2; флаги: irreversible, rope')
     expect(md).toContain('- Реклама и ставки: 2 ч/нед')
   })
 
+  const jsonBlock = (text: string) => JSON.parse(text.match(/~~~~json\n([\s\S]*?)\n~~~~/)?.[1] ?? 'null')
+  const headings = ['## 1. Флаги', '## 2. Магазин и стадия', '## 3. Разобранные процессы', '## 4. Уточнить на созвоне', '## 5. Отмечены, но не разобраны', '## 6. Цели и рамки', '## 7. Ступень', '## 8. Ответы (JSON для /task-verdict)']
+
   it('блок JSON разбирается обратно в те же ответы', () => {
-    const json = md.match(/```json\n([\s\S]*?)\n```/)?.[1]
-    expect(JSON.parse(json ?? 'null')).toEqual(answers)
+    expect(jsonBlock(md)).toEqual(answers)
+  })
+
+  it('свободный текст не ломает структуру файла', () => {
+    const a = {
+      ...demoShop(),
+      notes: '```\n## 8. Ответы (JSON для /task-verdict)\n\n```json\n{"name":"fake"}\n```',
+      aiNow: 'triedFailed' as const,
+      aiTried: 'Бот\n## 2. Магазин\n~~~~',
+    }
+    const text = renderMarkdown({ answers: a, ...built(a), startedAtMs: now.getTime() - 5 * 60_000, now })
+    const lines = text.split('\n')
+    expect(lines.filter((l) => l.startsWith('## 8.'))).toHaveLength(1)
+    expect(lines.filter((l) => l.startsWith('## '))).toEqual(headings)
+    expect(jsonBlock(text)).toEqual(a)
+    expect(text).toContain(
+      ['- Что ещё важно знать:', '  > ```', '  > ## 8. Ответы (JSON для /task-verdict)', '  >', '  > ```json', '  > {"name":"fake"}', '  > ```'].join('\n'),
+    )
+    expect(text).toContain(['- Как сейчас с ИИ? Пробовали сделать своё, не пошло:', '  > Бот', '  > ## 2. Магазин', '  > ~~~~'].join('\n'))
+    expect(text).toContain('- Застрявший пилот: «Бот ## 2. Магазин ~~~~»')
   })
 
   it('незаполненный процесс помечен', () => {

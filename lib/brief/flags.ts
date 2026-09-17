@@ -18,7 +18,8 @@ export function flagsFor(a: BriefAnswers): string[] {
   if (a.ruOnly === 'required') out.push(flagCopy.ruOnly)
   if (a.implementer === 'nobody') out.push(flagCopy.noImplementer)
   if (a.access === 'no') out.push(flagCopy.noAccess)
-  if (a.aiNow === 'triedFailed') out.push(flagCopy.stuckPilot(a.aiTried?.trim() ?? ''))
+  // Флаг одной строкой пункта: переносы из рассказа о пилоте превращаются в пробелы.
+  if (a.aiNow === 'triedFailed') out.push(flagCopy.stuckPilot(a.aiTried?.replace(/\s*[\r\n]+\s*/g, ' ').trim() ?? ''))
   const budget = goalsQuestions.find((q) => q.id === 'budget')!
   if (a.budget) out.push(flagCopy.budget(optionLabel(budget, a.budget) ?? a.budget))
   return out
