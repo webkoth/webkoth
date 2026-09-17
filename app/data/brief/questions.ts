@@ -22,7 +22,7 @@ export type QuestionDef = {
   exclusive?: readonly string[]
   options: readonly Option[]
   /** Строка, которая появляется при выборе варианта trigger. */
-  other?: { trigger: string; field: OtherField; placeholder: string; max: number }
+  other?: { trigger: string; field: OtherField; placeholder: string; max: number; multiline?: boolean }
   showIf?: (a: BriefAnswers) => boolean
 }
 
@@ -205,7 +205,7 @@ export const nowQuestions: readonly QuestionDef[] = [
       ['automations', 'Есть настроенные автоматизации или сервисы с ИИ'],
       ['triedFailed', 'Пробовали сделать своё, не пошло'],
     ]),
-    other: { trigger: 'triedFailed', field: 'aiTried', placeholder: 'Что пробовали и что пошло не так', max: 500 },
+    other: { trigger: 'triedFailed', field: 'aiTried', placeholder: 'Что пробовали и что пошло не так', max: 500, multiline: true },
   },
   {
     id: 'docs',

@@ -19,7 +19,9 @@ export function StepIntro({
   return (
     <section className="py-6">
       <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground">{c.eyebrow}</p>
-      <h1 className="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">{c.title}</h1>
+      <h1 tabIndex={-1} className="mt-3 text-3xl font-semibold tracking-tight outline-none md:text-4xl">
+        {c.title}
+      </h1>
       <p className="mt-4 text-base leading-relaxed text-muted-foreground">{c.lead}</p>
       <ul className="mt-6 space-y-2">
         {c.points.map((p) => (

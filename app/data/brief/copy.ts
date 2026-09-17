@@ -45,6 +45,14 @@ export const briefCopy = {
   },
   stepTitles,
   progress: (n: number, title: string) => `Шаг ${n} из 6 · ${title}`,
+  more: 'Подробнее',
+  hours: {
+    zero: '0 ч',
+    /** Часы в неделю: «5 ч/нед». Число уже отформатировано (formatHours). */
+    perWeek: (n: string) => `${n} ч/нед`,
+    /** Итог часов: «5 ч». */
+    total: (n: string) => `${n} ч`,
+  },
   saved: 'сохранено ✓',
   notSaved: 'не сохраняется в этом браузере',
   nav: { back: '← Назад', next: 'Дальше →', submit: 'Показать карту' },
@@ -64,6 +72,7 @@ export const briefCopy = {
       `Отмечено ${n}. Выберите до трёх, что болит сильнее всего: по ним зададим несколько вопросов.`,
     deepToggle: 'Разобрать подробно',
     customPlaceholder: 'Например: заказ упаковки у поставщика',
+    customAria: 'Название своего процесса',
   },
   deep: {
     eyebrow: (i: number, total: number) => `Подробно · процесс ${i} из ${total}`,
@@ -92,6 +101,7 @@ export const briefCopy = {
     lessThanHourNote: 'Меньше часа в неделю: обсудим, стоит ли автоматизировать.',
     zeroHoursNote: 'Пока ноль: сначала подготовка из пунктов ниже, потом автоматизация.',
     startHere: 'Начните с этого',
+    startShort: 'начать с этого',
     startFallback: 'Начните с порядка',
     why: 'Почему первым',
     prepare: 'Что подготовить',

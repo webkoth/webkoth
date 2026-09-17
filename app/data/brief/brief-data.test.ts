@@ -98,6 +98,19 @@ describe('тексты брифа', () => {
     expect(briefCopy.map.zeroHoursNote).toBe('Пока ноль: сначала подготовка из пунктов ниже, потом автоматизация.')
   })
 
+  it('часы и «Подробнее» из текстов совпадают с прежними строками экрана', () => {
+    expect(briefCopy.more).toBe('Подробнее')
+    expect(briefCopy.hours.zero).toBe('0 ч')
+    expect(`≈ ${briefCopy.hours.perWeek('5')}`).toBe('≈ 5 ч/нед')
+    expect(`≈ ${briefCopy.hours.total('<1')}`).toBe('≈ <1 ч')
+    expect(briefCopy.map.startShort).toBe('начать с этого')
+  })
+
+  it('поле «что пробовали» многострочное, остальные «другое» в одну строку', () => {
+    const others = [...shopQuestions, ...nowQuestions, ...goalsQuestions].flatMap((q) => (q.other ? [q.other] : []))
+    expect(others.filter((o) => o.multiline).map((o) => o.field)).toEqual(['aiTried'])
+  })
+
   it('лимит отправок: повтор через пару минут, как пополняется лимит', () => {
     expect(briefCopy.send.rateLimited).toBe('Слишком много попыток. Повторите через пару минут.')
   })

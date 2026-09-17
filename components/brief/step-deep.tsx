@@ -1,6 +1,6 @@
 'use client'
 
-import type { Dispatch } from 'react'
+import { useId, type Dispatch } from 'react'
 import { briefCopy } from '@/app/data/brief/copy'
 import { processCatalog } from '@/app/data/brief/processes'
 import { deepQuestions } from '@/app/data/brief/questions'
@@ -30,6 +30,7 @@ export function StepDeep({
 }) {
   const entry = processCatalog[id]
   const d = answers.deepAnswers[id] ?? {}
+  const uid = useId()
 
   return (
     <section className="space-y-7">
@@ -37,13 +38,21 @@ export function StepDeep({
         <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
           {briefCopy.deep.eyebrow(index + 1, total)}
         </p>
-        <h2 className="mt-2 text-2xl font-semibold tracking-tight">{processLabel(id, answers)}</h2>
+        <h1 tabIndex={-1} className="mt-2 text-2xl font-semibold tracking-tight [overflow-wrap:anywhere] outline-none">
+          {processLabel(id, answers)}
+        </h1>
       </div>
       {deepQuestions.map((q) => {
         if (q.showIf && !q.showIf(d)) return null
         const bad = invalid.includes(q.id)
+        const errorId = `${uid}-${q.id}-error`
         return (
-          <fieldset key={q.id} className="min-w-0">
+          <fieldset
+            key={q.id}
+            className="min-w-0"
+            data-invalid={bad ? 'true' : undefined}
+            aria-describedby={bad ? errorId : undefined}
+          >
             <legend className="text-sm font-medium">{q.title}</legend>
             {entry.hints[q.id] ? <p className="mt-1 text-xs text-muted-foreground">{entry.hints[q.id]}</p> : null}
             {q.terms ? <TermNotes terms={q.terms} /> : null}
@@ -53,7 +62,11 @@ export function StepDeep({
               invalid={bad}
               onChange={(v) => dispatch({ type: 'setDeep', id, field: q.id, value: typeof v === 'string' ? v : undefined })}
             />
-            {bad ? <p className="mt-1.5 text-xs text-destructive">{briefCopy.errors.required}</p> : null}
+            {bad ? (
+              <p id={errorId} className="mt-1.5 text-xs text-destructive">
+                {briefCopy.errors.required}
+              </p>
+            ) : null}
           </fieldset>
         )
       })}

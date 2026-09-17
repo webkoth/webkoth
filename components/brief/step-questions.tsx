@@ -21,7 +21,9 @@ export function StepQuestions({
 }) {
   return (
     <section className="space-y-7">
-      <h2 className="text-2xl font-semibold tracking-tight">{title}</h2>
+      <h1 tabIndex={-1} className="text-2xl font-semibold tracking-tight outline-none">
+        {title}
+      </h1>
       {questions.map((q) => (
         <QuestionBlock key={q.id} q={q} answers={answers} dispatch={dispatch} invalid={invalid.includes(q.id)} />
       ))}

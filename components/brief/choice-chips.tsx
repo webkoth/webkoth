@@ -14,9 +14,11 @@ type Props = {
   max?: number
   exclusive?: readonly string[]
   invalid?: boolean
+  /** Подпись группы для экранного диктора, когда видимого заголовка рядом нет. */
+  label?: string
 }
 
-export function ChoiceChips({ options, value, onChange, multi, max, exclusive, invalid }: Props) {
+export function ChoiceChips({ options, value, onChange, multi, max, exclusive, invalid, label }: Props) {
   const selected: readonly string[] = typeof value === 'string' ? [value] : (value ?? [])
 
   const toggle = (v: string) => {
@@ -29,7 +31,7 @@ export function ChoiceChips({ options, value, onChange, multi, max, exclusive, i
   }
 
   return (
-    <div className="mt-2 flex flex-wrap gap-2">
+    <div className="mt-2 flex flex-wrap gap-2" role={label ? 'group' : undefined} aria-label={label}>
       {options.map((o) => {
         const on = selected.includes(o.value)
         return (
@@ -39,7 +41,7 @@ export function ChoiceChips({ options, value, onChange, multi, max, exclusive, i
             aria-pressed={on}
             onClick={() => toggle(o.value)}
             className={cn(
-              'rounded-xl border px-3 py-2 text-left text-sm transition focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:outline-none',
+              'rounded-xl border px-3 py-2 text-left text-sm [overflow-wrap:anywhere] transition focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:outline-none',
               on ? 'border-primary bg-primary/10 text-foreground' : 'border-border bg-card/70 hover:border-primary/60',
               invalid && !on && 'border-destructive/50',
             )}

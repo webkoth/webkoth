@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import type { Dispatch } from 'react'
+import { useId, type Dispatch } from 'react'
 import { briefCopy } from '@/app/data/brief/copy'
 import { goalsQuestions } from '@/app/data/brief/questions'
 import { Input } from '@/components/ui/input'
@@ -26,10 +26,16 @@ export function StepGoals({
 }) {
   const c = briefCopy.goals
   const e = briefCopy.errors
+  const uid = useId()
+  const bad = (field: 'name' | 'contact' | 'consent') => invalid.includes(field)
+  const errorId = (field: 'name' | 'contact' | 'consent') => `${uid}-${field}-error`
+  const describedBy = (field: 'name' | 'contact' | 'consent') => (bad(field) ? errorId(field) : undefined)
 
   return (
     <section className="space-y-7">
-      <h2 className="text-2xl font-semibold tracking-tight">{briefCopy.stepTitles.goals}</h2>
+      <h1 tabIndex={-1} className="text-2xl font-semibold tracking-tight outline-none">
+        {briefCopy.stepTitles.goals}
+      </h1>
       {goalsQuestions.map((q) => (
         <QuestionBlock key={q.id} q={q} answers={answers} dispatch={dispatch} invalid={invalid.includes(q.id)} />
       ))}
@@ -50,7 +56,7 @@ export function StepGoals({
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2">
-        <div className="min-w-0">
+        <div className="min-w-0" data-invalid={bad('name') ? 'true' : undefined}>
           <label htmlFor="brief-name" className="text-sm font-medium">
             {c.nameTitle}
           </label>
@@ -59,13 +65,18 @@ export function StepGoals({
             className="mt-2"
             maxLength={80}
             autoComplete="name"
-            aria-invalid={invalid.includes('name')}
+            aria-invalid={bad('name')}
+            aria-describedby={describedBy('name')}
             value={answers.name ?? ''}
             onChange={(ev) => dispatch({ type: 'setField', field: 'name', value: ev.target.value })}
           />
-          {invalid.includes('name') ? <p className="mt-1 text-xs text-destructive">{e.name}</p> : null}
+          {bad('name') ? (
+            <p id={errorId('name')} className="mt-1 text-xs text-destructive">
+              {e.name}
+            </p>
+          ) : null}
         </div>
-        <div className="min-w-0">
+        <div className="min-w-0" data-invalid={bad('contact') ? 'true' : undefined}>
           <label htmlFor="brief-contact" className="text-sm font-medium">
             {c.contactTitle}
           </label>
@@ -73,19 +84,26 @@ export function StepGoals({
             id="brief-contact"
             className="mt-2"
             maxLength={120}
-            aria-invalid={invalid.includes('contact')}
+            aria-invalid={bad('contact')}
+            aria-describedby={describedBy('contact')}
             value={answers.contact ?? ''}
             onChange={(ev) => dispatch({ type: 'setField', field: 'contact', value: ev.target.value })}
           />
-          {invalid.includes('contact') ? <p className="mt-1 text-xs text-destructive">{e.contact}</p> : null}
+          {bad('contact') ? (
+            <p id={errorId('contact')} className="mt-1 text-xs text-destructive">
+              {e.contact}
+            </p>
+          ) : null}
         </div>
       </div>
 
-      <div>
+      <div data-invalid={bad('consent') ? 'true' : undefined}>
         <label className="flex items-start gap-3 text-sm">
           <input
             type="checkbox"
             className="mt-0.5 size-4 accent-[var(--primary)]"
+            aria-invalid={bad('consent')}
+            aria-describedby={describedBy('consent')}
             checked={answers.consent}
             onChange={(ev) => dispatch({ type: 'setConsent', value: ev.target.checked })}
           />
@@ -96,7 +114,11 @@ export function StepGoals({
             </Link>
           </span>
         </label>
-        {invalid.includes('consent') ? <p className="mt-1 text-xs text-destructive">{e.consent}</p> : null}
+        {bad('consent') ? (
+          <p id={errorId('consent')} className="mt-1 text-xs text-destructive">
+            {e.consent}
+          </p>
+        ) : null}
       </div>
 
       {/* honeypot: скрыт от людей, виден ботам */}

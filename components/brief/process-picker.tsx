@@ -1,6 +1,6 @@
 'use client'
 
-import type { Dispatch } from 'react'
+import { useId, type Dispatch } from 'react'
 import { briefCopy } from '@/app/data/brief/copy'
 import { GROUP_ORDER, processGroups, processesByGroup } from '@/app/data/brief/processes'
 import { hoursOptions } from '@/app/data/brief/questions'
@@ -26,16 +26,29 @@ export function ProcessPicker({
   const hoursOf = new Map(answers.picked.map((p) => [p.id, p.hours]))
   const needChoice = answers.picked.length > MAX_DEEP
   const c = briefCopy.time
+  const uid = useId()
+  const pickedBad = invalid.includes('picked')
+  const choiceBad = invalid.includes('deepChoice')
+  const customBad = invalid.includes('customLabel')
+  const pickedErrorId = `${uid}-picked-error`
+  const choiceErrorId = `${uid}-deepChoice-error`
+  const customErrorId = `${uid}-customLabel-error`
 
   return (
     <section className="space-y-7">
       <div>
-        <h2 className="text-2xl font-semibold tracking-tight">{briefCopy.stepTitles.time}</h2>
+        <h1 tabIndex={-1} className="text-2xl font-semibold tracking-tight outline-none">
+          {briefCopy.stepTitles.time}
+        </h1>
         <p className="mt-2 text-sm text-muted-foreground">{c.lead}</p>
       </div>
 
       {needChoice ? (
-        <p className={cn('rounded-xl border p-3 text-sm', invalid.includes('deepChoice') ? 'border-destructive/60' : 'border-primary/40 bg-primary/5')}>
+        <p
+          data-invalid={choiceBad ? 'true' : undefined}
+          tabIndex={choiceBad ? -1 : undefined}
+          className={cn('rounded-xl border p-3 text-sm outline-none', choiceBad ? 'border-destructive/60' : 'border-primary/40 bg-primary/5')}
+        >
           {c.deepBanner(answers.picked.length)}
         </p>
       ) : null}
@@ -48,11 +61,17 @@ export function ProcessPicker({
               const hours = hoursOf.get(p.id)
               const on = hours !== undefined
               const chosen = answers.deepChoice.includes(p.id)
+              const cardBad = p.id === 'custom' && customBad
               return (
-                <div key={p.id} className={cn('min-w-0 rounded-xl border p-3 transition', on ? 'border-primary bg-primary/5' : 'border-border bg-card/70')}>
+                <div
+                  key={p.id}
+                  data-invalid={cardBad ? 'true' : undefined}
+                  className={cn('min-w-0 rounded-xl border p-3 transition', on ? 'border-primary bg-primary/5' : 'border-border bg-card/70')}
+                >
                   <button
                     type="button"
                     aria-pressed={on}
+                    aria-describedby={pickedBad ? pickedErrorId : undefined}
                     onClick={() => dispatch({ type: 'toggleProcess', id: p.id })}
                     className="w-full text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
                   >
@@ -68,11 +87,15 @@ export function ProcessPicker({
                             maxLength={80}
                             placeholder={c.customPlaceholder}
                             value={answers.customLabel ?? ''}
-                            aria-invalid={invalid.includes('customLabel')}
+                            aria-label={c.customAria}
+                            aria-invalid={customBad}
+                            aria-describedby={customBad ? customErrorId : undefined}
                             onChange={(e) => dispatch({ type: 'setField', field: 'customLabel', value: e.target.value })}
                           />
-                          {invalid.includes('customLabel') ? (
-                            <p className="mt-1 text-xs text-destructive">{briefCopy.errors.customLabel}</p>
+                          {customBad ? (
+                            <p id={customErrorId} className="mt-1 text-xs text-destructive">
+                              {briefCopy.errors.customLabel}
+                            </p>
                           ) : null}
                         </>
                       ) : null}
@@ -80,6 +103,7 @@ export function ProcessPicker({
                       <ChoiceChips
                         options={hoursOptions}
                         value={hours}
+                        label={`${c.hoursLabel}: ${p.label}`}
                         onChange={(v) => {
                           if (typeof v === 'string') dispatch({ type: 'setHours', id: p.id, hours: v as HoursBand })
                         }}
@@ -91,9 +115,13 @@ export function ProcessPicker({
                             className="size-4 accent-[var(--primary)]"
                             checked={chosen}
                             disabled={!chosen && answers.deepChoice.length >= MAX_DEEP}
+                            aria-describedby={choiceBad ? choiceErrorId : undefined}
                             onChange={() => dispatch({ type: 'toggleDeepChoice', id: p.id })}
                           />
-                          {c.deepToggle}
+                          <span>
+                            {c.deepToggle}
+                            <span className="sr-only">: {p.label}</span>
+                          </span>
                         </label>
                       ) : null}
                     </div>
@@ -105,8 +133,16 @@ export function ProcessPicker({
         </div>
       ))}
 
-      {invalid.includes('picked') ? <p className="text-sm text-destructive">{briefCopy.errors.picked}</p> : null}
-      {invalid.includes('deepChoice') ? <p className="text-sm text-destructive">{briefCopy.errors.deepChoice}</p> : null}
+      {pickedBad ? (
+        <p id={pickedErrorId} className="text-sm text-destructive">
+          {briefCopy.errors.picked}
+        </p>
+      ) : null}
+      {choiceBad ? (
+        <p id={choiceErrorId} className="text-sm text-destructive">
+          {briefCopy.errors.deepChoice}
+        </p>
+      ) : null}
     </section>
   )
 }
