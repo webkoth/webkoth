@@ -87,6 +87,8 @@ export async function POST(req: NextRequest) {
     console.warn(`[brief] delivery failed: ${result.error}`)
     return NextResponse.json({ ok: false, error: 'delivery' }, { status: 502 })
   }
-  if (result.via === 'chunks') console.warn('[brief] document rejected, delivered as text chunks')
+  // Сводка дошла: лид у нас, даже если часть текста файла потерялась.
+  if (result.partial) console.warn(`[brief] partial delivery: ${result.error}`)
+  else if (result.via === 'chunks') console.warn('[brief] document rejected, delivered as text chunks')
   return NextResponse.json({ ok: true }, { status: 200 })
 }

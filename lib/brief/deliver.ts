@@ -6,13 +6,20 @@ import { escapeHtml } from '@/lib/landing/telegram'
 // берём с запасом под теги <pre>.
 
 export const TELEGRAM_CHUNK = 3900
+// Пауза перед каждой частью: подряд без пауз Telegram режет поток сообщений в один чат.
+export const CHUNK_PAUSE_MS = 350
 
 type SendResult = { ok: boolean; error?: string }
 export type BriefTransport = {
   sendDocument: (filename: string, content: string, caption: string) => Promise<SendResult>
   sendMessage: (text: string) => Promise<SendResult>
+  /** Пауза между сообщениями; в тестах подменяется. */
+  sleep?: (ms: number) => Promise<void>
 }
-export type BriefDelivery = { ok: boolean; via?: 'document' | 'chunks'; error?: string }
+/** partial: сводка дошла, а часть текста файла нет. Лид не потерян, это не провал. */
+export type BriefDelivery = { ok: boolean; via?: 'document' | 'chunks'; partial?: boolean; error?: string }
+
+const defaultSleep = (ms: number) => new Promise<void>((resolve) => setTimeout(resolve, ms))
 
 /**
  * Экранированный текст частями не длиннее limit. Сущность «&amp;» и суррогатная пара
@@ -57,9 +64,14 @@ export async function deliverBrief(
 
   const head = await t.sendMessage(`${p.summary}\n\n<i>${escapeHtml(deliverCopy.documentFailed)}</i>`)
   if (!head.ok) return { ok: false, error: `document: ${doc.error}; message: ${head.error}` }
-  for (const part of chunkEscaped(p.markdown)) {
+  const sleep = t.sleep ?? defaultSleep
+  const parts = chunkEscaped(p.markdown)
+  for (const [i, part] of parts.entries()) {
+    await sleep(CHUNK_PAUSE_MS)
     const r = await t.sendMessage(`<pre>${part}</pre>`)
-    if (!r.ok) return { ok: false, error: `document: ${doc.error}; chunk: ${r.error}` }
+    if (!r.ok) {
+      return { ok: true, via: 'chunks', partial: true, error: `document: ${doc.error}; chunk ${i + 1}/${parts.length}: ${r.error}` }
+    }
   }
   return { ok: true, via: 'chunks' }
 }
