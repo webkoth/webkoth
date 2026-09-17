@@ -2,8 +2,8 @@ import { describe, expect, it, vi } from 'vitest'
 import { deliverCopy } from '@/app/data/brief/copy'
 import { chunkEscaped, deliverBrief, TELEGRAM_CHUNK } from './deliver'
 
-const ok = async () => ({ ok: true })
-const fail = async () => ({ ok: false, error: 'boom' })
+const ok = async (..._args: unknown[]) => ({ ok: true })
+const fail = async (..._args: unknown[]) => ({ ok: false, error: 'boom' })
 const payload = { summary: '<b>Бриф</b>', filename: 'brief.md', markdown: '# Бриф\n<тест> & ok' }
 
 describe('deliverBrief', () => {
