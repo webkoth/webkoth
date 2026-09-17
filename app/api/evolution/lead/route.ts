@@ -4,15 +4,13 @@ import type { EvolutionLeadData } from '@/lib/evolution/email'
 import { buildLeadTelegramText } from '@/lib/evolution/telegram-text'
 import { settleReturning, summarize } from '@/lib/evolution/delivery'
 import { sendTelegramMessage } from '@/lib/landing/telegram'
+import { clientIp } from '@/lib/landing/client-ip'
 import { rateLimitTake } from '@/lib/landing/rate-limit'
 
 const MIN_FILL_MS = 1500
 
 export async function POST(req: NextRequest) {
-  const ip =
-    req.headers.get('x-forwarded-for')?.split(',')[0].trim() ||
-    req.headers.get('x-real-ip') ||
-    'unknown'
+  const ip = clientIp(req.headers)
 
   // 1. Rate limit
   const rl = rateLimitTake(`evolead:${ip}`)
