@@ -48,11 +48,9 @@ export async function POST(req: NextRequest) {
 
   const parsed = briefSubmitSchema.safeParse(body)
   if (!parsed.success) {
+    // Подробности ошибок только в лог: браузер проверяет ответы сам до отправки, боту они подсказка.
     console.warn(`[brief] validation: ${issuePaths(parsed.error.issues)}`)
-    return NextResponse.json(
-      { ok: false, error: 'validation', issues: parsed.error.flatten() },
-      { status: 400 },
-    )
+    return NextResponse.json({ ok: false, error: 'validation' }, { status: 400 })
   }
   const { k, startedAtMs, website } = parsed.data
 

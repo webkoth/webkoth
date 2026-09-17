@@ -31,7 +31,6 @@ export type DeepQuestionDef = {
   title: string
   terms?: readonly TermId[]
   options: readonly Option[]
-  optional?: boolean
   showIf?: (d: DeepAnswers) => boolean
 }
 
@@ -298,7 +297,6 @@ export const deepQuestions: readonly DeepQuestionDef[] = [
     id: 'handover',
     title: 'Как хотите?',
     terms: ['program', 'aiPrepares'],
-    optional: true,
     options: opts([
       ['give', 'Отдать полностью'],
       ['keep', 'Оставить себе, но с помощником'],

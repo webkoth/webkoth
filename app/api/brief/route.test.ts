@@ -89,6 +89,7 @@ describe('POST /api/brief', () => {
   it('без согласия и битый JSON: 400; в логе пути ошибок без значений', async () => {
     const noConsent = await send({ ...valid(), answers: { ...demoShop(), consent: false, contact: 'x' } })
     expect(noConsent.status).toBe(400)
+    expect(await noConsent.json()).toEqual({ ok: false, error: 'validation' })
     expect(console.warn).toHaveBeenCalledWith('[brief] validation: answers.contact, answers.consent')
     expect(JSON.stringify(vi.mocked(console.warn).mock.calls)).not.toContain('Анна')
     expect((await POST(request('{oops'))).status).toBe(400)
