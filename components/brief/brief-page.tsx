@@ -1,18 +1,19 @@
 'use client'
 
-import { useEffect, useMemo, useReducer, useRef, useState } from 'react'
+import { useEffect, useMemo, useReducer, useRef, useState, type ReactNode } from 'react'
 import { briefCopy } from '@/app/data/brief/copy'
 import { nowQuestions, shopQuestions } from '@/app/data/brief/questions'
 import { Button } from '@/components/ui/button'
-import { ymGoal } from '@/lib/analytics/ym'
+import { ymGoal, type YmGoal } from '@/lib/analytics/ym'
 import { buildMap } from '@/lib/brief/build-map'
 import { postBrief } from '@/lib/brief/client'
-import { briefReducer, deepList, initialState, invalidFields, stepNumber, type BriefState, type StepKey } from '@/lib/brief/state'
-import { browserStorage, clearState, loadState, saveState } from '@/lib/brief/storage'
+import { briefReducer, deepList, initialState, invalidFields, stepNumber, type StepKey } from '@/lib/brief/state'
+import { browserStorage, clearState, loadState, saveState, type LoadResult } from '@/lib/brief/storage'
 import { BriefMapView } from './brief-map'
 import { LiveMap } from './live-map'
 import type { CaseLinks } from './map-item'
 import { ProcessPicker } from './process-picker'
+import { revealFirstInvalid, scrollToTop } from './scroll-focus'
 import { StepDeep } from './step-deep'
 import { StepGoals } from './step-goals'
 import { StepIntro } from './step-intro'
@@ -20,10 +21,12 @@ import { StepQuestions } from './step-questions'
 
 // Оболочка брифа: состояние, сохранение в браузере, шаги, отправка. Логика шагов и карты
 // живёт в lib/brief и покрыта тестами; здесь только последовательность экранов.
-
-type Boot = 'pending' | 'empty' | 'resume' | 'outdated' | 'unavailable'
+// Рисуется только в браузере (brief-page-client.tsx): черновик читается при первом рендере.
 
 const STEP_GOALS = ['brief_step_1', 'brief_step_2', 'brief_step_3', 'brief_step_4'] as const
+
+/** После «Начать» и «Продолжить» старый черновик больше не предлагается; недоступное хранилище так и остаётся. */
+const forgetDraft = (b: LoadResult): LoadResult => (b.status === 'unavailable' || b.status === 'empty' ? b : { status: 'empty' })
 
 function Progress({ step, saved }: { step: StepKey; saved: boolean }) {
   const n = stepNumber(step)
@@ -42,23 +45,14 @@ function Progress({ step, saved }: { step: StepKey; saved: boolean }) {
 
 export function BriefPage({ k, caseLinks }: { k?: string; caseLinks: CaseLinks }) {
   const [state, dispatch] = useReducer(briefReducer, 0, initialState)
-  const [boot, setBoot] = useState<Boot>('pending')
-  const [resume, setResume] = useState<BriefState | null>(null)
+  const [boot, setBoot] = useState<LoadResult>(() => loadState(browserStorage()))
   const [showErrors, setShowErrors] = useState(false)
   const [saved, setSaved] = useState(true)
   const honeypot = useRef('')
-
-  useEffect(() => {
-    const r = loadState(browserStorage())
-    if (r.status === 'ok') {
-      // eslint-disable-next-line react-hooks/set-state-in-effect -- localStorage доступен только в браузере, черновик подхватываем один раз после монтирования
-      setResume(r.state)
-      setBoot('resume')
-      return
-    }
-    if (r.status === 'outdated') clearState(browserStorage())
-    setBoot(r.status)
-  }, [])
+  const reachedGoals = useRef(new Set<YmGoal>())
+  const rootRef = useRef<HTMLDivElement>(null)
+  const formRef = useRef<HTMLDivElement>(null)
+  const shownStep = useRef<string | null>(null)
 
   useEffect(() => {
     if (state.startedAtMs === 0) return
@@ -66,40 +60,65 @@ export function BriefPage({ k, caseLinks }: { k?: string; caseLinks: CaseLinks }
     setSaved(saveState(browserStorage(), state))
   }, [state])
 
+  // Новый шаг: фокус на его заголовок, чтобы диктор прочитал, где человек оказался.
+  // Первый показ вводного экрана без фокуса.
+  useEffect(() => {
+    const key = `${state.step}:${state.deepIndex}`
+    const previous = shownStep.current
+    shownStep.current = key
+    if (previous === null || previous === key) return
+    rootRef.current?.querySelector<HTMLElement>('h1')?.focus({ preventScroll: true })
+  }, [state.step, state.deepIndex])
+
   const map = useMemo(() => buildMap(state.answers), [state.answers])
   const invalid = invalidFields(state)
   const deep = deepList(state.answers)
-  const scrollTop = () => window.scrollTo({ top: 0, behavior: 'smooth' })
+  const inProgress = state.startedAtMs > 0
+
+  /** Цель Метрики не больше одного раза за жизнь страницы. */
+  const goal = (g: YmGoal) => {
+    if (reachedGoals.current.has(g)) return
+    reachedGoals.current.add(g)
+    ymGoal(g)
+  }
+
+  const showInvalid = () => {
+    setShowErrors(true)
+    requestAnimationFrame(() => revealFirstInvalid(formRef.current))
+  }
 
   const start = () => {
     clearState(browserStorage())
+    setBoot(forgetDraft)
     dispatch({ type: 'start', now: Date.now() })
-    ymGoal('brief_start')
-    scrollTop()
+    goal('brief_start')
+    scrollToTop()
   }
 
-  const continueSaved = () => {
-    if (resume) dispatch({ type: 'restore', state: resume })
-    scrollTop()
+  const resume = () => {
+    if (inProgress) dispatch({ type: 'goto', step: 'shop' })
+    else if (boot.status === 'ok') dispatch({ type: 'restore', state: boot.state })
+    setBoot(forgetDraft)
+    scrollToTop()
   }
 
   const next = () => {
     if (invalid.length > 0) {
-      setShowErrors(true)
+      showInvalid()
       return
     }
     setShowErrors(false)
     const leavesStep = state.step !== 'deep' || state.deepIndex >= deep.length - 1
     const n = stepNumber(state.step)
-    if (leavesStep && n >= 1 && n <= 4) ymGoal(STEP_GOALS[n - 1])
+    if (leavesStep && n >= 1 && n <= 4) goal(STEP_GOALS[n - 1])
     dispatch({ type: 'next' })
-    scrollTop()
+    scrollToTop()
   }
 
   const back = () => {
     setShowErrors(false)
     dispatch({ type: 'back' })
-    scrollTop()
+    scrollToTop()
   }
 
   const send = async () => {
@@ -111,40 +130,43 @@ export function BriefPage({ k, caseLinks }: { k?: string; caseLinks: CaseLinks }
       website: honeypot.current,
     })
     dispatch({ type: 'send', status: result })
-    if (result === 'sent') ymGoal('brief_submit')
+    if (result === 'sent') goal('brief_submit')
   }
 
   const submit = async () => {
     if (invalid.length > 0) {
-      setShowErrors(true)
+      showInvalid()
       return
     }
     setShowErrors(false)
-    ymGoal('brief_step_5')
+    goal('brief_step_5')
     dispatch({ type: 'goto', step: 'map' })
-    scrollTop()
+    scrollToTop()
     await send()
+  }
+
+  const pdf = () => {
+    goal('brief_pdf')
+    window.print()
   }
 
   const reset = () => {
     clearState(browserStorage())
-    setResume(null)
-    setBoot('empty')
+    setBoot(forgetDraft)
+    setShowErrors(false)
     dispatch({ type: 'reset' })
-    scrollTop()
+    scrollToTop()
   }
-
-  if (boot === 'pending') return <div className="min-h-[60vh]" aria-busy />
 
   if (state.step === 'intro') {
     return (
-      <div className="mx-auto max-w-3xl px-4 pb-24 md:px-8">
+      <div ref={rootRef} className="mx-auto max-w-3xl px-4 pb-24 md:px-8">
         <StepIntro
-          canResume={boot === 'resume' && resume !== null}
-          outdated={boot === 'outdated'}
-          unavailable={boot === 'unavailable'}
+          canResume={inProgress || boot.status === 'ok'}
+          outdated={boot.status === 'outdated'}
+          unavailable={boot.status === 'unavailable'}
           onStart={start}
-          onResume={continueSaved}
+          onResume={resume}
         />
       </div>
     )
@@ -152,39 +174,58 @@ export function BriefPage({ k, caseLinks }: { k?: string; caseLinks: CaseLinks }
 
   if (state.step === 'map') {
     return (
-      <div className="mx-auto max-w-3xl px-4 pb-24 md:px-8">
-        <BriefMapView map={map} answers={state.answers} send={state.send} onRetry={send} onReset={reset} caseLinks={caseLinks} />
+      <div ref={rootRef} className="mx-auto max-w-3xl px-4 pb-24 md:px-8">
+        <BriefMapView
+          map={map}
+          answers={state.answers}
+          send={state.send}
+          onRetry={send}
+          onReset={reset}
+          onPdf={pdf}
+          caseLinks={caseLinks}
+        />
       </div>
     )
   }
 
   const errors = showErrors ? invalid : []
   const deepId = deep[state.deepIndex]
-  const body =
-    state.step === 'shop' ? (
-      <StepQuestions title={briefCopy.stepTitles.shop} questions={shopQuestions} answers={state.answers} dispatch={dispatch} invalid={errors} />
-    ) : state.step === 'now' ? (
-      <StepQuestions title={briefCopy.stepTitles.now} questions={nowQuestions} answers={state.answers} dispatch={dispatch} invalid={errors} />
-    ) : state.step === 'time' ? (
-      <ProcessPicker answers={state.answers} dispatch={dispatch} invalid={errors} />
-    ) : state.step === 'deep' && deepId ? (
-      <StepDeep id={deepId} index={state.deepIndex} total={deep.length} answers={state.answers} dispatch={dispatch} invalid={errors} />
-    ) : (
-      <StepGoals
-        answers={state.answers}
-        dispatch={dispatch}
-        invalid={errors}
-        onHoneypot={(v) => {
-          honeypot.current = v
-        }}
-      />
-    )
+  let body: ReactNode = null
+  switch (state.step) {
+    case 'shop':
+      body = <StepQuestions title={briefCopy.stepTitles.shop} questions={shopQuestions} answers={state.answers} dispatch={dispatch} invalid={errors} />
+      break
+    case 'now':
+      body = <StepQuestions title={briefCopy.stepTitles.now} questions={nowQuestions} answers={state.answers} dispatch={dispatch} invalid={errors} />
+      break
+    case 'time':
+      body = <ProcessPicker answers={state.answers} dispatch={dispatch} invalid={errors} />
+      break
+    case 'deep':
+      // Редьюсер не оставляет шаг без процесса; проверка только для типов.
+      body = deepId ? (
+        <StepDeep id={deepId} index={state.deepIndex} total={deep.length} answers={state.answers} dispatch={dispatch} invalid={errors} />
+      ) : null
+      break
+    case 'goals':
+      body = (
+        <StepGoals
+          answers={state.answers}
+          dispatch={dispatch}
+          invalid={errors}
+          onHoneypot={(v) => {
+            honeypot.current = v
+          }}
+        />
+      )
+      break
+  }
 
   return (
-    <div className="mx-auto max-w-6xl px-4 pb-28 md:px-8 lg:pb-16">
+    <div ref={rootRef} className="mx-auto max-w-6xl px-4 pb-28 md:px-8 lg:pb-16">
       <Progress step={state.step} saved={saved} />
       <div className="grid gap-8 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)]">
-        <div className="min-w-0">
+        <div ref={formRef} className="min-w-0">
           {body}
           <nav className="mt-10 flex items-center justify-between gap-3">
             <Button variant="ghost" onClick={back}>

@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { briefCopy } from '@/app/data/brief/copy'
 import { CASE_SLUGS, casePath, casesCopy } from '@/app/data/cases'
 import { evolutionData } from '@/app/data/evolution'
-import { BriefPage } from '@/components/brief/brief-page'
+import { BriefPageClient } from '@/components/brief/brief-page-client'
 import type { CaseLinks } from '@/components/brief/map-item'
 import { Footer } from '@/components/evolution/footer'
 import { HtmlLang } from '@/components/evolution/html-lang'
@@ -39,7 +39,7 @@ export default async function BriefRoute({ searchParams }: { searchParams: Promi
             {briefCopy.meta.headerLabel}
           </span>
         </header>
-        <BriefPage k={typeof k === 'string' && LABEL_RE.test(k) ? k : undefined} caseLinks={caseLinks} />
+        <BriefPageClient k={typeof k === 'string' && LABEL_RE.test(k) ? k : undefined} caseLinks={caseLinks} />
         <div className="print:hidden">
           <Footer data={data} />
         </div>

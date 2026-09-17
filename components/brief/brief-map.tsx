@@ -3,7 +3,6 @@
 import type { ReactNode } from 'react'
 import { briefCopy } from '@/app/data/brief/copy'
 import { Button } from '@/components/ui/button'
-import { ymGoal } from '@/lib/analytics/ym'
 import { marketplacesText } from '@/lib/brief/labels'
 import type { BriefMap } from '@/lib/brief/map-types'
 import { formatHours } from '@/lib/brief/priority'
@@ -33,7 +32,7 @@ function SendLine({ send, onRetry }: { send: SendStatus; onRetry: () => void }) 
   if (send === 'sending') return <p className="text-sm text-muted-foreground">{s.sending}</p>
   if (send === 'sent') return <p className="rounded-xl border border-brief-auto/40 bg-brief-auto/10 p-3 text-sm">{s.sent}</p>
   return (
-    <div className="flex flex-wrap items-center gap-3 rounded-xl border border-destructive/50 p-3 text-sm print:hidden">
+    <div className="flex flex-wrap items-center gap-3 rounded-xl border border-destructive/50 p-3 text-sm">
       <span>{send === 'rateLimited' ? s.rateLimited : s.failed}</span>
       <Button size="sm" onClick={onRetry}>
         {s.retry}
@@ -51,6 +50,7 @@ export function BriefMapView({
   send,
   onRetry,
   onReset,
+  onPdf,
   caseLinks,
 }: {
   map: BriefMap
@@ -58,6 +58,8 @@ export function BriefMapView({
   send: SendStatus
   onRetry: () => void
   onReset: () => void
+  /** «Скачать PDF»: цель Метрики и системная печать. */
+  onPdf: () => void
   caseLinks: CaseLinks
 }) {
   const m = briefCopy.map
@@ -66,14 +68,16 @@ export function BriefMapView({
   const rest = map.items.filter((i) => i.processId !== map.startId)
   const fallbackItem = map.startFallback ? map.items.find((i) => i.processId === map.startFallback?.processId) : undefined
   const hours = map.totalReturnedHours
-  const total = hours === 0 ? '0 ч' : hours < 1 ? m.lessThanHour : `≈ ${formatHours(hours)} ч`
+  const total = hours === 0 ? briefCopy.hours.zero : hours < 1 ? m.lessThanHour : `≈ ${briefCopy.hours.total(formatHours(hours))}`
   const hoursNote = map.items.length === 0 ? null : hours === 0 ? (map.startFallback ? m.zeroHoursNote : null) : hours < 1 ? m.lessThanHourNote : null
 
   return (
     <section className="space-y-5 py-4">
       <header>
         <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground">{m.eyebrow}</p>
-        <h1 className="mt-2 text-2xl font-semibold tracking-tight md:text-3xl">{m.title}</h1>
+        <h1 tabIndex={-1} className="mt-2 text-2xl font-semibold tracking-tight outline-none md:text-3xl">
+          {m.title}
+        </h1>
         {shops ? <p className="mt-2 text-sm text-muted-foreground">{m.shops(shops)}</p> : null}
         <div className="mt-5 grid gap-3 sm:grid-cols-3">
           <Kpi value={total} label={m.kpiHours} />
@@ -88,7 +92,10 @@ export function BriefMapView({
         </div>
       </header>
 
-      <SendLine send={send} onRetry={onRetry} />
+      {/* Статус отправки объявляется диктором; контейнер есть всегда, в PDF не печатается. */}
+      <div role="status" aria-live="polite" className="empty:mb-0 print:hidden">
+        <SendLine send={send} onRetry={onRetry} />
+      </div>
 
       {start ? <MapItemView item={start} index={1} highlight caseLinks={caseLinks} /> : null}
       {!start && map.startFallback ? (
@@ -107,18 +114,12 @@ export function BriefMapView({
 
       {map.notDeep.length > 0 ? (
         <p className="text-sm text-muted-foreground">
-          {m.notDeep}: {map.notDeep.map((n) => `${n.label} (${formatHours(n.hours)} ч/нед)`).join(', ')} · {m.notDeepTail}
+          {m.notDeep}: {map.notDeep.map((n) => `${n.label} (${briefCopy.hours.perWeek(formatHours(n.hours))})`).join(', ')} · {m.notDeepTail}
         </p>
       ) : null}
 
       <div className="flex flex-wrap gap-3 pt-2 print:hidden">
-        <Button
-          size="lg"
-          onClick={() => {
-            ymGoal('brief_pdf')
-            window.print()
-          }}
-        >
+        <Button size="lg" onClick={onPdf}>
           {m.pdf}
         </Button>
         <Button size="lg" variant="outline" onClick={onReset}>
