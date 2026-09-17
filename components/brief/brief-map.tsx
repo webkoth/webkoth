@@ -26,7 +26,7 @@ function Kpi({ value, label, children }: { value: string; label: string; childre
   )
 }
 
-function SendLine({ send, onRetry }: { send: SendStatus; onRetry: () => void }) {
+function SendLine({ send, onRetry, onBack }: { send: SendStatus; onRetry: () => void; onBack: () => void }) {
   const s = briefCopy.send
   if (send === 'idle') return null
   if (send === 'sending') return <p className="text-sm text-muted-foreground">{s.sending}</p>
@@ -37,6 +37,11 @@ function SendLine({ send, onRetry }: { send: SendStatus; onRetry: () => void }) 
       <Button size="sm" onClick={onRetry}>
         {s.retry}
       </Button>
+      {send === 'failed' ? (
+        <Button size="sm" variant="outline" onClick={onBack}>
+          {s.backToAnswers}
+        </Button>
+      ) : null}
       <a href={contacts.telegram} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-primary">
         {s.writeTelegram}
       </a>
@@ -49,6 +54,7 @@ export function BriefMapView({
   answers,
   send,
   onRetry,
+  onBack,
   onReset,
   onPdf,
   caseLinks,
@@ -57,6 +63,8 @@ export function BriefMapView({
   answers: BriefAnswers
   send: SendStatus
   onRetry: () => void
+  /** «Вернуться к ответам»: шаг «Цели и рамки». */
+  onBack: () => void
   onReset: () => void
   /** «Скачать PDF»: цель Метрики и системная печать. */
   onPdf: () => void
@@ -94,7 +102,7 @@ export function BriefMapView({
 
       {/* Статус отправки объявляется диктором; контейнер есть всегда, в PDF не печатается. */}
       <div role="status" aria-live="polite" className="empty:mb-0 print:hidden">
-        <SendLine send={send} onRetry={onRetry} />
+        <SendLine send={send} onRetry={onRetry} onBack={onBack} />
       </div>
 
       {start ? <MapItemView item={start} index={1} highlight caseLinks={caseLinks} /> : null}

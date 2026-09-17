@@ -176,6 +176,16 @@ describe('шаг «Подробно» всегда с процессом', () =>
     expect([s.step, s.deepIndex]).toEqual(['time', 0])
   })
 
+  it('переход на «Подробно» с номером процесса: номер в пределах списка', () => {
+    const two = pick(started(), ['reviews', 'stocks'])
+    const s = briefReducer({ ...two, step: 'map' }, { type: 'goto', step: 'deep', deepIndex: 1 })
+    expect([s.step, s.deepIndex]).toEqual(['deep', 1])
+    const high = briefReducer({ ...two, step: 'map' }, { type: 'goto', step: 'deep', deepIndex: 9 })
+    expect([high.step, high.deepIndex]).toEqual(['deep', 1])
+    const keep = briefReducer({ ...two, step: 'deep', deepIndex: 1 }, { type: 'goto', step: 'goals' })
+    expect([keep.step, keep.deepIndex]).toEqual(['goals', 1])
+  })
+
   it('переход на «Подробно» без процессов ведёт на шаг 3', () => {
     const s = briefReducer(started(), { type: 'goto', step: 'deep' })
     expect([s.step, s.deepIndex]).toEqual(['time', 0])

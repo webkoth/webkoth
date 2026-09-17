@@ -7,6 +7,8 @@ import { Button } from '@/components/ui/button'
 import { ymGoal, type YmGoal } from '@/lib/analytics/ym'
 import { buildMap } from '@/lib/brief/build-map'
 import { postBrief } from '@/lib/brief/client'
+import { stepForIssue } from '@/lib/brief/issue-step'
+import { briefSubmitSchema, type BriefSubmit } from '@/lib/brief/schema'
 import { briefReducer, deepList, initialState, invalidFields, stepNumber, type StepKey } from '@/lib/brief/state'
 import { browserStorage, clearState, loadState, saveState, type LoadResult } from '@/lib/brief/storage'
 import { BriefMapView } from './brief-map'
@@ -121,14 +123,31 @@ export function BriefPage({ k, caseLinks }: { k?: string; caseLinks: CaseLinks }
     scrollToTop()
   }
 
+  const submitBody = (): BriefSubmit => ({
+    answers: state.answers,
+    k,
+    startedAtMs: state.startedAtMs,
+    website: honeypot.current,
+  })
+
+  /**
+   * Та же проверка, что на сервере: ответ 400 на экране карты был бы тупиком.
+   * Не прошло: вернуть на шаг с первой ошибкой и показать её.
+   */
+  const rejectedBeforeSend = (body: BriefSubmit): boolean => {
+    const parsed = briefSubmitSchema.safeParse(body)
+    if (parsed.success) return false
+    const target = stepForIssue(parsed.error.issues[0]?.path ?? [], state.answers)
+    dispatch({ type: 'goto', step: target.step, deepIndex: target.deepIndex })
+    showInvalid()
+    return true
+  }
+
   const send = async () => {
+    const body = submitBody()
+    if (rejectedBeforeSend(body)) return
     dispatch({ type: 'send', status: 'sending' })
-    const result = await postBrief({
-      answers: state.answers,
-      k,
-      startedAtMs: state.startedAtMs,
-      website: honeypot.current,
-    })
+    const result = await postBrief(body)
     dispatch({ type: 'send', status: result })
     if (result === 'sent') goal('brief_submit')
   }
@@ -138,6 +157,8 @@ export function BriefPage({ k, caseLinks }: { k?: string; caseLinks: CaseLinks }
       showInvalid()
       return
     }
+    // Проверка до перехода на карту: при ошибке экран карты не мелькает.
+    if (rejectedBeforeSend(submitBody())) return
     setShowErrors(false)
     goal('brief_step_5')
     dispatch({ type: 'goto', step: 'map' })
@@ -148,6 +169,12 @@ export function BriefPage({ k, caseLinks }: { k?: string; caseLinks: CaseLinks }
   const pdf = () => {
     goal('brief_pdf')
     window.print()
+  }
+
+  const backToAnswers = () => {
+    setShowErrors(false)
+    dispatch({ type: 'goto', step: 'goals' })
+    scrollToTop()
   }
 
   const reset = () => {
@@ -180,6 +207,7 @@ export function BriefPage({ k, caseLinks }: { k?: string; caseLinks: CaseLinks }
           answers={state.answers}
           send={state.send}
           onRetry={send}
+          onBack={backToAnswers}
           onReset={reset}
           onPdf={pdf}
           caseLinks={caseLinks}

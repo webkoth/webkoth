@@ -47,7 +47,8 @@ export type BriefAction =
   | { type: 'setDeep'; id: ProcessId; field: DeepQuestionId; value: string | undefined }
   | { type: 'next' }
   | { type: 'back' }
-  | { type: 'goto'; step: StepKey }
+  /** deepIndex: номер процесса для шага «Подробно»; без него номер не меняется. */
+  | { type: 'goto'; step: StepKey; deepIndex?: number }
   | { type: 'send'; status: SendStatus }
 
 export function initialState(startedAtMs: number): BriefState {
@@ -206,7 +207,7 @@ function reduce(s: BriefState, action: BriefAction): BriefState {
     case 'back':
       return prevStep(s)
     case 'goto':
-      return { ...s, step: action.step }
+      return { ...s, step: action.step, deepIndex: action.deepIndex ?? s.deepIndex }
     case 'send':
       return { ...s, send: action.status }
   }

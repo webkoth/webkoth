@@ -120,6 +120,7 @@ export const briefCopy = {
     failed: 'Не отправилось.',
     rateLimited: 'Слишком много попыток. Повторите через пару минут.',
     retry: 'Отправить ещё раз',
+    backToAnswers: 'Вернуться к ответам',
     writeTelegram: 'Написать в Telegram',
   },
 }
