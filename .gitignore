@@ -44,3 +44,4 @@ next-env.d.ts
 
 # Скачанные шаблоны Яндекса для генератора импорта Директа
 /marketing/direct/ref/
+marketing/direct/api/created.json
