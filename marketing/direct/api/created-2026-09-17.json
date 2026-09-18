@@ -1,155 +1,157 @@
 {
-  "kontur": {
-    "campaignId": 714528958,
-    "images": [
-      "5r-yEClrMbfl_gInZpQ46g",
-      "_v5skYk5Aht0wREiVFG6aQ",
-      "ss3oeJfNX4fL2b00CEIn_Q"
-    ],
-    "callouts": [
-      44479600,
-      44479601,
-      44479602,
-      44479603,
-      44479604
-    ],
-    "groups": {
-      "integraciya-1s-marketpleysy": {
-        "adGroupId": 5800026679,
-        "sitelinkSetId": 1510968376
-      },
-      "integraciya-api-1s": {
-        "adGroupId": 5800026749,
-        "sitelinkSetId": 1510969698
-      },
-      "sinhronizaciya-ostatkov": {
-        "adGroupId": 5800026842,
-        "sitelinkSetId": 1510970161
-      }
-    }
-  },
-  "it-director": {
-    "campaignId": 714529074,
-    "images": [
-      "eLmuycDJorWj-cd1RHirrg",
-      "mG0iUm1jUBlShdgyZMiKlg",
-      "j08vPBrMuBY27XJZ1ZHxyA"
-    ],
-    "callouts": [
-      44479600,
-      44479667,
-      44479668,
-      44479669,
-      44479670
-    ],
-    "groups": {
-      "it-direktor-autsors": {
-        "adGroupId": 5800030463,
-        "sitelinkSetId": 1510974937
-      },
-      "it-autsorsing-infrastruktury": {
-        "adGroupId": 5800030482,
-        "sitelinkSetId": 1510975566
-      },
-      "audit-it-infrastruktury": {
-        "adGroupId": 5800030497,
-        "sitelinkSetId": 1510975642
-      }
-    }
-  },
-  "agent": {
-    "campaignId": 714529095,
-    "images": [
-      "ZP1GZLDurH-BgMjA5Nu8nw",
-      "gP_RL83004rfcFQEmFX06A",
-      "7ilwSENvy47WOvU4vK7kjw"
-    ],
-    "callouts": [
-      44479677,
-      44479678,
-      44479679,
-      44479680,
-      44479681
-    ],
-    "groups": {
-      "ii-agenty-dlya-biznesa": {
-        "adGroupId": 5800030594,
-        "sitelinkSetId": 1510976413
-      },
-      "vnedrenie-ii-agentov": {
-        "adGroupId": 5800030615,
-        "sitelinkSetId": 1510976492
-      },
-      "kupit-razrabotka-agenta": {
-        "adGroupId": 5800030647,
-        "sitelinkSetId": 1510977166
-      },
-      "ii-avtomatizaciya-processov": {
-        "adGroupId": 5800030650,
-        "sitelinkSetId": 1510977621
-      }
-    }
-  },
-  "finance": {
-    "campaignId": 714529126,
-    "images": [
-      "SVjbAv4ySv94I7g7mQLr4A",
-      "2jL7U-iZRQpq_Wwn5_sAWA",
-      "_g7YkIgL_sqqx7D9LLxl8g"
-    ],
-    "callouts": [
-      44479600,
-      44479601,
-      44479687,
-      44479688,
-      44479689
-    ],
-    "groups": {
-      "raspoznavanie-pervichki-1s": {
-        "adGroupId": 5800030849,
-        "sitelinkSetId": 1510977648
-      },
-      "servis-raspoznavaniya": {
-        "adGroupId": 5800030853,
-        "sitelinkSetId": 1510978306
-      },
-      "upravlencheskaya-otchetnost": {
-        "adGroupId": 5800030860,
-        "sitelinkSetId": 1510978520
-      },
-      "ii-dlya-buhgalterii": {
-        "adGroupId": 5800030868,
-        "sitelinkSetId": 1510978951
-      }
-    }
-  },
-  "home": {
-    "campaignId": 714529148,
-    "images": [
-      "15A9x4E7W2z1PWCgs23-0g",
-      "whWgy_2pM7vPQRQJFKhNnw",
-      "xIDRiZ1oTgf409HWU9Cx7A"
-    ],
-    "callouts": [
-      44479600,
-      44479699,
-      44479700,
-      44479604,
-      44479680
-    ],
-    "groups": {
-      "avtomatizaciya-biznesa": {
-        "adGroupId": 5800030944,
-        "sitelinkSetId": 1510979513
-      },
-      "avtomatizaciya-biznes-processov": {
-        "adGroupId": 5800030953,
-        "sitelinkSetId": 1510979878
-      },
-      "audit-i-razrabotka": {
-        "adGroupId": 5800030966,
-        "sitelinkSetId": 1510980570
-      }
-    }
+ "kontur": {
+  "campaignId": 714528958,
+  "images": [
+   "zA1LXpztKCfejkeWyDZWMg",
+   "ZLLQD2_noEdxgI-klC1tyQ",
+   "qwukjUDVIwkCYcSX4bjf3A",
+   "Vn3OfwYThroMT1FYK1h7AA",
+   "HdTYPVQ2RflPq8YJVVjf0Q"
+  ],
+  "callouts": [
+   44479600,
+   44479601,
+   44479602,
+   44479603,
+   44484199
+  ],
+  "groups": {
+   "integraciya-1s-marketpleysy": {
+    "adGroupId": 5800026679,
+    "sitelinkSetId": 1510968376
+   },
+   "otchety-ploshchadok-1s": {
+    "adGroupId": 5800026749,
+    "sitelinkSetId": 1511048065
+   },
+   "sinhronizaciya-ostatkov": {
+    "adGroupId": 5800026842,
+    "sitelinkSetId": 1510970161
+   }
   }
+ },
+ "it-director": {
+  "campaignId": 714529074,
+  "images": [
+   "eLmuycDJorWj-cd1RHirrg",
+   "mG0iUm1jUBlShdgyZMiKlg",
+   "j08vPBrMuBY27XJZ1ZHxyA"
+  ],
+  "callouts": [
+   44479600,
+   44479667,
+   44479668,
+   44479669,
+   44479670
+  ],
+  "groups": {
+   "it-direktor-autsors": {
+    "adGroupId": 5800030463,
+    "sitelinkSetId": 1510974937
+   },
+   "it-autsorsing-infrastruktury": {
+    "adGroupId": 5800030482,
+    "sitelinkSetId": 1510975566
+   },
+   "audit-it-infrastruktury": {
+    "adGroupId": 5800030497,
+    "sitelinkSetId": 1510975642
+   }
+  }
+ },
+ "agent": {
+  "campaignId": 714529095,
+  "images": [
+   "ZP1GZLDurH-BgMjA5Nu8nw",
+   "gP_RL83004rfcFQEmFX06A",
+   "7ilwSENvy47WOvU4vK7kjw"
+  ],
+  "callouts": [
+   44479677,
+   44479678,
+   44479679,
+   44479680,
+   44479681
+  ],
+  "groups": {
+   "ii-agenty-dlya-biznesa": {
+    "adGroupId": 5800030594,
+    "sitelinkSetId": 1510976413
+   },
+   "vnedrenie-ii-agentov": {
+    "adGroupId": 5800030615,
+    "sitelinkSetId": 1510976492
+   },
+   "kupit-razrabotka-agenta": {
+    "adGroupId": 5800030647,
+    "sitelinkSetId": 1510977166
+   },
+   "ii-avtomatizaciya-processov": {
+    "adGroupId": 5800030650,
+    "sitelinkSetId": 1510977621
+   }
+  }
+ },
+ "finance": {
+  "campaignId": 714529126,
+  "images": [
+   "SVjbAv4ySv94I7g7mQLr4A",
+   "2jL7U-iZRQpq_Wwn5_sAWA",
+   "_g7YkIgL_sqqx7D9LLxl8g"
+  ],
+  "callouts": [
+   44479600,
+   44479601,
+   44479687,
+   44479688,
+   44479689
+  ],
+  "groups": {
+   "raspoznavanie-pervichki-1s": {
+    "adGroupId": 5800030849,
+    "sitelinkSetId": 1510977648
+   },
+   "servis-raspoznavaniya": {
+    "adGroupId": 5800030853,
+    "sitelinkSetId": 1510978306
+   },
+   "upravlencheskaya-otchetnost": {
+    "adGroupId": 5800030860,
+    "sitelinkSetId": 1510978520
+   },
+   "ii-dlya-buhgalterii": {
+    "adGroupId": 5800030868,
+    "sitelinkSetId": 1510978951
+   }
+  }
+ },
+ "home": {
+  "campaignId": 714529148,
+  "images": [
+   "15A9x4E7W2z1PWCgs23-0g",
+   "whWgy_2pM7vPQRQJFKhNnw",
+   "xIDRiZ1oTgf409HWU9Cx7A"
+  ],
+  "callouts": [
+   44479600,
+   44479699,
+   44479700,
+   44479604,
+   44479680
+  ],
+  "groups": {
+   "avtomatizaciya-biznesa": {
+    "adGroupId": 5800030944,
+    "sitelinkSetId": 1510979513
+   },
+   "avtomatizaciya-biznes-processov": {
+    "adGroupId": 5800030953,
+    "sitelinkSetId": 1510979878
+   },
+   "audit-i-razrabotka": {
+    "adGroupId": 5800030966,
+    "sitelinkSetId": 1510980570
+   }
+  }
+ }
 }
