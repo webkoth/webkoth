@@ -32,8 +32,9 @@ const LIMITS = { h: 56, word: 22, t: 81, display: 20, slTitle: 30, slDesc: 60, c
 const DISPLAY = { kontur: 'контур-1С', 'it-director': 'ИТ-директор', agent: 'ИИ-агент-вердикт', finance: 'финансы-1С', home: 'эволюция-бизнеса' }
 
 // РСЯ-зеркало поисковой кампании: те же группы и фразы, к объявлению группы добавляется
-// объявление страницы из NETWORK_ADS (вопрос-боль для сетей). UTM-кампания с суффиксом -rsya,
-// utm_term = площадка.
+// объявление страницы из NETWORK_ADS (вопрос-боль для сетей). UTM-кампания с суффиксом -rsya.
+// utm_term у сетей в ссылку не пишем: фразу и площадку добавляют параметры отслеживания кампании
+// (TrackingParams, api/upload-rsya.mjs), а второй utm_term в ссылке с ними спорил бы.
 function networkMirror(c) {
   const netAd = NETWORK_ADS[c.id]
   return {
@@ -59,9 +60,8 @@ const numCell = (ref, v) => `<c r="${ref}"><v>${v}</v></c>`
 function utmLink(c, g) {
   const path = g.path ?? c.path
   const q = new URLSearchParams({ ...(g.query ?? c.query ?? {}), utm_source: 'yandex', utm_medium: 'cpc', utm_campaign: c.utm.campaign, utm_content: g.slug })
-  // {keyword} и {source} подставляет Директ, поэтому они вне URLSearchParams.
-  const term = c.kind === 'network' ? '{source}' : '{keyword}'
-  return `${SITE}${path}?${q.toString()}&utm_term=${term}`
+  // {keyword} подставляет Директ, поэтому вне URLSearchParams.
+  return c.kind === 'network' ? `${SITE}${path}?${q.toString()}` : `${SITE}${path}?${q.toString()}&utm_term={keyword}`
 }
 
 function sitelinkHref(c, g, href) {
@@ -155,7 +155,8 @@ const summary = []
 let groupNo = 0
 for (const c of allCampaigns) {
   const display = DISPLAY[c.base ?? c.id] ?? DISPLAY[c.path?.slice(1)] ?? ''
-  const campaignNegatives = [...new Set([...NEGATIVES_COMMON, ...(c.negatives ?? [])])]
+  const common = NEGATIVES_COMMON.filter((n) => !(c.negativesExcept ?? []).includes(n))
+  const campaignNegatives = [...new Set([...common, ...(c.negatives ?? [])])]
   const bid = c.kind === 'network' ? 10 : 30
   const bidNet = 10
   const rows = []

@@ -23,7 +23,8 @@ function mirror(c) {
 }
 function utmLink(c, g) {
   const q = new URLSearchParams({ ...(g.query ?? c.query ?? {}), utm_source: 'yandex', utm_medium: 'cpc', utm_campaign: c.utm.campaign, utm_content: g.slug })
-  return `${SITE}${g.path ?? c.path}?${q.toString()}&utm_term={source}`
+  // utm_term (фразу) и placement (площадку) добавляет TrackingParams кампании, в ссылке их нет.
+  return `${SITE}${g.path ?? c.path}?${q.toString()}`
 }
 function sitelinkHref(c, g, href) {
   const [p, anchor] = href.split('#')
@@ -63,7 +64,8 @@ function ids(res, key = 'Id') {
 
 const plan = campaigns.filter((c) => c.kind === 'search').map(mirror).filter((c) => !ONLY || c.base === ONLY)
 for (const c of plan) {
-  const negatives = [...new Set([...NEGATIVES_COMMON, ...(c.negatives ?? [])])]
+  const common = NEGATIVES_COMMON.filter((n) => !(c.negativesExcept ?? []).includes(n))
+  const negatives = [...new Set([...common, ...(c.negatives ?? [])])]
   const groups = c.groups.map((g) => ({ g, ad: combinatorial(g), href: utmLink(c, g),
     sitelinks: (g.sitelinks ?? c.sitelinks ?? []).map((s) => ({ Title: s.title, Description: s.desc, Href: sitelinkHref(c, g, s.href) })) }))
   const kw = groups.reduce((n, x) => n + x.g.keywords.length, 0)
@@ -74,7 +76,9 @@ for (const c of plan) {
   const rec = (created[c.base] ??= {})
   // 1. Изображения страницы
   if (!rec.images) {
-    const imgs = ['1x1', '4x3', '16x9'].map((f) => ({ Name: `${c.base}-${f}`, ImageData: readFileSync(`${SRC}/images/${c.base}-${f}.png`).toString('base64') }))
+    // Обязательны 1:1, 4:3 и 16:9; вертикальный и второй квадрат есть не у всех страниц (у Контура с 17.09.2026).
+    const imgs = ['1x1', '4x3', '16x9', '9x16', '1x1-table'].filter((f) => existsSync(`${SRC}/images/${c.base}-${f}.png`))
+      .map((f) => ({ Name: `${c.base}-${f}`, ImageData: readFileSync(`${SRC}/images/${c.base}-${f}.png`).toString('base64') }))
     rec.images = ids(await api('adimages', 'add', { AdImages: imgs }), 'AdImageHash'); save(); console.log('   изображения:', rec.images.length)
   }
   // 2. Уточнения

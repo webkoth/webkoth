@@ -1,0 +1,90 @@
+<!-- Баннеры РСЯ для Контура (аудит 17.09.2026): светлый фон, до 7 слов, без логотипов площадок.
+     Рендер: images/src/render.sh. Формат задаёт ?f=1x1|4x3|16x9|9x16, сюжет ?v=scheme|table. -->
+<meta charset="utf-8">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 100%; height: 100%; }
+  body {
+    font-family: -apple-system, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+    color: #111827; overflow: hidden;
+    background: radial-gradient(120% 90% at 85% 10%, #E8F0FF 0%, #F7F8FB 45%, #FFFFFF 100%);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .card { background: #fff; border-radius: calc(var(--u) * 2.2); box-shadow: 0 calc(var(--u) * .5) calc(var(--u) * 2.4) rgba(17, 24, 39, .10), 0 0 0 1px rgba(17, 24, 39, .05); }
+  .num { font-variant-numeric: tabular-nums; }
+
+  /* Сюжет «схема»: три кабинета сходятся в 1С, внизу «Сходится» */
+  .scheme { display: flex; align-items: center; gap: calc(var(--u) * 3.2); }
+  .col { display: flex; flex-direction: column; gap: calc(var(--u) * 1.6); }
+  .src { width: calc(var(--u) * 19); padding: calc(var(--u) * 1.8) calc(var(--u) * 2); display: flex; flex-direction: column; gap: calc(var(--u) * 1); }
+  .src .name { display: flex; align-items: center; gap: calc(var(--u) * 1); font-size: calc(var(--u) * 3); font-weight: 700; letter-spacing: -.01em; }
+  .dot { width: calc(var(--u) * 1.6); height: calc(var(--u) * 1.6); border-radius: 50%; }
+  .bar { height: calc(var(--u) * .9); border-radius: 99px; background: #E5E7EB; }
+  .arrows { width: calc(var(--u) * 9); align-self: stretch; }
+  .target { width: calc(var(--u) * 24); padding: calc(var(--u) * 3); display: flex; flex-direction: column; align-items: center; gap: calc(var(--u) * 2.2); }
+  .onec { font-size: calc(var(--u) * 11); font-weight: 800; letter-spacing: -.04em; line-height: 1; color: #111827; }
+  .ok { display: inline-flex; align-items: center; gap: calc(var(--u) * 1); padding: calc(var(--u) * 1) calc(var(--u) * 2.2); border-radius: 99px; background: #DCFCE7; color: #166534; font-size: calc(var(--u) * 2.8); font-weight: 700; }
+  .ok svg { width: calc(var(--u) * 2.8); height: calc(var(--u) * 2.8); }
+  .rows { width: 100%; display: flex; flex-direction: column; gap: calc(var(--u) * 1); }
+
+  /* Вертикальный: кабинеты в ряд сверху, стрелка вниз, 1С снизу */
+  .v .scheme { flex-direction: column; gap: calc(var(--u) * 2.4); }
+  .v .col { flex-direction: row; }
+  .v .src { width: calc(var(--u) * 15.5); padding: calc(var(--u) * 1.6); }
+  .v .src .name { font-size: calc(var(--u) * 2.5); gap: calc(var(--u) * .8); }
+  .v .arrows { width: calc(var(--u) * 50); height: calc(var(--u) * 12); align-self: center; }
+  .v .target { width: calc(var(--u) * 40); padding: calc(var(--u) * 4); }
+  .v .onec { font-size: calc(var(--u) * 16); }
+
+  /* Сюжет «таблица»: вопрос слева, сверка справа, одна строка не сходится */
+  .table-wrap { display: flex; align-items: center; gap: calc(var(--u) * 4); }
+  .q { font-size: calc(var(--u) * 5.2); font-weight: 800; letter-spacing: -.03em; line-height: 1.08; width: calc(var(--u) * 44); }
+  .t { width: calc(var(--u) * 54); padding: calc(var(--u) * 2.6) calc(var(--u) * 3); }
+  .tr { display: grid; grid-template-columns: .8fr 1.25fr 1.25fr 1fr; white-space: nowrap; align-items: center; gap: calc(var(--u) * 1.6); padding: calc(var(--u) * 1.5) 0; border-bottom: 1px solid #EEF0F3; font-size: calc(var(--u) * 2.3); }
+  .tr:last-child { border-bottom: 0; }
+  .th { color: #6B7280; font-weight: 600; font-size: calc(var(--u) * 2.1); }
+  .tr .r { text-align: right; }
+  .bad { background: #FEF2F2; margin: calc(var(--u) * .3) calc(var(--u) * -1.5); padding-left: calc(var(--u) * 1.5); padding-right: calc(var(--u) * 1.5); border-radius: calc(var(--u) * 1); border-bottom-color: transparent; }
+  .total { font-weight: 800; border-top: 2px solid #111827; margin-top: calc(var(--u) * .6); }
+  .total .diff { color: #DC2626; }
+  .bad .diff { color: #DC2626; font-weight: 800; }
+  .zero { color: #16A34A; font-weight: 700; }
+  .stack .table-wrap { flex-direction: column; align-items: flex-start; gap: calc(var(--u) * 3.5); }
+  .stack .q { width: calc(var(--u) * 62); font-size: calc(var(--u) * 6.2); }
+  .stack .t { width: calc(var(--u) * 62); }
+</style>
+<div id="root"></div>
+<script>
+  const p = new URLSearchParams(location.search)
+  const f = p.get('f') || '1x1', v = p.get('v') || 'scheme'
+  const W = { '1x1': 1080, '4x3': 1200, '16x9': 1920, '9x16': 1080 }[f]
+  const H = { '1x1': 1080, '4x3': 900, '16x9': 1080, '9x16': 1920 }[f]
+  // Единица масштаба: сюжет занимает ту же долю кадра в любом формате.
+  const u = { '1x1': 14.2, '4x3': 13.2, '16x9': 17.5, '9x16': 19 }[f] * (v === 'table' && f === '1x1' ? .95 : 1)
+  document.documentElement.style.setProperty('--u', u + 'px')
+  document.body.style.width = W + 'px'; document.body.style.height = H + 'px'
+  if (f === '9x16') document.body.classList.add('v')
+  if (v === 'table' && f !== '16x9') document.body.classList.add('stack')
+  const bars = (ws) => ws.map((w) => `<div class="bar" style="width:${w}%"></div>`).join('')
+  const check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>'
+  const src = (name, color, ws) => `<div class="card src"><div class="name"><span class="dot" style="background:${color}"></span>${name}</div>${bars(ws)}</div>`
+  const sources = src('WB', '#A21CAF', [92, 70]) + src('Ozon', '#2563EB', [80, 58]) + src('Маркет', '#F59E0B', [88, 64])
+  const vertical = f === '9x16'
+  const arrows = vertical
+    ? `<svg class="arrows" viewBox="0 0 500 120" fill="none" stroke="#94A3B8" stroke-width="5" stroke-linecap="round"><path d="M80 5 C80 70 250 50 250 110"/><path d="M250 5 L250 110"/><path d="M420 5 C420 70 250 50 250 110"/><path d="M232 92 L250 112 L268 92" stroke="#475569"/></svg>`
+    : `<svg class="arrows" viewBox="0 0 100 300" preserveAspectRatio="none" fill="none" stroke="#94A3B8" stroke-width="3" stroke-linecap="round" vector-effect="non-scaling-stroke"><path d="M4 50 C55 50 50 150 94 150" vector-effect="non-scaling-stroke"/><path d="M4 150 L94 150" vector-effect="non-scaling-stroke"/><path d="M4 250 C55 250 50 150 94 150" vector-effect="non-scaling-stroke"/></svg>`
+  const target = `<div class="card target"><div class="onec">1С</div><div class="rows">${bars([100, 84, 92])}</div><div class="ok">${check}Сходится</div></div>`
+  const scheme = `<div class="scheme"><div class="col">${sources}</div>${arrows}${target}</div>`
+  // Числа примера сходятся: по площадке 1 284 500 − 312 040 − 96 380 − 12 400 = 863 680,
+  // в 1С 1 284 500 − 312 040 − 91 120 = 881 340; расхождение 5 260 + 12 400 = 17 660 ₽.
+  const row = (a, b, c, d, cls = '') => `<div class="tr num ${cls}"><div>${a}</div><div class="r">${b}</div><div class="r">${c}</div><div class="r ${d === '0' ? 'zero' : 'diff'}">${d}</div></div>`
+  const table = `<div class="table-wrap"><div class="q">Выплаты не сходятся с&nbsp;1С?</div><div class="card t">
+    <div class="tr th"><div></div><div class="r">WB</div><div class="r">1С</div><div class="r"></div></div>
+    ${row('<div class="bar" style="width:80%"></div>', '1 284 500', '1 284 500', '0')}
+    ${row('<div class="bar" style="width:65%"></div>', '312 040', '312 040', '0')}
+    ${row('<div class="bar" style="width:72%"></div>', '96 380', '91 120', '5 260', 'bad')}
+    ${row('<div class="bar" style="width:58%"></div>', '12 400', '0', '12 400', 'bad')}
+    ${row('', '863 680', '881 340', '17 660 ₽', 'total')}
+  </div></div>`
+  document.getElementById('root').innerHTML = v === 'table' ? table : scheme
+</script>
