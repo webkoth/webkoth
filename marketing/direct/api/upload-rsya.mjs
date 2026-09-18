@@ -40,7 +40,9 @@ function combinatorial(g) {
   if (T.length > 7 || X.length > 3) throw new Error(`${g.slug}: лимит заголовков/текстов`)
   return { titles: T, texts: X }
 }
-const schedule = [1, 2, 3, 4, 5, 6, 7].map((d) => [d, ...Array.from({ length: 24 }, (_, h) => (d <= 5 && h >= 8 && h < 20 ? 100 : 0))].join(','))
+// 7:00–23:00 все семь дней (решение собственника 18.09.2026): селлер читает вечером и в выходные,
+// а бюджет всё равно ограничен неделей. Праздники не выключаем, иначе «все дни» ломается на длинных выходных.
+const schedule = [1, 2, 3, 4, 5, 6, 7].map((d) => [d, ...Array.from({ length: 24 }, (_, h) => (h >= 7 && h < 23 ? 100 : 0))].join(','))
 
 let unitsLast = ''
 const V501 = new Set(['campaigns', 'adgroups', 'ads'])
@@ -90,7 +92,7 @@ for (const c of plan) {
     rec.campaignId = ids(await api('campaigns', 'add', { Campaigns: [{
       Name: c.name, StartDate: TODAY,
       NegativeKeywords: { Items: negatives },
-      TimeTargeting: { Schedule: { Items: schedule }, ConsiderWorkingWeekends: 'YES', HolidaysSchedule: { SuspendOnHolidays: 'YES' } },
+      TimeTargeting: { Schedule: { Items: schedule }, ConsiderWorkingWeekends: 'YES', HolidaysSchedule: { SuspendOnHolidays: 'NO', BidPercent: 100, StartHour: 7, EndHour: 23 } },
       UnifiedCampaign: {
         BiddingStrategy: { Search: { BiddingStrategyType: 'SERVING_OFF' }, Network: { BiddingStrategyType: 'WB_MAXIMUM_CLICKS', WbMaximumClicks: { WeeklySpendLimit: WEEKLY[c.base] * 1_000_000 } } },
         CounterIds: { Items: [COUNTER] },
