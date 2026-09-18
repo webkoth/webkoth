@@ -45,7 +45,7 @@ describe('POST /api/brief', () => {
     expect(content).toContain('### Ответы на отзывы (начать с этого)')
     expect(caption).toContain('Начать с: Ответы на отзывы')
     expect(caption).toContain('Ступень: первый процесс до production')
-    expect(content).toContain('- Проверить категорию по правилу 1.6: Одежда и обувь')
+    expect(content).not.toContain('правилу 1.6')
   })
 
   it('карта и файл строятся по нормализованным ответам: скрытые ответы не уходят', async () => {

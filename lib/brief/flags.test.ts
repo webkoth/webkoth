@@ -6,7 +6,6 @@ import { clarifyFor, flagsFor } from './flags'
 import { clarifyCopy, flagCopy } from './internal-copy'
 import { emptyAnswers, type BriefAnswers, type DeepAnswers } from './schema'
 
-const category = flagCopy.category('не указана')
 const flags = (patch: Partial<BriefAnswers>) => flagsFor({ ...emptyAnswers(), ...patch })
 
 const complete: DeepAnswers = { frequency: 'daily', who: 'me', etalon: 'many', rule: 'sheet', risk: 'nothing', data: 'cabinet' }
@@ -30,30 +29,24 @@ describe('flagsFor', () => {
       ],
       deepChoice: ['reviews'],
     }
-    expect(flags(a)).toEqual([category, flagCopy.personalData(processCatalog.returns.label)])
+    expect(flags(a)).toEqual([flagCopy.personalData(processCatalog.returns.label)])
   })
 
   it('российские сервисы, некому внедрять, нет доступа', () => {
-    expect(flags({ ruOnly: 'required' })).toEqual([category, flagCopy.ruOnly])
-    expect(flags({ ruOnly: 'preferred' })).toEqual([category])
-    expect(flags({ implementer: 'nobody' })).toEqual([category, flagCopy.noImplementer])
-    expect(flags({ access: 'no' })).toEqual([category, flagCopy.noAccess])
+    expect(flags({ ruOnly: 'required' })).toEqual([flagCopy.ruOnly])
+    expect(flags({ ruOnly: 'preferred' })).toEqual([])
+    expect(flags({ implementer: 'nobody' })).toEqual([flagCopy.noImplementer])
+    expect(flags({ access: 'no' })).toEqual([flagCopy.noAccess])
   })
 
   it('застрявший пилот с описанием и без', () => {
-    expect(flags({ aiNow: 'triedFailed', aiTried: '  Бот не понял отзывы ' })).toEqual([
-      category,
-      flagCopy.stuckPilot('Бот не понял отзывы'),
-    ])
-    expect(flags({ aiNow: 'triedFailed' })).toEqual([category, flagCopy.stuckPilot('')])
-    expect(flags({ aiNow: 'triedFailed', aiTried: 'Бот\r\nне понял\n\nотзывы' })).toEqual([
-      category,
-      flagCopy.stuckPilot('Бот не понял отзывы'),
-    ])
+    expect(flags({ aiNow: 'triedFailed', aiTried: '  Бот не понял отзывы ' })).toEqual([flagCopy.stuckPilot('Бот не понял отзывы')])
+    expect(flags({ aiNow: 'triedFailed' })).toEqual([flagCopy.stuckPilot('')])
+    expect(flags({ aiNow: 'triedFailed', aiTried: 'Бот\r\nне понял\n\nотзывы' })).toEqual([flagCopy.stuckPilot('Бот не понял отзывы')])
   })
 
   it('бюджет подписью варианта', () => {
-    expect(flags({ budget: 'lt50' })).toEqual([category, flagCopy.budget('До 50 тыс ₽')])
+    expect(flags({ budget: 'lt50' })).toEqual([flagCopy.budget('До 50 тыс ₽')])
   })
 })
 

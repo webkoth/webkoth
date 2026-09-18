@@ -48,7 +48,7 @@ export function renderTelegramSummary(a: BriefAnswers, map: BriefMap, internal: 
     shop,
     startLine,
     `Ступень: ${offerCopy[internal.offer]}`,
-    `⚠ категория: ${categoryText(a)}, проверить по правилу 1.6`,
+    `Категория: ${categoryText(a)}`,
     ...(k ? [`метка: ${k}`] : []),
   ].map(escapeHtml)
 

@@ -1,15 +1,14 @@
 import { processCatalog } from '@/app/data/brief/processes'
 import { deepQuestions, goalsQuestions, nowQuestions, optionLabel, shopQuestions } from '@/app/data/brief/questions'
 import { clarifyCopy, flagCopy } from './internal-copy'
-import { answerValues, categoryText, processLabel } from './labels'
+import { answerValues, processLabel } from './labels'
 import type { MapItem } from './map-types'
 import type { BriefAnswers } from './schema'
 
 // Флаги и «что уточнить на созвоне» (спека, 7.7 и 7.8). Только для файла нам.
-// Название и категории нанимателя в код сайта не попадают: флаг категории ставится всегда.
 
 export function flagsFor(a: BriefAnswers): string[] {
-  const out = [flagCopy.category(categoryText(a))]
+  const out: string[] = []
   // По всем отмеченным процессам: данные покупателей есть и там, где подробно не разбирали.
   const personal = a.picked
     .filter((p) => processCatalog[p.id].facts.personalData)

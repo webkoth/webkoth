@@ -22,7 +22,6 @@ export const offerCopy: Record<OfferStep, string> = {
 
 export const flagCopy = {
   fastFill: (n: number) => `Заполнено за ${n} с: проверить, не бот ли`,
-  category: (c: string) => `Проверить категорию по правилу 1.6: ${c}`,
   personalData: (list: string) => `Персональные данные покупателей: ${list}`,
   ruOnly: 'Данные только в российских сервисах: обязательно',
   noImplementer: 'С их стороны внедрением заняться некому: нужно под ключ',

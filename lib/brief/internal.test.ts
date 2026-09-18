@@ -13,10 +13,10 @@ describe('buildInternal', () => {
     for (const k of ['offer', 'flags', 'clarify']) expect(keys).not.toContain(k)
   })
 
-  it('демо-магазин: первый процесс, категория и бюджет, уточнять нечего', () => {
+  it('демо-магазин: первый процесс и бюджет, уточнять нечего', () => {
     expect(internal(demoShop())).toEqual({
       offer: 'firstProcess',
-      flags: [flagCopy.category('Одежда и обувь'), flagCopy.budget('150–400 тыс ₽')],
+      flags: [flagCopy.budget('150–400 тыс ₽')],
       clarify: [],
     })
   })
@@ -31,8 +31,8 @@ describe('buildInternal', () => {
     expect(internal(soloRareShop()).offer).toBe('review')
   })
 
-  it('пустой бриф: только флаг категории', () => {
-    expect(internal(emptyAnswers()).flags).toEqual([flagCopy.category('не указана')])
+  it('пустой бриф: флагов нет', () => {
+    expect(internal(emptyAnswers()).flags).toEqual([])
   })
 
   it('заполнено быстрее минуты: секунды в поле и первым флагом', () => {
@@ -40,7 +40,7 @@ describe('buildInternal', () => {
     const r = buildInternal(a, buildMap(a), { fillSeconds: 5 })
     expect(r.fastFillSeconds).toBe(5)
     expect(flagCopy.fastFill(5)).toBe('Заполнено за 5 с: проверить, не бот ли')
-    expect(r.flags).toEqual([flagCopy.fastFill(5), flagCopy.category('Одежда и обувь'), flagCopy.budget('150–400 тыс ₽')])
+    expect(r.flags).toEqual([flagCopy.fastFill(5), flagCopy.budget('150–400 тыс ₽')])
     expect(buildInternal(a, buildMap(a), { fillSeconds: 0 }).flags[0]).toBe(flagCopy.fastFill(0))
   })
 
@@ -49,7 +49,7 @@ describe('buildInternal', () => {
     for (const opts of [{ fillSeconds: 60 }, { fillSeconds: 600 }, { fillSeconds: -1 }, {}, undefined]) {
       const r = buildInternal(a, buildMap(a), opts)
       expect(Object.keys(r)).not.toContain('fastFillSeconds')
-      expect(r.flags[0]).toBe(flagCopy.category('Одежда и обувь'))
+      expect(r.flags[0]).toBe(flagCopy.budget('150–400 тыс ₽'))
     }
   })
 })
