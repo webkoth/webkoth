@@ -1,8 +1,11 @@
 import type { Lang } from '@/app/data/evolution/types'
-import type { LeadAttribution, LeadSource } from './schemas'
+import type { LeadAttribution, LeadDetails, LeadSource } from './schemas'
 
 const escapeHtml = (s: string) =>
   s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
+
+/** Заполненное необязательное поле заявки: подпись для уведомления и значение. */
+export type LeadDetailRow = { label: string; value: string }
 
 export type EvolutionLeadData = {
   name: string
@@ -17,6 +20,27 @@ export type EvolutionLeadData = {
   consentAt?: string
   /** Метки рекламы первого и последнего входа и ClientID Метрики. */
   attribution?: LeadAttribution
+  /** Необязательные поля лендинга («Какая 1С: УТ 11»), уже с подписями. */
+  details?: readonly LeadDetailRow[]
+}
+
+// Подписи берутся из полей лендинга, а без них - сам ключ: поле, которого страница уже
+// не знает (вкладка открыта до выкладки), всё равно доходит до владельца. Порядок как
+// в форме, незнакомые ключи в конце. hasOwn, а не details[key]: ключ «constructor»
+// иначе достал бы функцию из прототипа.
+export function leadDetailRows(
+  details?: LeadDetails,
+  fields?: readonly { key: string; label: string }[],
+): LeadDetailRow[] {
+  if (!details) return []
+  const known = new Set((fields ?? []).map((f) => f.key))
+  const rows = [
+    ...(fields ?? []).filter((f) => Object.hasOwn(details, f.key)).map((f) => ({ label: f.label, value: details[f.key] })),
+    ...Object.keys(details)
+      .filter((k) => !known.has(k))
+      .map((k) => ({ label: k, value: details[k] })),
+  ]
+  return rows.filter((r) => r.value.length > 0)
 }
 
 // Уведомления владельцу всегда на русском - меняется только пометка источника.
@@ -39,6 +63,7 @@ export function buildLeadText(d: EvolutionLeadData): string {
     `👤 Имя:     ${d.name}`,
     `💬 Контакт: ${d.contact}`,
     `🌐 IP:      ${d.ip}`,
+    ...(d.details?.length ? ['', ...d.details.map((r) => `${r.label}: ${r.value}`)] : []),
     '',
     'Какую проблему хотят решить и что уже пробовали:',
     d.answer,
@@ -59,6 +84,7 @@ export function buildLeadHtml(d: EvolutionLeadData): string {
     ${row('👤 Имя', d.name)}
     ${row('💬 Контакт', d.contact)}
     ${row('🌐 IP', d.ip)}
+    ${(d.details ?? []).map((r) => row(escapeHtml(r.label), r.value)).join('\n    ')}
   </table>
   <div style="margin-top:20px">
     <div style="color:#666;font-size:13px;margin-bottom:8px">Какую проблему хотят решить и что уже пробовали</div>

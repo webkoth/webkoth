@@ -204,6 +204,16 @@ describe('angleForCase', () => {
     expect(a.otherBlocks.length).toBe(caseMeta['finance-loop'].blocks.length - 1)
   })
 
+  it('по запросу отдаёт угол другого блока и не считает его в связях', () => {
+    const a = angleForCase('ru', 'data-platform', 'money')
+    expect(a.angle).toBe(casesCopy.ru['data-platform'].angles.money)
+    expect(a.otherBlocks).toEqual(['system', 'decisions'])
+  })
+
+  it('бросает, если у системы нет угла для запрошенного блока', () => {
+    expect(() => angleForCase('ru', 'data-platform', 'speed')).toThrow(/no angle for speed/)
+  })
+
   it('не падает ни на одном кейсе ни в одной локали', () => {
     for (const lang of ['ru', 'en'] as const) {
       for (const slug of CASE_SLUGS) {

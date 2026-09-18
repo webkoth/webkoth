@@ -1,6 +1,7 @@
 import { NextResponse, type NextRequest } from 'next/server'
+import { landingCopy } from '@/app/data/landings'
 import { evolutionLeadSchema } from '@/lib/evolution/schemas'
-import type { EvolutionLeadData } from '@/lib/evolution/email'
+import { leadDetailRows, type EvolutionLeadData } from '@/lib/evolution/email'
 import { buildLeadTelegramText } from '@/lib/evolution/telegram-text'
 import { settleReturning, summarize } from '@/lib/evolution/delivery'
 import { sendTelegramMessage } from '@/lib/landing/telegram'
@@ -60,6 +61,11 @@ export async function POST(req: NextRequest) {
     lang: parsed.data.lang,
     source: parsed.data.source,
     attribution: parsed.data.attribution,
+    // Подписи полей («Какая 1С») из данных лендинга: клиент присылает только ключи.
+    details: leadDetailRows(
+      parsed.data.details,
+      parsed.data.source ? landingCopy[parsed.data.source.landing].lead.fields : undefined,
+    ),
     // Схема уже отклонила заявку без согласия; фиксируем момент как доказательство.
     consentAt: new Date().toISOString(),
   }

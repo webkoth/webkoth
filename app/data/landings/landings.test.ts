@@ -1,7 +1,7 @@
 // app/data/landings/landings.test.ts
 import { describe, expect, it } from 'vitest'
-import { CASE_SLUGS } from '@/app/data/cases'
-import { LEAD_LANDINGS } from '@/lib/evolution/schemas'
+import { CASE_SLUGS, caseMeta, casesCopy } from '@/app/data/cases'
+import { LEAD_DETAIL_KEY, LEAD_DETAILS_MAX, LEAD_LANDINGS } from '@/lib/evolution/schemas'
 import { LANDING_SLUGS, landingMeta } from './index'
 import { presetsForLanding, quizPresets, resolvePresetParam } from './index'
 import { landingCopy } from './index'
@@ -23,11 +23,24 @@ describe('реестр лендингов', () => {
     }
   })
 
-  it('case-first обязан иметь главный кейс, symptoms-first не имеет', () => {
+  it('case-first и quiz-first обязаны иметь главный кейс, symptoms-first не имеет', () => {
     for (const slug of LANDING_SLUGS) {
       const meta = landingMeta[slug]
-      if (meta.skeleton === 'case-first') expect(meta.heroCase, slug).toBeDefined()
-      else expect(meta.heroCase, slug).toBeUndefined()
+      if (meta.skeleton === 'symptoms-first') expect(meta.heroCase, slug).toBeUndefined()
+      else expect(meta.heroCase, slug).toBeDefined()
+    }
+  })
+
+  // angleForCase бросает на блоке без угла: опечатка в реестре уронила бы страницу при сборке.
+  it('угол главного кейса есть у системы в обеих локалях', () => {
+    for (const slug of LANDING_SLUGS) {
+      const { heroCase, heroCaseAngle } = landingMeta[slug]
+      if (!heroCaseAngle) continue
+      expect(heroCase, slug).toBeDefined()
+      if (!heroCase) continue
+      expect(caseMeta[heroCase].blocks, slug).toContain(heroCaseAngle)
+      expect(casesCopy.ru[heroCase].angles[heroCaseAngle], `${slug}/ru`).toBeDefined()
+      expect(casesCopy.en[heroCase].angles[heroCaseAngle], `${slug}/en`).toBeDefined()
     }
   })
 
@@ -120,12 +133,36 @@ describe('тексты лендингов', () => {
     }
   })
 
-  // Главный кейс case-first страницы должен входить в cases: сборщик страницы (задача 19)
-  // исключает его из карусели фильтром, а не отдельным списком.
-  it('главный кейс case-first страницы входит в cases', () => {
+  // Главный кейс case-first и quiz-first страницы должен входить в cases: сборщик страницы
+  // (задача 19) исключает его из карусели фильтром, а не отдельным списком.
+  it('главный кейс case-first и quiz-first страницы входит в cases', () => {
     for (const slug of LANDING_SLUGS) {
       const meta = landingMeta[slug]
-      if (meta.skeleton === 'case-first') expect(meta.cases, slug).toContain(meta.heroCase)
+      if (meta.skeleton !== 'symptoms-first') expect(meta.cases, slug).toContain(meta.heroCase)
+    }
+  })
+
+  // Поля формы дублируют ограничения схемы заявки: поле, которое схема отвергнет,
+  // роняло бы всю заявку с этой страницы.
+  it('необязательные поля заявки проходят схему: ключ, число, уникальность', () => {
+    for (const slug of LANDING_SLUGS) {
+      const fields = landingCopy[slug].lead.fields ?? []
+      expect(fields.length, slug).toBeLessThanOrEqual(LEAD_DETAILS_MAX)
+      expect(new Set(fields.map((f) => f.key)).size, slug).toBe(fields.length)
+      for (const f of fields) expect(f.key, `${slug}/${f.key}`).toMatch(LEAD_DETAIL_KEY)
+    }
+  })
+
+  // Разницы и итог таблицы считает компонент, а вывод под ней написан текстом:
+  // тест не даёт им разойтись после правки чисел.
+  it('вывод примера сверки называет каждое расхождение из таблицы', () => {
+    const group = (n: number) => String(Math.abs(n)).replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
+    for (const slug of LANDING_SLUGS) {
+      const r = landingCopy[slug].reconciliation
+      if (!r) continue
+      const diffs = r.rows.map((row) => Math.abs(row.oneC - row.report)).filter((d) => d > 0)
+      expect(diffs.length, slug).toBeGreaterThan(0)
+      for (const d of diffs) expect(r.verdict, `${slug}/${d}`).toContain(`${group(d)} ₽`)
     }
   })
 

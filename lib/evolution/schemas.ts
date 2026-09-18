@@ -47,6 +47,21 @@ export const leadAttributionSchema = z.object({
 
 export type LeadAttribution = z.infer<typeof leadAttributionSchema>
 
+// Необязательные поля лендинга («Какая 1С», «Площадки», «Оборот в месяц»): ключ из данных
+// страницы → строка. Ключи и число полей ограничены, чтобы тело запроса не стало мешком
+// для чего угодно; пустые строки выбрасываются - незаполненное поле не попадает в уведомление.
+export const LEAD_DETAILS_MAX = 6
+export const LEAD_DETAIL_KEY = /^[A-Za-z0-9-]{1,32}$/
+export const leadDetailsSchema = z
+  .record(
+    z.string().regex(LEAD_DETAIL_KEY, 'detail_key'),
+    z.string().trim().max(200).regex(/^[^\r\n]*$/, 'no_newline'),
+  )
+  .refine((d) => Object.keys(d).length <= LEAD_DETAILS_MAX, 'details_max')
+  .transform((d) => Object.fromEntries(Object.entries(d).filter(([, v]) => v.length > 0)))
+
+export type LeadDetails = z.infer<typeof leadDetailsSchema>
+
 // Форма главной (RU `/`, EN `/en`) — минимум полей: имя, контакт и один
 // квалифицирующий вопрос оффера. Сообщения об ошибках — коды: текст на нужном
 // языке подставляет форма из `data.finale.form.errors`.
@@ -77,6 +92,7 @@ export const evolutionLeadSchema = z.object({
   lang: z.enum(['ru', 'en']).optional(),
   source: leadSourceSchema.optional(),
   attribution: leadAttributionSchema.optional(),
+  details: leadDetailsSchema.optional(),
 })
 
 export type EvolutionLeadInput = z.infer<typeof evolutionLeadSchema>

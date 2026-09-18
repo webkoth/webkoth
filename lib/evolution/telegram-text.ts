@@ -12,6 +12,9 @@ const TELEGRAM_MAX_CHARS = 4096
 const ANSWER_BUDGET = 2500
 const TRUNCATION_NOTE = '\n\n<i>Ответ обрезан, полный текст - в письме.</i>'
 const ANSWER_HEADER = '\n\n<b>Какую проблему хотят решить и что пробовали:</b>\n'
+// Необязательное поле лендинга - до 200 символов, но экранирование раздувает «&» впятеро:
+// шесть таких полей перебили бы лимит сообщения. Значение поля режем после экранирования.
+const DETAIL_BUDGET = 250
 
 // Режем уже экранированную строку, поэтому на срезе может остаться половина
 // сущности - «&am». Хвостовой «&» без «;» убираем: битая сущность роняет разбор
@@ -20,6 +23,17 @@ function trimDanglingEntity(s: string): string {
   const lastAmp = s.lastIndexOf('&')
   if (lastAmp === -1) return s
   return s.slice(lastAmp).includes(';') ? s : s.slice(0, lastAmp)
+}
+
+// Поля лендинга сразу под контактом: «Какая 1С», «Площадки», «Оборот в месяц».
+function detailLines(rows: EvolutionLeadData['details']): string {
+  return (rows ?? [])
+    .map((r) => {
+      const value = escapeHtml(r.value)
+      const clipped = value.length > DETAIL_BUDGET ? `${trimDanglingEntity(value.slice(0, DETAIL_BUDGET))}…` : value
+      return `\n<b>${escapeHtml(r.label)}:</b> ${clipped}`
+    })
+    .join('')
 }
 
 type LeadTouch = NonNullable<LeadAttribution['last']>
@@ -60,8 +74,9 @@ export function buildLeadTelegramText(d: EvolutionLeadData): string {
   const base =
     `<b>🌱 Заявка на разбор - ${escapeHtml(sourceLabel(d.lang, d.source))}</b>\n\n` +
     `<b>Имя:</b> ${escapeHtml(d.name)}\n` +
-    `<b>Контакт:</b> ${escapeHtml(d.contact)}\n` +
-    `<b>IP:</b> ${escapeHtml(d.ip)}` +
+    `<b>Контакт:</b> ${escapeHtml(d.contact)}` +
+    detailLines(d.details) +
+    `\n<b>IP:</b> ${escapeHtml(d.ip)}` +
     (d.consentAt ? `\n<b>Согласие на обработку ПДн:</b> ${escapeHtml(d.consentAt)}` : '') +
     attributionBlock(d.attribution)
 

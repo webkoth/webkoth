@@ -9,8 +9,10 @@ export const isLandingSlug = (v: unknown): v is LandingSlug =>
 export const landingMeta: Record<LandingSlug, LandingMeta> = {
   kontur: {
     slug: 'kontur',
-    skeleton: 'case-first',
+    skeleton: 'quiz-first',
     heroCase: 'data-platform',
+    // Страница про сверку с выплатами: угол «деньги», а не первый блок системы.
+    heroCaseAngle: 'money',
     cases: ['data-platform', 'finance-loop', 'stock-sync', 'payout-documents'],
     presets: ['kontur-stocks', 'kontur-reports', 'kontur-orders', 'kontur-payouts'],
     campaign: 'kontur',

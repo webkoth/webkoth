@@ -21,10 +21,12 @@ import { LandingCases } from './landing-cases'
 import { PricingSteps } from './pricing-steps'
 import { Faq } from './faq'
 import { LeadSection } from './lead-section'
+import { ReconciliationExample } from './reconciliation-example'
 
-// Один скелет, два порядка (спека, секция 6). Порядок задаёт landingMeta.skeleton:
+// Один скелет, три порядка (спека, секция 6). Порядок задаёт landingMeta.skeleton:
 // symptoms-first: hero → симптомы → квиз → как работает → кейсы → цены → вопросы → заявка;
-// case-first:     hero → главный кейс → как работает → квиз → кейсы → цены → вопросы → заявка.
+// case-first:     hero → главный кейс → как работает → квиз → кейсы → цены → вопросы → заявка;
+// quiz-first:     hero → квиз → главный кейс → как работает → кейсы → цены → вопросы → заявка.
 export function LandingPage({ slug }: { slug: LandingSlug }) {
   const meta = landingMeta[slug]
   const copy = landingCopy[slug]
@@ -41,22 +43,34 @@ export function LandingPage({ slug }: { slug: LandingSlug }) {
 
   const quiz = <LandingQuiz slug={slug} title={copy.hero.title} copy={copy.quiz} />
   const how = <HowItWorks copy={copy.how} note={copy.standardNote} />
+  const heroCase =
+    copy.heroCase && meta.heroCase ? (
+      <HeroCase copy={copy.heroCase} slug={meta.heroCase} block={meta.heroCaseAngle} />
+    ) : null
   // Сцена первого экрана из анимаций главной, по смыслу страницы: обрывки собираются в
   // контур, туман рассеивается в отчёт, шум становится сигналом, сетка систем заполняется.
   const a = data.animations
-  const scene = {
+  const animation = {
     kontur: <FragmentsToStructure copy={a.fragments} />,
     finance: <FogToDashboard copy={a.fog} />,
     agent: <NoiseToSignal copy={a.noise} />,
     'it-director': <CellsGrid copy={a.cells} />,
   }[slug]
+  // Пример сверки важнее анимации: бухгалтер узнаёт свою таблицу, а не серые полосы (аудит 2026-09-17).
+  const scene = copy.reconciliation ? <ReconciliationExample copy={copy.reconciliation} /> : animation
 
   return (
     <>
       <HtmlLang lang="ru" />
       <ParticleField />
       <TooltipProvider delay={200}>
-        <LeadDialogProvider copy={data.finale.form} lang="ru" defaultSource={{ landing: slug }}>
+        <LeadDialogProvider
+          copy={data.finale.form}
+          lang="ru"
+          defaultSource={{ landing: slug }}
+          fields={copy.lead.fields}
+          fieldsNote={copy.lead.fieldsNote}
+        >
           <main className="relative z-[1] min-h-screen" lang="ru">
             <HeaderNav
               lang="ru"
@@ -78,9 +92,15 @@ export function LandingPage({ slug }: { slug: LandingSlug }) {
                 {quiz}
                 {how}
               </>
+            ) : meta.skeleton === 'quiz-first' ? (
+              <>
+                {quiz}
+                {heroCase}
+                {how}
+              </>
             ) : (
               <>
-                {copy.heroCase && meta.heroCase ? <HeroCase copy={copy.heroCase} slug={meta.heroCase} /> : null}
+                {heroCase}
                 {how}
                 {quiz}
               </>

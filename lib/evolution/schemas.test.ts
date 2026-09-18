@@ -92,4 +92,40 @@ describe('evolutionLeadSchema', () => {
     const bad = { ...attribution, last: { ...attribution.last, utm_term: 'a\nb' } }
     expect(evolutionLeadSchema.safeParse({ ...valid, attribution: bad }).success).toBe(false)
   })
+
+  it('без необязательных полей лендинга details в результате нет', () => {
+    const r = evolutionLeadSchema.safeParse(valid)
+    expect(r.success && r.data.details).toBeUndefined()
+  })
+
+  it('принимает поля лендинга, обрезает пробелы и выбрасывает пустые', () => {
+    const r = evolutionLeadSchema.safeParse({
+      ...valid,
+      source: { landing: 'kontur' },
+      details: { onec: '  УТ 11 ', marketplaces: 'Wildberries, Ozon', turnover: '   ' },
+    })
+    expect(r.success).toBe(true)
+    if (r.success) expect(r.data.details).toEqual({ onec: 'УТ 11', marketplaces: 'Wildberries, Ozon' })
+  })
+
+  it('отклоняет ключ поля не латиницей, с пробелом или длиннее 32 символов', () => {
+    for (const key of ['какая1с', 'one c', 'a'.repeat(33), '']) {
+      expect(evolutionLeadSchema.safeParse({ ...valid, details: { [key]: 'x' } }).success, key).toBe(false)
+    }
+    expect(evolutionLeadSchema.safeParse({ ...valid, details: { 'one-c2': 'x' } }).success).toBe(true)
+  })
+
+  it('отклоняет больше шести полей, значение длиннее 200 символов, перенос строки и не строку', () => {
+    const seven = Object.fromEntries(Array.from({ length: 7 }, (_, i) => [`k${i}`, 'x']))
+    expect(evolutionLeadSchema.safeParse({ ...valid, details: seven }).success).toBe(false)
+    expect(evolutionLeadSchema.safeParse({ ...valid, details: { onec: 'x'.repeat(201) } }).success).toBe(false)
+    expect(evolutionLeadSchema.safeParse({ ...valid, details: { onec: 'УТ\nBcc: x@y.z' } }).success).toBe(false)
+    expect(evolutionLeadSchema.safeParse({ ...valid, details: { onec: 11 } }).success).toBe(false)
+    expect(evolutionLeadSchema.safeParse({ ...valid, details: ['УТ 11'] }).success).toBe(false)
+  })
+
+  it('поля лендинга не мешают ловушке: honeypot по-прежнему проходит схему для роута', () => {
+    const r = evolutionLeadSchema.safeParse({ ...valid, website: 'http://spam.example', details: { onec: 'УТ 11' } })
+    expect(r.success && r.data.website).toBe('http://spam.example')
+  })
 })

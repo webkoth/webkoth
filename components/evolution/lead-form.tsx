@@ -13,6 +13,7 @@ import { ymGoal } from '@/lib/analytics/ym'
 import { getYmClientId, readAttribution } from '@/lib/analytics/attribution'
 import { evolutionLeadSchema, type EvolutionLeadInput, type LeadSource } from '@/lib/evolution/schemas'
 import type { EvolutionData, Lang, LinkedText } from '@/app/data/evolution/types'
+import type { LeadField } from '@/app/data/landings'
 
 type SubmitState = 'idle' | 'submitting' | 'success' | 'error' | 'rate_limited'
 
@@ -34,8 +35,9 @@ const openTelegram = () => {
 }
 
 // Минимум полей: имя, контакт и один вопрос — он же первый квалифицирующий
-// вопрос оффера. Форма живёт в двух местах — inline в финале и в модалке —
-// поэтому id полей берутся из useId. Сообщения валидации приходят из схемы
+// вопрос оффера. Лендинг может добавить необязательные поля (`fields`): они
+// уходят объектом `details`, на главной их нет. Форма живёт в двух местах —
+// inline в финале и в модалке — поэтому id полей берутся из useId. Сообщения валидации приходят из схемы
 // кодами и переводятся через `copy.errors`. Исход отправки — тост (sonner);
 // inline-плашки ошибок остаются, чтобы текст был рядом с кнопкой.
 export function LeadForm({
@@ -44,6 +46,8 @@ export function LeadForm({
   startedAt,
   defaultAnswer,
   source,
+  fields,
+  fieldsNote,
   onSuccess,
 }: {
   copy: EvolutionData['finale']['form']
@@ -54,6 +58,10 @@ export function LeadForm({
   defaultAnswer?: string
   /** Откуда заявка: лендинг, пресет квиза, вердикт. Уходит в тело запроса как есть. */
   source?: LeadSource
+  /** Необязательные поля лендинга («Какая 1С»): значения уходят в `details`. */
+  fields?: readonly LeadField[]
+  /** Подпись над необязательными полями. */
+  fieldsNote?: string
   onSuccess?: () => void
 }) {
   const [state, setState] = useState<SubmitState>('idle')
@@ -72,7 +80,17 @@ export function LeadForm({
     formState: { errors },
   } = useForm<EvolutionLeadInput>({
     resolver: zodResolver(evolutionLeadSchema),
-    defaultValues: { name: '', contact: '', answer: defaultAnswer ?? '', consent: false, website: '', filledAtMs: 1, lang },
+    defaultValues: {
+      name: '',
+      contact: '',
+      answer: defaultAnswer ?? '',
+      consent: false,
+      website: '',
+      filledAtMs: 1,
+      lang,
+      // Без полей лендинга details нет вовсе: тело запроса главной не меняется.
+      details: fields?.length ? Object.fromEntries(fields.map((f) => [f.key, ''])) : undefined,
+    },
   })
 
   const msg = (code?: string) => (code ? (copy.errors[code] ?? code) : undefined)
@@ -217,6 +235,37 @@ export function LeadForm({
           </p>
         ) : null}
       </div>
+
+      {fields?.length ? (
+        <div>
+          {fieldsNote ? <p className="mb-3 text-xs text-muted-foreground">{fieldsNote}</p> : null}
+          <div className="grid gap-4 md:grid-cols-2">
+            {fields.map((f) => {
+              const error = errors.details?.[f.key]
+              return (
+                <div key={f.key}>
+                  <label htmlFor={id(`details-${f.key}`)} className="mb-1.5 block text-sm font-medium">
+                    {f.label}
+                  </label>
+                  <Input
+                    id={id(`details-${f.key}`)}
+                    {...register(`details.${f.key}`)}
+                    placeholder={f.placeholder}
+                    maxLength={200}
+                    aria-invalid={!!error}
+                    aria-describedby={error ? id(`details-${f.key}-error`) : undefined}
+                  />
+                  {error ? (
+                    <p id={id(`details-${f.key}-error`)} className="mt-1 text-xs text-destructive">
+                      {msg(error.message)}
+                    </p>
+                  ) : null}
+                </div>
+              )
+            })}
+          </div>
+        </div>
+      ) : null}
 
       {/* Согласие на обработку персональных данных (152-ФЗ): обязательный чекбокс со ссылкой на политику. */}
       <div>

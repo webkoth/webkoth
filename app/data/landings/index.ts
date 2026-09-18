@@ -12,10 +12,12 @@ export type {
   LandingSkeleton,
   LandingSlug,
   LandingStep,
+  LeadField,
   PricingStep,
   QuizPreset,
   QuizPresetId,
   QuizQuestionKey,
+  ReconciliationRow,
 } from './types'
 export { LANDING_SLUGS, isLandingSlug, landingMeta } from './registry'
 export { presetsForLanding, quizPresets, resolvePresetParam } from './presets'

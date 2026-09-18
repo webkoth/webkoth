@@ -53,6 +53,35 @@ describe('buildLeadTelegramText', () => {
     expect(text).toContain('F4')
   })
 
+  it('выводит поля лендинга строками под контактом и экранирует их', () => {
+    const text = buildLeadTelegramText({
+      ...lead,
+      source: { landing: 'kontur' },
+      details: [
+        { label: 'Какая 1С', value: 'УТ 11 <доработанная>' },
+        { label: 'Оборот в месяц', value: '3 млн ₽ & больше' },
+      ],
+    })
+    expect(text).toContain(
+      '<b>Контакт:</b> @ivan\n<b>Какая 1С:</b> УТ 11 &lt;доработанная&gt;\n<b>Оборот в месяц:</b> 3 млн ₽ &amp; больше\n<b>IP:</b>',
+    )
+  })
+
+  it('без полей лендинга шапка как раньше: за контактом сразу IP', () => {
+    expect(buildLeadTelegramText(lead)).toContain('<b>Контакт:</b> @ivan\n<b>IP:</b> 203.0.113.7')
+    expect(buildLeadTelegramText({ ...lead, details: [] })).toContain('<b>Контакт:</b> @ivan\n<b>IP:</b> 203.0.113.7')
+  })
+
+  it('шесть полей из «&» и длинный ответ не перебивают лимит Telegram', () => {
+    const details = Array.from({ length: 6 }, (_, i) => ({ label: `k${i}`, value: '&'.repeat(200) }))
+    const text = buildLeadTelegramText({ ...lead, details, answer: '&'.repeat(4000) })
+    expect(text.length).toBeLessThanOrEqual(4096)
+    for (const line of text.split('\n').filter((l) => l.startsWith('<b>k'))) {
+      const tail = line.slice(line.lastIndexOf('&'))
+      expect(tail.includes(';')).toBe(true)
+    }
+  })
+
   it('пишет, что меток рекламы нет, если заявка без атрибуции', () => {
     expect(buildLeadTelegramText(lead)).toContain('<b>Реклама:</b> меток нет')
   })

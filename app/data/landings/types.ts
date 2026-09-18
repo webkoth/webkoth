@@ -1,13 +1,17 @@
 // app/data/landings/types.ts
 // Лендинги под кампании Директа. Язык-независимая часть - registry.ts,
 // пресеты квиза - presets.ts, тексты - по файлу на страницу. Только RU.
-import type { CaseSlug } from '@/app/data/cases'
+import type { BlockKey, CaseSlug } from '@/app/data/cases'
 import type { QuizInput, VerdictForm } from '@/lib/standard/verdict'
 
 export type LandingSlug = 'kontur' | 'it-director' | 'agent' | 'finance'
 
-/** A «симптомы первыми» или C «кейс первым» из спеки, секция 6. */
-export type LandingSkeleton = 'symptoms-first' | 'case-first'
+/**
+ * A «симптомы первыми» или C «кейс первым» из спеки, секция 6. quiz-first - вариант C
+ * с квизом сразу под первым экраном: реклама ведёт с готовым вопросом, и ответ на него
+ * должен быть в первом прокруте, а не под кейсом и шагами (аудит Директа 2026-09-17).
+ */
+export type LandingSkeleton = 'symptoms-first' | 'case-first' | 'quiz-first'
 
 export type QuizPresetId =
   | 'kontur-stocks'
@@ -30,8 +34,13 @@ export type QuizPresetId =
 export type LandingMeta = {
   slug: LandingSlug
   skeleton: LandingSkeleton
-  /** Главный кейс для case-first; у symptoms-first его нет. */
+  /** Главный кейс для case-first и quiz-first; у symptoms-first его нет. */
   heroCase?: CaseSlug
+  /**
+   * Угол главного кейса. Без него карточка берёт первый блок системы, как в карусели;
+   * задаётся, когда заголовок страницы говорит о другом постулате той же системы.
+   */
+  heroCaseAngle?: BlockKey
   /**
    * Порядок карусели, включая главный кейс: карусель его исключает сама (см. LandingPage).
    * После исключения должно остаться не меньше трёх, иначе карусель бессмысленна.
@@ -60,6 +69,12 @@ export type LandingStep = { title: string; body: string }
 export type PricingStep = { title: string; price: string; body: string }
 export type FaqItem = { q: string; a: string }
 
+/** Необязательное поле заявки лендинга: значение уходит в `details[key]` тела запроса. */
+export type LeadField = { key: string; label: string; placeholder: string }
+
+/** Строка примера сверки: суммы за период со знаком, удержания отрицательные. */
+export type ReconciliationRow = { label: string; report: number; oneC: number }
+
 export type LandingCopy = {
   meta: { title: string; description: string }
   /** Подписи якорей в шапке: квиз, как работает, кейсы, цены, вопросы. */
@@ -67,8 +82,24 @@ export type LandingCopy = {
   hero: { eyebrow: string; title: string; sub: string; primaryCta: string; secondaryCta: string }
   /** Только для symptoms-first. */
   symptoms?: { eyebrow: string; title: string; items: readonly [string, string, string, ...string[]] }
-  /** Только для case-first: подпись над главным кейсом. */
+  /** Для case-first и quiz-first: подпись над главным кейсом. */
   heroCase?: { eyebrow: string; title: string }
+  /**
+   * Сцена первого экрана вместо анимации: пример сверки отчёта площадки с 1С.
+   * Итоговая строка и разницы считаются из `rows`, в тексте только статьи и вывод.
+   */
+  reconciliation?: {
+    /** «Пример»: числа выдуманы, это не данные клиента. */
+    badge: string
+    title: string
+    head: readonly [string, string, string, string]
+    rows: readonly [ReconciliationRow, ...ReconciliationRow[]]
+    /** Подпись итоговой строки: «К перечислению». */
+    total: string
+    /** Итог под таблицей: «{mismatch} N ₽: {verdict}». */
+    mismatch: string
+    verdict: string
+  }
   quiz: {
     eyebrow: string
     title: string
@@ -88,5 +119,13 @@ export type LandingCopy = {
   cases: { eyebrow: string; title: string }
   pricing: { eyebrow: string; title: string; note: string; steps: readonly [PricingStep, ...PricingStep[]] }
   faq: { eyebrow: string; title: string; items: readonly [FaqItem, FaqItem, FaqItem, ...FaqItem[]] }
-  lead: { eyebrow: string; title: string; sub: string }
+  lead: {
+    eyebrow: string
+    title: string
+    sub: string
+    /** Необязательные поля под аудиторию страницы: в нижней форме и во всплывающей. */
+    fields?: readonly LeadField[]
+    /** Подпись над необязательными полями. */
+    fieldsNote?: string
+  }
 }

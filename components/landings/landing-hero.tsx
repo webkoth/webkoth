@@ -1,15 +1,19 @@
 'use client'
 
 import type { ReactNode } from 'react'
+import { Send } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import type { LandingCopy, LandingSkeleton } from '@/app/data/landings'
 import { useLeadDialog } from '@/components/evolution/lead-dialog'
+import { TelegramLink } from '@/components/analytics/telegram-link'
+import { contacts } from '@/lib/landing/contacts'
 
 // Первый экран лендинга: слева текст и пара кнопок, справа сцена из анимаций главной
 // (components/evolution/animations), подобранная под смысл страницы в landing-page.tsx.
 // На мобильном сцена уходит под кнопки, чтобы призыв к действию оставался в первом экране.
 // Пара кнопок зависит от скелета: symptoms-first ведёт в квиз и в заявку,
-// case-first в заявку и к главному кейсу.
+// case-first в заявку и к главному кейсу, quiz-first в заявку и в Telegram:
+// квиз и так следующий экран, а часть аудитории пишет сразу, минуя форму.
 export function LandingHero({
   copy,
   skeleton,
@@ -40,6 +44,21 @@ export function LandingHero({
                   {copy.secondaryCta}
                 </Button>
               </>
+            ) : skeleton === 'quiz-first' ? (
+              <>
+                <Button size="lg" onClick={() => open()}>
+                  {copy.primaryCta}
+                </Button>
+                <Button
+                  size="lg"
+                  variant="outline"
+                  nativeButton={false}
+                  render={<TelegramLink href={contacts.telegram} target="_blank" rel="noopener noreferrer" />}
+                >
+                  <Send className="text-primary" aria-hidden />
+                  {copy.secondaryCta}
+                </Button>
+              </>
             ) : (
               <>
                 <Button size="lg" onClick={() => open()}>
@@ -52,8 +71,9 @@ export function LandingHero({
             )}
           </div>
         </div>
+        {/* min-w-0: иначе нерушимая ширина таблицы примера растягивает сетку и уводит страницу вбок на телефоне. */}
         {scene ? (
-          <div className="mx-auto w-full max-w-md lg:col-span-5 lg:max-w-none" aria-hidden={false}>
+          <div className="mx-auto w-full max-w-md min-w-0 lg:col-span-5 lg:max-w-none" aria-hidden={false}>
             {scene}
           </div>
         ) : null}

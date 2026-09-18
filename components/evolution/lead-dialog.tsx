@@ -9,6 +9,7 @@ import { contacts } from '@/lib/landing/contacts'
 import { ymGoal } from '@/lib/analytics/ym'
 import type { EvolutionData, Lang } from '@/app/data/evolution/types'
 import type { LeadSource } from '@/lib/evolution/schemas'
+import type { LeadField } from '@/app/data/landings'
 import { LeadForm } from './lead-form'
 
 export type LeadPrefill = { answer?: string; source?: LeadSource }
@@ -32,12 +33,17 @@ export function LeadDialogProvider({
   copy,
   lang,
   defaultSource,
+  fields,
+  fieldsNote,
   children,
 }: {
   copy: EvolutionData['finale']['form']
   lang: Lang
   /** Источник по умолчанию: на лендинге кнопки первого экрана и плавающая открывают форму без него. */
   defaultSource?: LeadSource
+  /** Необязательные поля лендинга: те же, что в форме внизу страницы. */
+  fields?: readonly LeadField[]
+  fieldsNote?: string
   children: ReactNode
 }) {
   const [open, setOpen] = useState(false)
@@ -79,6 +85,8 @@ export function LeadDialogProvider({
         startedAt={openedAt}
         defaultAnswer={prefill.answer}
         source={prefill.source}
+        fields={fields}
+        fieldsNote={fieldsNote}
         onSuccess={close}
       />
     </>
