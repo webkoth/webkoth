@@ -1,0 +1,5141 @@
+{
+ "exported": "2026-09-18",
+ "account": "minasarkisyan",
+ "note": "Слепок пяти РСЯ-кампаний webkoth перед удалением 18.09.2026. Для переноса на другой аккаунт: marketing/direct/api/upload-rsya.mjs --run создаёт всё заново из kampanii.mjs (баннеры в marketing/direct/images). Здесь — фактическое состояние в Директе на момент удаления.",
+ "campaigns": [
+  {
+   "Id": 714528958,
+   "Name": "РСЯ · Контур 1С и маркетплейсы",
+   "StartDate": "2026-09-17",
+   "Type": "UNIFIED_CAMPAIGN",
+   "Status": "DRAFT",
+   "State": "OFF",
+   "DailyBudget": null,
+   "NegativeKeywords": {
+    "Items": [
+     "!своими руками",
+     "!что !такое",
+     "!что !это",
+     "github",
+     "hh",
+     "kwork",
+     "ozon seller скачать",
+     "python",
+     "sap",
+     "беларусь",
+     "бесплатно",
+     "бит",
+     "вакансия",
+     "вебинар",
+     "виктория",
+     "вуз",
+     "диплом",
+     "дипломная",
+     "документация",
+     "зарплата",
+     "институт",
+     "казахстан",
+     "книга",
+     "колледж",
+     "курсовая",
+     "курсы",
+     "образец",
+     "обучающий",
+     "обучение",
+     "презентация",
+     "пример",
+     "программист",
+     "разработчик",
+     "резюме",
+     "реферат",
+     "самозанятый",
+     "скачать",
+     "специальность",
+     "торрент",
+     "узбекистан",
+     "университет",
+     "урок",
+     "учебник",
+     "форум",
+     "фриланс",
+     "шаблон"
+    ]
+   },
+   "ExcludedSites": {
+    "Items": [
+     "BidSwitch",
+     "Inner-active",
+     "Inner-active SSP",
+     "MobFox",
+     "Smaato",
+     "Smaato Inc."
+    ]
+   },
+   "UnifiedCampaign": {
+    "BiddingStrategy": {
+     "Search": {
+      "BiddingStrategyType": "SERVING_OFF"
+     },
+     "Network": {
+      "BiddingStrategyType": "WB_MAXIMUM_CONVERSION_RATE",
+      "WbMaximumConversionRate": {
+       "GoalId": 608551265,
+       "WeeklySpendLimit": 9300000000,
+       "BudgetType": "WEEKLY_BUDGET",
+       "BidCeiling": null
+      }
+     }
+    },
+    "Settings": [
+     {
+      "Option": "ADD_METRICA_TAG",
+      "Value": "YES"
+     },
+     {
+      "Option": "ADD_TO_FAVORITES",
+      "Value": "NO"
+     },
+     {
+      "Option": "CAMPAIGN_EXACT_PHRASE_MATCHING_ENABLED",
+      "Value": "NO"
+     },
+     {
+      "Option": "ALTERNATIVE_TEXTS_ENABLED",
+      "Value": "YES"
+     },
+     {
+      "Option": "ENABLE_AREA_OF_INTEREST_TARGETING",
+      "Value": "YES"
+     },
+     {
+      "Option": "ENABLE_COMPANY_INFO",
+      "Value": "YES"
+     },
+     {
+      "Option": "ENABLE_SITE_MONITORING",
+      "Value": "YES"
+     },
+     {
+      "Option": "REQUIRE_SERVICING",
+      "Value": "NO"
+     },
+     {
+      "Option": "SHARED_ACCOUNT_ENABLED",
+      "Value": "YES"
+     }
+    ],
+    "TrackingParams": "utm_term={keyword}&placement={source}&source_type={source_type}&device={device_type}&region={region_id}&cid={campaign_id}&gid={gbid}&aid={ad_id}&pid={phrase_id}&match={match_type}",
+    "PriorityGoals": {
+     "Items": [
+      {
+       "GoalId": 608551265,
+       "Value": 100000000,
+       "IsMetrikaSourceOfValue": "NO"
+      },
+      {
+       "GoalId": 608551156,
+       "Value": 300000000,
+       "IsMetrikaSourceOfValue": "NO"
+      },
+      {
+       "GoalId": 608551140,
+       "Value": 1000000000,
+       "IsMetrikaSourceOfValue": "NO"
+      }
+     ]
+    },
+    "PackageBiddingStrategy": {
+     "Platforms": {
+      "SearchResult": "NO",
+      "ProductGallery": "NO",
+      "Network": "YES",
+      "DynamicPlaces": "NO"
+     },
+     "StrategyId": 711197609
+    },
+    "CounterIds": {
+     "Items": [
+      112267661
+     ]
+    },
+    "AttributionModel": "AUTO"
+   },
+   "TimeTargeting": {
+    "HolidaysSchedule": {
+     "SuspendOnHolidays": "NO",
+     "BidPercent": 100,
+     "StartHour": 7,
+     "EndHour": 23
+    },
+    "Schedule": {
+     "Items": [
+      "1,0,0,0,0,0,0,0,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,0",
+      "2,0,0,0,0,0,0,0,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,0",
+      "3,0,0,0,0,0,0,0,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,0",
+      "4,0,0,0,0,0,0,0,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,0",
+      "5,0,0,0,0,0,0,0,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,0",
+      "6,0,0,0,0,0,0,0,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,0",
+      "7,0,0,0,0,0,0,0,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,0"
+     ]
+    },
+    "ConsiderWorkingWeekends": "YES"
+   }
+  },
+  {
+   "Id": 714529074,
+   "Name": "РСЯ · ИТ-директор на аутсорсе",
+   "StartDate": "2026-09-17",
+   "Type": "UNIFIED_CAMPAIGN",
+   "Status": "DRAFT",
+   "State": "OFF",
+   "DailyBudget": null,
+   "NegativeKeywords": {
+    "Items": [
+     "!как",
+     "!своими руками",
+     "!что !такое",
+     "!что !это",
+     "audit !it",
+     "hh",
+     "kpi",
+     "аттестация",
+     "аудит !it ru",
+     "беларусь",
+     "бесплатно",
+     "вакансия",
+     "вебинар",
+     "видео",
+     "вуз",
+     "диплом",
+     "дипломная",
+     "договор",
+     "должностная",
+     "зарплата",
+     "институт",
+     "инструкция",
+     "казахстан",
+     "книга",
+     "колледж",
+     "курсовая",
+     "курсы",
+     "лицензия",
+     "образец",
+     "обучающий",
+     "обучение",
+     "обязанности",
+     "презентация",
+     "пример",
+     "работа",
+     "резюме",
+     "реферат",
+     "самостоятельно",
+     "сертификат",
+     "скачать",
+     "специальность",
+     "торрент",
+     "узбекистан",
+     "университет",
+     "урок",
+     "учебник",
+     "фз",
+     "форум",
+     "шаблон"
+    ]
+   },
+   "ExcludedSites": {
+    "Items": [
+     "BidSwitch",
+     "Inner-active",
+     "Inner-active SSP",
+     "MobFox",
+     "Smaato",
+     "Smaato Inc."
+    ]
+   },
+   "UnifiedCampaign": {
+    "BiddingStrategy": {
+     "Search": {
+      "BiddingStrategyType": "SERVING_OFF"
+     },
+     "Network": {
+      "BiddingStrategyType": "WB_MAXIMUM_CONVERSION_RATE",
+      "WbMaximumConversionRate": {
+       "GoalId": 608551265,
+       "WeeklySpendLimit": 9300000000,
+       "BudgetType": "WEEKLY_BUDGET",
+       "BidCeiling": null
+      }
+     }
+    },
+    "Settings": [
+     {
+      "Option": "ADD_METRICA_TAG",
+      "Value": "YES"
+     },
+     {
+      "Option": "ADD_TO_FAVORITES",
+      "Value": "NO"
+     },
+     {
+      "Option": "CAMPAIGN_EXACT_PHRASE_MATCHING_ENABLED",
+      "Value": "NO"
+     },
+     {
+      "Option": "ALTERNATIVE_TEXTS_ENABLED",
+      "Value": "YES"
+     },
+     {
+      "Option": "ENABLE_AREA_OF_INTEREST_TARGETING",
+      "Value": "YES"
+     },
+     {
+      "Option": "ENABLE_COMPANY_INFO",
+      "Value": "YES"
+     },
+     {
+      "Option": "ENABLE_SITE_MONITORING",
+      "Value": "YES"
+     },
+     {
+      "Option": "REQUIRE_SERVICING",
+      "Value": "NO"
+     },
+     {
+      "Option": "SHARED_ACCOUNT_ENABLED",
+      "Value": "YES"
+     }
+    ],
+    "TrackingParams": "utm_term={keyword}&placement={source}&source_type={source_type}&device={device_type}&region={region_id}&cid={campaign_id}&gid={gbid}&aid={ad_id}&pid={phrase_id}&match={match_type}",
+    "PriorityGoals": {
+     "Items": [
+      {
+       "GoalId": 608551265,
+       "Value": 100000000,
+       "IsMetrikaSourceOfValue": "NO"
+      },
+      {
+       "GoalId": 608551156,
+       "Value": 300000000,
+       "IsMetrikaSourceOfValue": "NO"
+      },
+      {
+       "GoalId": 608551140,
+       "Value": 1000000000,
+       "IsMetrikaSourceOfValue": "NO"
+      }
+     ]
+    },
+    "PackageBiddingStrategy": {
+     "Platforms": {
+      "SearchResult": "NO",
+      "ProductGallery": "NO",
+      "Network": "YES",
+      "DynamicPlaces": "NO"
+     },
+     "StrategyId": 711197609
+    },
+    "CounterIds": {
+     "Items": [
+      112267661
+     ]
+    },
+    "AttributionModel": "AUTO"
+   },
+   "TimeTargeting": {
+    "HolidaysSchedule": {
+     "SuspendOnHolidays": "NO",
+     "BidPercent": 100,
+     "StartHour": 7,
+     "EndHour": 23
+    },
+    "Schedule": {
+     "Items": [
+      "1,0,0,0,0,0,0,0,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,0",
+      "2,0,0,0,0,0,0,0,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,0",
+      "3,0,0,0,0,0,0,0,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,0",
+      "4,0,0,0,0,0,0,0,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,0",
+      "5,0,0,0,0,0,0,0,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,0",
+      "6,0,0,0,0,0,0,0,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,0",
+      "7,0,0,0,0,0,0,0,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,0"
+     ]
+    },
+    "ConsiderWorkingWeekends": "YES"
+   }
+  },
+  {
+   "Id": 714529095,
+   "Name": "РСЯ · ИИ-агенты для бизнеса",
+   "StartDate": "2026-09-17",
+   "Type": "UNIFIED_CAMPAIGN",
+   "Status": "DRAFT",
+   "State": "OFF",
+   "DailyBudget": null,
+   "NegativeKeywords": {
+    "Items": [
+     "!как",
+     "!своими руками",
+     "!что !такое",
+     "!что !это",
+     "chatgpt",
+     "claude",
+     "gemini",
+     "github",
+     "gpt",
+     "hermes",
+     "hh",
+     "langchain",
+     "n8n",
+     "open source",
+     "python",
+     "seo",
+     "telegram",
+     "алиса",
+     "беларусь",
+     "бесплатно",
+     "вакансия",
+     "вебинар",
+     "видео",
+     "вуз",
+     "гермес",
+     "гигачат",
+     "голосовой",
+     "диплом",
+     "дипломная",
+     "зарплата",
+     "институт",
+     "инструкция",
+     "казахстан",
+     "карточки",
+     "книга",
+     "колледж",
+     "курсовая",
+     "курсы",
+     "локальный",
+     "маркетинга",
+     "настроить",
+     "образец",
+     "обучающий",
+     "обучение",
+     "построить",
+     "презентация",
+     "пример",
+     "работа",
+     "резюме",
+     "реферат",
+     "самостоятельно",
+     "сбер",
+     "сделать",
+     "скачать",
+     "создать",
+     "специальность",
+     "телеграм",
+     "торрент",
+     "узбекистан",
+     "университет",
+     "урок",
+     "учебник",
+     "форум",
+     "шаблон",
+     "яндекс"
+    ]
+   },
+   "ExcludedSites": {
+    "Items": [
+     "BidSwitch",
+     "Inner-active",
+     "Inner-active SSP",
+     "MobFox",
+     "Smaato",
+     "Smaato Inc."
+    ]
+   },
+   "UnifiedCampaign": {
+    "BiddingStrategy": {
+     "Search": {
+      "BiddingStrategyType": "SERVING_OFF"
+     },
+     "Network": {
+      "BiddingStrategyType": "WB_MAXIMUM_CONVERSION_RATE",
+      "WbMaximumConversionRate": {
+       "GoalId": 608551265,
+       "WeeklySpendLimit": 9300000000,
+       "BudgetType": "WEEKLY_BUDGET",
+       "BidCeiling": null
+      }
+     }
+    },
+    "Settings": [
+     {
+      "Option": "ADD_METRICA_TAG",
+      "Value": "YES"
+     },
+     {
+      "Option": "ADD_TO_FAVORITES",
+      "Value": "NO"
+     },
+     {
+      "Option": "CAMPAIGN_EXACT_PHRASE_MATCHING_ENABLED",
+      "Value": "NO"
+     },
+     {
+      "Option": "ALTERNATIVE_TEXTS_ENABLED",
+      "Value": "YES"
+     },
+     {
+      "Option": "ENABLE_AREA_OF_INTEREST_TARGETING",
+      "Value": "YES"
+     },
+     {
+      "Option": "ENABLE_COMPANY_INFO",
+      "Value": "YES"
+     },
+     {
+      "Option": "ENABLE_SITE_MONITORING",
+      "Value": "YES"
+     },
+     {
+      "Option": "REQUIRE_SERVICING",
+      "Value": "NO"
+     },
+     {
+      "Option": "SHARED_ACCOUNT_ENABLED",
+      "Value": "YES"
+     }
+    ],
+    "TrackingParams": "utm_term={keyword}&placement={source}&source_type={source_type}&device={device_type}&region={region_id}&cid={campaign_id}&gid={gbid}&aid={ad_id}&pid={phrase_id}&match={match_type}",
+    "PriorityGoals": {
+     "Items": [
+      {
+       "GoalId": 608551265,
+       "Value": 100000000,
+       "IsMetrikaSourceOfValue": "NO"
+      },
+      {
+       "GoalId": 608551156,
+       "Value": 300000000,
+       "IsMetrikaSourceOfValue": "NO"
+      },
+      {
+       "GoalId": 608551140,
+       "Value": 1000000000,
+       "IsMetrikaSourceOfValue": "NO"
+      }
+     ]
+    },
+    "PackageBiddingStrategy": {
+     "Platforms": {
+      "SearchResult": "NO",
+      "ProductGallery": "NO",
+      "Network": "YES",
+      "DynamicPlaces": "NO"
+     },
+     "StrategyId": 711197609
+    },
+    "CounterIds": {
+     "Items": [
+      112267661
+     ]
+    },
+    "AttributionModel": "AUTO"
+   },
+   "TimeTargeting": {
+    "HolidaysSchedule": {
+     "SuspendOnHolidays": "NO",
+     "BidPercent": 100,
+     "StartHour": 7,
+     "EndHour": 23
+    },
+    "Schedule": {
+     "Items": [
+      "1,0,0,0,0,0,0,0,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,0",
+      "2,0,0,0,0,0,0,0,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,0",
+      "3,0,0,0,0,0,0,0,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,0",
+      "4,0,0,0,0,0,0,0,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,0",
+      "5,0,0,0,0,0,0,0,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,0",
+      "6,0,0,0,0,0,0,0,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,0",
+      "7,0,0,0,0,0,0,0,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,0"
+     ]
+    },
+    "ConsiderWorkingWeekends": "YES"
+   }
+  },
+  {
+   "Id": 714529126,
+   "Name": "РСЯ · Финансовый контур",
+   "StartDate": "2026-09-17",
+   "Type": "UNIFIED_CAMPAIGN",
+   "Status": "DRAFT",
+   "State": "OFF",
+   "DailyBudget": null,
+   "NegativeKeywords": {
+    "Items": [
+     "!как",
+     "!своими руками",
+     "!что !такое",
+     "!что !это",
+     "excel",
+     "hh",
+     "беларусь",
+     "бесплатно",
+     "вакансия",
+     "вебинар",
+     "видео",
+     "вуз",
+     "диплом",
+     "дипломная",
+     "зарплата",
+     "институт",
+     "инструкция",
+     "казахстан",
+     "книга",
+     "колледж",
+     "курсовая",
+     "курсы",
+     "образец",
+     "обучающий",
+     "обучение",
+     "презентация",
+     "пример",
+     "работа",
+     "резюме",
+     "реферат",
+     "самостоятельно",
+     "скачать",
+     "специальность",
+     "торрент",
+     "узбекистан",
+     "университет",
+     "урок",
+     "учебник",
+     "форум",
+     "шаблон",
+     "эксель"
+    ]
+   },
+   "ExcludedSites": {
+    "Items": [
+     "BidSwitch",
+     "Inner-active",
+     "Inner-active SSP",
+     "MobFox",
+     "Smaato",
+     "Smaato Inc."
+    ]
+   },
+   "UnifiedCampaign": {
+    "BiddingStrategy": {
+     "Search": {
+      "BiddingStrategyType": "SERVING_OFF"
+     },
+     "Network": {
+      "BiddingStrategyType": "WB_MAXIMUM_CONVERSION_RATE",
+      "WbMaximumConversionRate": {
+       "GoalId": 608551265,
+       "WeeklySpendLimit": 9300000000,
+       "BudgetType": "WEEKLY_BUDGET",
+       "BidCeiling": null
+      }
+     }
+    },
+    "Settings": [
+     {
+      "Option": "ADD_METRICA_TAG",
+      "Value": "YES"
+     },
+     {
+      "Option": "ADD_TO_FAVORITES",
+      "Value": "NO"
+     },
+     {
+      "Option": "CAMPAIGN_EXACT_PHRASE_MATCHING_ENABLED",
+      "Value": "NO"
+     },
+     {
+      "Option": "ALTERNATIVE_TEXTS_ENABLED",
+      "Value": "YES"
+     },
+     {
+      "Option": "ENABLE_AREA_OF_INTEREST_TARGETING",
+      "Value": "YES"
+     },
+     {
+      "Option": "ENABLE_COMPANY_INFO",
+      "Value": "YES"
+     },
+     {
+      "Option": "ENABLE_SITE_MONITORING",
+      "Value": "YES"
+     },
+     {
+      "Option": "REQUIRE_SERVICING",
+      "Value": "NO"
+     },
+     {
+      "Option": "SHARED_ACCOUNT_ENABLED",
+      "Value": "YES"
+     }
+    ],
+    "TrackingParams": "utm_term={keyword}&placement={source}&source_type={source_type}&device={device_type}&region={region_id}&cid={campaign_id}&gid={gbid}&aid={ad_id}&pid={phrase_id}&match={match_type}",
+    "PriorityGoals": {
+     "Items": [
+      {
+       "GoalId": 608551265,
+       "Value": 100000000,
+       "IsMetrikaSourceOfValue": "NO"
+      },
+      {
+       "GoalId": 608551156,
+       "Value": 300000000,
+       "IsMetrikaSourceOfValue": "NO"
+      },
+      {
+       "GoalId": 608551140,
+       "Value": 1000000000,
+       "IsMetrikaSourceOfValue": "NO"
+      }
+     ]
+    },
+    "PackageBiddingStrategy": {
+     "Platforms": {
+      "SearchResult": "NO",
+      "ProductGallery": "NO",
+      "Network": "YES",
+      "DynamicPlaces": "NO"
+     },
+     "StrategyId": 711197609
+    },
+    "CounterIds": {
+     "Items": [
+      112267661
+     ]
+    },
+    "AttributionModel": "AUTO"
+   },
+   "TimeTargeting": {
+    "HolidaysSchedule": {
+     "SuspendOnHolidays": "NO",
+     "BidPercent": 100,
+     "StartHour": 7,
+     "EndHour": 23
+    },
+    "Schedule": {
+     "Items": [
+      "1,0,0,0,0,0,0,0,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,0",
+      "2,0,0,0,0,0,0,0,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,0",
+      "3,0,0,0,0,0,0,0,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,0",
+      "4,0,0,0,0,0,0,0,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,0",
+      "5,0,0,0,0,0,0,0,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,0",
+      "6,0,0,0,0,0,0,0,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,0",
+      "7,0,0,0,0,0,0,0,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,0"
+     ]
+    },
+    "ConsiderWorkingWeekends": "YES"
+   }
+  },
+  {
+   "Id": 714529148,
+   "Name": "РСЯ · Автоматизация бизнеса",
+   "StartDate": "2026-09-17",
+   "Type": "UNIFIED_CAMPAIGN",
+   "Status": "DRAFT",
+   "State": "OFF",
+   "DailyBudget": null,
+   "NegativeKeywords": {
+    "Items": [
+     "!как",
+     "!своими руками",
+     "!что !такое",
+     "!что !это",
+     "1с",
+     "amocrm",
+     "erp",
+     "excel",
+     "hh",
+     "low code",
+     "rpa",
+     "sap",
+     "wms",
+     "автосервиса",
+     "беларусь",
+     "бесплатно",
+     "битрикс",
+     "битрикс24",
+     "бот",
+     "вакансия",
+     "вебинар",
+     "видео",
+     "вуз",
+     "диплом",
+     "дипломная",
+     "доставки",
+     "зарплата",
+     "институт",
+     "инструкция",
+     "казахстан",
+     "клиники",
+     "книга",
+     "колледж",
+     "курсовая",
+     "курсы",
+     "магазина",
+     "образец",
+     "обучающий",
+     "обучение",
+     "отеля",
+     "презентация",
+     "пример",
+     "производства",
+     "работа",
+     "резюме",
+     "ресторана",
+     "реферат",
+     "салона",
+     "самостоятельно",
+     "скачать",
+     "склада",
+     "специальность",
+     "стоматологии",
+     "такси",
+     "торрент",
+     "узбекистан",
+     "университет",
+     "урок",
+     "учебник",
+     "форум",
+     "чат бот",
+     "шаблон"
+    ]
+   },
+   "ExcludedSites": {
+    "Items": [
+     "BidSwitch",
+     "Inner-active",
+     "Inner-active SSP",
+     "MobFox",
+     "Smaato",
+     "Smaato Inc."
+    ]
+   },
+   "UnifiedCampaign": {
+    "BiddingStrategy": {
+     "Search": {
+      "BiddingStrategyType": "SERVING_OFF"
+     },
+     "Network": {
+      "BiddingStrategyType": "WB_MAXIMUM_CONVERSION_RATE",
+      "WbMaximumConversionRate": {
+       "GoalId": 608551265,
+       "WeeklySpendLimit": 9300000000,
+       "BudgetType": "WEEKLY_BUDGET",
+       "BidCeiling": null
+      }
+     }
+    },
+    "Settings": [
+     {
+      "Option": "ADD_METRICA_TAG",
+      "Value": "YES"
+     },
+     {
+      "Option": "ADD_TO_FAVORITES",
+      "Value": "NO"
+     },
+     {
+      "Option": "CAMPAIGN_EXACT_PHRASE_MATCHING_ENABLED",
+      "Value": "NO"
+     },
+     {
+      "Option": "ALTERNATIVE_TEXTS_ENABLED",
+      "Value": "YES"
+     },
+     {
+      "Option": "ENABLE_AREA_OF_INTEREST_TARGETING",
+      "Value": "YES"
+     },
+     {
+      "Option": "ENABLE_COMPANY_INFO",
+      "Value": "YES"
+     },
+     {
+      "Option": "ENABLE_SITE_MONITORING",
+      "Value": "YES"
+     },
+     {
+      "Option": "REQUIRE_SERVICING",
+      "Value": "NO"
+     },
+     {
+      "Option": "SHARED_ACCOUNT_ENABLED",
+      "Value": "YES"
+     }
+    ],
+    "TrackingParams": "utm_term={keyword}&placement={source}&source_type={source_type}&device={device_type}&region={region_id}&cid={campaign_id}&gid={gbid}&aid={ad_id}&pid={phrase_id}&match={match_type}",
+    "PriorityGoals": {
+     "Items": [
+      {
+       "GoalId": 608551265,
+       "Value": 100000000,
+       "IsMetrikaSourceOfValue": "NO"
+      },
+      {
+       "GoalId": 608551156,
+       "Value": 300000000,
+       "IsMetrikaSourceOfValue": "NO"
+      },
+      {
+       "GoalId": 608551140,
+       "Value": 1000000000,
+       "IsMetrikaSourceOfValue": "NO"
+      }
+     ]
+    },
+    "PackageBiddingStrategy": {
+     "Platforms": {
+      "SearchResult": "NO",
+      "ProductGallery": "NO",
+      "Network": "YES",
+      "DynamicPlaces": "NO"
+     },
+     "StrategyId": 711197609
+    },
+    "CounterIds": {
+     "Items": [
+      112267661
+     ]
+    },
+    "AttributionModel": "AUTO"
+   },
+   "TimeTargeting": {
+    "HolidaysSchedule": {
+     "SuspendOnHolidays": "NO",
+     "BidPercent": 100,
+     "StartHour": 7,
+     "EndHour": 23
+    },
+    "Schedule": {
+     "Items": [
+      "1,0,0,0,0,0,0,0,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,0",
+      "2,0,0,0,0,0,0,0,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,0",
+      "3,0,0,0,0,0,0,0,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,0",
+      "4,0,0,0,0,0,0,0,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,0",
+      "5,0,0,0,0,0,0,0,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,0",
+      "6,0,0,0,0,0,0,0,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,0",
+      "7,0,0,0,0,0,0,0,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,0"
+     ]
+    },
+    "ConsiderWorkingWeekends": "YES"
+   }
+  }
+ ],
+ "strategy": [
+  {
+   "Id": 711197609,
+   "AttributionModel": "AUTO",
+   "Type": "WB_MAXIMUM_CONVERSION_RATE",
+   "PriorityGoals": {
+    "Items": [
+     {
+      "GoalId": 608551265,
+      "Value": 100000000,
+      "IsMetrikaSourceOfValue": "NO"
+     },
+     {
+      "GoalId": 608551156,
+      "Value": 300000000,
+      "IsMetrikaSourceOfValue": "NO"
+     },
+     {
+      "GoalId": 608551140,
+      "Value": 1000000000,
+      "IsMetrikaSourceOfValue": "NO"
+     }
+    ]
+   },
+   "CounterIds": {
+    "Items": [
+     112267661
+    ]
+   },
+   "Name": "webkoth РСЯ · старт квиза",
+   "WbMaximumConversionRate": {
+    "WeeklySpendLimit": 9300000000,
+    "BidCeiling": null,
+    "GoalId": 608551265
+   }
+  }
+ ],
+ "adgroups": [
+  {
+   "Id": 5800030944,
+   "Name": "Автоматизация бизнеса",
+   "CampaignId": 714529148,
+   "Status": "DRAFT",
+   "UnifiedAdGroup": {
+    "OfferRetargeting": "NO"
+   },
+   "RegionIds": [
+    225
+   ],
+   "NegativeKeywords": {
+    "Items": [
+     "программа",
+     "система"
+    ]
+   }
+  },
+  {
+   "Id": 5800030953,
+   "Name": "Автоматизация бизнес-процессов",
+   "CampaignId": 714529148,
+   "Status": "DRAFT",
+   "UnifiedAdGroup": {
+    "OfferRetargeting": "NO"
+   },
+   "RegionIds": [
+    225
+   ],
+   "NegativeKeywords": {
+    "Items": [
+     "программа",
+     "система"
+    ]
+   }
+  },
+  {
+   "Id": 5800030966,
+   "Name": "Аудит процессов и разработка на заказ",
+   "CampaignId": 714529148,
+   "Status": "DRAFT",
+   "UnifiedAdGroup": {
+    "OfferRetargeting": "NO"
+   },
+   "RegionIds": [
+    225
+   ],
+   "NegativeKeywords": null
+  },
+  {
+   "Id": 5800026679,
+   "Name": "Интеграция 1С с маркетплейсами",
+   "CampaignId": 714528958,
+   "Status": "DRAFT",
+   "UnifiedAdGroup": {
+    "OfferRetargeting": "NO"
+   },
+   "RegionIds": [
+    225
+   ],
+   "NegativeKeywords": null
+  },
+  {
+   "Id": 5800026749,
+   "Name": "Отчёты площадок в 1С",
+   "CampaignId": 714528958,
+   "Status": "DRAFT",
+   "UnifiedAdGroup": {
+    "OfferRetargeting": "NO"
+   },
+   "RegionIds": [
+    225
+   ],
+   "NegativeKeywords": null
+  },
+  {
+   "Id": 5800026842,
+   "Name": "Синхронизация остатков и сверка",
+   "CampaignId": 714528958,
+   "Status": "DRAFT",
+   "UnifiedAdGroup": {
+    "OfferRetargeting": "NO"
+   },
+   "RegionIds": [
+    225
+   ],
+   "NegativeKeywords": null
+  },
+  {
+   "Id": 5800030594,
+   "Name": "ИИ-агенты для бизнеса",
+   "CampaignId": 714529095,
+   "Status": "DRAFT",
+   "UnifiedAdGroup": {
+    "OfferRetargeting": "NO"
+   },
+   "RegionIds": [
+    225
+   ],
+   "NegativeKeywords": null
+  },
+  {
+   "Id": 5800030615,
+   "Name": "Внедрение ИИ-агентов",
+   "CampaignId": 714529095,
+   "Status": "DRAFT",
+   "UnifiedAdGroup": {
+    "OfferRetargeting": "NO"
+   },
+   "RegionIds": [
+    225
+   ],
+   "NegativeKeywords": null
+  },
+  {
+   "Id": 5800030647,
+   "Name": "Заказать или купить ИИ-агента",
+   "CampaignId": 714529095,
+   "Status": "DRAFT",
+   "UnifiedAdGroup": {
+    "OfferRetargeting": "NO"
+   },
+   "RegionIds": [
+    225
+   ],
+   "NegativeKeywords": null
+  },
+  {
+   "Id": 5800030650,
+   "Name": "ИИ-автоматизация процессов",
+   "CampaignId": 714529095,
+   "Status": "DRAFT",
+   "UnifiedAdGroup": {
+    "OfferRetargeting": "NO"
+   },
+   "RegionIds": [
+    225
+   ],
+   "NegativeKeywords": null
+  },
+  {
+   "Id": 5800030463,
+   "Name": "ИТ-директор на аутсорсе",
+   "CampaignId": 714529074,
+   "Status": "DRAFT",
+   "UnifiedAdGroup": {
+    "OfferRetargeting": "NO"
+   },
+   "RegionIds": [
+    225
+   ],
+   "NegativeKeywords": null
+  },
+  {
+   "Id": 5800030482,
+   "Name": "ИТ-аутсорсинг инфраструктуры",
+   "CampaignId": 714529074,
+   "Status": "DRAFT",
+   "UnifiedAdGroup": {
+    "OfferRetargeting": "NO"
+   },
+   "RegionIds": [
+    225
+   ],
+   "NegativeKeywords": null
+  },
+  {
+   "Id": 5800030497,
+   "Name": "Аудит ИТ-инфраструктуры",
+   "CampaignId": 714529074,
+   "Status": "DRAFT",
+   "UnifiedAdGroup": {
+    "OfferRetargeting": "NO"
+   },
+   "RegionIds": [
+    225
+   ],
+   "NegativeKeywords": null
+  },
+  {
+   "Id": 5800030849,
+   "Name": "Распознавание первичных документов 1С",
+   "CampaignId": 714529126,
+   "Status": "DRAFT",
+   "UnifiedAdGroup": {
+    "OfferRetargeting": "NO"
+   },
+   "RegionIds": [
+    225
+   ],
+   "NegativeKeywords": {
+    "Items": [
+     "abbyy",
+     "entera",
+     "finereader",
+     "qr",
+     "диадок",
+     "контур",
+     "онлайн",
+     "паспорт",
+     "печать",
+     "подпись",
+     "правовых",
+     "рукописного",
+     "сбис",
+     "сканер",
+     "текста",
+     "фото",
+     "штрих",
+     "энтера",
+     "юридических"
+    ]
+   }
+  },
+  {
+   "Id": 5800030853,
+   "Name": "Сервис распознавания документов",
+   "CampaignId": 714529126,
+   "Status": "DRAFT",
+   "UnifiedAdGroup": {
+    "OfferRetargeting": "NO"
+   },
+   "RegionIds": [
+    225
+   ],
+   "NegativeKeywords": {
+    "Items": [
+     "abbyy",
+     "entera",
+     "finereader",
+     "qr",
+     "диадок",
+     "контур",
+     "онлайн",
+     "паспорт",
+     "печать",
+     "подпись",
+     "правовых",
+     "рукописного",
+     "сбис",
+     "сканер",
+     "текста",
+     "фото",
+     "штрих",
+     "энтера",
+     "юридических"
+    ]
+   }
+  },
+  {
+   "Id": 5800030860,
+   "Name": "Автоматизация управленческой отчётности",
+   "CampaignId": 714529126,
+   "Status": "DRAFT",
+   "UnifiedAdGroup": {
+    "OfferRetargeting": "NO"
+   },
+   "RegionIds": [
+    225
+   ],
+   "NegativeKeywords": {
+    "Items": [
+     "ozon",
+     "power bi",
+     "wildberries",
+     "бюджетных",
+     "гугл",
+     "маркетплейс",
+     "мсфо",
+     "налоговой",
+     "программа",
+     "рсбу",
+     "сдать",
+     "сдача",
+     "учреждений",
+     "формы"
+    ]
+   }
+  },
+  {
+   "Id": 5800030868,
+   "Name": "ИИ для бухгалтерии и финансов",
+   "CampaignId": 714529126,
+   "Status": "DRAFT",
+   "UnifiedAdGroup": {
+    "OfferRetargeting": "NO"
+   },
+   "RegionIds": [
+    225
+   ],
+   "NegativeKeywords": {
+    "Items": [
+     "ozon",
+     "power bi",
+     "wildberries",
+     "бюджетных",
+     "гугл",
+     "маркетплейс",
+     "мсфо",
+     "налоговой",
+     "программа",
+     "рсбу",
+     "сдать",
+     "сдача",
+     "учреждений",
+     "формы"
+    ]
+   }
+  }
+ ],
+ "ads": [
+  {
+   "Id": 1921615305784239004,
+   "CampaignId": 714529148,
+   "AdGroupId": 5800030944,
+   "Status": "DRAFT",
+   "State": "OFF",
+   "Type": "RESPONSIVE_AD",
+   "ResponsiveAd": {
+    "Texts": [
+     {
+      "Text": "Финансы прозрачнее, решения точнее, процессы быстрее. Первый шаг: аудит и карта.",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Text": "Решаю задачи бизнеса один раз: системой. Бесплатный разбор процессов, 30 минут.",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Text": "Знаю, чем попытка, которая заглохнет, отличается от той, которая поедет.",
+      "Status": "ACCEPTED"
+     }
+    ],
+    "Titles": [
+     {
+      "Title": "Автоматизация бизнеса: сначала система",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "Из хаоса в систему, из рутины в автоматизацию",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "Три захода на одну задачу и все остановлены?",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "Разбор бесплатно",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "Системой, а не наймом",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "Дело в методологии",
+      "Status": "ACCEPTED"
+     }
+    ],
+    "AdImages": {
+     "Items": [
+      {
+       "ImageHash": "15A9x4E7W2z1PWCgs23-0g",
+       "ImageUrl": "http://direct.yandex.ru/images/direct/4303262/15A9x4E7W2z1PWCgs23-0g",
+       "Status": "ACCEPTED"
+      },
+      {
+       "ImageHash": "whWgy_2pM7vPQRQJFKhNnw",
+       "ImageUrl": "http://direct.yandex.ru/images/direct/3950780/whWgy_2pM7vPQRQJFKhNnw",
+       "Status": "ACCEPTED"
+      },
+      {
+       "ImageHash": "xIDRiZ1oTgf409HWU9Cx7A",
+       "ImageUrl": "http://direct.yandex.ru/images/direct/5223989/xIDRiZ1oTgf409HWU9Cx7A",
+       "Status": "ACCEPTED"
+      }
+     ]
+    },
+    "Href": "https://webkoth.com/?utm_source=yandex&utm_medium=cpc&utm_campaign=home-rsya&utm_content=avtomatizaciya-biznesa",
+    "DisplayUrlPath": "эволюция-бизнеса",
+    "SitelinkSetId": 1510979513,
+    "AdExtensions": [
+     {
+      "AdExtensionId": 44479600,
+      "Type": "CALLOUT"
+     },
+     {
+      "AdExtensionId": 44479699,
+      "Type": "CALLOUT"
+     },
+     {
+      "AdExtensionId": 44479700,
+      "Type": "CALLOUT"
+     },
+     {
+      "AdExtensionId": 44479604,
+      "Type": "CALLOUT"
+     },
+     {
+      "AdExtensionId": 44479680,
+      "Type": "CALLOUT"
+     }
+    ]
+   }
+  },
+  {
+   "Id": 1921615315447151293,
+   "CampaignId": 714529148,
+   "AdGroupId": 5800030953,
+   "Status": "DRAFT",
+   "State": "OFF",
+   "Type": "RESPONSIVE_AD",
+   "ResponsiveAd": {
+    "Texts": [
+     {
+      "Text": "Карта процессов, вердикт по каждому шагу, запуск первого процесса, сопровождение.",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Text": "Не всё стоит автоматизировать. Разбираю процесс и говорю честно. Бесплатно.",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Text": "Знаю, чем попытка, которая заглохнет, отличается от той, которая поедет.",
+      "Status": "ACCEPTED"
+     }
+    ],
+    "Titles": [
+     {
+      "Title": "Автоматизация бизнес-процессов под ключ",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "Бизнес-процессы: автоматизировать или убрать",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "Три захода на одну задачу и все остановлены?",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "От аудита до production",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "Вердикт по стандарту",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "Дело в методологии",
+      "Status": "ACCEPTED"
+     }
+    ],
+    "AdImages": {
+     "Items": [
+      {
+       "ImageHash": "15A9x4E7W2z1PWCgs23-0g",
+       "ImageUrl": "http://direct.yandex.ru/images/direct/4303262/15A9x4E7W2z1PWCgs23-0g",
+       "Status": "ACCEPTED"
+      },
+      {
+       "ImageHash": "whWgy_2pM7vPQRQJFKhNnw",
+       "ImageUrl": "http://direct.yandex.ru/images/direct/3950780/whWgy_2pM7vPQRQJFKhNnw",
+       "Status": "ACCEPTED"
+      },
+      {
+       "ImageHash": "xIDRiZ1oTgf409HWU9Cx7A",
+       "ImageUrl": "http://direct.yandex.ru/images/direct/5223989/xIDRiZ1oTgf409HWU9Cx7A",
+       "Status": "ACCEPTED"
+      }
+     ]
+    },
+    "Href": "https://webkoth.com/?utm_source=yandex&utm_medium=cpc&utm_campaign=home-rsya&utm_content=avtomatizaciya-biznes-processov",
+    "DisplayUrlPath": "эволюция-бизнеса",
+    "SitelinkSetId": 1510979878,
+    "AdExtensions": [
+     {
+      "AdExtensionId": 44479600,
+      "Type": "CALLOUT"
+     },
+     {
+      "AdExtensionId": 44479699,
+      "Type": "CALLOUT"
+     },
+     {
+      "AdExtensionId": 44479700,
+      "Type": "CALLOUT"
+     },
+     {
+      "AdExtensionId": 44479604,
+      "Type": "CALLOUT"
+     },
+     {
+      "AdExtensionId": 44479680,
+      "Type": "CALLOUT"
+     }
+    ]
+   }
+  },
+  {
+   "Id": 1921615322963316223,
+   "CampaignId": 714529148,
+   "AdGroupId": 5800030966,
+   "Status": "DRAFT",
+   "State": "OFF",
+   "Type": "RESPONSIVE_AD",
+   "ResponsiveAd": {
+    "Texts": [
+     {
+      "Text": "Что у вас есть, что сломается, что автоматизировать первым. Отчёт с планом.",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Text": "Системы строят ваши специалисты, я отвечаю за инженерную часть. Разбор бесплатно.",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Text": "Знаю, чем попытка, которая заглохнет, отличается от той, которая поедет.",
+      "Status": "ACCEPTED"
+     }
+    ],
+    "Titles": [
+     {
+      "Title": "Аудит бизнес-процессов и карта систем",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "Разработка сервисов и CRM под ваш процесс",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "Три захода на одну задачу и все остановлены?",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "Неделя, только чтение",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "Внутри вашей компании",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "Дело в методологии",
+      "Status": "ACCEPTED"
+     }
+    ],
+    "AdImages": {
+     "Items": [
+      {
+       "ImageHash": "15A9x4E7W2z1PWCgs23-0g",
+       "ImageUrl": "http://direct.yandex.ru/images/direct/4303262/15A9x4E7W2z1PWCgs23-0g",
+       "Status": "ACCEPTED"
+      },
+      {
+       "ImageHash": "whWgy_2pM7vPQRQJFKhNnw",
+       "ImageUrl": "http://direct.yandex.ru/images/direct/3950780/whWgy_2pM7vPQRQJFKhNnw",
+       "Status": "ACCEPTED"
+      },
+      {
+       "ImageHash": "xIDRiZ1oTgf409HWU9Cx7A",
+       "ImageUrl": "http://direct.yandex.ru/images/direct/5223989/xIDRiZ1oTgf409HWU9Cx7A",
+       "Status": "ACCEPTED"
+      }
+     ]
+    },
+    "Href": "https://webkoth.com/?utm_source=yandex&utm_medium=cpc&utm_campaign=home-rsya&utm_content=audit-i-razrabotka",
+    "DisplayUrlPath": "эволюция-бизнеса",
+    "SitelinkSetId": 1510980570,
+    "AdExtensions": [
+     {
+      "AdExtensionId": 44479600,
+      "Type": "CALLOUT"
+     },
+     {
+      "AdExtensionId": 44479699,
+      "Type": "CALLOUT"
+     },
+     {
+      "AdExtensionId": 44479700,
+      "Type": "CALLOUT"
+     },
+     {
+      "AdExtensionId": 44479604,
+      "Type": "CALLOUT"
+     },
+     {
+      "AdExtensionId": 44479680,
+      "Type": "CALLOUT"
+     }
+    ]
+   }
+  },
+  {
+   "Id": 1921615081372386671,
+   "CampaignId": 714528958,
+   "AdGroupId": 5800026679,
+   "Status": "DRAFT",
+   "State": "OFF",
+   "Type": "RESPONSIVE_AD",
+   "ResponsiveAd": {
+    "Texts": [
+     {
+      "Text": "Отчёты о реализации WB, Ozon и Маркета уходят в 1С по расписанию. Без выгрузок.",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Text": "Видно, где площадка недоплатила: продажи, комиссии, возвраты и выплаты рядом.",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Text": "Разбор 30 минут: что не сходится и что делать первым. Внедрение от 150 тыс. ₽",
+      "Status": "ACCEPTED"
+     }
+    ],
+    "Titles": [
+     {
+      "Title": "Отчёты Wildberries и Ozon сами попадают в 1С",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "Сколько площадка удержала и почему: сверка с 1С",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "Выплаты площадок не сходятся с 1С?",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "Интеграция 1С с WB и Ozon",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "Интеграция 1С с маркетплейсами",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "WB, Ozon и Маркет в 1С",
+      "Status": "ACCEPTED"
+     }
+    ],
+    "AdImages": {
+     "Items": [
+      {
+       "ImageHash": "zA1LXpztKCfejkeWyDZWMg",
+       "ImageUrl": "http://direct.yandex.ru/images/direct/5220335/zA1LXpztKCfejkeWyDZWMg",
+       "Status": "ACCEPTED"
+      },
+      {
+       "ImageHash": "ZLLQD2_noEdxgI-klC1tyQ",
+       "ImageUrl": "http://direct.yandex.ru/images/direct/4824955/ZLLQD2_noEdxgI-klC1tyQ",
+       "Status": "ACCEPTED"
+      },
+      {
+       "ImageHash": "qwukjUDVIwkCYcSX4bjf3A",
+       "ImageUrl": "http://direct.yandex.ru/images/direct/5283119/qwukjUDVIwkCYcSX4bjf3A",
+       "Status": "ACCEPTED"
+      },
+      {
+       "ImageHash": "Vn3OfwYThroMT1FYK1h7AA",
+       "ImageUrl": "http://direct.yandex.ru/images/direct/4376277/Vn3OfwYThroMT1FYK1h7AA",
+       "Status": "ACCEPTED"
+      },
+      {
+       "ImageHash": "HdTYPVQ2RflPq8YJVVjf0Q",
+       "ImageUrl": "http://direct.yandex.ru/images/direct/5220055/HdTYPVQ2RflPq8YJVVjf0Q",
+       "Status": "ACCEPTED"
+      }
+     ]
+    },
+    "Href": "https://webkoth.com/kontur?utm_source=yandex&utm_medium=cpc&utm_campaign=kontur-rsya&utm_content=integraciya-1s-marketpleysy",
+    "DisplayUrlPath": "контур-1С",
+    "SitelinkSetId": 1510968376,
+    "AdExtensions": [
+     {
+      "AdExtensionId": 44479600,
+      "Type": "CALLOUT"
+     },
+     {
+      "AdExtensionId": 44479601,
+      "Type": "CALLOUT"
+     },
+     {
+      "AdExtensionId": 44479602,
+      "Type": "CALLOUT"
+     },
+     {
+      "AdExtensionId": 44479603,
+      "Type": "CALLOUT"
+     },
+     {
+      "AdExtensionId": 44484199,
+      "Type": "CALLOUT"
+     }
+    ]
+   }
+  },
+  {
+   "Id": 1921615087814302413,
+   "CampaignId": 714528958,
+   "AdGroupId": 5800026749,
+   "Status": "DRAFT",
+   "State": "OFF",
+   "Type": "RESPONSIVE_AD",
+   "ResponsiveAd": {
+    "Texts": [
+     {
+      "Text": "Комиссии, логистика и возвраты из отчётов площадок попадают в 1С проводками.",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Text": "Спорные строки уходят бухгалтеру в очередь, остальное проводит программа.",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Text": "Разбор 30 минут: что не сходится и что делать первым. Внедрение от 150 тыс. ₽",
+      "Status": "ACCEPTED"
+     }
+    ],
+    "Titles": [
+     {
+      "Title": "Бухгалтер вручную разносит отчёты площадок в 1С?",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "Отчёт комиссионера Wildberries в 1С без ручного ввода",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "Выплаты площадок не сходятся с 1С?",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "Учёт маркетплейсов в 1С",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "Отчёты WB и Ozon по расписанию",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "WB, Ozon и Маркет в 1С",
+      "Status": "ACCEPTED"
+     }
+    ],
+    "AdImages": {
+     "Items": [
+      {
+       "ImageHash": "zA1LXpztKCfejkeWyDZWMg",
+       "ImageUrl": "http://direct.yandex.ru/images/direct/5220335/zA1LXpztKCfejkeWyDZWMg",
+       "Status": "ACCEPTED"
+      },
+      {
+       "ImageHash": "ZLLQD2_noEdxgI-klC1tyQ",
+       "ImageUrl": "http://direct.yandex.ru/images/direct/4824955/ZLLQD2_noEdxgI-klC1tyQ",
+       "Status": "ACCEPTED"
+      },
+      {
+       "ImageHash": "qwukjUDVIwkCYcSX4bjf3A",
+       "ImageUrl": "http://direct.yandex.ru/images/direct/5283119/qwukjUDVIwkCYcSX4bjf3A",
+       "Status": "ACCEPTED"
+      },
+      {
+       "ImageHash": "Vn3OfwYThroMT1FYK1h7AA",
+       "ImageUrl": "http://direct.yandex.ru/images/direct/4376277/Vn3OfwYThroMT1FYK1h7AA",
+       "Status": "ACCEPTED"
+      },
+      {
+       "ImageHash": "HdTYPVQ2RflPq8YJVVjf0Q",
+       "ImageUrl": "http://direct.yandex.ru/images/direct/5220055/HdTYPVQ2RflPq8YJVVjf0Q",
+       "Status": "ACCEPTED"
+      }
+     ]
+    },
+    "Href": "https://webkoth.com/kontur?utm_source=yandex&utm_medium=cpc&utm_campaign=kontur-rsya&utm_content=otchety-ploshchadok-1s",
+    "DisplayUrlPath": "контур-1С",
+    "SitelinkSetId": 1511048065,
+    "AdExtensions": [
+     {
+      "AdExtensionId": 44479600,
+      "Type": "CALLOUT"
+     },
+     {
+      "AdExtensionId": 44479601,
+      "Type": "CALLOUT"
+     },
+     {
+      "AdExtensionId": 44479602,
+      "Type": "CALLOUT"
+     },
+     {
+      "AdExtensionId": 44479603,
+      "Type": "CALLOUT"
+     },
+     {
+      "AdExtensionId": 44484199,
+      "Type": "CALLOUT"
+     }
+    ]
+   }
+  },
+  {
+   "Id": 1921615095329326939,
+   "CampaignId": 714528958,
+   "AdGroupId": 5800026842,
+   "Status": "DRAFT",
+   "State": "OFF",
+   "Type": "RESPONSIVE_AD",
+   "ResponsiveAd": {
+    "Texts": [
+     {
+      "Text": "Остатки из 1С уходят на WB, Ozon и Маркет по расписанию. Расхождения видны сразу.",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Text": "Сверяю продажи, возвраты и выплаты площадок с 1С до единицы товара.",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Text": "Разбор 30 минут: что не сходится и что делать первым. Внедрение от 150 тыс. ₽",
+      "Status": "ACCEPTED"
+     }
+    ],
+    "Titles": [
+     {
+      "Title": "Остатки в 1С и на площадках снова разные?",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "Продали товар, которого уже нет на складе?",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "Выплаты площадок не сходятся с 1С?",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "Синхронизация остатков с 1С",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "Сверка продаж и выплат с 1С",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "WB, Ozon и Маркет в 1С",
+      "Status": "ACCEPTED"
+     }
+    ],
+    "AdImages": {
+     "Items": [
+      {
+       "ImageHash": "zA1LXpztKCfejkeWyDZWMg",
+       "ImageUrl": "http://direct.yandex.ru/images/direct/5220335/zA1LXpztKCfejkeWyDZWMg",
+       "Status": "ACCEPTED"
+      },
+      {
+       "ImageHash": "ZLLQD2_noEdxgI-klC1tyQ",
+       "ImageUrl": "http://direct.yandex.ru/images/direct/4824955/ZLLQD2_noEdxgI-klC1tyQ",
+       "Status": "ACCEPTED"
+      },
+      {
+       "ImageHash": "qwukjUDVIwkCYcSX4bjf3A",
+       "ImageUrl": "http://direct.yandex.ru/images/direct/5283119/qwukjUDVIwkCYcSX4bjf3A",
+       "Status": "ACCEPTED"
+      },
+      {
+       "ImageHash": "Vn3OfwYThroMT1FYK1h7AA",
+       "ImageUrl": "http://direct.yandex.ru/images/direct/4376277/Vn3OfwYThroMT1FYK1h7AA",
+       "Status": "ACCEPTED"
+      },
+      {
+       "ImageHash": "HdTYPVQ2RflPq8YJVVjf0Q",
+       "ImageUrl": "http://direct.yandex.ru/images/direct/5220055/HdTYPVQ2RflPq8YJVVjf0Q",
+       "Status": "ACCEPTED"
+      }
+     ]
+    },
+    "Href": "https://webkoth.com/kontur?utm_source=yandex&utm_medium=cpc&utm_campaign=kontur-rsya&utm_content=sinhronizaciya-ostatkov",
+    "DisplayUrlPath": "контур-1С",
+    "SitelinkSetId": 1510970161,
+    "AdExtensions": [
+     {
+      "AdExtensionId": 44479600,
+      "Type": "CALLOUT"
+     },
+     {
+      "AdExtensionId": 44479601,
+      "Type": "CALLOUT"
+     },
+     {
+      "AdExtensionId": 44479602,
+      "Type": "CALLOUT"
+     },
+     {
+      "AdExtensionId": 44479603,
+      "Type": "CALLOUT"
+     },
+     {
+      "AdExtensionId": 44484199,
+      "Type": "CALLOUT"
+     }
+    ]
+   }
+  },
+  {
+   "Id": 1921615232766450056,
+   "CampaignId": 714529095,
+   "AdGroupId": 5800030594,
+   "Status": "DRAFT",
+   "State": "OFF",
+   "Type": "RESPONSIVE_AD",
+   "ResponsiveAd": {
+    "Texts": [
+     {
+      "Text": "Разбираю один процесс и говорю честно: где агент, где программа, что не трогать.",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Text": "Половина вердиктов по стандарту не про ИИ. Сначала процесс, потом агент. Кейсы.",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Text": "Восемь вопросов к каждому шагу и честный вердикт. Половина ответов не про ИИ.",
+      "Status": "ACCEPTED"
+     }
+    ],
+    "Titles": [
+     {
+      "Title": "ИИ-агенты для бизнеса: нужен ли вам",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "ИИ-агент в компанию без презумпции внедрения",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "Прототип на ИИ есть, пользы нет?",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "Вердикт за 30 минут",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "Бесплатный разбор",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "Разбор процесса бесплатно",
+      "Status": "ACCEPTED"
+     }
+    ],
+    "AdImages": {
+     "Items": [
+      {
+       "ImageHash": "ZP1GZLDurH-BgMjA5Nu8nw",
+       "ImageUrl": "http://direct.yandex.ru/images/direct/5224137/ZP1GZLDurH-BgMjA5Nu8nw",
+       "Status": "ACCEPTED"
+      },
+      {
+       "ImageHash": "gP_RL83004rfcFQEmFX06A",
+       "ImageUrl": "http://direct.yandex.ru/images/direct/5231987/gP_RL83004rfcFQEmFX06A",
+       "Status": "ACCEPTED"
+      },
+      {
+       "ImageHash": "7ilwSENvy47WOvU4vK7kjw",
+       "ImageUrl": "http://direct.yandex.ru/images/direct/5241204/7ilwSENvy47WOvU4vK7kjw",
+       "Status": "ACCEPTED"
+      }
+     ]
+    },
+    "Href": "https://webkoth.com/agent?utm_source=yandex&utm_medium=cpc&utm_campaign=agent-rsya&utm_content=ii-agenty-dlya-biznesa",
+    "DisplayUrlPath": "ИИ-агент-вердикт",
+    "SitelinkSetId": 1510976413,
+    "AdExtensions": [
+     {
+      "AdExtensionId": 44479677,
+      "Type": "CALLOUT"
+     },
+     {
+      "AdExtensionId": 44479678,
+      "Type": "CALLOUT"
+     },
+     {
+      "AdExtensionId": 44479679,
+      "Type": "CALLOUT"
+     },
+     {
+      "AdExtensionId": 44479680,
+      "Type": "CALLOUT"
+     },
+     {
+      "AdExtensionId": 44479681,
+      "Type": "CALLOUT"
+     }
+    ]
+   }
+  },
+  {
+   "Id": 1921615239211513182,
+   "CampaignId": 714529095,
+   "AdGroupId": 5800030615,
+   "Status": "DRAFT",
+   "State": "OFF",
+   "Type": "RESPONSIVE_AD",
+   "ResponsiveAd": {
+    "Texts": [
+     {
+      "Text": "Аудит и карта процессов, первый процесс в production, обучение специалиста.",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Text": "Восемь вопросов к каждому шагу: программа, ИИ-шаг, агент или человек. Бесплатно.",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Text": "Восемь вопросов к каждому шагу и честный вердикт. Половина ответов не про ИИ.",
+      "Status": "ACCEPTED"
+     }
+    ],
+    "Titles": [
+     {
+      "Title": "Внедрение ИИ-агентов в бизнес",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "Внедрение ИИ в бизнес-процессы",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "Прототип на ИИ есть, пользы нет?",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "По открытому стандарту",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "Сначала вердикт, потом код",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "Разбор процесса бесплатно",
+      "Status": "ACCEPTED"
+     }
+    ],
+    "AdImages": {
+     "Items": [
+      {
+       "ImageHash": "ZP1GZLDurH-BgMjA5Nu8nw",
+       "ImageUrl": "http://direct.yandex.ru/images/direct/5224137/ZP1GZLDurH-BgMjA5Nu8nw",
+       "Status": "ACCEPTED"
+      },
+      {
+       "ImageHash": "gP_RL83004rfcFQEmFX06A",
+       "ImageUrl": "http://direct.yandex.ru/images/direct/5231987/gP_RL83004rfcFQEmFX06A",
+       "Status": "ACCEPTED"
+      },
+      {
+       "ImageHash": "7ilwSENvy47WOvU4vK7kjw",
+       "ImageUrl": "http://direct.yandex.ru/images/direct/5241204/7ilwSENvy47WOvU4vK7kjw",
+       "Status": "ACCEPTED"
+      }
+     ]
+    },
+    "Href": "https://webkoth.com/agent?utm_source=yandex&utm_medium=cpc&utm_campaign=agent-rsya&utm_content=vnedrenie-ii-agentov",
+    "DisplayUrlPath": "ИИ-агент-вердикт",
+    "SitelinkSetId": 1510976492,
+    "AdExtensions": [
+     {
+      "AdExtensionId": 44479677,
+      "Type": "CALLOUT"
+     },
+     {
+      "AdExtensionId": 44479678,
+      "Type": "CALLOUT"
+     },
+     {
+      "AdExtensionId": 44479679,
+      "Type": "CALLOUT"
+     },
+     {
+      "AdExtensionId": 44479680,
+      "Type": "CALLOUT"
+     },
+     {
+      "AdExtensionId": 44479681,
+      "Type": "CALLOUT"
+     }
+    ]
+   }
+  },
+  {
+   "Id": 1921615245652446610,
+   "CampaignId": 714529095,
+   "AdGroupId": 5800030647,
+   "Status": "DRAFT",
+   "State": "OFF",
+   "Type": "RESPONSIVE_AD",
+   "ResponsiveAd": {
+    "Texts": [
+     {
+      "Text": "Контур production, журнал, выключатель, приёмка. Разбор бесплатно, 30 минут.",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Text": "Где агент окупится, а где хватит программы. Вилки цен, разбор бесплатно.",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Text": "Восемь вопросов к каждому шагу и честный вердикт. Половина ответов не про ИИ.",
+      "Status": "ACCEPTED"
+     }
+    ],
+    "Titles": [
+     {
+      "Title": "Разработка ИИ-агента под ваш процесс",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "Сколько стоит ИИ-агент для компании",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "Прототип на ИИ есть, пользы нет?",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "Цена по объёму",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "Честно и по шагам",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "Разбор процесса бесплатно",
+      "Status": "ACCEPTED"
+     }
+    ],
+    "AdImages": {
+     "Items": [
+      {
+       "ImageHash": "ZP1GZLDurH-BgMjA5Nu8nw",
+       "ImageUrl": "http://direct.yandex.ru/images/direct/5224137/ZP1GZLDurH-BgMjA5Nu8nw",
+       "Status": "ACCEPTED"
+      },
+      {
+       "ImageHash": "gP_RL83004rfcFQEmFX06A",
+       "ImageUrl": "http://direct.yandex.ru/images/direct/5231987/gP_RL83004rfcFQEmFX06A",
+       "Status": "ACCEPTED"
+      },
+      {
+       "ImageHash": "7ilwSENvy47WOvU4vK7kjw",
+       "ImageUrl": "http://direct.yandex.ru/images/direct/5241204/7ilwSENvy47WOvU4vK7kjw",
+       "Status": "ACCEPTED"
+      }
+     ]
+    },
+    "Href": "https://webkoth.com/agent?utm_source=yandex&utm_medium=cpc&utm_campaign=agent-rsya&utm_content=kupit-razrabotka-agenta",
+    "DisplayUrlPath": "ИИ-агент-вердикт",
+    "SitelinkSetId": 1510977166,
+    "AdExtensions": [
+     {
+      "AdExtensionId": 44479677,
+      "Type": "CALLOUT"
+     },
+     {
+      "AdExtensionId": 44479678,
+      "Type": "CALLOUT"
+     },
+     {
+      "AdExtensionId": 44479679,
+      "Type": "CALLOUT"
+     },
+     {
+      "AdExtensionId": 44479680,
+      "Type": "CALLOUT"
+     },
+     {
+      "AdExtensionId": 44479681,
+      "Type": "CALLOUT"
+     }
+    ]
+   }
+  },
+  {
+   "Id": 1921615251022436325,
+   "CampaignId": 714529095,
+   "AdGroupId": 5800030650,
+   "Status": "DRAFT",
+   "State": "OFF",
+   "Type": "RESPONSIVE_AD",
+   "ResponsiveAd": {
+    "Texts": [
+     {
+      "Text": "Вердикт по каждому шагу, контур production, обучение специалиста. Бесплатно.",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Text": "Не всякий процесс стоит отдавать ИИ. Разбираю за 30 минут и говорю, что делать.",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Text": "Восемь вопросов к каждому шагу и честный вердикт. Половина ответов не про ИИ.",
+      "Status": "ACCEPTED"
+     }
+    ],
+    "Titles": [
+     {
+      "Title": "ИИ-автоматизация бизнес-процессов",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "Автоматизация процессов с помощью ИИ",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "Прототип на ИИ есть, пользы нет?",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "Без мёртвых прототипов",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "Стандарт AIAS",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "Разбор процесса бесплатно",
+      "Status": "ACCEPTED"
+     }
+    ],
+    "AdImages": {
+     "Items": [
+      {
+       "ImageHash": "ZP1GZLDurH-BgMjA5Nu8nw",
+       "ImageUrl": "http://direct.yandex.ru/images/direct/5224137/ZP1GZLDurH-BgMjA5Nu8nw",
+       "Status": "ACCEPTED"
+      },
+      {
+       "ImageHash": "gP_RL83004rfcFQEmFX06A",
+       "ImageUrl": "http://direct.yandex.ru/images/direct/5231987/gP_RL83004rfcFQEmFX06A",
+       "Status": "ACCEPTED"
+      },
+      {
+       "ImageHash": "7ilwSENvy47WOvU4vK7kjw",
+       "ImageUrl": "http://direct.yandex.ru/images/direct/5241204/7ilwSENvy47WOvU4vK7kjw",
+       "Status": "ACCEPTED"
+      }
+     ]
+    },
+    "Href": "https://webkoth.com/agent?utm_source=yandex&utm_medium=cpc&utm_campaign=agent-rsya&utm_content=ii-avtomatizaciya-processov",
+    "DisplayUrlPath": "ИИ-агент-вердикт",
+    "SitelinkSetId": 1510977621,
+    "AdExtensions": [
+     {
+      "AdExtensionId": 44479677,
+      "Type": "CALLOUT"
+     },
+     {
+      "AdExtensionId": 44479678,
+      "Type": "CALLOUT"
+     },
+     {
+      "AdExtensionId": 44479679,
+      "Type": "CALLOUT"
+     },
+     {
+      "AdExtensionId": 44479680,
+      "Type": "CALLOUT"
+     },
+     {
+      "AdExtensionId": 44479681,
+      "Type": "CALLOUT"
+     }
+    ]
+   }
+  },
+  {
+   "Id": 1921615199480424853,
+   "CampaignId": 714529074,
+   "AdGroupId": 5800030463,
+   "Status": "DRAFT",
+   "State": "OFF",
+   "Type": "RESPONSIVE_AD",
+   "ResponsiveAd": {
+    "Texts": [
+     {
+      "Text": "Аудит за неделю, только чтение. Потом держу контур за фиксированную плату.",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Text": "Что у вас крутится, кто имеет доступ и что сломается завтра. Разбор бесплатно.",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Text": "Аудит за неделю, только чтение. Потом контур под контролем за фикс в месяц.",
+      "Status": "ACCEPTED"
+     }
+    ],
+    "Titles": [
+     {
+      "Title": "ИТ-директор на аутсорсе",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "ИТ-директор на аутсорсе для вашей компании",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "Кто имеет доступ к вашим серверам?",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "Компании 10–200 человек",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "Аудит за неделю",
+      "Status": "ACCEPTED"
+     }
+    ],
+    "AdImages": {
+     "Items": [
+      {
+       "ImageHash": "eLmuycDJorWj-cd1RHirrg",
+       "ImageUrl": "http://direct.yandex.ru/images/direct/4034182/eLmuycDJorWj-cd1RHirrg",
+       "Status": "ACCEPTED"
+      },
+      {
+       "ImageHash": "mG0iUm1jUBlShdgyZMiKlg",
+       "ImageUrl": "http://direct.yandex.ru/images/direct/4533780/mG0iUm1jUBlShdgyZMiKlg",
+       "Status": "ACCEPTED"
+      },
+      {
+       "ImageHash": "j08vPBrMuBY27XJZ1ZHxyA",
+       "ImageUrl": "http://direct.yandex.ru/images/direct/4711027/j08vPBrMuBY27XJZ1ZHxyA",
+       "Status": "ACCEPTED"
+      }
+     ]
+    },
+    "Href": "https://webkoth.com/it-director?utm_source=yandex&utm_medium=cpc&utm_campaign=it-director-rsya&utm_content=it-direktor-autsors",
+    "DisplayUrlPath": "ИТ-директор",
+    "SitelinkSetId": 1510974937,
+    "AdExtensions": [
+     {
+      "AdExtensionId": 44479600,
+      "Type": "CALLOUT"
+     },
+     {
+      "AdExtensionId": 44479667,
+      "Type": "CALLOUT"
+     },
+     {
+      "AdExtensionId": 44479668,
+      "Type": "CALLOUT"
+     },
+     {
+      "AdExtensionId": 44479669,
+      "Type": "CALLOUT"
+     },
+     {
+      "AdExtensionId": 44479670,
+      "Type": "CALLOUT"
+     }
+    ]
+   }
+  },
+  {
+   "Id": 1921615206999683732,
+   "CampaignId": 714529074,
+   "AdGroupId": 5800030482,
+   "Status": "DRAFT",
+   "State": "OFF",
+   "Type": "RESPONSIVE_AD",
+   "ResponsiveAd": {
+    "Texts": [
+     {
+      "Text": "Серверы, доступы, бэкапы и подрядчики под контролем. Фиксированная плата в месяц.",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Text": "Функция ИТ-директора: учёт систем, приёмка подрядчиков, план. Разбор бесплатно.",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Text": "Аудит за неделю, только чтение. Потом контур под контролем за фикс в месяц.",
+      "Status": "ACCEPTED"
+     }
+    ],
+    "Titles": [
+     {
+      "Title": "ИТ-аутсорсинг инфраструктуры",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "ИТ-аутсорсинг для бизнеса 10–200 человек",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "Кто имеет доступ к вашим серверам?",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "Учёт, контур, план",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "Без штатного ИТ-директора",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "ИТ-директор на аутсорсе",
+      "Status": "ACCEPTED"
+     }
+    ],
+    "AdImages": {
+     "Items": [
+      {
+       "ImageHash": "eLmuycDJorWj-cd1RHirrg",
+       "ImageUrl": "http://direct.yandex.ru/images/direct/4034182/eLmuycDJorWj-cd1RHirrg",
+       "Status": "ACCEPTED"
+      },
+      {
+       "ImageHash": "mG0iUm1jUBlShdgyZMiKlg",
+       "ImageUrl": "http://direct.yandex.ru/images/direct/4533780/mG0iUm1jUBlShdgyZMiKlg",
+       "Status": "ACCEPTED"
+      },
+      {
+       "ImageHash": "j08vPBrMuBY27XJZ1ZHxyA",
+       "ImageUrl": "http://direct.yandex.ru/images/direct/4711027/j08vPBrMuBY27XJZ1ZHxyA",
+       "Status": "ACCEPTED"
+      }
+     ]
+    },
+    "Href": "https://webkoth.com/it-director?utm_source=yandex&utm_medium=cpc&utm_campaign=it-director-rsya&utm_content=it-autsorsing-infrastruktury",
+    "DisplayUrlPath": "ИТ-директор",
+    "SitelinkSetId": 1510975566,
+    "AdExtensions": [
+     {
+      "AdExtensionId": 44479600,
+      "Type": "CALLOUT"
+     },
+     {
+      "AdExtensionId": 44479667,
+      "Type": "CALLOUT"
+     },
+     {
+      "AdExtensionId": 44479668,
+      "Type": "CALLOUT"
+     },
+     {
+      "AdExtensionId": 44479669,
+      "Type": "CALLOUT"
+     },
+     {
+      "AdExtensionId": 44479670,
+      "Type": "CALLOUT"
+     }
+    ]
+   }
+  },
+  {
+   "Id": 1921615213442646321,
+   "CampaignId": 714529074,
+   "AdGroupId": 5800030497,
+   "Status": "DRAFT",
+   "State": "OFF",
+   "Type": "RESPONSIVE_AD",
+   "ResponsiveAd": {
+    "Texts": [
+     {
+      "Text": "Отчёт с находками и планом: срочное, важное, не трогать. Разбор бесплатно.",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Text": "Что крутится, где, кто имеет доступ, что сломается. Отчёт и план за неделю.",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Text": "Аудит за неделю, только чтение. Потом контур под контролем за фикс в месяц.",
+      "Status": "ACCEPTED"
+     }
+    ],
+    "Titles": [
+     {
+      "Title": "Аудит ИТ-инфраструктуры за неделю",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "Аудит ИТ-инфраструктуры компании",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "Кто имеет доступ к вашим серверам?",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "Только на чтение",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "Карта систем и доступов",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "ИТ-директор на аутсорсе",
+      "Status": "ACCEPTED"
+     }
+    ],
+    "AdImages": {
+     "Items": [
+      {
+       "ImageHash": "eLmuycDJorWj-cd1RHirrg",
+       "ImageUrl": "http://direct.yandex.ru/images/direct/4034182/eLmuycDJorWj-cd1RHirrg",
+       "Status": "ACCEPTED"
+      },
+      {
+       "ImageHash": "mG0iUm1jUBlShdgyZMiKlg",
+       "ImageUrl": "http://direct.yandex.ru/images/direct/4533780/mG0iUm1jUBlShdgyZMiKlg",
+       "Status": "ACCEPTED"
+      },
+      {
+       "ImageHash": "j08vPBrMuBY27XJZ1ZHxyA",
+       "ImageUrl": "http://direct.yandex.ru/images/direct/4711027/j08vPBrMuBY27XJZ1ZHxyA",
+       "Status": "ACCEPTED"
+      }
+     ]
+    },
+    "Href": "https://webkoth.com/it-director?utm_source=yandex&utm_medium=cpc&utm_campaign=it-director-rsya&utm_content=audit-it-infrastruktury",
+    "DisplayUrlPath": "ИТ-директор",
+    "SitelinkSetId": 1510975642,
+    "AdExtensions": [
+     {
+      "AdExtensionId": 44479600,
+      "Type": "CALLOUT"
+     },
+     {
+      "AdExtensionId": 44479667,
+      "Type": "CALLOUT"
+     },
+     {
+      "AdExtensionId": 44479668,
+      "Type": "CALLOUT"
+     },
+     {
+      "AdExtensionId": 44479669,
+      "Type": "CALLOUT"
+     },
+     {
+      "AdExtensionId": 44479670,
+      "Type": "CALLOUT"
+     }
+    ]
+   }
+  },
+  {
+   "Id": 1921615270347559499,
+   "CampaignId": 714529126,
+   "AdGroupId": 5800030849,
+   "Status": "DRAFT",
+   "State": "OFF",
+   "Type": "RESPONSIVE_AD",
+   "ResponsiveAd": {
+    "Texts": [
+     {
+      "Text": "Распознавание, проверка по справочникам, загрузка в 1С. Спорное к вам в очередь.",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Text": "Документы из почты уходят в 1С без ручного ввода. Разбор бесплатно.",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Text": "Витрины из 1С, банков и площадок, отчёт за полчаса. Развивает ваш финансист.",
+      "Status": "ACCEPTED"
+     }
+    ],
+    "Titles": [
+     {
+      "Title": "Первичка сама попадает в 1С",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "Распознавание первичных документов в 1С",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "Отчёт собирают неделю и правят руками?",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "Счета и акты из почты",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "С проверкой по справочникам",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "Управленческий контур",
+      "Status": "ACCEPTED"
+     }
+    ],
+    "AdImages": {
+     "Items": [
+      {
+       "ImageHash": "SVjbAv4ySv94I7g7mQLr4A",
+       "ImageUrl": "http://direct.yandex.ru/images/direct/6089339/SVjbAv4ySv94I7g7mQLr4A",
+       "Status": "ACCEPTED"
+      },
+      {
+       "ImageHash": "2jL7U-iZRQpq_Wwn5_sAWA",
+       "ImageUrl": "http://direct.yandex.ru/images/direct/5275581/2jL7U-iZRQpq_Wwn5_sAWA",
+       "Status": "ACCEPTED"
+      },
+      {
+       "ImageHash": "_g7YkIgL_sqqx7D9LLxl8g",
+       "ImageUrl": "http://direct.yandex.ru/images/direct/6544047/_g7YkIgL_sqqx7D9LLxl8g",
+       "Status": "ACCEPTED"
+      }
+     ]
+    },
+    "Href": "https://webkoth.com/finance?p=pervichka&utm_source=yandex&utm_medium=cpc&utm_campaign=finance-rsya&utm_content=raspoznavanie-pervichki-1s",
+    "DisplayUrlPath": "финансы-1С",
+    "SitelinkSetId": 1510977648,
+    "AdExtensions": [
+     {
+      "AdExtensionId": 44479600,
+      "Type": "CALLOUT"
+     },
+     {
+      "AdExtensionId": 44479601,
+      "Type": "CALLOUT"
+     },
+     {
+      "AdExtensionId": 44479687,
+      "Type": "CALLOUT"
+     },
+     {
+      "AdExtensionId": 44479688,
+      "Type": "CALLOUT"
+     },
+     {
+      "AdExtensionId": 44479689,
+      "Type": "CALLOUT"
+     }
+    ]
+   }
+  },
+  {
+   "Id": 1921615275720754918,
+   "CampaignId": 714529126,
+   "AdGroupId": 5800030853,
+   "Status": "DRAFT",
+   "State": "OFF",
+   "Type": "RESPONSIVE_AD",
+   "ResponsiveAd": {
+    "Texts": [
+     {
+      "Text": "Не коробка, а контур под ваш процесс: очередь исключений, журнал. От 150 тыс. ₽.",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Text": "Счета, акты, накладные из почты в 1С с проверкой. Разбор за 30 минут бесплатно.",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Text": "Витрины из 1С, банков и площадок, отчёт за полчаса. Развивает ваш финансист.",
+      "Status": "ACCEPTED"
+     }
+    ],
+    "Titles": [
+     {
+      "Title": "Распознавание документов для бухгалтерии",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "Сервис распознавания первички",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "Отчёт собирают неделю и правят руками?",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "Под ваш 1С и справочники",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "Данные лежат у вас",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "Управленческий контур",
+      "Status": "ACCEPTED"
+     }
+    ],
+    "AdImages": {
+     "Items": [
+      {
+       "ImageHash": "SVjbAv4ySv94I7g7mQLr4A",
+       "ImageUrl": "http://direct.yandex.ru/images/direct/6089339/SVjbAv4ySv94I7g7mQLr4A",
+       "Status": "ACCEPTED"
+      },
+      {
+       "ImageHash": "2jL7U-iZRQpq_Wwn5_sAWA",
+       "ImageUrl": "http://direct.yandex.ru/images/direct/5275581/2jL7U-iZRQpq_Wwn5_sAWA",
+       "Status": "ACCEPTED"
+      },
+      {
+       "ImageHash": "_g7YkIgL_sqqx7D9LLxl8g",
+       "ImageUrl": "http://direct.yandex.ru/images/direct/6544047/_g7YkIgL_sqqx7D9LLxl8g",
+       "Status": "ACCEPTED"
+      }
+     ]
+    },
+    "Href": "https://webkoth.com/finance?p=pervichka&utm_source=yandex&utm_medium=cpc&utm_campaign=finance-rsya&utm_content=servis-raspoznavaniya",
+    "DisplayUrlPath": "финансы-1С",
+    "SitelinkSetId": 1510978306,
+    "AdExtensions": [
+     {
+      "AdExtensionId": 44479600,
+      "Type": "CALLOUT"
+     },
+     {
+      "AdExtensionId": 44479601,
+      "Type": "CALLOUT"
+     },
+     {
+      "AdExtensionId": 44479687,
+      "Type": "CALLOUT"
+     },
+     {
+      "AdExtensionId": 44479688,
+      "Type": "CALLOUT"
+     },
+     {
+      "AdExtensionId": 44479689,
+      "Type": "CALLOUT"
+     }
+    ]
+   }
+  },
+  {
+   "Id": 1921615282160456805,
+   "CampaignId": 714529126,
+   "AdGroupId": 5800030860,
+   "Status": "DRAFT",
+   "State": "OFF",
+   "Type": "RESPONSIVE_AD",
+   "ResponsiveAd": {
+    "Texts": [
+     {
+      "Text": "Выручка, выплаты площадок и кассовый разрыв в одном отчёте с кликом до документа.",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Text": "Витрины из 1С, банков и маркетплейсов. Обучение финансиста. Разбор бесплатно.",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Text": "Витрины из 1С, банков и площадок, отчёт за полчаса. Развивает ваш финансист.",
+      "Status": "ACCEPTED"
+     }
+    ],
+    "Titles": [
+     {
+      "Title": "Управленческий отчёт за полчаса",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "Автоматизация управленческой отчётности",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "Отчёт собирают неделю и правят руками?",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "Из 1С, банков и площадок",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "Отчёт развивает финансист",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "Управленческий контур",
+      "Status": "ACCEPTED"
+     }
+    ],
+    "AdImages": {
+     "Items": [
+      {
+       "ImageHash": "SVjbAv4ySv94I7g7mQLr4A",
+       "ImageUrl": "http://direct.yandex.ru/images/direct/6089339/SVjbAv4ySv94I7g7mQLr4A",
+       "Status": "ACCEPTED"
+      },
+      {
+       "ImageHash": "2jL7U-iZRQpq_Wwn5_sAWA",
+       "ImageUrl": "http://direct.yandex.ru/images/direct/5275581/2jL7U-iZRQpq_Wwn5_sAWA",
+       "Status": "ACCEPTED"
+      },
+      {
+       "ImageHash": "_g7YkIgL_sqqx7D9LLxl8g",
+       "ImageUrl": "http://direct.yandex.ru/images/direct/6544047/_g7YkIgL_sqqx7D9LLxl8g",
+       "Status": "ACCEPTED"
+      }
+     ]
+    },
+    "Href": "https://webkoth.com/finance?p=otchet&utm_source=yandex&utm_medium=cpc&utm_campaign=finance-rsya&utm_content=upravlencheskaya-otchetnost",
+    "DisplayUrlPath": "финансы-1С",
+    "SitelinkSetId": 1510978520,
+    "AdExtensions": [
+     {
+      "AdExtensionId": 44479600,
+      "Type": "CALLOUT"
+     },
+     {
+      "AdExtensionId": 44479601,
+      "Type": "CALLOUT"
+     },
+     {
+      "AdExtensionId": 44479687,
+      "Type": "CALLOUT"
+     },
+     {
+      "AdExtensionId": 44479688,
+      "Type": "CALLOUT"
+     },
+     {
+      "AdExtensionId": 44479689,
+      "Type": "CALLOUT"
+     }
+    ]
+   }
+  },
+  {
+   "Id": 1921615288603265480,
+   "CampaignId": 714529126,
+   "AdGroupId": 5800030868,
+   "Status": "DRAFT",
+   "State": "OFF",
+   "Type": "RESPONSIVE_AD",
+   "ResponsiveAd": {
+    "Texts": [
+     {
+      "Text": "ИИ-шаг только с эталоном и очередью исключений. Первичка в 1С, отчёт за полчаса.",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Text": "Канонические цифры считает только код. Разбор процесса за 30 минут бесплатно.",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Text": "Витрины из 1С, банков и площадок, отчёт за полчаса. Развивает ваш финансист.",
+      "Status": "ACCEPTED"
+     }
+    ],
+    "Titles": [
+     {
+      "Title": "ИИ для бухгалтерии и финансов",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "ИИ в бухгалтерии без ошибок в цифрах",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "Отчёт собирают неделю и правят руками?",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "Цифры считает код",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "По открытому стандарту",
+      "Status": "ACCEPTED"
+     },
+     {
+      "Title": "Управленческий контур",
+      "Status": "ACCEPTED"
+     }
+    ],
+    "AdImages": {
+     "Items": [
+      {
+       "ImageHash": "SVjbAv4ySv94I7g7mQLr4A",
+       "ImageUrl": "http://direct.yandex.ru/images/direct/6089339/SVjbAv4ySv94I7g7mQLr4A",
+       "Status": "ACCEPTED"
+      },
+      {
+       "ImageHash": "2jL7U-iZRQpq_Wwn5_sAWA",
+       "ImageUrl": "http://direct.yandex.ru/images/direct/5275581/2jL7U-iZRQpq_Wwn5_sAWA",
+       "Status": "ACCEPTED"
+      },
+      {
+       "ImageHash": "_g7YkIgL_sqqx7D9LLxl8g",
+       "ImageUrl": "http://direct.yandex.ru/images/direct/6544047/_g7YkIgL_sqqx7D9LLxl8g",
+       "Status": "ACCEPTED"
+      }
+     ]
+    },
+    "Href": "https://webkoth.com/finance?p=otchet&utm_source=yandex&utm_medium=cpc&utm_campaign=finance-rsya&utm_content=ii-dlya-buhgalterii",
+    "DisplayUrlPath": "финансы-1С",
+    "SitelinkSetId": 1510978951,
+    "AdExtensions": [
+     {
+      "AdExtensionId": 44479600,
+      "Type": "CALLOUT"
+     },
+     {
+      "AdExtensionId": 44479601,
+      "Type": "CALLOUT"
+     },
+     {
+      "AdExtensionId": 44479687,
+      "Type": "CALLOUT"
+     },
+     {
+      "AdExtensionId": 44479688,
+      "Type": "CALLOUT"
+     },
+     {
+      "AdExtensionId": 44479689,
+      "Type": "CALLOUT"
+     }
+    ]
+   }
+  }
+ ],
+ "keywords": [
+  {
+   "Id": 58076667273,
+   "Keyword": "интеграция 1с с маркетплейсами",
+   "AdGroupId": 5800026679,
+   "CampaignId": 714528958,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076667274,
+   "Keyword": "интеграция 1с ут с маркетплейсами",
+   "AdGroupId": 5800026679,
+   "CampaignId": 714528958,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076667275,
+   "Keyword": "интеграция 1с унф с маркетплейсами",
+   "AdGroupId": 5800026679,
+   "CampaignId": 714528958,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076667276,
+   "Keyword": "интеграция 1с бухгалтерия с маркетплейсами",
+   "AdGroupId": 5800026679,
+   "CampaignId": 714528958,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076667277,
+   "Keyword": "интеграция ozon с 1с",
+   "AdGroupId": 5800026679,
+   "CampaignId": 714528958,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076667278,
+   "Keyword": "интеграция wildberries с 1с",
+   "AdGroupId": 5800026679,
+   "CampaignId": 714528958,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076667279,
+   "Keyword": "интеграция яндекс маркет с 1с",
+   "AdGroupId": 5800026679,
+   "CampaignId": 714528958,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076667280,
+   "Keyword": "модуль интеграции 1с с маркетплейсами",
+   "AdGroupId": 5800026679,
+   "CampaignId": 714528958,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076667281,
+   "Keyword": "сервис интеграции с маркетплейсами",
+   "AdGroupId": 5800026679,
+   "CampaignId": 714528958,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076667282,
+   "Keyword": "интеграция с маркетплейсами услуги",
+   "AdGroupId": 5800026679,
+   "CampaignId": 714528958,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076667283,
+   "Keyword": "подключить маркетплейс к 1с",
+   "AdGroupId": 5800026679,
+   "CampaignId": 714528958,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076667664,
+   "Keyword": "синхронизация остатков 1с",
+   "AdGroupId": 5800026842,
+   "CampaignId": 714528958,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076667665,
+   "Keyword": "синхронизация остатков на маркетплейсах",
+   "AdGroupId": 5800026842,
+   "CampaignId": 714528958,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076667666,
+   "Keyword": "синхронизация остатков 1с и маркетплейсов",
+   "AdGroupId": 5800026842,
+   "CampaignId": 714528958,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076667667,
+   "Keyword": "выгрузка остатков в маркетплейсы из 1с",
+   "AdGroupId": 5800026842,
+   "CampaignId": 714528958,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076667668,
+   "Keyword": "автоматизация маркетплейсов 1с",
+   "AdGroupId": 5800026842,
+   "CampaignId": 714528958,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076667669,
+   "Keyword": "сверка с маркетплейсами",
+   "AdGroupId": 5800026842,
+   "CampaignId": 714528958,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076667670,
+   "Keyword": "сверка выплат маркетплейсов",
+   "AdGroupId": 5800026842,
+   "CampaignId": 714528958,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076667671,
+   "Keyword": "акт сверки маркетплейс 1с",
+   "AdGroupId": 5800026842,
+   "CampaignId": 714528958,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076667672,
+   "Keyword": "учет продаж маркетплейсов в 1с",
+   "AdGroupId": 5800026842,
+   "CampaignId": 714528958,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076680575,
+   "Keyword": "ит директор на аутсорсе",
+   "AdGroupId": 5800030463,
+   "CampaignId": 714529074,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076680576,
+   "Keyword": "+it директор на аутсорсе",
+   "AdGroupId": 5800030463,
+   "CampaignId": 714529074,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076680577,
+   "Keyword": "аутсорсинг ит директора",
+   "AdGroupId": 5800030463,
+   "CampaignId": 714529074,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076680578,
+   "Keyword": "технический директор на аутсорсе",
+   "AdGroupId": 5800030463,
+   "CampaignId": 714529074,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076680579,
+   "Keyword": "cio на аутсорсе",
+   "AdGroupId": 5800030463,
+   "CampaignId": 714529074,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076680580,
+   "Keyword": "виртуальный ит директор",
+   "AdGroupId": 5800030463,
+   "CampaignId": 714529074,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076680581,
+   "Keyword": "внешний ит директор",
+   "AdGroupId": 5800030463,
+   "CampaignId": 714529074,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076680582,
+   "Keyword": "ит директор по договору",
+   "AdGroupId": 5800030463,
+   "CampaignId": 714529074,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076681148,
+   "Keyword": "ит аутсорсинг инфраструктуры",
+   "AdGroupId": 5800030482,
+   "CampaignId": 714529074,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076681149,
+   "Keyword": "ит аутсорсинг для предприятий",
+   "AdGroupId": 5800030482,
+   "CampaignId": 714529074,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076681150,
+   "Keyword": "ит аутсорсинг услуги",
+   "AdGroupId": 5800030482,
+   "CampaignId": 714529074,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076681151,
+   "Keyword": "ит аутсорсинг для бизнеса",
+   "AdGroupId": 5800030482,
+   "CampaignId": 714529074,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076681152,
+   "Keyword": "ит аутсорсинг москва",
+   "AdGroupId": 5800030482,
+   "CampaignId": 714529074,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076681153,
+   "Keyword": "ит аутсорсинг спб",
+   "AdGroupId": 5800030482,
+   "CampaignId": 714529074,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076681154,
+   "Keyword": "+it аутсорсинг компании",
+   "AdGroupId": 5800030482,
+   "CampaignId": 714529074,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076681155,
+   "Keyword": "обслуживание ит инфраструктуры",
+   "AdGroupId": 5800030482,
+   "CampaignId": 714529074,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076681156,
+   "Keyword": "сопровождение ит инфраструктуры",
+   "AdGroupId": 5800030482,
+   "CampaignId": 714529074,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076681157,
+   "Keyword": "управление ит инфраструктурой аутсорсинг",
+   "AdGroupId": 5800030482,
+   "CampaignId": 714529074,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076681380,
+   "Keyword": "аудит ит инфраструктуры",
+   "AdGroupId": 5800030497,
+   "CampaignId": 714529074,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076681381,
+   "Keyword": "аудит +it инфраструктуры",
+   "AdGroupId": 5800030497,
+   "CampaignId": 714529074,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076681382,
+   "Keyword": "ит аудит компании",
+   "AdGroupId": 5800030497,
+   "CampaignId": 714529074,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076681383,
+   "Keyword": "ит аудит услуги",
+   "AdGroupId": 5800030497,
+   "CampaignId": 714529074,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076681384,
+   "Keyword": "аудит ит инфраструктуры стоимость",
+   "AdGroupId": 5800030497,
+   "CampaignId": 714529074,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076681385,
+   "Keyword": "аудит информационной инфраструктуры",
+   "AdGroupId": 5800030497,
+   "CampaignId": 714529074,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076681386,
+   "Keyword": "аудит серверов и сети",
+   "AdGroupId": 5800030497,
+   "CampaignId": 714529074,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076681387,
+   "Keyword": "аудит ит инфраструктуры предприятия",
+   "AdGroupId": 5800030497,
+   "CampaignId": 714529074,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076681388,
+   "Keyword": "заказать ит аудит",
+   "AdGroupId": 5800030497,
+   "CampaignId": 714529074,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076682420,
+   "Keyword": "ии агенты для бизнеса",
+   "AdGroupId": 5800030594,
+   "CampaignId": 714529095,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076682421,
+   "Keyword": "ai агенты для бизнеса",
+   "AdGroupId": 5800030594,
+   "CampaignId": 714529095,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076682422,
+   "Keyword": "ии агент в компанию",
+   "AdGroupId": 5800030594,
+   "CampaignId": 714529095,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076682423,
+   "Keyword": "корпоративные ии агенты",
+   "AdGroupId": 5800030594,
+   "CampaignId": 714529095,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076682424,
+   "Keyword": "ии агенты для бизнеса под ключ",
+   "AdGroupId": 5800030594,
+   "CampaignId": 714529095,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076682425,
+   "Keyword": "ии агенты для бизнес процессов",
+   "AdGroupId": 5800030594,
+   "CampaignId": 714529095,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076682426,
+   "Keyword": "ии агенты и автоматизация",
+   "AdGroupId": 5800030594,
+   "CampaignId": 714529095,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076683484,
+   "Keyword": "внедрение ии агентов",
+   "AdGroupId": 5800030615,
+   "CampaignId": 714529095,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076683485,
+   "Keyword": "внедрение ии агентов в компанию",
+   "AdGroupId": 5800030615,
+   "CampaignId": 714529095,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076683486,
+   "Keyword": "внедрение ии в бизнес",
+   "AdGroupId": 5800030615,
+   "CampaignId": 714529095,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076683487,
+   "Keyword": "внедрение ии в бизнес процессы",
+   "AdGroupId": 5800030615,
+   "CampaignId": 714529095,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076683488,
+   "Keyword": "внедрение ии в компании",
+   "AdGroupId": 5800030615,
+   "CampaignId": 714529095,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076683489,
+   "Keyword": "внедрение ии в организации",
+   "AdGroupId": 5800030615,
+   "CampaignId": 714529095,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076683490,
+   "Keyword": "внедрение ии под ключ",
+   "AdGroupId": 5800030615,
+   "CampaignId": 714529095,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076683491,
+   "Keyword": "внедрение ии услуги",
+   "AdGroupId": 5800030615,
+   "CampaignId": 714529095,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076683492,
+   "Keyword": "внедрение ии стоимость",
+   "AdGroupId": 5800030615,
+   "CampaignId": 714529095,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076683493,
+   "Keyword": "внедрение искусственного интеллекта в бизнес",
+   "AdGroupId": 5800030615,
+   "CampaignId": 714529095,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076683494,
+   "Keyword": "внедрение ии в 1с",
+   "AdGroupId": 5800030615,
+   "CampaignId": 714529095,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076683995,
+   "Keyword": "купить ии агента",
+   "AdGroupId": 5800030647,
+   "CampaignId": 714529095,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076683996,
+   "Keyword": "заказать ии агента",
+   "AdGroupId": 5800030647,
+   "CampaignId": 714529095,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076683997,
+   "Keyword": "разработка ии агентов для бизнеса",
+   "AdGroupId": 5800030647,
+   "CampaignId": 714529095,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076683998,
+   "Keyword": "разработка ии агентов под ключ",
+   "AdGroupId": 5800030647,
+   "CampaignId": 714529095,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076683999,
+   "Keyword": "разработка ии агентов стоимость",
+   "AdGroupId": 5800030647,
+   "CampaignId": 714529095,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076684000,
+   "Keyword": "разработка ии агента цена",
+   "AdGroupId": 5800030647,
+   "CampaignId": 714529095,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076684001,
+   "Keyword": "ии агент стоимость",
+   "AdGroupId": 5800030647,
+   "CampaignId": 714529095,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076684002,
+   "Keyword": "сколько стоит ии агент",
+   "AdGroupId": 5800030647,
+   "CampaignId": 714529095,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076684003,
+   "Keyword": "ии агент для 1с",
+   "AdGroupId": 5800030647,
+   "CampaignId": 714529095,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076684004,
+   "Keyword": "разработка ии агентов для 1с",
+   "AdGroupId": 5800030647,
+   "CampaignId": 714529095,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076684005,
+   "Keyword": "ии агент на заказ",
+   "AdGroupId": 5800030647,
+   "CampaignId": 714529095,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076684533,
+   "Keyword": "ии автоматизация бизнес процессов",
+   "AdGroupId": 5800030650,
+   "CampaignId": 714529095,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076684534,
+   "Keyword": "ai автоматизация бизнеса",
+   "AdGroupId": 5800030650,
+   "CampaignId": 714529095,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076684535,
+   "Keyword": "ии автоматизация для бизнеса",
+   "AdGroupId": 5800030650,
+   "CampaignId": 714529095,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076684536,
+   "Keyword": "автоматизация бизнес процессов с помощью ии",
+   "AdGroupId": 5800030650,
+   "CampaignId": 714529095,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076684537,
+   "Keyword": "автоматизация процессов с помощью ии",
+   "AdGroupId": 5800030650,
+   "CampaignId": 714529095,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076684538,
+   "Keyword": "автоматизация бизнеса искусственный интеллект",
+   "AdGroupId": 5800030650,
+   "CampaignId": 714529095,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076684539,
+   "Keyword": "автоматизация рутинных задач ии",
+   "AdGroupId": 5800030650,
+   "CampaignId": 714529095,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076684540,
+   "Keyword": "автоматизация бизнеса нейросетями",
+   "AdGroupId": 5800030650,
+   "CampaignId": 714529095,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076685755,
+   "Keyword": "распознавание первичных документов 1с",
+   "AdGroupId": 5800030849,
+   "CampaignId": 714529126,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076685756,
+   "Keyword": "распознавание документов 1с",
+   "AdGroupId": 5800030849,
+   "CampaignId": 714529126,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076685757,
+   "Keyword": "распознавание первичных документов",
+   "AdGroupId": 5800030849,
+   "CampaignId": 714529126,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076685758,
+   "Keyword": "распознавание первички",
+   "AdGroupId": 5800030849,
+   "CampaignId": 714529126,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076685759,
+   "Keyword": "автоматическая загрузка первичных документов в 1с",
+   "AdGroupId": 5800030849,
+   "CampaignId": 714529126,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076685760,
+   "Keyword": "загрузка счетов и актов в 1с",
+   "AdGroupId": 5800030849,
+   "CampaignId": 714529126,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076685761,
+   "Keyword": "загрузка документов из почты в 1с",
+   "AdGroupId": 5800030849,
+   "CampaignId": 714529126,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076685762,
+   "Keyword": "автоматизация ввода первичных документов",
+   "AdGroupId": 5800030849,
+   "CampaignId": 714529126,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076685763,
+   "Keyword": "ввод первички в 1с",
+   "AdGroupId": 5800030849,
+   "CampaignId": 714529126,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076685764,
+   "Keyword": "обработка первичных документов автоматизация",
+   "AdGroupId": 5800030849,
+   "CampaignId": 714529126,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076685765,
+   "Keyword": "сервис распознавания документов",
+   "AdGroupId": 5800030853,
+   "CampaignId": 714529126,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076685766,
+   "Keyword": "сервис распознавания первичных документов",
+   "AdGroupId": 5800030853,
+   "CampaignId": 714529126,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076685767,
+   "Keyword": "распознавание документов цена",
+   "AdGroupId": 5800030853,
+   "CampaignId": 714529126,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076685768,
+   "Keyword": "распознавание документов стоимость",
+   "AdGroupId": 5800030853,
+   "CampaignId": 714529126,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076685769,
+   "Keyword": "распознавание документов тарифы",
+   "AdGroupId": 5800030853,
+   "CampaignId": 714529126,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076685770,
+   "Keyword": "распознавание документов для бухгалтерии",
+   "AdGroupId": 5800030853,
+   "CampaignId": 714529126,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076685771,
+   "Keyword": "распознавание документов нейросетью",
+   "AdGroupId": 5800030853,
+   "CampaignId": 714529126,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076685772,
+   "Keyword": "распознавание документов ии",
+   "AdGroupId": 5800030853,
+   "CampaignId": 714529126,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076685773,
+   "Keyword": "распознавание счетов и накладных",
+   "AdGroupId": 5800030853,
+   "CampaignId": 714529126,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076685774,
+   "Keyword": "распознавание бухгалтерских документов",
+   "AdGroupId": 5800030853,
+   "CampaignId": 714529126,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076685870,
+   "Keyword": "автоматизация управленческой отчетности",
+   "AdGroupId": 5800030860,
+   "CampaignId": 714529126,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076685871,
+   "Keyword": "автоматизация управленческого учета",
+   "AdGroupId": 5800030860,
+   "CampaignId": 714529126,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076685872,
+   "Keyword": "автоматизация управленческого учета 1с",
+   "AdGroupId": 5800030860,
+   "CampaignId": 714529126,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076685873,
+   "Keyword": "автоматизация финансовой отчетности",
+   "AdGroupId": 5800030860,
+   "CampaignId": 714529126,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076685874,
+   "Keyword": "автоматизация формирования отчетности",
+   "AdGroupId": 5800030860,
+   "CampaignId": 714529126,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076685875,
+   "Keyword": "автоматизация подготовки отчетности",
+   "AdGroupId": 5800030860,
+   "CampaignId": 714529126,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076685876,
+   "Keyword": "система автоматизации отчетности",
+   "AdGroupId": 5800030860,
+   "CampaignId": 714529126,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076685877,
+   "Keyword": "автоматизация отчетности 1с",
+   "AdGroupId": 5800030860,
+   "CampaignId": 714529126,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076685878,
+   "Keyword": "управленческая отчетность из 1с",
+   "AdGroupId": 5800030860,
+   "CampaignId": 714529126,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076685879,
+   "Keyword": "внедрение управленческого учета",
+   "AdGroupId": 5800030860,
+   "CampaignId": 714529126,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076685881,
+   "Keyword": "отчет о движении денежных средств автоматизация",
+   "AdGroupId": 5800030860,
+   "CampaignId": 714529126,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076686328,
+   "Keyword": "ии для бухгалтерии",
+   "AdGroupId": 5800030868,
+   "CampaignId": 714529126,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076686329,
+   "Keyword": "ии для бухгалтерии 1с",
+   "AdGroupId": 5800030868,
+   "CampaignId": 714529126,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076686330,
+   "Keyword": "автоматизация бухгалтерии с помощью ии",
+   "AdGroupId": 5800030868,
+   "CampaignId": 714529126,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076686331,
+   "Keyword": "внедрение ии в бухгалтерию",
+   "AdGroupId": 5800030868,
+   "CampaignId": 714529126,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076686332,
+   "Keyword": "ии агенты для бухгалтерии",
+   "AdGroupId": 5800030868,
+   "CampaignId": 714529126,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076686333,
+   "Keyword": "ии финансовый агент",
+   "AdGroupId": 5800030868,
+   "CampaignId": 714529126,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076686334,
+   "Keyword": "ии для финансового директора",
+   "AdGroupId": 5800030868,
+   "CampaignId": 714529126,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076686335,
+   "Keyword": "ии для финансов компании",
+   "AdGroupId": 5800030868,
+   "CampaignId": 714529126,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076686336,
+   "Keyword": "искусственный интеллект в бухгалтерии",
+   "AdGroupId": 5800030868,
+   "CampaignId": 714529126,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076686548,
+   "Keyword": "автоматизация бизнеса",
+   "AdGroupId": 5800030944,
+   "CampaignId": 714529148,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076686549,
+   "Keyword": "комплексная автоматизация бизнеса",
+   "AdGroupId": 5800030944,
+   "CampaignId": 714529148,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076686550,
+   "Keyword": "автоматизация малого бизнеса",
+   "AdGroupId": 5800030944,
+   "CampaignId": 714529148,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076686551,
+   "Keyword": "автоматизация среднего бизнеса",
+   "AdGroupId": 5800030944,
+   "CampaignId": 714529148,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076686552,
+   "Keyword": "автоматизация крупного бизнеса",
+   "AdGroupId": 5800030944,
+   "CampaignId": 714529148,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076686553,
+   "Keyword": "автоматизация бизнеса под ключ",
+   "AdGroupId": 5800030944,
+   "CampaignId": 714529148,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076686554,
+   "Keyword": "заказать автоматизацию бизнеса",
+   "AdGroupId": 5800030944,
+   "CampaignId": 714529148,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076686555,
+   "Keyword": "нужна автоматизация бизнеса",
+   "AdGroupId": 5800030944,
+   "CampaignId": 714529148,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076686556,
+   "Keyword": "автоматизация бизнеса услуги",
+   "AdGroupId": 5800030944,
+   "CampaignId": 714529148,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076686557,
+   "Keyword": "автоматизация бизнеса компания",
+   "AdGroupId": 5800030944,
+   "CampaignId": 714529148,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076686558,
+   "Keyword": "автоматизация бизнеса стоимость",
+   "AdGroupId": 5800030944,
+   "CampaignId": 714529148,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076686559,
+   "Keyword": "автоматизация бизнеса цена",
+   "AdGroupId": 5800030944,
+   "CampaignId": 714529148,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076686560,
+   "Keyword": "автоматизация бизнеса москва",
+   "AdGroupId": 5800030944,
+   "CampaignId": 714529148,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076686948,
+   "Keyword": "автоматизация бизнес процессов",
+   "AdGroupId": 5800030953,
+   "CampaignId": 714529148,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076686949,
+   "Keyword": "автоматизация бизнес процессов компании",
+   "AdGroupId": 5800030953,
+   "CampaignId": 714529148,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076686950,
+   "Keyword": "внедрение автоматизации бизнес процессов",
+   "AdGroupId": 5800030953,
+   "CampaignId": 714529148,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076686951,
+   "Keyword": "автоматизация бизнес процессов под ключ",
+   "AdGroupId": 5800030953,
+   "CampaignId": 714529148,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076686952,
+   "Keyword": "автоматизация бизнес процессов стоимость",
+   "AdGroupId": 5800030953,
+   "CampaignId": 714529148,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076686953,
+   "Keyword": "автоматизация бизнес процессов услуги",
+   "AdGroupId": 5800030953,
+   "CampaignId": 714529148,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076686954,
+   "Keyword": "автоматизация процессов компании",
+   "AdGroupId": 5800030953,
+   "CampaignId": 714529148,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076686955,
+   "Keyword": "автоматизация рутинных процессов",
+   "AdGroupId": 5800030953,
+   "CampaignId": 714529148,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076686956,
+   "Keyword": "автоматизация процессов предприятия",
+   "AdGroupId": 5800030953,
+   "CampaignId": 714529148,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076686957,
+   "Keyword": "оптимизация и автоматизация бизнес процессов",
+   "AdGroupId": 5800030953,
+   "CampaignId": 714529148,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076686958,
+   "Keyword": "автоматизация бизнес процессов малого бизнеса",
+   "AdGroupId": 5800030953,
+   "CampaignId": 714529148,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076687393,
+   "Keyword": "аудит бизнес процессов компании",
+   "AdGroupId": 5800030966,
+   "CampaignId": 714529148,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076687394,
+   "Keyword": "проведение аудита бизнес процессов",
+   "AdGroupId": 5800030966,
+   "CampaignId": 714529148,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076687395,
+   "Keyword": "аудит бизнес процессов услуга",
+   "AdGroupId": 5800030966,
+   "CampaignId": 714529148,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076687396,
+   "Keyword": "аудит бизнес процессов предприятия",
+   "AdGroupId": 5800030966,
+   "CampaignId": 714529148,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076687397,
+   "Keyword": "аудит процессов и систем компании",
+   "AdGroupId": 5800030966,
+   "CampaignId": 714529148,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076687398,
+   "Keyword": "разработка crm на заказ",
+   "AdGroupId": 5800030966,
+   "CampaignId": 714529148,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076687399,
+   "Keyword": "разработка crm системы на заказ",
+   "AdGroupId": 5800030966,
+   "CampaignId": 714529148,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076687400,
+   "Keyword": "разработка веб сервисов на заказ",
+   "AdGroupId": 5800030966,
+   "CampaignId": 714529148,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076687401,
+   "Keyword": "разработка информационной системы на заказ",
+   "AdGroupId": 5800030966,
+   "CampaignId": 714529148,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076687402,
+   "Keyword": "разработка по для бизнеса на заказ",
+   "AdGroupId": 5800030966,
+   "CampaignId": 714529148,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076687403,
+   "Keyword": "заказная разработка для бизнеса",
+   "AdGroupId": 5800030966,
+   "CampaignId": 714529148,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58076687404,
+   "Keyword": "разработка внутренних систем компании",
+   "AdGroupId": 5800030966,
+   "CampaignId": 714529148,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58085300655,
+   "Keyword": "отчет комиссионера wildberries 1с",
+   "AdGroupId": 5800026749,
+   "CampaignId": 714528958,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58085300656,
+   "Keyword": "отчет о реализации wildberries в 1с",
+   "AdGroupId": 5800026749,
+   "CampaignId": 714528958,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58085300657,
+   "Keyword": "загрузка отчета озон в 1с",
+   "AdGroupId": 5800026749,
+   "CampaignId": 714528958,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58085300658,
+   "Keyword": "учет wildberries в 1с",
+   "AdGroupId": 5800026749,
+   "CampaignId": 714528958,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58085300659,
+   "Keyword": "учет маркетплейсов в 1с",
+   "AdGroupId": 5800026749,
+   "CampaignId": 714528958,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58085300660,
+   "Keyword": "обмен 1с с wildberries",
+   "AdGroupId": 5800026749,
+   "CampaignId": 714528958,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58085300661,
+   "Keyword": "1с для маркетплейсов",
+   "AdGroupId": 5800026749,
+   "CampaignId": 714528958,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58085300662,
+   "Keyword": "работа с маркетплейсами в 1с",
+   "AdGroupId": 5800026749,
+   "CampaignId": 714528958,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58085300663,
+   "Keyword": "как отразить продажи на маркетплейсе в 1с",
+   "AdGroupId": 5800026749,
+   "CampaignId": 714528958,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58085300664,
+   "Keyword": "управленческий учет для маркетплейсов",
+   "AdGroupId": 5800026749,
+   "CampaignId": 714528958,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 58085300665,
+   "Keyword": "интеграция мойсклад с 1с",
+   "AdGroupId": 5800026679,
+   "CampaignId": 714528958,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 205800026679,
+   "Keyword": "---autotargeting",
+   "AdGroupId": 5800026679,
+   "CampaignId": 714528958,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 205800026749,
+   "Keyword": "---autotargeting",
+   "AdGroupId": 5800026749,
+   "CampaignId": 714528958,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 205800026842,
+   "Keyword": "---autotargeting",
+   "AdGroupId": 5800026842,
+   "CampaignId": 714528958,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 205800030463,
+   "Keyword": "---autotargeting",
+   "AdGroupId": 5800030463,
+   "CampaignId": 714529074,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 205800030482,
+   "Keyword": "---autotargeting",
+   "AdGroupId": 5800030482,
+   "CampaignId": 714529074,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 205800030497,
+   "Keyword": "---autotargeting",
+   "AdGroupId": 5800030497,
+   "CampaignId": 714529074,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 205800030594,
+   "Keyword": "---autotargeting",
+   "AdGroupId": 5800030594,
+   "CampaignId": 714529095,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 205800030615,
+   "Keyword": "---autotargeting",
+   "AdGroupId": 5800030615,
+   "CampaignId": 714529095,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 205800030647,
+   "Keyword": "---autotargeting",
+   "AdGroupId": 5800030647,
+   "CampaignId": 714529095,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 205800030650,
+   "Keyword": "---autotargeting",
+   "AdGroupId": 5800030650,
+   "CampaignId": 714529095,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 205800030849,
+   "Keyword": "---autotargeting",
+   "AdGroupId": 5800030849,
+   "CampaignId": 714529126,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 205800030853,
+   "Keyword": "---autotargeting",
+   "AdGroupId": 5800030853,
+   "CampaignId": 714529126,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 205800030860,
+   "Keyword": "---autotargeting",
+   "AdGroupId": 5800030860,
+   "CampaignId": 714529126,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 205800030868,
+   "Keyword": "---autotargeting",
+   "AdGroupId": 5800030868,
+   "CampaignId": 714529126,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 205800030944,
+   "Keyword": "---autotargeting",
+   "AdGroupId": 5800030944,
+   "CampaignId": 714529148,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 205800030953,
+   "Keyword": "---autotargeting",
+   "AdGroupId": 5800030953,
+   "CampaignId": 714529148,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 205800030966,
+   "Keyword": "---autotargeting",
+   "AdGroupId": 5800030966,
+   "CampaignId": 714529148,
+   "State": "ON",
+   "Status": "ACCEPTED"
+  }
+ ],
+ "sitelinks": [
+  {
+   "Id": 1510968376,
+   "Sitelinks": [
+    {
+     "Title": "Разобрать процесс",
+     "Href": "https://webkoth.com/kontur?utm_source=yandex&utm_medium=cpc&utm_campaign=kontur-rsya&utm_content=integraciya-1s-marketpleysy-sitelink#quiz",
+     "Description": "Квиз на три минуты: вердикт по вашему процессу"
+    },
+    {
+     "Title": "Как это работает",
+     "Href": "https://webkoth.com/kontur?utm_source=yandex&utm_medium=cpc&utm_campaign=kontur-rsya&utm_content=integraciya-1s-marketpleysy-sitelink#how",
+     "Description": "Четыре шага: что стандартизировано, что под вас"
+    },
+    {
+     "Title": "Кейсы с цифрами",
+     "Href": "https://webkoth.com/kontur?utm_source=yandex&utm_medium=cpc&utm_campaign=kontur-rsya&utm_content=integraciya-1s-marketpleysy-sitelink#cases",
+     "Description": "Что уже сделано по этой схеме, цифры из репозиториев"
+    },
+    {
+     "Title": "Цены",
+     "Href": "https://webkoth.com/kontur?utm_source=yandex&utm_medium=cpc&utm_campaign=kontur-rsya&utm_content=integraciya-1s-marketpleysy-sitelink#pricing",
+     "Description": "Вилки по ступеням, точнее после бесплатного разбора"
+    }
+   ]
+  },
+  {
+   "Id": 1510970161,
+   "Sitelinks": [
+    {
+     "Title": "Разобрать процесс",
+     "Href": "https://webkoth.com/kontur?utm_source=yandex&utm_medium=cpc&utm_campaign=kontur-rsya&utm_content=sinhronizaciya-ostatkov-sitelink#quiz",
+     "Description": "Квиз на три минуты: вердикт по вашему процессу"
+    },
+    {
+     "Title": "Как это работает",
+     "Href": "https://webkoth.com/kontur?utm_source=yandex&utm_medium=cpc&utm_campaign=kontur-rsya&utm_content=sinhronizaciya-ostatkov-sitelink#how",
+     "Description": "Четыре шага: что стандартизировано, что под вас"
+    },
+    {
+     "Title": "Кейсы с цифрами",
+     "Href": "https://webkoth.com/kontur?utm_source=yandex&utm_medium=cpc&utm_campaign=kontur-rsya&utm_content=sinhronizaciya-ostatkov-sitelink#cases",
+     "Description": "Что уже сделано по этой схеме, цифры из репозиториев"
+    },
+    {
+     "Title": "Цены",
+     "Href": "https://webkoth.com/kontur?utm_source=yandex&utm_medium=cpc&utm_campaign=kontur-rsya&utm_content=sinhronizaciya-ostatkov-sitelink#pricing",
+     "Description": "Вилки по ступеням, точнее после бесплатного разбора"
+    }
+   ]
+  },
+  {
+   "Id": 1510974937,
+   "Sitelinks": [
+    {
+     "Title": "Разобрать процесс",
+     "Href": "https://webkoth.com/it-director?utm_source=yandex&utm_medium=cpc&utm_campaign=it-director-rsya&utm_content=it-direktor-autsors-sitelink#quiz",
+     "Description": "Квиз на три минуты: вердикт по вашему процессу"
+    },
+    {
+     "Title": "Как это работает",
+     "Href": "https://webkoth.com/it-director?utm_source=yandex&utm_medium=cpc&utm_campaign=it-director-rsya&utm_content=it-direktor-autsors-sitelink#how",
+     "Description": "Четыре шага: что стандартизировано, что под вас"
+    },
+    {
+     "Title": "Кейсы с цифрами",
+     "Href": "https://webkoth.com/it-director?utm_source=yandex&utm_medium=cpc&utm_campaign=it-director-rsya&utm_content=it-direktor-autsors-sitelink#cases",
+     "Description": "Что уже сделано по этой схеме, цифры из репозиториев"
+    },
+    {
+     "Title": "Цены",
+     "Href": "https://webkoth.com/it-director?utm_source=yandex&utm_medium=cpc&utm_campaign=it-director-rsya&utm_content=it-direktor-autsors-sitelink#pricing",
+     "Description": "Вилки по ступеням, точнее после бесплатного разбора"
+    }
+   ]
+  },
+  {
+   "Id": 1510975566,
+   "Sitelinks": [
+    {
+     "Title": "Разобрать процесс",
+     "Href": "https://webkoth.com/it-director?utm_source=yandex&utm_medium=cpc&utm_campaign=it-director-rsya&utm_content=it-autsorsing-infrastruktury-sitelink#quiz",
+     "Description": "Квиз на три минуты: вердикт по вашему процессу"
+    },
+    {
+     "Title": "Как это работает",
+     "Href": "https://webkoth.com/it-director?utm_source=yandex&utm_medium=cpc&utm_campaign=it-director-rsya&utm_content=it-autsorsing-infrastruktury-sitelink#how",
+     "Description": "Четыре шага: что стандартизировано, что под вас"
+    },
+    {
+     "Title": "Кейсы с цифрами",
+     "Href": "https://webkoth.com/it-director?utm_source=yandex&utm_medium=cpc&utm_campaign=it-director-rsya&utm_content=it-autsorsing-infrastruktury-sitelink#cases",
+     "Description": "Что уже сделано по этой схеме, цифры из репозиториев"
+    },
+    {
+     "Title": "Цены",
+     "Href": "https://webkoth.com/it-director?utm_source=yandex&utm_medium=cpc&utm_campaign=it-director-rsya&utm_content=it-autsorsing-infrastruktury-sitelink#pricing",
+     "Description": "Вилки по ступеням, точнее после бесплатного разбора"
+    }
+   ]
+  },
+  {
+   "Id": 1510975642,
+   "Sitelinks": [
+    {
+     "Title": "Разобрать процесс",
+     "Href": "https://webkoth.com/it-director?utm_source=yandex&utm_medium=cpc&utm_campaign=it-director-rsya&utm_content=audit-it-infrastruktury-sitelink#quiz",
+     "Description": "Квиз на три минуты: вердикт по вашему процессу"
+    },
+    {
+     "Title": "Как это работает",
+     "Href": "https://webkoth.com/it-director?utm_source=yandex&utm_medium=cpc&utm_campaign=it-director-rsya&utm_content=audit-it-infrastruktury-sitelink#how",
+     "Description": "Четыре шага: что стандартизировано, что под вас"
+    },
+    {
+     "Title": "Кейсы с цифрами",
+     "Href": "https://webkoth.com/it-director?utm_source=yandex&utm_medium=cpc&utm_campaign=it-director-rsya&utm_content=audit-it-infrastruktury-sitelink#cases",
+     "Description": "Что уже сделано по этой схеме, цифры из репозиториев"
+    },
+    {
+     "Title": "Цены",
+     "Href": "https://webkoth.com/it-director?utm_source=yandex&utm_medium=cpc&utm_campaign=it-director-rsya&utm_content=audit-it-infrastruktury-sitelink#pricing",
+     "Description": "Вилки по ступеням, точнее после бесплатного разбора"
+    }
+   ]
+  },
+  {
+   "Id": 1510976413,
+   "Sitelinks": [
+    {
+     "Title": "Разобрать процесс",
+     "Href": "https://webkoth.com/agent?utm_source=yandex&utm_medium=cpc&utm_campaign=agent-rsya&utm_content=ii-agenty-dlya-biznesa-sitelink#quiz",
+     "Description": "Квиз на три минуты: вердикт по вашему процессу"
+    },
+    {
+     "Title": "Как это работает",
+     "Href": "https://webkoth.com/agent?utm_source=yandex&utm_medium=cpc&utm_campaign=agent-rsya&utm_content=ii-agenty-dlya-biznesa-sitelink#how",
+     "Description": "Четыре шага: что стандартизировано, что под вас"
+    },
+    {
+     "Title": "Кейсы с цифрами",
+     "Href": "https://webkoth.com/agent?utm_source=yandex&utm_medium=cpc&utm_campaign=agent-rsya&utm_content=ii-agenty-dlya-biznesa-sitelink#cases",
+     "Description": "Что уже сделано по этой схеме, цифры из репозиториев"
+    },
+    {
+     "Title": "Цены",
+     "Href": "https://webkoth.com/agent?utm_source=yandex&utm_medium=cpc&utm_campaign=agent-rsya&utm_content=ii-agenty-dlya-biznesa-sitelink#pricing",
+     "Description": "Вилки по ступеням, точнее после бесплатного разбора"
+    },
+    {
+     "Title": "Стандарт AIAS",
+     "Href": "https://webkoth.com/ru/standard?utm_source=yandex&utm_medium=cpc&utm_campaign=agent-rsya&utm_content=ii-agenty-dlya-biznesa-sitelink",
+     "Description": "Восемь вопросов, шесть форм, чеклист приёмки"
+    }
+   ]
+  },
+  {
+   "Id": 1510976492,
+   "Sitelinks": [
+    {
+     "Title": "Разобрать процесс",
+     "Href": "https://webkoth.com/agent?utm_source=yandex&utm_medium=cpc&utm_campaign=agent-rsya&utm_content=vnedrenie-ii-agentov-sitelink#quiz",
+     "Description": "Квиз на три минуты: вердикт по вашему процессу"
+    },
+    {
+     "Title": "Как это работает",
+     "Href": "https://webkoth.com/agent?utm_source=yandex&utm_medium=cpc&utm_campaign=agent-rsya&utm_content=vnedrenie-ii-agentov-sitelink#how",
+     "Description": "Четыре шага: что стандартизировано, что под вас"
+    },
+    {
+     "Title": "Кейсы с цифрами",
+     "Href": "https://webkoth.com/agent?utm_source=yandex&utm_medium=cpc&utm_campaign=agent-rsya&utm_content=vnedrenie-ii-agentov-sitelink#cases",
+     "Description": "Что уже сделано по этой схеме, цифры из репозиториев"
+    },
+    {
+     "Title": "Цены",
+     "Href": "https://webkoth.com/agent?utm_source=yandex&utm_medium=cpc&utm_campaign=agent-rsya&utm_content=vnedrenie-ii-agentov-sitelink#pricing",
+     "Description": "Вилки по ступеням, точнее после бесплатного разбора"
+    },
+    {
+     "Title": "Стандарт AIAS",
+     "Href": "https://webkoth.com/ru/standard?utm_source=yandex&utm_medium=cpc&utm_campaign=agent-rsya&utm_content=vnedrenie-ii-agentov-sitelink",
+     "Description": "Восемь вопросов, шесть форм, чеклист приёмки"
+    }
+   ]
+  },
+  {
+   "Id": 1510977166,
+   "Sitelinks": [
+    {
+     "Title": "Разобрать процесс",
+     "Href": "https://webkoth.com/agent?utm_source=yandex&utm_medium=cpc&utm_campaign=agent-rsya&utm_content=kupit-razrabotka-agenta-sitelink#quiz",
+     "Description": "Квиз на три минуты: вердикт по вашему процессу"
+    },
+    {
+     "Title": "Как это работает",
+     "Href": "https://webkoth.com/agent?utm_source=yandex&utm_medium=cpc&utm_campaign=agent-rsya&utm_content=kupit-razrabotka-agenta-sitelink#how",
+     "Description": "Четыре шага: что стандартизировано, что под вас"
+    },
+    {
+     "Title": "Кейсы с цифрами",
+     "Href": "https://webkoth.com/agent?utm_source=yandex&utm_medium=cpc&utm_campaign=agent-rsya&utm_content=kupit-razrabotka-agenta-sitelink#cases",
+     "Description": "Что уже сделано по этой схеме, цифры из репозиториев"
+    },
+    {
+     "Title": "Цены",
+     "Href": "https://webkoth.com/agent?utm_source=yandex&utm_medium=cpc&utm_campaign=agent-rsya&utm_content=kupit-razrabotka-agenta-sitelink#pricing",
+     "Description": "Вилки по ступеням, точнее после бесплатного разбора"
+    },
+    {
+     "Title": "Стандарт AIAS",
+     "Href": "https://webkoth.com/ru/standard?utm_source=yandex&utm_medium=cpc&utm_campaign=agent-rsya&utm_content=kupit-razrabotka-agenta-sitelink",
+     "Description": "Восемь вопросов, шесть форм, чеклист приёмки"
+    }
+   ]
+  },
+  {
+   "Id": 1510977621,
+   "Sitelinks": [
+    {
+     "Title": "Разобрать процесс",
+     "Href": "https://webkoth.com/agent?utm_source=yandex&utm_medium=cpc&utm_campaign=agent-rsya&utm_content=ii-avtomatizaciya-processov-sitelink#quiz",
+     "Description": "Квиз на три минуты: вердикт по вашему процессу"
+    },
+    {
+     "Title": "Как это работает",
+     "Href": "https://webkoth.com/agent?utm_source=yandex&utm_medium=cpc&utm_campaign=agent-rsya&utm_content=ii-avtomatizaciya-processov-sitelink#how",
+     "Description": "Четыре шага: что стандартизировано, что под вас"
+    },
+    {
+     "Title": "Кейсы с цифрами",
+     "Href": "https://webkoth.com/agent?utm_source=yandex&utm_medium=cpc&utm_campaign=agent-rsya&utm_content=ii-avtomatizaciya-processov-sitelink#cases",
+     "Description": "Что уже сделано по этой схеме, цифры из репозиториев"
+    },
+    {
+     "Title": "Цены",
+     "Href": "https://webkoth.com/agent?utm_source=yandex&utm_medium=cpc&utm_campaign=agent-rsya&utm_content=ii-avtomatizaciya-processov-sitelink#pricing",
+     "Description": "Вилки по ступеням, точнее после бесплатного разбора"
+    },
+    {
+     "Title": "Стандарт AIAS",
+     "Href": "https://webkoth.com/ru/standard?utm_source=yandex&utm_medium=cpc&utm_campaign=agent-rsya&utm_content=ii-avtomatizaciya-processov-sitelink",
+     "Description": "Восемь вопросов, шесть форм, чеклист приёмки"
+    }
+   ]
+  },
+  {
+   "Id": 1510977648,
+   "Sitelinks": [
+    {
+     "Title": "Разобрать процесс",
+     "Href": "https://webkoth.com/finance?p=pervichka&utm_source=yandex&utm_medium=cpc&utm_campaign=finance-rsya&utm_content=raspoznavanie-pervichki-1s-sitelink#quiz",
+     "Description": "Квиз на три минуты: вердикт по вашему процессу"
+    },
+    {
+     "Title": "Как это работает",
+     "Href": "https://webkoth.com/finance?p=pervichka&utm_source=yandex&utm_medium=cpc&utm_campaign=finance-rsya&utm_content=raspoznavanie-pervichki-1s-sitelink#how",
+     "Description": "Четыре шага: что стандартизировано, что под вас"
+    },
+    {
+     "Title": "Кейсы с цифрами",
+     "Href": "https://webkoth.com/finance?p=pervichka&utm_source=yandex&utm_medium=cpc&utm_campaign=finance-rsya&utm_content=raspoznavanie-pervichki-1s-sitelink#cases",
+     "Description": "Что уже сделано по этой схеме, цифры из репозиториев"
+    },
+    {
+     "Title": "Цены",
+     "Href": "https://webkoth.com/finance?p=pervichka&utm_source=yandex&utm_medium=cpc&utm_campaign=finance-rsya&utm_content=raspoznavanie-pervichki-1s-sitelink#pricing",
+     "Description": "Вилки по ступеням, точнее после бесплатного разбора"
+    }
+   ]
+  },
+  {
+   "Id": 1510978306,
+   "Sitelinks": [
+    {
+     "Title": "Разобрать процесс",
+     "Href": "https://webkoth.com/finance?p=pervichka&utm_source=yandex&utm_medium=cpc&utm_campaign=finance-rsya&utm_content=servis-raspoznavaniya-sitelink#quiz",
+     "Description": "Квиз на три минуты: вердикт по вашему процессу"
+    },
+    {
+     "Title": "Как это работает",
+     "Href": "https://webkoth.com/finance?p=pervichka&utm_source=yandex&utm_medium=cpc&utm_campaign=finance-rsya&utm_content=servis-raspoznavaniya-sitelink#how",
+     "Description": "Четыре шага: что стандартизировано, что под вас"
+    },
+    {
+     "Title": "Кейсы с цифрами",
+     "Href": "https://webkoth.com/finance?p=pervichka&utm_source=yandex&utm_medium=cpc&utm_campaign=finance-rsya&utm_content=servis-raspoznavaniya-sitelink#cases",
+     "Description": "Что уже сделано по этой схеме, цифры из репозиториев"
+    },
+    {
+     "Title": "Цены",
+     "Href": "https://webkoth.com/finance?p=pervichka&utm_source=yandex&utm_medium=cpc&utm_campaign=finance-rsya&utm_content=servis-raspoznavaniya-sitelink#pricing",
+     "Description": "Вилки по ступеням, точнее после бесплатного разбора"
+    }
+   ]
+  },
+  {
+   "Id": 1510978520,
+   "Sitelinks": [
+    {
+     "Title": "Разобрать процесс",
+     "Href": "https://webkoth.com/finance?p=otchet&utm_source=yandex&utm_medium=cpc&utm_campaign=finance-rsya&utm_content=upravlencheskaya-otchetnost-sitelink#quiz",
+     "Description": "Квиз на три минуты: вердикт по вашему процессу"
+    },
+    {
+     "Title": "Как это работает",
+     "Href": "https://webkoth.com/finance?p=otchet&utm_source=yandex&utm_medium=cpc&utm_campaign=finance-rsya&utm_content=upravlencheskaya-otchetnost-sitelink#how",
+     "Description": "Четыре шага: что стандартизировано, что под вас"
+    },
+    {
+     "Title": "Кейсы с цифрами",
+     "Href": "https://webkoth.com/finance?p=otchet&utm_source=yandex&utm_medium=cpc&utm_campaign=finance-rsya&utm_content=upravlencheskaya-otchetnost-sitelink#cases",
+     "Description": "Что уже сделано по этой схеме, цифры из репозиториев"
+    },
+    {
+     "Title": "Цены",
+     "Href": "https://webkoth.com/finance?p=otchet&utm_source=yandex&utm_medium=cpc&utm_campaign=finance-rsya&utm_content=upravlencheskaya-otchetnost-sitelink#pricing",
+     "Description": "Вилки по ступеням, точнее после бесплатного разбора"
+    }
+   ]
+  },
+  {
+   "Id": 1510978951,
+   "Sitelinks": [
+    {
+     "Title": "Разобрать процесс",
+     "Href": "https://webkoth.com/finance?p=otchet&utm_source=yandex&utm_medium=cpc&utm_campaign=finance-rsya&utm_content=ii-dlya-buhgalterii-sitelink#quiz",
+     "Description": "Квиз на три минуты: вердикт по вашему процессу"
+    },
+    {
+     "Title": "Как это работает",
+     "Href": "https://webkoth.com/finance?p=otchet&utm_source=yandex&utm_medium=cpc&utm_campaign=finance-rsya&utm_content=ii-dlya-buhgalterii-sitelink#how",
+     "Description": "Четыре шага: что стандартизировано, что под вас"
+    },
+    {
+     "Title": "Кейсы с цифрами",
+     "Href": "https://webkoth.com/finance?p=otchet&utm_source=yandex&utm_medium=cpc&utm_campaign=finance-rsya&utm_content=ii-dlya-buhgalterii-sitelink#cases",
+     "Description": "Что уже сделано по этой схеме, цифры из репозиториев"
+    },
+    {
+     "Title": "Цены",
+     "Href": "https://webkoth.com/finance?p=otchet&utm_source=yandex&utm_medium=cpc&utm_campaign=finance-rsya&utm_content=ii-dlya-buhgalterii-sitelink#pricing",
+     "Description": "Вилки по ступеням, точнее после бесплатного разбора"
+    }
+   ]
+  },
+  {
+   "Id": 1510979513,
+   "Sitelinks": [
+    {
+     "Title": "Кейс HubMarket",
+     "Href": "https://webkoth.com/?utm_source=yandex&utm_medium=cpc&utm_campaign=home-rsya&utm_content=avtomatizaciya-biznesa-sitelink#hubmarket",
+     "Description": "Именованный кейс: продукт от идеи до production"
+    },
+    {
+     "Title": "Как это происходит",
+     "Href": "https://webkoth.com/?utm_source=yandex&utm_medium=cpc&utm_campaign=home-rsya&utm_content=avtomatizaciya-biznesa-sitelink#roadmap",
+     "Description": "Разбор, аудит и карта, первый процесс, сопровождение"
+    },
+    {
+     "Title": "Бесплатный разбор",
+     "Href": "https://webkoth.com/?utm_source=yandex&utm_medium=cpc&utm_campaign=home-rsya&utm_content=avtomatizaciya-biznesa-sitelink#form",
+     "Description": "30–45 минут: текущие процессы и прототипы"
+    },
+    {
+     "Title": "Стандарт AIAS",
+     "Href": "https://webkoth.com/ru/standard?utm_source=yandex&utm_medium=cpc&utm_campaign=home-rsya&utm_content=avtomatizaciya-biznesa-sitelink",
+     "Description": "Восемь вопросов, шесть форм, чеклист приёмки"
+    }
+   ]
+  },
+  {
+   "Id": 1510979878,
+   "Sitelinks": [
+    {
+     "Title": "Кейс HubMarket",
+     "Href": "https://webkoth.com/?utm_source=yandex&utm_medium=cpc&utm_campaign=home-rsya&utm_content=avtomatizaciya-biznes-processov-sitelink#hubmarket",
+     "Description": "Именованный кейс: продукт от идеи до production"
+    },
+    {
+     "Title": "Как это происходит",
+     "Href": "https://webkoth.com/?utm_source=yandex&utm_medium=cpc&utm_campaign=home-rsya&utm_content=avtomatizaciya-biznes-processov-sitelink#roadmap",
+     "Description": "Разбор, аудит и карта, первый процесс, сопровождение"
+    },
+    {
+     "Title": "Бесплатный разбор",
+     "Href": "https://webkoth.com/?utm_source=yandex&utm_medium=cpc&utm_campaign=home-rsya&utm_content=avtomatizaciya-biznes-processov-sitelink#form",
+     "Description": "30–45 минут: текущие процессы и прототипы"
+    },
+    {
+     "Title": "Стандарт AIAS",
+     "Href": "https://webkoth.com/ru/standard?utm_source=yandex&utm_medium=cpc&utm_campaign=home-rsya&utm_content=avtomatizaciya-biznes-processov-sitelink",
+     "Description": "Восемь вопросов, шесть форм, чеклист приёмки"
+    }
+   ]
+  },
+  {
+   "Id": 1510980570,
+   "Sitelinks": [
+    {
+     "Title": "Кейс HubMarket",
+     "Href": "https://webkoth.com/?utm_source=yandex&utm_medium=cpc&utm_campaign=home-rsya&utm_content=audit-i-razrabotka-sitelink#hubmarket",
+     "Description": "Именованный кейс: продукт от идеи до production"
+    },
+    {
+     "Title": "Как это происходит",
+     "Href": "https://webkoth.com/?utm_source=yandex&utm_medium=cpc&utm_campaign=home-rsya&utm_content=audit-i-razrabotka-sitelink#roadmap",
+     "Description": "Разбор, аудит и карта, первый процесс, сопровождение"
+    },
+    {
+     "Title": "Бесплатный разбор",
+     "Href": "https://webkoth.com/?utm_source=yandex&utm_medium=cpc&utm_campaign=home-rsya&utm_content=audit-i-razrabotka-sitelink#form",
+     "Description": "30–45 минут: текущие процессы и прототипы"
+    },
+    {
+     "Title": "Стандарт AIAS",
+     "Href": "https://webkoth.com/ru/standard?utm_source=yandex&utm_medium=cpc&utm_campaign=home-rsya&utm_content=audit-i-razrabotka-sitelink",
+     "Description": "Восемь вопросов, шесть форм, чеклист приёмки"
+    }
+   ]
+  },
+  {
+   "Id": 1511048065,
+   "Sitelinks": [
+    {
+     "Title": "Разобрать процесс",
+     "Href": "https://webkoth.com/kontur?utm_source=yandex&utm_medium=cpc&utm_campaign=kontur-rsya&utm_content=otchety-ploshchadok-1s-sitelink#quiz",
+     "Description": "Квиз на три минуты: вердикт по вашему процессу"
+    },
+    {
+     "Title": "Как это работает",
+     "Href": "https://webkoth.com/kontur?utm_source=yandex&utm_medium=cpc&utm_campaign=kontur-rsya&utm_content=otchety-ploshchadok-1s-sitelink#how",
+     "Description": "Четыре шага: что стандартизировано, что под вас"
+    },
+    {
+     "Title": "Кейсы с цифрами",
+     "Href": "https://webkoth.com/kontur?utm_source=yandex&utm_medium=cpc&utm_campaign=kontur-rsya&utm_content=otchety-ploshchadok-1s-sitelink#cases",
+     "Description": "Что уже сделано по этой схеме, цифры из репозиториев"
+    },
+    {
+     "Title": "Цены",
+     "Href": "https://webkoth.com/kontur?utm_source=yandex&utm_medium=cpc&utm_campaign=kontur-rsya&utm_content=otchety-ploshchadok-1s-sitelink#pricing",
+     "Description": "Вилки по ступеням, точнее после бесплатного разбора"
+    }
+   ]
+  }
+ ],
+ "adextensions": [
+  {
+   "Id": 44479600,
+   "Type": "CALLOUT",
+   "Callout": {
+    "CalloutText": "Разбор 30 минут бесплатно"
+   },
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 44479601,
+   "Type": "CALLOUT",
+   "Callout": {
+    "CalloutText": "Данные лежат у вас"
+   },
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 44479602,
+   "Type": "CALLOUT",
+   "Callout": {
+    "CalloutText": "Сверка до единицы"
+   },
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 44479603,
+   "Type": "CALLOUT",
+   "Callout": {
+    "CalloutText": "Wildberries, Ozon, Маркет"
+   },
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 44479604,
+   "Type": "CALLOUT",
+   "Callout": {
+    "CalloutText": "Открытый стандарт"
+   },
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 44479667,
+   "Type": "CALLOUT",
+   "Callout": {
+    "CalloutText": "Аудит только на чтение"
+   },
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 44479668,
+   "Type": "CALLOUT",
+   "Callout": {
+    "CalloutText": "Отчёт и план за неделю"
+   },
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 44479669,
+   "Type": "CALLOUT",
+   "Callout": {
+    "CalloutText": "Фиксированная плата"
+   },
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 44479670,
+   "Type": "CALLOUT",
+   "Callout": {
+    "CalloutText": "Компании 10–200 человек"
+   },
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 44479677,
+   "Type": "CALLOUT",
+   "Callout": {
+    "CalloutText": "Вердикт за 30 минут"
+   },
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 44479678,
+   "Type": "CALLOUT",
+   "Callout": {
+    "CalloutText": "Без презумпции внедрения"
+   },
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 44479679,
+   "Type": "CALLOUT",
+   "Callout": {
+    "CalloutText": "Открытый стандарт AIAS"
+   },
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 44479680,
+   "Type": "CALLOUT",
+   "Callout": {
+    "CalloutText": "Кейсы с цифрами"
+   },
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 44479681,
+   "Type": "CALLOUT",
+   "Callout": {
+    "CalloutText": "Контур production"
+   },
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 44479687,
+   "Type": "CALLOUT",
+   "Callout": {
+    "CalloutText": "Цифры считает код"
+   },
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 44479688,
+   "Type": "CALLOUT",
+   "Callout": {
+    "CalloutText": "Отчёт за полчаса"
+   },
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 44479689,
+   "Type": "CALLOUT",
+   "Callout": {
+    "CalloutText": "Первичка сама в 1С"
+   },
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 44479699,
+   "Type": "CALLOUT",
+   "Callout": {
+    "CalloutText": "Системой, а не наймом"
+   },
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 44479700,
+   "Type": "CALLOUT",
+   "Callout": {
+    "CalloutText": "Аудит и карта процессов"
+   },
+   "State": "ON",
+   "Status": "ACCEPTED"
+  },
+  {
+   "Id": 44484199,
+   "Type": "CALLOUT",
+   "Callout": {
+    "CalloutText": "Внедрение от 150 тыс. ₽"
+   },
+   "State": "ON",
+   "Status": "ACCEPTED"
+  }
+ ],
+ "bidmodifiers": [
+  {
+   "CampaignId": 714528958,
+   "Id": 132119588348,
+   "Level": "CAMPAIGN",
+   "Type": "REGIONAL_ADJUSTMENT",
+   "RegionalAdjustment": {
+    "RegionId": 1,
+    "BidModifier": 100
+   }
+  },
+  {
+   "CampaignId": 714528958,
+   "Id": 132119588349,
+   "Level": "CAMPAIGN",
+   "Type": "REGIONAL_ADJUSTMENT",
+   "RegionalAdjustment": {
+    "RegionId": 10174,
+    "BidModifier": 115
+   }
+  },
+  {
+   "CampaignId": 714529074,
+   "Id": 132119588351,
+   "Level": "CAMPAIGN",
+   "Type": "REGIONAL_ADJUSTMENT",
+   "RegionalAdjustment": {
+    "RegionId": 1,
+    "BidModifier": 100
+   }
+  },
+  {
+   "CampaignId": 714529074,
+   "Id": 132119588352,
+   "Level": "CAMPAIGN",
+   "Type": "REGIONAL_ADJUSTMENT",
+   "RegionalAdjustment": {
+    "RegionId": 10174,
+    "BidModifier": 115
+   }
+  },
+  {
+   "CampaignId": 714529148,
+   "Id": 132119588354,
+   "Level": "CAMPAIGN",
+   "Type": "REGIONAL_ADJUSTMENT",
+   "RegionalAdjustment": {
+    "RegionId": 1,
+    "BidModifier": 100
+   }
+  },
+  {
+   "CampaignId": 714529148,
+   "Id": 132119588355,
+   "Level": "CAMPAIGN",
+   "Type": "REGIONAL_ADJUSTMENT",
+   "RegionalAdjustment": {
+    "RegionId": 10174,
+    "BidModifier": 115
+   }
+  },
+  {
+   "CampaignId": 714529095,
+   "Id": 132119588357,
+   "Level": "CAMPAIGN",
+   "Type": "REGIONAL_ADJUSTMENT",
+   "RegionalAdjustment": {
+    "RegionId": 1,
+    "BidModifier": 100
+   }
+  },
+  {
+   "CampaignId": 714529095,
+   "Id": 132119588358,
+   "Level": "CAMPAIGN",
+   "Type": "REGIONAL_ADJUSTMENT",
+   "RegionalAdjustment": {
+    "RegionId": 10174,
+    "BidModifier": 115
+   }
+  },
+  {
+   "CampaignId": 714529126,
+   "Id": 132119588360,
+   "Level": "CAMPAIGN",
+   "Type": "REGIONAL_ADJUSTMENT",
+   "RegionalAdjustment": {
+    "RegionId": 1,
+    "BidModifier": 100
+   }
+  },
+  {
+   "CampaignId": 714529126,
+   "Id": 132119588361,
+   "Level": "CAMPAIGN",
+   "Type": "REGIONAL_ADJUSTMENT",
+   "RegionalAdjustment": {
+    "RegionId": 10174,
+    "BidModifier": 115
+   }
+  }
+ ]
+}
