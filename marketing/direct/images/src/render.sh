@@ -10,5 +10,5 @@ shot() { # формат, сюжет, ширина, высота, файл
 shot 1x1 scheme 1080 1080 kontur-1x1.png
 shot 4x3 scheme 1200 900 kontur-4x3.png
 shot 16x9 table 1920 1080 kontur-16x9.png
-shot 9x16 scheme 1080 1920 kontur-9x16.png
+shot 3x4 scheme 1080 1440 kontur-3x4.png
 shot 1x1 table 1080 1080 kontur-1x1-table.png

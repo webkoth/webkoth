@@ -77,7 +77,7 @@ for (const c of plan) {
   // 1. Изображения страницы
   if (!rec.images) {
     // Обязательны 1:1, 4:3 и 16:9; вертикальный и второй квадрат есть не у всех страниц (у Контура с 17.09.2026).
-    const imgs = ['1x1', '4x3', '16x9', '9x16', '1x1-table'].filter((f) => existsSync(`${SRC}/images/${c.base}-${f}.png`))
+    const imgs = ['1x1', '4x3', '16x9', '3x4', '1x1-table'].filter((f) => existsSync(`${SRC}/images/${c.base}-${f}.png`))
       .map((f) => ({ Name: `${c.base}-${f}`, ImageData: readFileSync(`${SRC}/images/${c.base}-${f}.png`).toString('base64') }))
     rec.images = ids(await api('adimages', 'add', { AdImages: imgs }), 'AdImageHash'); save(); console.log('   изображения:', rec.images.length)
   }

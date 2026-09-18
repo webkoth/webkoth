@@ -1,5 +1,6 @@
 <!-- Баннеры РСЯ для Контура (аудит 17.09.2026): светлый фон, до 7 слов, без логотипов площадок.
-     Рендер: images/src/render.sh. Формат задаёт ?f=1x1|4x3|16x9|9x16, сюжет ?v=scheme|table. -->
+     Рендер: images/src/render.sh. Формат задаёт ?f=1x1|4x3|16x9|3x4, сюжет ?v=scheme|table.
+     Вертикаль 9:16 Директ не принял («Размер изображения некорректен»), берёт 3:4. -->
 <meta charset="utf-8">
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -57,19 +58,19 @@
 <script>
   const p = new URLSearchParams(location.search)
   const f = p.get('f') || '1x1', v = p.get('v') || 'scheme'
-  const W = { '1x1': 1080, '4x3': 1200, '16x9': 1920, '9x16': 1080 }[f]
-  const H = { '1x1': 1080, '4x3': 900, '16x9': 1080, '9x16': 1920 }[f]
+  const W = { '1x1': 1080, '4x3': 1200, '16x9': 1920, '3x4': 1080 }[f]
+  const H = { '1x1': 1080, '4x3': 900, '16x9': 1080, '3x4': 1440 }[f]
   // Единица масштаба: сюжет занимает ту же долю кадра в любом формате.
-  const u = { '1x1': 14.2, '4x3': 13.2, '16x9': 17.5, '9x16': 19 }[f] * (v === 'table' && f === '1x1' ? .95 : 1)
+  const u = { '1x1': 14.2, '4x3': 13.2, '16x9': 17.5, '3x4': 17.5 }[f] * (v === 'table' && f === '1x1' ? .95 : 1)
   document.documentElement.style.setProperty('--u', u + 'px')
   document.body.style.width = W + 'px'; document.body.style.height = H + 'px'
-  if (f === '9x16') document.body.classList.add('v')
+  if (f === '3x4') document.body.classList.add('v')
   if (v === 'table' && f !== '16x9') document.body.classList.add('stack')
   const bars = (ws) => ws.map((w) => `<div class="bar" style="width:${w}%"></div>`).join('')
   const check = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>'
   const src = (name, color, ws) => `<div class="card src"><div class="name"><span class="dot" style="background:${color}"></span>${name}</div>${bars(ws)}</div>`
   const sources = src('WB', '#A21CAF', [92, 70]) + src('Ozon', '#2563EB', [80, 58]) + src('Маркет', '#F59E0B', [88, 64])
-  const vertical = f === '9x16'
+  const vertical = f === '3x4'
   const arrows = vertical
     ? `<svg class="arrows" viewBox="0 0 500 120" fill="none" stroke="#94A3B8" stroke-width="5" stroke-linecap="round"><path d="M80 5 C80 70 250 50 250 110"/><path d="M250 5 L250 110"/><path d="M420 5 C420 70 250 50 250 110"/><path d="M232 92 L250 112 L268 92" stroke="#475569"/></svg>`
     : `<svg class="arrows" viewBox="0 0 100 300" preserveAspectRatio="none" fill="none" stroke="#94A3B8" stroke-width="3" stroke-linecap="round" vector-effect="non-scaling-stroke"><path d="M4 50 C55 50 50 150 94 150" vector-effect="non-scaling-stroke"/><path d="M4 150 L94 150" vector-effect="non-scaling-stroke"/><path d="M4 250 C55 250 50 150 94 150" vector-effect="non-scaling-stroke"/></svg>`
