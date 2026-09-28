@@ -1,0 +1,256 @@
+[
+  {
+    "id": "agents",
+    "label": "ИИ-агенты и оркестрация",
+    "n": 143,
+    "examples": [
+      "- ClickUp (2 roles) — Senior AI Engineer - Multi-Agent Frameworks, Remote · $200K–$250K — https://www.careerjumpship.com/jobs/senior-ai-engineer-multi...",
+      "Agentic workflows plus traditional ML, deployed on-premises inside agency cloud environments, directly on top of their data.",
+      "AiMi | Full Stack AI Engineer | Remote(Everywhere) | Full-timeAiMi builds agentic AI infrastructure for capital markets: autonomous agents that ingest venue and",
+      "I take responsibility for both staff and clients, and I look for people who approach their work with a similar sense of ownership.For September 2026: our curren"
+    ],
+    "byMonth": {
+      "2026-09": 40,
+      "2026-08": 33,
+      "2026-07": 31,
+      "2026-06": 39
+    }
+  },
+  {
+    "id": "data",
+    "label": "Данные, разметка, датасеты",
+    "n": 61,
+    "examples": [
+      "Our mission is to democratize the pro sports experience for all athletes.All positions are in Berkeley, California:- Data Labeling Intern: https://app.deel.com/",
+      "Pando combines novel plant datasets and emerging predictive models to help researchers design and optimize plant production workflows with greater speed and rel",
+      "You have backend experience, have built tools for agents to interact with, and enjoy tinkering with agent harnesses.- Data Engineering: we generate large volume",
+      "You will own that platform end to end, not manage the people.What you&#x27;ll work on- Agent orchestration: tool calling, planner/executor and multi-agent patte"
+    ],
+    "byMonth": {
+      "2026-09": 15,
+      "2026-08": 12,
+      "2026-07": 13,
+      "2026-06": 21
+    }
+  },
+  {
+    "id": "eval",
+    "label": "Оценка качества и промпты",
+    "n": 54,
+    "examples": [
+      "concretely: shipping features in the agent pipeline, building MCP-based connectors and skills that extend what our agents can reach, running evals on agent accu",
+      "Mastra | Customer Engineer | REMOTE (AMER or EMEA time zones) | Full-timeMastra is the open-source TypeScript framework for building AI agents (agents, workflow",
+      "We have a backlog of hundreds of Agentic AI ideas that we need to deliver and a foundation of ontologies, evaluations, guardrails, etc...",
+      "You design experiments, write the training and eval infra, and co-author the papers.- ML Engineer, Cloud Platform: design and scale the backend that serves and "
+    ],
+    "byMonth": {
+      "2026-09": 14,
+      "2026-08": 10,
+      "2026-07": 11,
+      "2026-06": 19
+    }
+  },
+  {
+    "id": "mlops",
+    "label": "MLOps и инфраструктура моделей",
+    "n": 39,
+    "examples": [
+      "or https://www.vcluster.com/careers?ashby_jid=7a0a3f38-e7bf-407...Senior Inference Engineer — Our first dedicated inference hire.",
+      "+ Familiar with MLOps and the infrastructure needed to run AI models in production",
+      "Then help me execute on our ambitious roadmap!If you find yourself nodding along with the following statements, you may be a good fit:- You enjoy getting your w",
+      "Models stay open, research stays public, same team and offices.Roles (most can sit in any of the three offices):- Senior ML Infrastructure Engineer: own multi-c"
+    ],
+    "byMonth": {
+      "2026-09": 9,
+      "2026-08": 12,
+      "2026-07": 8,
+      "2026-06": 10
+    }
+  },
+  {
+    "id": "code",
+    "label": "Кодогенерация и разработка",
+    "n": 36,
+    "examples": [
+      "- BaseTen (2 roles) — Software Engineer - AI Developer Productivity, Remote · $165K–$330K — https://www.careerjumpship.com/jobs/software-engineer-ai-dev...",
+      "Every engineer directs coding agents daily, and we&#x27;re actively rebuilding our SDLC around that — not piloting it, not debating it.",
+      "We empower teams to build software faster, more securely, and at scale through the collaboration of AI coding agents and human developers.",
+      "We work in a monorepo designed for agent-assisted engineering workflows and are investing heavily in making engineers dramatically more effective with coding ag"
+    ],
+    "byMonth": {
+      "2026-09": 9,
+      "2026-08": 6,
+      "2026-07": 10,
+      "2026-06": 11
+    }
+  },
+  {
+    "id": "rag",
+    "label": "RAG и поиск по документам",
+    "n": 33,
+    "examples": [
+      "Strong experience with Python, Django, FastAPI, Linux, AWS, Docker, MySQL, microservices, CI/CD and GenAI/RAG.I also run Compute Labs, where I have built and op",
+      "Experience with LangGraph, LangChain, MCP, RAG, vector databases, or AI agents is a strong plus, but curiosity and the ability to learn quickly matter more.We&#",
+      "Stealth (B2B AI for MedTech) | Founding Engineer (AI / RAG, backend-leaning) | Hybrid (preferred Berlin Germany, & EU) | Part- or Full-timeWe&#x27;re an early, ",
+      "Cora AI | Founding Full Stack / Applied AI Engineer | REMOTE (US ONLY, LA/SF preferred) | Full-time | $190–250k + early equityWe build customer success agents a"
+    ],
+    "byMonth": {
+      "2026-09": 8,
+      "2026-08": 6,
+      "2026-07": 9,
+      "2026-06": 10
+    }
+  },
+  {
+    "id": "reports",
+    "label": "Отчётность и аналитика",
+    "n": 24,
+    "examples": [
+      "You&#x27;ll be the senior scientific computing person in the area, reporting directly to me (the area head), and you&#x27;ll help define where scientific comput",
+      "Two roles, one team, both reporting to the CPO:Senior Technical Product Engineer ($150–230k + meaningful equity).",
+      "We pride ourselves on keeping teams small, tightly knit and agile, enabling us to build the next generation of reporting intelligence for health care profession",
+      "• pre-IPO fintech adds custom reporting & data export features to their money movement product."
+    ],
+    "byMonth": {
+      "2026-09": 4,
+      "2026-08": 8,
+      "2026-07": 5,
+      "2026-06": 7
+    }
+  },
+  {
+    "id": "cv",
+    "label": "Компьютерное зрение",
+    "n": 24,
+    "examples": [
+      "Own the app and its UX end to end.AI Engineer (Computer Vision + LLMs)",
+      "worked at Cloudant (YC S08), Meteor (YC S11), Parse (YC S11, Facebook/Meta), and explored AI/ML (computer vision for self-driving cars).We have 2 products:1.",
+      "We&#x27;re looking for a jack-of-all-trades who can: prototype computer vision algorithms, build Python web services, wrangle large sets of data from disparate ",
+      "Founded in 2019, we&#x27;re an NSF- and investor-backed startup in Orange County, CA, with a team of 6 PhDs in computer vision.We&#x27;re hiring a Machine Learn"
+    ],
+    "byMonth": {
+      "2026-09": 4,
+      "2026-08": 3,
+      "2026-07": 6,
+      "2026-06": 11
+    }
+  },
+  {
+    "id": "integr",
+    "label": "Интеграции и учётные системы",
+    "n": 21,
+    "examples": [
+      "Notable recent projects include a gigantic ERP migration for Anduril, and working with Surge Labs to help develop some of the frontier LLM models from the big g",
+      "You will own that platform end to end, not manage the people.What you&#x27;ll work on- Agent orchestration: tool calling, planner/executor and multi-agent patte",
+      "Code: https://github.com/PriorLabs/TabPFNSince July we&#x27;re an independent lab inside SAP, with more than EUR 1B committed over four years.",
+      "We&#x27;re now working on things like payments and treasury, replacing parts of our property management ERP, and using LLMs to automate workflows that previousl"
+    ],
+    "byMonth": {
+      "2026-09": 3,
+      "2026-08": 8,
+      "2026-07": 6,
+      "2026-06": 4
+    }
+  },
+  {
+    "id": "docs",
+    "label": "Распознавание и разбор документов",
+    "n": 14,
+    "examples": [
+      "Klassif.ai | ML/AI Engineer | Hybrid (Leuven, Belgium; remote 3 days/week)We started off naively as just another intelligent document processing SaaS.",
+      "Balerion AI | Software + FDE + AI Engineers | San Francisco, CA | ONSITE | Full-time | $250k+ base + seed equity | Visa sponsorship available | https://balerion",
+      "Maynard already touches leasing, property operations, communications, maintenance, document processing and reporting.",
+      "Invoices in, mapped to contracts, schedule of values, and cost codes, back out as pay applications."
+    ],
+    "byMonth": {
+      "2026-09": 2,
+      "2026-08": 3,
+      "2026-07": 4,
+      "2026-06": 5
+    }
+  },
+  {
+    "id": "copilot",
+    "label": "Помощник сотрудника и генерация контента",
+    "n": 14,
+    "examples": [
+      "You think in tensors, understand what makes a kernel fast, and obsess over training throughput.- X-Scientist: building an agentic copilot for drug development w",
+      "You send a query, we return Google, Google News, ChatGPT, Perplexity, Gemini, Grok and Copilot results as structured fields: the answer, the sources it cited, a",
+      "https://pathos.comSenior Software/AI Engineer: build AI agents/copilots for BD, clinical, comp bio, and lab teams, MCP-style servers, pipelines into a governed ",
+      "- Proficiency in leveraging AI-assisted development tools (e.g., Claude Code, GitHub Copilot) to accelerate development, optimize workflows, and maintain high c"
+    ],
+    "byMonth": {
+      "2026-09": 3,
+      "2026-08": 5,
+      "2026-07": 3,
+      "2026-06": 3
+    }
+  },
+  {
+    "id": "fraud",
+    "label": "Антифрод, риски, скоринг",
+    "n": 12,
+    "examples": [
+      "If you have questions, feel free to reach out directly at liz.woodfield at sentilink dot com.At SentiLink, we stop identity fraud at scale.",
+      "These are not player-coach roles, but these are frontline roles that need that technical capability.Interesting problems: trust/fraud at marketplace scale; lega",
+      "ex:* agentic legal case origination agent - responsible for validating things like privacy violations, research existing case law to find new cases for us to op",
+      "Middesk | Full-time | NYC / SF | Hybrid | middesk.comAt Middesk, we&#x27;re building the business identity infrastructure that banks, fintechs, and platforms re"
+    ],
+    "byMonth": {
+      "2026-09": 4,
+      "2026-08": 4,
+      "2026-07": 2,
+      "2026-06": 2
+    }
+  },
+  {
+    "id": "calls",
+    "label": "Звонки, речь, транскрибация",
+    "n": 9,
+    "examples": [
+      "https://www.workhero.pro/careers?ashby_jid=89aac721-3aa3-4ae...- Senior Software Engineer, Voice AI & Data Infrastructure: own our real-time voice agents and da",
+      "This summer we&#x27;re launching a program called LEVI Literacy, which has a goal of halving the number of struggling readers in the US within 5 years.We&#x27;r",
+      "Tech stack: TypeScript | Node | React/Next.js | Postgres | Docker | K8s | LLMsWe’re building the Voice AI infrastructure layer for financial services.",
+      "River (rivergtm.com) | NYC, on-site | Founding Engineer + Product Engineer | Full-timeRiver builds voice AI agents for B2B comapnies."
+    ],
+    "byMonth": {
+      "2026-09": 3,
+      "2026-08": 3,
+      "2026-07": 1,
+      "2026-06": 2
+    }
+  },
+  {
+    "id": "forecast",
+    "label": "Прогнозирование и спрос",
+    "n": 9,
+    "examples": [
+      "Please mention HN.Search terms: quantitative trading, energy, power markets, ISO, forecasting, electricity, PJM",
+      "Joulent | Founding ML Platform Engineer, Energy Intelligence | San Francisco | HYBRID | Full-time | equityWe deliver multi-gigawatt power to AI data centers, an",
+      "Merchandising and assortment planning, tech packs and PLM, Shopify Plus and PIM, allocation, replenishment, demand forecasting, size curves, markdown optimizati",
+      "This is a high-leverage senior IC role: the quality of our analytics, forecasts, and operating decisions all depend on the foundation you build."
+    ],
+    "byMonth": {
+      "2026-09": 1,
+      "2026-08": 4,
+      "2026-07": 1,
+      "2026-06": 3
+    }
+  },
+  {
+    "id": "support",
+    "label": "Чат-боты и поддержка",
+    "n": 5,
+    "examples": [
+      "If you&#x27;re a mature engineer, looking to work with a very senior/staff team across the stack: customers, models, server, clients (web, TUI, chatbots), evals",
+      "We&#x27;re building the fix.You&#x27;ll own the intelligence layer: LLM-powered agentic workflows (tool use, structured outputs, multi-step orchestration), RAG/",
+      "This is not an AI strategy role, and it’s not a chatbot demo job.",
+      "Detections.ai | Full-Stack Engineer, Detection Platform | REMOTE (US & Canada) | Full-timeDetections.ai is building the platform for teams to create, test, orga"
+    ],
+    "byMonth": {
+      "2026-09": 2,
+      "2026-08": 2,
+      "2026-06": 1
+    }
+  }
+]

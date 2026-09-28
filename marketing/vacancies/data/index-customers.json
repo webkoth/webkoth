@@ -1,0 +1,138 @@
+[
+  {
+    "label": "Интеграции и 1С",
+    "n": 316,
+    "share": 32.9,
+    "companies": 232,
+    "medianYear": 1710000.0,
+    "index": 540.36
+  },
+  {
+    "label": "MLOps и инфраструктура моделей",
+    "n": 121,
+    "share": 12.6,
+    "companies": 78,
+    "medianYear": 3600000,
+    "index": 435.6
+  },
+  {
+    "label": "RAG и поиск по документам",
+    "n": 145,
+    "share": 15.1,
+    "companies": 100,
+    "medianYear": 2700000.0,
+    "index": 391.5
+  },
+  {
+    "label": "ИИ-агенты и оркестрация",
+    "n": 177,
+    "share": 18.4,
+    "companies": 116,
+    "medianYear": 1800000,
+    "index": 318.6
+  },
+  {
+    "label": "Отчётность и аналитика",
+    "n": 136,
+    "share": 14.2,
+    "companies": 114,
+    "medianYear": 1835772,
+    "index": 249.664992
+  },
+  {
+    "label": "Оценка качества и промпты",
+    "n": 122,
+    "share": 12.7,
+    "companies": 90,
+    "medianYear": 1680000.0,
+    "index": 204.96
+  },
+  {
+    "label": "Данные, разметка, датасеты",
+    "n": 83,
+    "share": 8.6,
+    "companies": 61,
+    "medianYear": 2010000.0,
+    "index": 166.83
+  },
+  {
+    "label": "Компьютерное зрение",
+    "n": 53,
+    "share": 5.5,
+    "companies": 34,
+    "medianYear": 2400000,
+    "index": 127.2
+  },
+  {
+    "label": "Прогнозирование и спрос",
+    "n": 30,
+    "share": 3.1,
+    "companies": 28,
+    "medianYear": 2400000,
+    "index": 72.0
+  },
+  {
+    "label": "Рекомендации и персонализация",
+    "n": 26,
+    "share": 2.7,
+    "companies": 21,
+    "medianYear": 2700000.0,
+    "index": 70.2
+  },
+  {
+    "label": "HR и подбор",
+    "n": 23,
+    "share": 2.4,
+    "companies": 16,
+    "medianYear": 3000000,
+    "index": 69.0
+  },
+  {
+    "label": "Распознавание и разбор документов",
+    "n": 23,
+    "share": 2.4,
+    "companies": 21,
+    "medianYear": 2808000.0,
+    "index": 64.584
+  },
+  {
+    "label": "Чат-боты и поддержка",
+    "n": 36,
+    "share": 3.7,
+    "companies": 30,
+    "medianYear": 1740000.0,
+    "index": 62.64
+  },
+  {
+    "label": "Антифрод, риски, скоринг",
+    "n": 24,
+    "share": 2.5,
+    "companies": 20,
+    "medianYear": 2580000.0,
+    "index": 61.92
+  },
+  {
+    "label": "Звонки, речь, транскрибация",
+    "n": 17,
+    "share": 1.8,
+    "companies": 15,
+    "medianYear": 2700000.0,
+    "index": 45.9
+  },
+  {
+    "label": "Помощник сотрудника и генерация контента",
+    "n": 26,
+    "share": 2.7,
+    "companies": 23,
+    "medianYear": 1200000.0,
+    "index": 31.2
+  },
+  {
+    "label": "Кодогенерация и разработка",
+    "n": 12,
+    "share": 1.2,
+    "companies": 12,
+    "medianYear": 2400000,
+    "index": 28.8
+  }
+]

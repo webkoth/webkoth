@@ -1,0 +1,1336 @@
+[
+  {
+    "company": "Qnits",
+    "ind": [
+      "Розничная торговля",
+      "Электроника, приборостроение, бытовая техника, компьютеры и оргтехника"
+    ],
+    "site": "https://qnits.com",
+    "city": "Санкт-Петербург",
+    "n": 1,
+    "mp": true,
+    "onec": true,
+    "inList": true,
+    "roles": [
+      "Team Lead BI и аналитики"
+    ]
+  },
+  {
+    "company": "Ozon",
+    "ind": [
+      "Информационные технологии, системная интеграция, интернет",
+      "Перевозки, логистика, склад, ВЭД",
+      "Розничная торговля",
+      "Услуги для населения"
+    ],
+    "site": null,
+    "city": "Москва",
+    "n": 17,
+    "mp": true,
+    "onec": false,
+    "inList": false,
+    "roles": [
+      "Data Scientist",
+      "Team Lead Data Science в команду ранжиро",
+      "Старший Data Scientist, Возвраты ML",
+      "Стажёр/Data Scientist (моделирование бан",
+      "Старший разработчик Python (Fullstack), ",
+      "Младший аналитик данных",
+      "Старший Data Scientist, Команда модераци",
+      "Ведущий Data Scientist, Возвраты ML",
+      "Go-разработчик, Сопровождение контроля к",
+      "Старший Go-разработчик, ML Workflow",
+      "Data Scientist, Анализ спроса",
+      "Старший математик-разработчик, Внутренни",
+      "Старший математик-разработчик, Базовые M",
+      "Senior Data Scientist, Anti-Fraud, Ozon ",
+      "Инженер данных",
+      "Бизнес-аналитик"
+    ]
+  },
+  {
+    "company": "Фанагория, АПФ",
+    "ind": [
+      "Гостиницы, рестораны, общепит, кейтеринг",
+      "Продукты питания",
+      "Розничная торговля",
+      "Сельское хозяйство"
+    ],
+    "site": "http://www.fanagoria.ru",
+    "city": "Сенной (Краснодарский край)",
+    "n": 5,
+    "mp": false,
+    "onec": true,
+    "inList": true,
+    "roles": [
+      "Программист"
+    ]
+  },
+  {
+    "company": "МАГНИТ, Розничная сеть",
+    "ind": [
+      "Розничная торговля"
+    ],
+    "site": "https://rabota.magnit.ru/",
+    "city": "Краснодар",
+    "n": 2,
+    "mp": true,
+    "onec": false,
+    "inList": false,
+    "roles": [
+      "ML-инженер/инженер по машинному обучению",
+      "Разработчик AI"
+    ]
+  },
+  {
+    "company": "Банк ПСБ",
+    "ind": [
+      "Финансовый сектор"
+    ],
+    "site": "http://job.psbank.ru",
+    "city": "Москва",
+    "n": 2,
+    "mp": true,
+    "onec": false,
+    "inList": true,
+    "roles": [
+      "Системный аналитик (ML-платформа)",
+      "DevOps-инженер (ML/AI, DevSecOps, MLSecO"
+    ]
+  },
+  {
+    "company": "IEK GROUP",
+    "ind": [
+      "Электроника, приборостроение, бытовая техника, компьютеры и оргтехника"
+    ],
+    "site": "https://job.iek.group/",
+    "city": "Москва",
+    "n": 1,
+    "mp": false,
+    "onec": true,
+    "inList": false,
+    "roles": [
+      "AI Agent Engineer (NLP/LLM)"
+    ]
+  },
+  {
+    "company": "Инфинити Групп",
+    "ind": [
+      "Перевозки, логистика, склад, ВЭД",
+      "Строительство, недвижимость, эксплуатация, проектирование"
+    ],
+    "site": "http://infiniti-group-l.ru",
+    "city": "Липецк",
+    "n": 1,
+    "mp": false,
+    "onec": true,
+    "inList": true,
+    "roles": [
+      "AI-инженер / Специалист по внедрению ИИ "
+    ]
+  },
+  {
+    "company": "Страховой брокер Сбербанка",
+    "ind": [
+      "Финансовый сектор"
+    ],
+    "site": "http://www.broker-sb.ru",
+    "city": "Москва",
+    "n": 1,
+    "mp": false,
+    "onec": true,
+    "inList": true,
+    "roles": [
+      "BI-разработчик Middle+\\Senior"
+    ]
+  },
+  {
+    "company": "«ДержавинЪ»",
+    "ind": [
+      "Продукты питания"
+    ],
+    "site": "http://optvrn.ru",
+    "city": "Воронеж",
+    "n": 1,
+    "mp": false,
+    "onec": true,
+    "inList": true,
+    "roles": [
+      "Аналитик данных"
+    ]
+  },
+  {
+    "company": "НЛ Континент",
+    "ind": [
+      "Продукты питания",
+      "Розничная торговля",
+      "Товары народного потребления (непищевые)"
+    ],
+    "site": "http://www.nlstar.com",
+    "city": "Новосибирск",
+    "n": 1,
+    "mp": false,
+    "onec": true,
+    "inList": true,
+    "roles": [
+      "CTO / Технический директор"
+    ]
+  },
+  {
+    "company": "ПерилаГлавСнаб",
+    "ind": [
+      "Металлургия, металлообработка",
+      "Строительство, недвижимость, эксплуатация, проектирование",
+      "Товары народного потребления (непищевые)"
+    ],
+    "site": "http://www.perilaglavsnab.ru",
+    "city": "Россия",
+    "n": 1,
+    "mp": false,
+    "onec": true,
+    "inList": true,
+    "roles": [
+      "Ведущий разработчик"
+    ]
+  },
+  {
+    "company": "ГРУППА КОМПАНИЙ ЭКОНИВА",
+    "ind": [
+      "Информационные технологии, системная интеграция, интернет",
+      "Продукты питания",
+      "Сельское хозяйство",
+      "Строительство, недвижимость, эксплуатация, проектирование"
+    ],
+    "site": "http://www.ekoniva-apk.ru",
+    "city": "Воронеж",
+    "n": 1,
+    "mp": false,
+    "onec": true,
+    "inList": true,
+    "roles": [
+      "Младший инженер инфраструктуры (DevOps-и"
+    ]
+  },
+  {
+    "company": "ПАТ GROUP",
+    "ind": [
+      "Строительство, недвижимость, эксплуатация, проектирование"
+    ],
+    "site": "http://WWW.patgroup.ru",
+    "city": "Москва",
+    "n": 1,
+    "mp": false,
+    "onec": true,
+    "inList": true,
+    "roles": [
+      "Data Engineer/Bi Developer"
+    ]
+  },
+  {
+    "company": "СБЕР",
+    "ind": [
+      "Финансовый сектор"
+    ],
+    "site": "https://rabota.sber.ru/",
+    "city": "Москва",
+    "n": 12,
+    "mp": false,
+    "onec": false,
+    "inList": false,
+    "roles": [
+      "Аналитик данных (Пульт)",
+      "CV engineer (Gigachat)",
+      "DevOps-инженер (команда развития платфор",
+      "Data analyst (Центр розничного риск - мо",
+      "Data Engineer",
+      "Аналитик данных",
+      "Python разработчик в команду BI analytic",
+      "Data engineer (hadoop + java)",
+      "Senior Python-developer",
+      "Аналитик данных (финансы)",
+      "Аналитик данных (Департамент противодейс"
+    ]
+  },
+  {
+    "company": "X5 Tech",
+    "ind": [
+      "Информационные технологии, системная интеграция, интернет",
+      "Розничная торговля"
+    ],
+    "site": "https://www.x5.ru",
+    "city": "Москва",
+    "n": 6,
+    "mp": false,
+    "onec": false,
+    "inList": false,
+    "roles": [
+      "Senior Data Engineer (MLops)",
+      "Data Scientist middle/senior",
+      "Lead AI-Augmented (Python) developer",
+      "Middle/Senior Data Scientist/ML Engineer",
+      "Senior AI-Augmented Java developer",
+      "Team Lead Data Science/ML, Промо и распр"
+    ]
+  },
+  {
+    "company": "Альфа-Банк",
+    "ind": [
+      "Финансовый сектор"
+    ],
+    "site": "http://job.alfabank.ru/",
+    "city": "Москва",
+    "n": 5,
+    "mp": false,
+    "onec": false,
+    "inList": false,
+    "roles": [
+      "Старший инженер данных (антифрод)",
+      "Инженер данных",
+      "Старший ML инженер",
+      "Системный архитектор / Solution architec",
+      "DevOps engineer"
+    ]
+  },
+  {
+    "company": "ПИК-специализированный застройщик",
+    "ind": [
+      "Строительство, недвижимость, эксплуатация, проектирование"
+    ],
+    "site": "https://www.pik.ru/",
+    "city": "Россия",
+    "n": 5,
+    "mp": false,
+    "onec": false,
+    "inList": false,
+    "roles": [
+      "Менеджер продуктов (AI)",
+      "Бизнес-аналитик (AI)",
+      "Выездной инженер технической поддержки",
+      "Старший Backend-разработчик PHP (лидер к",
+      "Разработчик полного цикла"
+    ]
+  },
+  {
+    "company": "НПП КуйбышевТелеком-Метрология",
+    "ind": [
+      "Промышленное оборудование, техника, станки и комплектующие"
+    ],
+    "site": "http://www.ktkprom.com",
+    "city": "Самара",
+    "n": 4,
+    "mp": false,
+    "onec": false,
+    "inList": true,
+    "roles": [
+      "Системный архитектор / Tech Lead"
+    ]
+  },
+  {
+    "company": "Банк ВТБ (ПАО)",
+    "ind": [
+      "Финансовый сектор"
+    ],
+    "site": "https://rabota.vtb.ru/",
+    "city": "Москва",
+    "n": 3,
+    "mp": false,
+    "onec": false,
+    "inList": false,
+    "roles": [
+      "Аналитик данных/ Data analyst",
+      "Data-аналитик/аналитик данных (middle/se",
+      "Бизнес-аналитик (Управление \"Общекредитн"
+    ]
+  },
+  {
+    "company": "Сервис Плюс",
+    "ind": [
+      "Информационные технологии, системная интеграция, интернет",
+      "Электроника, приборостроение, бытовая техника, компьютеры и оргтехника"
+    ],
+    "site": "http://www.servplus.ru",
+    "city": "Москва",
+    "n": 3,
+    "mp": false,
+    "onec": false,
+    "inList": true,
+    "roles": [
+      "Ведущий Scala-разработчик (Вендор)",
+      "Scala-разработчик (Вендор)",
+      "Scala-разработчик (Akka, в Вендоре)"
+    ]
+  },
+  {
+    "company": "МегаФон",
+    "ind": [
+      "Информационные технологии, системная интеграция, интернет",
+      "Телекоммуникации, связь"
+    ],
+    "site": "http://job.megafon.ru",
+    "city": "Москва",
+    "n": 3,
+    "mp": false,
+    "onec": false,
+    "inList": false,
+    "roles": [
+      "DevOps-инженер",
+      "Data Engineer (Стажер)"
+    ]
+  },
+  {
+    "company": "МТС",
+    "ind": [
+      "Информационные технологии, системная интеграция, интернет",
+      "Телекоммуникации, связь"
+    ],
+    "site": "https://job.mts.ru/",
+    "city": "Москва",
+    "n": 2,
+    "mp": false,
+    "onec": false,
+    "inList": false,
+    "roles": [
+      "Senior Python Backend Developer",
+      "Ведущий разработчик Data Governance (МГТ"
+    ]
+  },
+  {
+    "company": "SkillStaff",
+    "ind": [
+      "Информационные технологии, системная интеграция, интернет",
+      "СМИ, маркетинг, реклама, BTL, PR, дизайн, продюсирование",
+      "Услуги для бизнеса"
+    ],
+    "site": "https://skillstaff.ru/",
+    "city": "Москва",
+    "n": 2,
+    "mp": false,
+    "onec": false,
+    "inList": false,
+    "roles": [
+      "MLOps-инженер (Senior), Big Data & Infra",
+      "LLM engineer/ Разработчик мультиагентных"
+    ]
+  },
+  {
+    "company": "ROSSKO",
+    "ind": [
+      "Автомобильный бизнес"
+    ],
+    "site": "https://wemake.rossko.ru/",
+    "city": "Новосибирск",
+    "n": 2,
+    "mp": false,
+    "onec": false,
+    "inList": false,
+    "roles": [
+      "C#/.NET-разработчик | Разработчик поиско",
+      "Сеньор ML/DS Инженер"
+    ]
+  },
+  {
+    "company": "Polymedia",
+    "ind": [
+      "Информационные технологии, системная интеграция, интернет",
+      "Электроника, приборостроение, бытовая техника, компьютеры и оргтехника"
+    ],
+    "site": "http://www.polymedia.ru",
+    "city": "Москва",
+    "n": 2,
+    "mp": false,
+    "onec": false,
+    "inList": true,
+    "roles": [
+      "Ведущий разработчик C# (Full Stack, ASP.",
+      "Senior Python разработчик (Visiology Cor"
+    ]
+  },
+  {
+    "company": "Navio",
+    "ind": [
+      "Автомобильный бизнес",
+      "Информационные технологии, системная интеграция, интернет",
+      "Электроника, приборостроение, бытовая техника, компьютеры и оргтехника"
+    ],
+    "site": "https://navio.auto/",
+    "city": "Москва",
+    "n": 2,
+    "mp": false,
+    "onec": false,
+    "inList": true,
+    "roles": [
+      "Инженер данных в команду высокоточных ци",
+      "Аналитик данных"
+    ]
+  },
+  {
+    "company": "Норникель",
+    "ind": [
+      "Добывающая отрасль",
+      "Металлургия, металлообработка"
+    ],
+    "site": "http://www.nornik.ru",
+    "city": "Москва",
+    "n": 2,
+    "mp": false,
+    "onec": false,
+    "inList": false,
+    "roles": [
+      "Team Lead MLOps",
+      "Архитектор по ИИ (ML/AI/LLM)"
+    ]
+  },
+  {
+    "company": "Okko",
+    "ind": [
+      "Информационные технологии, системная интеграция, интернет",
+      "СМИ, маркетинг, реклама, BTL, PR, дизайн, продюсирование"
+    ],
+    "site": "http://okko.tv/",
+    "city": "Санкт-Петербург",
+    "n": 2,
+    "mp": false,
+    "onec": false,
+    "inList": false,
+    "roles": [
+      "Senior ML Engineer (Uplift)",
+      "Senior Data Scientist (Rec. system)"
+    ]
+  },
+  {
+    "company": "Riverstart (ООО Риверстарт)",
+    "ind": [
+      "Информационные технологии, системная интеграция, интернет",
+      "СМИ, маркетинг, реклама, BTL, PR, дизайн, продюсирование"
+    ],
+    "site": "https://riverstart.ru/",
+    "city": "Нижний Новгород",
+    "n": 1,
+    "mp": false,
+    "onec": false,
+    "inList": true,
+    "roles": [
+      "ML-инженер (Middle)"
+    ]
+  },
+  {
+    "company": "«UZUM TECHNOLOGIES»",
+    "ind": [
+      "Розничная торговля"
+    ],
+    "site": null,
+    "city": "Ташкент",
+    "n": 1,
+    "mp": false,
+    "onec": false,
+    "inList": true,
+    "roles": [
+      "ML engineer"
+    ]
+  },
+  {
+    "company": "Нижегороднефтегазпроект",
+    "ind": [
+      "Нефть и газ"
+    ],
+    "site": "http://ннгп.рф",
+    "city": "Нижний Новгород",
+    "n": 1,
+    "mp": false,
+    "onec": false,
+    "inList": true,
+    "roles": [
+      "Специалист по базам данных (ETL и миграц"
+    ]
+  },
+  {
+    "company": "АстраЗенека",
+    "ind": [
+      "Медицина, фармацевтика, аптеки"
+    ],
+    "site": "http://www.astrazeneca.ru",
+    "city": "Москва",
+    "n": 1,
+    "mp": false,
+    "onec": false,
+    "inList": false,
+    "roles": [
+      "Бизнес-аналитик (международный проект)"
+    ]
+  },
+  {
+    "company": "Компания БКС",
+    "ind": [
+      "Финансовый сектор"
+    ],
+    "site": "https://bcs.ru/",
+    "city": "Москва",
+    "n": 1,
+    "mp": false,
+    "onec": false,
+    "inList": false,
+    "roles": [
+      "Аналитик данных (маркетинг)"
+    ]
+  },
+  {
+    "company": "ITG Corporation",
+    "ind": [
+      "Информационные технологии, системная интеграция, интернет",
+      "Телекоммуникации, связь",
+      "Услуги для бизнеса"
+    ],
+    "site": "https://itg.ru",
+    "city": "Санкт-Петербург",
+    "n": 1,
+    "mp": false,
+    "onec": false,
+    "inList": true,
+    "roles": [
+      "Инженер инфраструктуры (Linux, DevOps) -"
+    ]
+  },
+  {
+    "company": "ИнтернетУрок",
+    "ind": [
+      "Информационные технологии, системная интеграция, интернет",
+      "Образовательные учреждения"
+    ],
+    "site": "http://InternetUrok.ru",
+    "city": "Москва",
+    "n": 1,
+    "mp": false,
+    "onec": false,
+    "inList": true,
+    "roles": [
+      "Senior BI-аналитик данных в EdTech"
+    ]
+  },
+  {
+    "company": "Московская Биржа",
+    "ind": [
+      "Финансовый сектор"
+    ],
+    "site": "http://moex.com/ru/career/",
+    "city": "Москва",
+    "n": 1,
+    "mp": false,
+    "onec": false,
+    "inList": true,
+    "roles": [
+      "Инженер по машинному обучению"
+    ]
+  },
+  {
+    "company": "JACOBS DOUWE EGBERTS (JDE)",
+    "ind": [
+      "Продукты питания"
+    ],
+    "site": "https://jacobscoffee.ru/karjera/",
+    "city": "Россия",
+    "n": 1,
+    "mp": false,
+    "onec": false,
+    "inList": true,
+    "roles": [
+      "Аналитик данных | Data scientist"
+    ]
+  },
+  {
+    "company": "Akvilon",
+    "ind": [
+      "Автомобильный бизнес"
+    ],
+    "site": "https://opt.akvilon-zap.ru/",
+    "city": "Москва",
+    "n": 1,
+    "mp": false,
+    "onec": false,
+    "inList": true,
+    "roles": [
+      "Python backend developer (в офис)"
+    ]
+  },
+  {
+    "company": "look.online",
+    "ind": [
+      "Розничная торговля"
+    ],
+    "site": "https://lookonline.ru/",
+    "city": "Москва",
+    "n": 1,
+    "mp": false,
+    "onec": false,
+    "inList": true,
+    "roles": [
+      "AI – евангелист"
+    ]
+  },
+  {
+    "company": "Rambler&Co",
+    "ind": [
+      "Информационные технологии, системная интеграция, интернет",
+      "СМИ, маркетинг, реклама, BTL, PR, дизайн, продюсирование"
+    ],
+    "site": "http://rambler-co.ru",
+    "city": "Москва",
+    "n": 1,
+    "mp": false,
+    "onec": false,
+    "inList": false,
+    "roles": [
+      "Senior AI Engineer (LLM / RAG / Agentic "
+    ]
+  },
+  {
+    "company": "Росгосстрах",
+    "ind": [
+      "Финансовый сектор"
+    ],
+    "site": "http://www.rgs.ru",
+    "city": "Москва",
+    "n": 1,
+    "mp": false,
+    "onec": false,
+    "inList": true,
+    "roles": [
+      "ML-инженер"
+    ]
+  },
+  {
+    "company": "ВкусВилл",
+    "ind": [
+      "Розничная торговля"
+    ],
+    "site": "http://www.vkusvill.ru",
+    "city": "Москва",
+    "n": 1,
+    "mp": false,
+    "onec": false,
+    "inList": false,
+    "roles": [
+      "ML-инженер / ML Engineer (с пониманием б"
+    ]
+  },
+  {
+    "company": "Okkam",
+    "ind": [
+      "СМИ, маркетинг, реклама, BTL, PR, дизайн, продюсирование"
+    ],
+    "site": "https://okkam.group/",
+    "city": "Россия",
+    "n": 1,
+    "mp": false,
+    "onec": false,
+    "inList": true,
+    "roles": [
+      "Senior Python Developer / Ведущий разраб"
+    ]
+  },
+  {
+    "company": "Восточная горнорудная компания",
+    "ind": [
+      "Добывающая отрасль"
+    ],
+    "site": "http://www.eastmining.ru",
+    "city": "Россия",
+    "n": 1,
+    "mp": false,
+    "onec": false,
+    "inList": false,
+    "roles": [
+      "AI-инженер / Архитектор платформы"
+    ]
+  },
+  {
+    "company": "Sputnik8",
+    "ind": [
+      "Информационные технологии, системная интеграция, интернет",
+      "Услуги для населения"
+    ],
+    "site": "http://sputnik8.com",
+    "city": "Санкт-Петербург",
+    "n": 1,
+    "mp": false,
+    "onec": false,
+    "inList": true,
+    "roles": [
+      "Senior Data Scientist"
+    ]
+  },
+  {
+    "company": "Протек, Центр Внедрения",
+    "ind": [
+      "Медицина, фармацевтика, аптеки",
+      "Промышленное оборудование, техника, станки и комплектующие"
+    ],
+    "site": "http://www.protek.ru",
+    "city": "Москва",
+    "n": 1,
+    "mp": false,
+    "onec": false,
+    "inList": true,
+    "roles": [
+      "Инженер сервисов ИИ"
+    ]
+  },
+  {
+    "company": "БУРГЕР КИНГ РОССИЯ",
+    "ind": [
+      "Гостиницы, рестораны, общепит, кейтеринг"
+    ],
+    "site": "http://burgerkingrus.ru/rabota",
+    "city": "Москва",
+    "n": 1,
+    "mp": false,
+    "onec": false,
+    "inList": true,
+    "roles": [
+      "Главный системный аналитик КХД / Техлид"
+    ]
+  },
+  {
+    "company": "СОГАЗ",
+    "ind": [
+      "Финансовый сектор"
+    ],
+    "site": "http://www.sogaz.ru",
+    "city": "Москва",
+    "n": 1,
+    "mp": false,
+    "onec": false,
+    "inList": true,
+    "roles": [
+      "MLOps"
+    ]
+  },
+  {
+    "company": "Вкусно — и точка",
+    "ind": [
+      "Гостиницы, рестораны, общепит, кейтеринг"
+    ],
+    "site": null,
+    "city": "Москва",
+    "n": 1,
+    "mp": false,
+    "onec": false,
+    "inList": false,
+    "roles": [
+      "Аналитик-разработчик (A/B тесты)"
+    ]
+  },
+  {
+    "company": "WMT",
+    "ind": [
+      "Информационные технологии, системная интеграция, интернет",
+      "Услуги для бизнеса"
+    ],
+    "site": "https://wmtgroup.ru/",
+    "city": "Москва",
+    "n": 1,
+    "mp": false,
+    "onec": false,
+    "inList": true,
+    "roles": [
+      "MLops инженер (финтех)"
+    ]
+  },
+  {
+    "company": "Сантехкомплект, Компания",
+    "ind": [
+      "Товары народного потребления (непищевые)"
+    ],
+    "site": "http://santech.ru",
+    "city": "Москва",
+    "n": 1,
+    "mp": false,
+    "onec": false,
+    "inList": true,
+    "roles": [
+      "Ведущий программист"
+    ]
+  },
+  {
+    "company": "Quadcode",
+    "ind": [
+      "Информационные технологии, системная интеграция, интернет",
+      "Финансовый сектор"
+    ],
+    "site": "https://quadcode.com",
+    "city": "Санкт-Петербург",
+    "n": 1,
+    "mp": false,
+    "onec": false,
+    "inList": true,
+    "roles": [
+      "AI Engineer (LLM)"
+    ]
+  },
+  {
+    "company": "Самокат (ООО Умный ритейл)",
+    "ind": [
+      "Информационные технологии, системная интеграция, интернет",
+      "Розничная торговля"
+    ],
+    "site": "https://vacancy.samokat.ru/",
+    "city": "Санкт-Петербург",
+    "n": 1,
+    "mp": false,
+    "onec": false,
+    "inList": true,
+    "roles": [
+      "Старший инженер данных"
+    ]
+  },
+  {
+    "company": "Подружка, сеть магазинов",
+    "ind": [
+      "Розничная торговля",
+      "Товары народного потребления (непищевые)"
+    ],
+    "site": "http://rabotavpodrygke.ru/",
+    "city": "Москва",
+    "n": 1,
+    "mp": false,
+    "onec": false,
+    "inList": true,
+    "roles": [
+      "Разработчик DWH (Oracle)"
+    ]
+  },
+  {
+    "company": "Санаториум",
+    "ind": [
+      "Информационные технологии, системная интеграция, интернет",
+      "Медицина, фармацевтика, аптеки"
+    ],
+    "site": "https://sanatorium-is.ru/?utm_source=vacancy",
+    "city": "Москва",
+    "n": 1,
+    "mp": false,
+    "onec": false,
+    "inList": true,
+    "roles": [
+      "SQL-программист/Разработчик баз данных"
+    ]
+  },
+  {
+    "company": "Федеральное автономное учреждение «Национальный институт аккредитации» (ФАУ НИА)",
+    "ind": [
+      "Государственные организации",
+      "Образовательные учреждения",
+      "Услуги для бизнеса"
+    ],
+    "site": "http://niakk.ru/",
+    "city": "Москва",
+    "n": 1,
+    "mp": false,
+    "onec": false,
+    "inList": true,
+    "roles": [
+      "Архитектор данных"
+    ]
+  },
+  {
+    "company": "Ланцет",
+    "ind": [
+      "Медицина, фармацевтика, аптеки"
+    ],
+    "site": "http://lancetpharm.ru",
+    "city": "Москва",
+    "n": 1,
+    "mp": false,
+    "onec": false,
+    "inList": true,
+    "roles": [
+      "Системный аналитик ИИ решений"
+    ]
+  },
+  {
+    "company": "Selecty",
+    "ind": [
+      "Услуги для бизнеса"
+    ],
+    "site": "http://www.selecty.ru/",
+    "city": "Москва",
+    "n": 1,
+    "mp": false,
+    "onec": false,
+    "inList": false,
+    "roles": [
+      "Data Scientist"
+    ]
+  },
+  {
+    "company": "РОВИ Факторинг Плюс",
+    "ind": [
+      "Финансовый сектор"
+    ],
+    "site": "https://rowi.com",
+    "city": "Москва",
+    "n": 1,
+    "mp": false,
+    "onec": false,
+    "inList": true,
+    "roles": [
+      "ML-инженер"
+    ]
+  },
+  {
+    "company": "Акрон",
+    "ind": [
+      "Химическое производство, удобрения"
+    ],
+    "site": "http://www.acron.ru",
+    "city": "Россия",
+    "n": 1,
+    "mp": false,
+    "onec": false,
+    "inList": true,
+    "roles": [
+      "Инженер-электроник"
+    ]
+  },
+  {
+    "company": "МТС Банк",
+    "ind": [
+      "Финансовый сектор"
+    ],
+    "site": "http://www.mtsbank.ru",
+    "city": "Москва",
+    "n": 1,
+    "mp": false,
+    "onec": false,
+    "inList": true,
+    "roles": [
+      "Разработчик Python"
+    ]
+  },
+  {
+    "company": "Газпромнефть-Региональные продажи",
+    "ind": [
+      "Нефть и газ"
+    ],
+    "site": "https://gpn-trade.ru/",
+    "city": "Санкт-Петербург",
+    "n": 1,
+    "mp": false,
+    "onec": false,
+    "inList": true,
+    "roles": [
+      "Tech lead ML"
+    ]
+  },
+  {
+    "company": "Арнест ЮниРусь",
+    "ind": [
+      "Продукты питания",
+      "Товары народного потребления (непищевые)"
+    ],
+    "site": "http://www.unirusgroup.ru",
+    "city": "Москва",
+    "n": 1,
+    "mp": false,
+    "onec": false,
+    "inList": false,
+    "roles": [
+      "Data Analyst (ML) / Аналитик данных"
+    ]
+  },
+  {
+    "company": "ДИКСИ, группа компаний",
+    "ind": [
+      "Розничная торговля"
+    ],
+    "site": "http://www.dixy.ru",
+    "city": "Москва",
+    "n": 1,
+    "mp": false,
+    "onec": false,
+    "inList": true,
+    "roles": [
+      "Аналитик данных (Поддержка и развитие мо"
+    ]
+  },
+  {
+    "company": "ТЕХНОНИКОЛЬ",
+    "ind": [
+      "Товары народного потребления (непищевые)"
+    ],
+    "site": "http://www.tn.ru",
+    "city": "Москва",
+    "n": 1,
+    "mp": false,
+    "onec": false,
+    "inList": false,
+    "roles": [
+      "Аналитик данных"
+    ]
+  },
+  {
+    "company": "Правительство Москвы",
+    "ind": [
+      "Государственные организации"
+    ],
+    "site": "http://mos.ru",
+    "city": "Москва",
+    "n": 1,
+    "mp": false,
+    "onec": false,
+    "inList": true,
+    "roles": [
+      "Бизнес-аналитик (Junior)"
+    ]
+  },
+  {
+    "company": "билайн",
+    "ind": [
+      "Информационные технологии, системная интеграция, интернет",
+      "Телекоммуникации, связь"
+    ],
+    "site": "https://job.beeline.ru/",
+    "city": "Москва",
+    "n": 1,
+    "mp": false,
+    "onec": false,
+    "inList": false,
+    "roles": [
+      "Data Scientist Middle/Senior Scoring"
+    ]
+  },
+  {
+    "company": "Иви",
+    "ind": [
+      "Информационные технологии, системная интеграция, интернет",
+      "СМИ, маркетинг, реклама, BTL, PR, дизайн, продюсирование"
+    ],
+    "site": "http://www.ivi.ru",
+    "city": "Москва",
+    "n": 1,
+    "mp": false,
+    "onec": false,
+    "inList": true,
+    "roles": [
+      "Data Platform Engineer"
+    ]
+  },
+  {
+    "company": "S7 Group",
+    "ind": [
+      "Перевозки, логистика, склад, ВЭД"
+    ],
+    "site": "http://s7.ru",
+    "city": "Москва",
+    "n": 1,
+    "mp": false,
+    "onec": false,
+    "inList": false,
+    "roles": [
+      "Системный аналитик DWH (middle)"
+    ]
+  },
+  {
+    "company": "ScoutX",
+    "ind": [
+      "Услуги для бизнеса"
+    ],
+    "site": "http://scoutx-team.com/",
+    "city": "Санкт-Петербург",
+    "n": 1,
+    "mp": false,
+    "onec": false,
+    "inList": true,
+    "roles": [
+      "ML Infrastructure Engineer (C++ / HFT)"
+    ]
+  },
+  {
+    "company": "Ventra",
+    "ind": [
+      "Информационные технологии, системная интеграция, интернет",
+      "Услуги для бизнеса"
+    ],
+    "site": "http://www.ventra.ru",
+    "city": "Москва",
+    "n": 1,
+    "mp": false,
+    "onec": false,
+    "inList": false,
+    "roles": [
+      "Data Scientist"
+    ]
+  },
+  {
+    "company": "BI.ZONE",
+    "ind": [
+      "Информационные технологии, системная интеграция, интернет",
+      "Услуги для бизнеса"
+    ],
+    "site": "http://www.bi.zone/",
+    "city": "Москва",
+    "n": 1,
+    "mp": false,
+    "onec": false,
+    "inList": false,
+    "roles": [
+      "SRE-инженер/Инженер по поддержке и разви"
+    ]
+  },
+  {
+    "company": "Брусника",
+    "ind": [
+      "Строительство, недвижимость, эксплуатация, проектирование"
+    ],
+    "site": "http://brusnika.ru",
+    "city": "Екатеринбург",
+    "n": 1,
+    "mp": false,
+    "onec": false,
+    "inList": false,
+    "roles": [
+      "Data Analyst Commercial department Middl"
+    ]
+  },
+  {
+    "company": "РЕСО-Гарантия, САО",
+    "ind": [
+      "Финансовый сектор"
+    ],
+    "site": "http://www.reso.ru",
+    "city": "Москва",
+    "n": 1,
+    "mp": false,
+    "onec": false,
+    "inList": false,
+    "roles": [
+      "Data Scientist"
+    ]
+  },
+  {
+    "company": "Европлан",
+    "ind": [
+      "Автомобильный бизнес",
+      "Финансовый сектор"
+    ],
+    "site": "http://www.europlan.ru",
+    "city": "Москва",
+    "n": 1,
+    "mp": false,
+    "onec": false,
+    "inList": true,
+    "roles": [
+      "Data Engineer"
+    ]
+  },
+  {
+    "company": "Правительство Московской области",
+    "ind": [
+      "Государственные организации"
+    ],
+    "site": "http://www.mosreg.ru",
+    "city": "Москва",
+    "n": 1,
+    "mp": false,
+    "onec": false,
+    "inList": true,
+    "roles": [
+      "Системный/бизнес-аналитик"
+    ]
+  },
+  {
+    "company": "Х5",
+    "ind": [
+      "Информационные технологии, системная интеграция, интернет",
+      "Розничная торговля"
+    ],
+    "site": "http://www.X5.ru",
+    "city": "Москва",
+    "n": 1,
+    "mp": false,
+    "onec": false,
+    "inList": false,
+    "roles": [
+      "Junior ML engineer"
+    ]
+  },
+  {
+    "company": "Ярнет",
+    "ind": [
+      "Информационные технологии, системная интеграция, интернет",
+      "Телекоммуникации, связь",
+      "Услуги для населения"
+    ],
+    "site": "http://yar-net.ru",
+    "city": "Ярославль",
+    "n": 1,
+    "mp": false,
+    "onec": false,
+    "inList": true,
+    "roles": [
+      "Middle Fullstack-разработчик (php/Yii2)"
+    ]
+  },
+  {
+    "company": "Фалькон Тех",
+    "ind": [
+      "Информационные технологии, системная интеграция, интернет",
+      "Электроника, приборостроение, бытовая техника, компьютеры и оргтехника"
+    ],
+    "site": "http://st-falcon.ru",
+    "city": "Москва",
+    "n": 1,
+    "mp": false,
+    "onec": false,
+    "inList": true,
+    "roles": [
+      "Senior Backend разработчик (Rust/С++)"
+    ]
+  },
+  {
+    "company": "Московский метрополитен",
+    "ind": [
+      "Перевозки, логистика, склад, ВЭД"
+    ],
+    "site": "https://rabota.transport.mos.ru/",
+    "city": "Москва",
+    "n": 1,
+    "mp": false,
+    "onec": false,
+    "inList": true,
+    "roles": [
+      "Системный инженер RnD"
+    ]
+  },
+  {
+    "company": "Страховая компания Сбербанк страхование",
+    "ind": [
+      "Финансовый сектор"
+    ],
+    "site": "https://sberbankins.ru/",
+    "city": "Москва",
+    "n": 1,
+    "mp": false,
+    "onec": false,
+    "inList": true,
+    "roles": [
+      "MLops"
+    ]
+  },
+  {
+    "company": "2ГИС",
+    "ind": [
+      "Информационные технологии, системная интеграция, интернет",
+      "СМИ, маркетинг, реклама, BTL, PR, дизайн, продюсирование",
+      "Услуги для бизнеса"
+    ],
+    "site": "http://2gis.ru",
+    "city": "Новосибирск",
+    "n": 1,
+    "mp": false,
+    "onec": false,
+    "inList": true,
+    "roles": [
+      "Data Scientist в команду DataLab"
+    ]
+  }
+]
