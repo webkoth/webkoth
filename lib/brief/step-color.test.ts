@@ -72,7 +72,7 @@ describe('dynamicOutcome', () => {
       showApproval: false,
     })
     expect(dynamicOutcome(v('f5', 'A4'), 'keep').notes).toEqual([n.kept])
-    expect(n.kept).toBe('Могла бы программа или ИИ: оставили вам по вашему выбору.')
+    expect(n.kept).toBe('Справилась бы программа или ИИ, но вы решили оставить это себе.')
     expect(dynamicOutcome(v('f1'), 'keep').notes).toEqual([])
     expect(dynamicOutcome(v('stopData'), 'keep').color).toBe('skip')
   })

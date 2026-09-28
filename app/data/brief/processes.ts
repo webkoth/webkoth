@@ -43,10 +43,10 @@ const dynamic = (label: string): ChainStep => ({ kind: 'dynamic', label })
 const approval = (label = 'Утвердить'): ChainStep => ({ kind: 'approval', label })
 const lib = (file: string, label: string): LinkRef => ({ label, href: `${AIAS_REPO_URL}/blob/main/library/${file}.md` })
 
-const L02 = lib('02-sverka-vyplat-marketpleysa', 'Карточка 02 · Сверка выплат маркетплейса')
-const L03 = lib('03-marzhinalnost-po-kabinetam', 'Карточка 03 · Маржинальность по кабинетам')
-const L07 = lib('07-snimok-prodazh-vitriny', 'Карточка 07 · Снимок продаж и витрины')
-const L12 = lib('12-otvety-na-otzyvy', 'Карточка 12 · Ответы на отзывы')
+const L02 = lib('02-sverka-vyplat-marketpleysa', 'процесс 02 · Сверка выплат маркетплейса')
+const L03 = lib('03-marzhinalnost-po-kabinetam', 'процесс 03 · Маржинальность по кабинетам')
+const L07 = lib('07-snimok-prodazh-vitriny', 'процесс 07 · Данные площадок в одном месте')
+const L12 = lib('12-otvety-na-otzyvy', 'процесс 12 · Ответы на отзывы')
 
 const RO = { personalData: false, moneyData: false } as const
 
@@ -55,13 +55,13 @@ export const processCatalog: Record<ProcessId, ProcessEntry> = {
     id: 'cards',
     group: 'content',
     label: 'Карточки товаров и SEO',
-    example: 'Описания, характеристики, ключевые слова',
+    example: 'Названия, описания, характеристики, ключевые слова',
     hints: {
       frequency: 'Карточки заводите партиями при новом товаре или обновляете постоянно',
-      etalon: 'Например, 5–10 карточек, которые хорошо продают и нравятся вам по тону',
-      rule: 'Характеристики обычно заполняются по правилу; текст описания чаще требует суждения',
+      etalon: 'Например, 5-10 карточек, которые хорошо продают и нравятся вам по тону',
+      rule: 'Для характеристик хватит инструкции, для хорошего описания нужен опыт',
       risk: 'Запрещённые слова площадки ведут к блокировке карточки',
-      data: 'Состав, размеры, материалы: в таблице, в учёте или в кабинете',
+      data: 'Состав и размеры товара лежат в таблице, в учёте или в кабинете',
     },
     facts: { sideEffect: 'write', singleRun: true, ...RO, cabinetApi: true },
     chain: [
@@ -77,7 +77,7 @@ export const processCatalog: Record<ProcessId, ProcessEntry> = {
       text: 'генерация описаний в кабинете WB, генератор названий и описаний на Маркете',
       checked: '2026-09',
     },
-    library: [lib('05-kartochki-tovara-i-seo', 'Карточка 05 · Карточки товара и SEO')],
+    library: [lib('05-kartochki-tovara-i-seo', 'процесс 05 · Карточки товара и SEO')],
     cases: ['product-portal'],
   },
   media: {
@@ -87,8 +87,8 @@ export const processCatalog: Record<ProcessId, ProcessEntry> = {
     example: 'Инфографика, обработка фото, обложки',
     hints: {
       etalon: 'Например, 5 карточек, где инфографика вам нравится и хорошо кликается',
-      rule: 'Шаблон и шрифты задаются правилом; сама картинка требует суждения',
-      data: 'Фото товара и характеристики: где они лежат',
+      rule: 'Шаблон и шрифты задаёте один раз. Хороша ли картинка, решаете вы',
+      data: 'Где лежат фото товара и характеристики',
     },
     facts: { sideEffect: 'write', singleRun: true, ...RO, cabinetApi: true },
     chain: [
@@ -108,8 +108,8 @@ export const processCatalog: Record<ProcessId, ProcessEntry> = {
     example: 'Ответить на новые отзывы в кабинете',
     hints: {
       frequency: 'Сколько новых отзывов в день по всем площадкам',
-      etalon: 'Например, 10–20 ответов из кабинета, под которыми вы бы подписались',
-      rule: 'Спасибо-ответы пишутся по правилу; ответ на жалобу требует суждения',
+      etalon: 'Например, 10-20 ответов из кабинета, под которыми вы бы подписались',
+      rule: 'На похвалу новичок ответит по шаблону, на жалобу без опыта лучше не отвечать',
       risk: 'Ответ публичный и остаётся навсегда',
       data: 'Отзывы приходят в кабинет площадки',
     },
@@ -121,10 +121,10 @@ export const processCatalog: Record<ProcessId, ProcessEntry> = {
       approval(),
       fixed('Опубликовать', 'auto'),
     ],
-    branches: [{ when: 'Отзывы 1–3★', step: { label: 'Сразу к вам, без черновика', color: 'human' } }],
+    branches: [{ when: 'Отзывы на 1-3 звезды', step: { label: 'Сразу к вам, без черновика', color: 'human' } }],
     readyMade: {
       kind: 'cabinet',
-      text: 'автоответы WB на отзывы 4–5★, генерация ответа в Ozon по тарифу',
+      text: 'автоответы WB на отзывы на 4-5 звёзд, генерация ответа в Ozon по тарифу',
       toolsKey: 'reviewsCabinet',
       checked: '2026-09',
     },
@@ -137,9 +137,9 @@ export const processCatalog: Record<ProcessId, ProcessEntry> = {
     label: 'Вопросы покупателей',
     example: 'Ответить на вопросы о товаре до покупки',
     hints: {
-      etalon: 'Например, 10 ответов на частые вопросы: про размер, состав, сроки',
-      rule: 'Если ответ есть в характеристиках, это правило; если нет, нужен человек',
-      data: 'Вопросы приходят в кабинет, ответы берутся из карточки',
+      etalon: 'Например, 10 ответов на частые вопросы про размер, состав и сроки',
+      rule: 'Если ответ есть в характеристиках, хватит инструкции. Если нет, отвечает человек',
+      data: 'Вопросы приходят в кабинет, ответы лежат в карточке',
     },
     facts: { sideEffect: 'write', singleRun: true, ...RO, cabinetApi: true },
     chain: [
@@ -159,8 +159,8 @@ export const processCatalog: Record<ProcessId, ProcessEntry> = {
     example: 'Возвраты, претензии, переписка с поддержкой площадки',
     hints: {
       etalon: 'Например, 5 претензий площадке, которые приняли, и ответы покупателям, которыми вы довольны',
-      rule: 'Тип обращения определяется по правилу; текст претензии требует суждения',
-      risk: 'Ошибка в претензии стоит денег, в ответе покупателю: репутации',
+      rule: 'Тип обращения новичок определит по инструкции. Претензию без опыта не составить',
+      risk: 'Ошибка в претензии стоит денег, а в ответе покупателю - репутации',
       data: 'Обращения в кабинете, в почте или в чате поддержки',
     },
     facts: { sideEffect: 'write', singleRun: true, personalData: true, moneyData: false, cabinetApi: true },
@@ -172,7 +172,7 @@ export const processCatalog: Record<ProcessId, ProcessEntry> = {
       fixed('Отправить', 'auto'),
     ],
     branches: [{ when: 'Спор с площадкой', step: { label: 'Ведёте вы', color: 'human' } }],
-    library: [lib('15-triazh-pochty', 'Карточка 15 · Триаж входящей почты')],
+    library: [lib('15-triazh-pochty', 'процесс 15 · Сортировка входящей почты')],
     cases: [],
   },
   ads: {
@@ -183,8 +183,8 @@ export const processCatalog: Record<ProcessId, ProcessEntry> = {
     hints: {
       frequency: 'Как часто смотрите кампании и меняете ставки',
       etalon: 'Например, расчёт ставки, которому вы доверяете, или удобный вам отчёт по кампаниям',
-      rule: 'Ставка считается формулой от маржи; «что делать с кампанией» отчасти суждение',
-      risk: 'Ставки и бюджеты это деньги каждый день',
+      rule: 'Ставку считает формула от маржи. Что делать с кампанией дальше, отчасти решаете вы',
+      risk: 'Ставки и бюджеты - это деньги каждый день',
       data: 'Статистика кампаний в кабинете, маржа в таблице или учёте',
     },
     facts: { sideEffect: 'notify', singleRun: true, personalData: false, moneyData: true, cabinetApi: true },
@@ -195,18 +195,18 @@ export const processCatalog: Record<ProcessId, ProcessEntry> = {
       fixed('Менять ставки', 'human'),
     ],
     readyMade: { kind: 'service', text: 'биддеры: MP Manager, Sellego и другие', toolsKey: 'bidder', checked: '2026-09' },
-    library: [lib('08-daydzhest-reklamy-i-stavki', 'Карточка 08 · Дайджест рекламы и ставки')],
+    library: [lib('08-daydzhest-reklamy-i-stavki', 'процесс 08 · Дайджест рекламы и ставки')],
     cases: ['ads-agents'],
   },
   prices: {
     id: 'prices',
     group: 'pricing',
     label: 'Цены и акции',
-    example: 'Цены, скидки, участие в акциях площадки',
+    example: 'Цены со скидками и участие в акциях площадки',
     hints: {
       etalon: 'Например, прошлая акция, где вы точно знаете, сколько заработали',
-      rule: 'Маржа при цене считается по правилу; решение об участии часто суждение',
-      risk: 'Цена ниже себестоимости это прямой убыток',
+      rule: 'Маржу при новой цене посчитает формула, а идти ли в акцию, обычно решаете вы',
+      risk: 'Цена ниже себестоимости - это прямой убыток',
       data: 'Цены в кабинете, себестоимость в таблице или учёте',
     },
     facts: { sideEffect: 'write', singleRun: true, personalData: false, moneyData: true, cabinetApi: true },
@@ -228,7 +228,7 @@ export const processCatalog: Record<ProcessId, ProcessEntry> = {
     example: 'Цены, позиции и новинки конкурентов',
     hints: {
       etalon: 'Например, таблица сравнения с конкурентами, которую вы уже вели',
-      rule: 'Собрать и сравнить можно по правилу; вывод «что делать» требует суждения',
+      rule: 'Собрать и сравнить цены может и новичок. Что с этим делать, решать вам',
       data: 'Сервис аналитики, выдача площадки или ручной обход',
     },
     facts: { sideEffect: 'notify', singleRun: true, ...RO, cabinetApi: false },
@@ -248,8 +248,8 @@ export const processCatalog: Record<ProcessId, ProcessEntry> = {
     example: 'Остатки на своём складе и на площадках',
     hints: {
       etalon: 'Например, инвентаризация, где остатки на складе и в кабинетах сошлись',
-      rule: 'Сколько отдать на каждую площадку обычно записывается таблицей',
-      risk: 'Продали то, чего нет: отмена, штраф, падение рейтинга',
+      rule: 'Сколько отдать на каждую площадку, обычно можно записать в таблицу',
+      risk: 'Если продали то, чего нет, будет отмена со штрафом и рейтинг упадёт',
       data: 'Остатки в учёте, в таблице или только в кабинетах',
     },
     facts: { sideEffect: 'write', singleRun: true, ...RO, cabinetApi: true },
@@ -270,7 +270,7 @@ export const processCatalog: Record<ProcessId, ProcessEntry> = {
     example: 'Что и сколько везти на склады площадок',
     hints: {
       etalon: 'Например, поставка, после которой не было ни дефицита, ни залежей',
-      rule: 'Потребность считается по продажам; поправка на сезон и акции чаще суждение',
+      rule: 'Сколько везти, видно по продажам, а поправку на сезон и акции вы вносите по опыту',
       data: 'Продажи и остатки по складам в кабинете или сервисе',
     },
     facts: { sideEffect: 'write', singleRun: true, ...RO, cabinetApi: true },
@@ -293,8 +293,8 @@ export const processCatalog: Record<ProcessId, ProcessEntry> = {
     terms: ['marking'],
     hints: {
       etalon: 'Например, партия, собранная без единой ошибки в этикетках',
-      rule: 'Что печатать и куда клеить задаётся правилом площадки',
-      risk: 'Ошибка в этикетке: штраф и возврат',
+      rule: 'Что печатать и куда клеить, площадка расписала в своих правилах',
+      risk: 'Ошибка в этикетке оборачивается штрафом и возвратом',
       data: 'Задания на сборку в кабинете, коды в «Честном знаке»',
     },
     facts: { sideEffect: 'write', singleRun: true, ...RO, cabinetApi: true },
@@ -306,7 +306,7 @@ export const processCatalog: Record<ProcessId, ProcessEntry> = {
       approval(),
     ],
     readyMade: { kind: 'service', text: 'учётные системы: МойСклад, SelSup и другие', toolsKey: 'ledgerSystem', checked: '2026-09' },
-    library: [lib('04-pechat-etiketok-i-pdf', 'Карточка 04 · Печать этикеток и PDF')],
+    library: [lib('04-pechat-etiketok-i-pdf', 'процесс 04 · Печать этикеток и PDF')],
     cases: ['product-portal'],
   },
   unit: {
@@ -317,7 +317,7 @@ export const processCatalog: Record<ProcessId, ProcessEntry> = {
     terms: ['unitEconomics'],
     hints: {
       etalon: 'Например, месяц, где вы вручную посчитали прибыль по товарам и уверены в цифрах',
-      rule: 'Формула прибыли записывается полностью; объяснение «почему упала» требует суждения',
+      rule: 'Формулу прибыли можно записать целиком, а почему прибыль упала, объяснит человек с опытом',
       data: 'Отчёты площадки и себестоимость',
     },
     facts: { sideEffect: 'read', singleRun: true, personalData: false, moneyData: true, cabinetApi: true },
@@ -337,8 +337,8 @@ export const processCatalog: Record<ProcessId, ProcessEntry> = {
     example: 'Сходится ли выплата площадки с продажами, что за удержания',
     hints: {
       etalon: 'Например, месяц, где выплата сошлась до рубля и понятно, из чего она сложилась',
-      rule: 'Сверка строк отчёта и выплаты это правило; разбор непонятного удержания суждение',
-      risk: 'Незамеченное удержание: потерянные деньги',
+      rule: 'Сверить строки отчёта с выплатой можно по инструкции. С непонятным удержанием разбирается опытный человек',
+      risk: 'Не заметили удержание - потеряли деньги',
       data: 'Отчёты о реализации и выплатах в кабинете',
     },
     facts: { sideEffect: 'read', singleRun: true, personalData: false, moneyData: true, cabinetApi: true },
@@ -378,10 +378,10 @@ export const processCatalog: Record<ProcessId, ProcessEntry> = {
     id: 'digest',
     group: 'management',
     label: 'Ежедневная сводка',
-    example: 'Утром знать, что важно: продажи, остатки, блокировки',
+    example: 'Утром знать, что с продажами и остатками и нет ли блокировок',
     hints: {
       etalon: 'Например, сообщение или таблица, которую вы бы хотели видеть каждое утро',
-      rule: 'Пороги «что считать проблемой» записываются; текст сводки требует суждения',
+      rule: 'Пороги «что считать проблемой» легко записать. Текст сводки так не запишешь',
       data: 'Цифры из кабинетов площадок',
     },
     facts: { sideEffect: 'notify', singleRun: true, ...RO, cabinetApi: true },
@@ -400,8 +400,8 @@ export const processCatalog: Record<ProcessId, ProcessEntry> = {
     example: 'Что ещё продавать и у кого закупать',
     terms: ['agent'],
     hints: {
-      etalon: 'Например, товар, который вы нашли и который хорошо продаётся: как вы его выбирали',
-      rule: 'Фильтры ниши записываются; итоговый выбор всегда суждение',
+      etalon: 'Например, как вы выбирали товар, который сейчас хорошо продаётся',
+      rule: 'Фильтры для ниши можно задать заранее, а выбирать товар всё равно вам',
       data: 'Сервисы аналитики ниш, сайты поставщиков',
     },
     facts: { sideEffect: 'read', singleRun: false, ...RO, cabinetApi: false },
@@ -422,7 +422,7 @@ export const processCatalog: Record<ProcessId, ProcessEntry> = {
     facts: { sideEffect: 'write', singleRun: true, ...RO, cabinetApi: false },
     chain: [dynamic('Ваш процесс'), approval()],
     cases: [],
-    mapNote: 'На созвоне разобьём на шаги.',
+    mapNote: 'Разложим на шаги на бесплатном разборе.',
   },
 }
 

@@ -12,7 +12,7 @@ export const en: EvolutionData = {
   meta: {
     title: 'Business evolution: from chaos to system, from routine to automation | Minas Sarkisyan',
     description:
-      'I solve business problems once: with a system. Finances become more transparent, decisions more precise, processes faster, resources freer. The first step is an audit: a review of your prototypes and a process map.',
+      'I solve business problems once: with a system. Finances become more transparent, decisions more precise, processes faster, resources freer. The first step is a free 30-minute review.',
     ogTitle: 'Business evolution: from chaos to system, from routine to automation',
     ogDescription:
       'I solve business problems once: with a system, not a hire. Systems are built by the company’s own specialists; I own the engineering side.',
@@ -21,13 +21,13 @@ export const en: EvolutionData = {
       name: 'Business evolution: from chaos to system, from routine to automation',
       serviceType: 'Audit and building of AI-powered business systems by the company’s own domain experts',
       description:
-        'I solve business problems once: with a system, not a hire. The first step is an audit: a review of existing prototypes and a process map.',
+        'I solve business problems once: with a system, not a hire. The first step is a free 30-minute review, then an audit of existing prototypes and a process map.',
       area: 'Worldwide, remote',
     },
   },
 
   nav: {
-    cta: 'Book a free audit',
+    cta: 'Book a free review',
     stepsAria: 'Steps',
     palette: 'Palette',
     theme: 'Theme',
@@ -78,7 +78,7 @@ export const en: EvolutionData = {
     lead: '**Finances** become transparent, **decisions** more precise, **processes** faster, and **resources** are freed up.',
     seal: 'AI business evolution',
     sub: 'I solve business problems by putting AI where it actually helps.',
-    cta: 'Book a free audit',
+    cta: 'Book a free review',
     scrollHint: 'This page is the work plan itself: six steps, in the order they happen',
     stackHint: 'hover a node to see what it does',
     stackNodes: {
@@ -298,7 +298,7 @@ export const en: EvolutionData = {
         num: '01',
         title: 'Review',
         body: 'Three questions: what you have already tried with AI and what of it works; who you plan to hire and why you haven’t yet; who in the company understands the painful process best. If the scheme doesn’t fit you, I’ll say so right away.',
-        pill: 'free · 30–45 min',
+        pill: 'free · 30 min',
       },
       {
         num: '02',
@@ -344,12 +344,11 @@ export const en: EvolutionData = {
     form: {
       label: 'Request',
       title: 'Review my situation',
-      sub: 'The first step is a free diagnostic review (30–45 min) of your current processes and prototypes.',
-      takeawaysTitle: 'What you get from the review:',
+      sub: 'The first step is a free 30-minute review of your current processes and prototypes.',
+      takeawaysTitle: 'What happens on the review',
       takeaways: [
-        'A map of bottlenecks and hidden losses in your current processes and spreadsheets.',
-        'An audit: why previous attempts to roll out software or AI stalled.',
-        'A step-by-step plan: how to digitise a key loop in one month with your own team.',
+        'We go through what you have already tried with AI and why it stalled.',
+        'We pick the process to start with. If my approach does not fit you, I will say so right away.',
       ],
       telegramCta: 'Message me directly on Telegram',
       orBelow: 'or leave your contact in the form below:',

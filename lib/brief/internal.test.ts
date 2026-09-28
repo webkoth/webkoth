@@ -16,7 +16,7 @@ describe('buildInternal', () => {
   it('демо-магазин: первый процесс и бюджет, уточнять нечего', () => {
     expect(internal(demoShop())).toEqual({
       offer: 'firstProcess',
-      flags: [flagCopy.budget('150–400 тыс ₽')],
+      flags: [flagCopy.budget('150-400 тыс ₽')],
       clarify: [],
     })
   })
@@ -40,7 +40,7 @@ describe('buildInternal', () => {
     const r = buildInternal(a, buildMap(a), { fillSeconds: 5 })
     expect(r.fastFillSeconds).toBe(5)
     expect(flagCopy.fastFill(5)).toBe('Заполнено за 5 с: проверить, не бот ли')
-    expect(r.flags).toEqual([flagCopy.fastFill(5), flagCopy.budget('150–400 тыс ₽')])
+    expect(r.flags).toEqual([flagCopy.fastFill(5), flagCopy.budget('150-400 тыс ₽')])
     expect(buildInternal(a, buildMap(a), { fillSeconds: 0 }).flags[0]).toBe(flagCopy.fastFill(0))
   })
 
@@ -49,7 +49,7 @@ describe('buildInternal', () => {
     for (const opts of [{ fillSeconds: 60 }, { fillSeconds: 600 }, { fillSeconds: -1 }, {}, undefined]) {
       const r = buildInternal(a, buildMap(a), opts)
       expect(Object.keys(r)).not.toContain('fastFillSeconds')
-      expect(r.flags[0]).toBe(flagCopy.budget('150–400 тыс ₽'))
+      expect(r.flags[0]).toBe(flagCopy.budget('150-400 тыс ₽'))
     }
   })
 })

@@ -24,7 +24,7 @@ describe('renderTelegramSummary', () => {
     const text = summary(demoShop(), 'anna')
     expect(text.split('\n')).toEqual([
       '<b>Бриф: Анна · @anna_shop</b>',
-      'Wildberries + Ozon · 300–1000 артикулов · 10–100 заказов в день',
+      'Wildberries + Ozon · 300-1000 артикулов · 10-100 заказов в день',
       'Начать с: Ответы на отзывы (≈ 5 ч/нед)',
       'Ступень: первый процесс до production',
       'Категория: Одежда и обувь',
@@ -39,7 +39,7 @@ describe('renderTelegramSummary', () => {
     expect(text.split('\n').slice(0, 3)).toEqual([
       '<b>Бриф: Анна · @anna_shop</b>',
       '⚠ заполнено за 7 с',
-      'Wildberries + Ozon · 300–1000 артикулов · 10–100 заказов в день',
+      'Wildberries + Ozon · 300-1000 артикулов · 10-100 заказов в день',
     ])
     expect(summary(a)).not.toContain('заполнено за')
   })

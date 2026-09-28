@@ -8,7 +8,7 @@ export function ProductionAI({ data, lang }: Props) {
   const sub =
     lang === "en"
       ? "Concrete achievements with evidence pointers."
-      : "Конкретные достижения с указателями на доказательства.";
+      : "Конкретные достижения и где их проверить.";
 
   return (
     <section className="space-y-5">

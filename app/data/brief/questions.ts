@@ -84,12 +84,12 @@ export const shopQuestions: readonly QuestionDef[] = [
   },
   {
     id: 'sku',
-    title: 'Сколько товаров в продаже?',
+    title: 'Сколько артикулов в продаже?',
     terms: ['sku'],
     options: opts([
       ['lt50', 'До 50'],
-      ['50to300', '50–300'],
-      ['300to1000', '300–1000'],
+      ['50to300', '50-300'],
+      ['300to1000', '300-1000'],
       ['gt1000', 'Больше 1000'],
       ['unknown', 'Не знаю'],
     ]),
@@ -99,8 +99,8 @@ export const shopQuestions: readonly QuestionDef[] = [
     title: 'Сколько заказов в день?',
     options: opts([
       ['lt10', 'До 10'],
-      ['10to100', '10–100'],
-      ['100to500', '100–500'],
+      ['10to100', '10-100'],
+      ['100to500', '100-500'],
       ['gt500', 'Больше 500'],
       ['unknown', 'Не знаю'],
     ]),
@@ -110,8 +110,8 @@ export const shopQuestions: readonly QuestionDef[] = [
     title: 'Оборот в месяц?',
     options: opts([
       ['lt1m', 'До 1 млн ₽'],
-      ['1to5m', '1–5 млн ₽'],
-      ['5to20m', '5–20 млн ₽'],
+      ['1to5m', '1-5 млн ₽'],
+      ['5to20m', '5-20 млн ₽'],
       ['gt20m', 'Больше 20 млн ₽'],
       ['hidden', 'Не хочу указывать'],
     ]),
@@ -121,8 +121,8 @@ export const shopQuestions: readonly QuestionDef[] = [
     title: 'Сколько человек работает с магазином?',
     options: opts([
       ['solo', 'Только я'],
-      ['2to5', '2–5'],
-      ['6to20', '6–20'],
+      ['2to5', '2-5'],
+      ['6to20', '6-20'],
       ['gt20', 'Больше 20'],
     ]),
   },
@@ -246,7 +246,7 @@ export const deepQuestions: readonly DeepQuestionDef[] = [
     terms: ['etalon'],
     options: opts([
       ['many', 'Да, несколько'],
-      ['few', 'Есть 1–2'],
+      ['few', 'Есть 1-2'],
       ['no', 'Нет'],
       ['unknown', 'Не знаю'],
     ]),
@@ -256,7 +256,7 @@ export const deepQuestions: readonly DeepQuestionDef[] = [
     title: 'Если объяснять новичку, чего ему хватит?',
     options: opts([
       ['sheet', 'Инструкции на листке: «если так, то так»'],
-      ['readInput', 'Инструкции, но придётся читать фото, письма, отзывы'],
+      ['readInput', 'Инструкции хватит, но сначала надо понять, что в письме, отзыве или на фото'],
       ['experience', 'Без опыта не справится'],
       ['unknown', 'Не знаю'],
     ]),
@@ -295,7 +295,7 @@ export const deepQuestions: readonly DeepQuestionDef[] = [
   },
   {
     id: 'handover',
-    title: 'Как хотите?',
+    title: 'Что сделать с этой работой?',
     terms: ['program', 'aiPrepares'],
     options: opts([
       ['give', 'Отдать полностью'],
@@ -329,11 +329,11 @@ export const goalsQuestions: readonly QuestionDef[] = [
   },
   {
     id: 'implementerHours',
-    title: 'Сколько часов в неделю у него будет?',
+    title: 'Сколько часов в неделю на это найдётся?',
     showIf: (a) => a.implementer === 'self' || a.implementer === 'employee',
     options: opts([
       ['lt2', 'До 2'],
-      ['2to5', '2–5'],
+      ['2to5', '2-5'],
       ['gt5', 'Больше 5'],
       ['unknown', 'Не знаю'],
     ]),
@@ -364,8 +364,8 @@ export const goalsQuestions: readonly QuestionDef[] = [
     title: 'Ориентир бюджета на внедрение',
     options: opts([
       ['lt50', 'До 50 тыс ₽'],
-      ['50to150', '50–150 тыс ₽'],
-      ['150to400', '150–400 тыс ₽'],
+      ['50to150', '50-150 тыс ₽'],
+      ['150to400', '150-400 тыс ₽'],
       ['gt400', 'Больше 400 тыс ₽'],
       ['unknown', 'Пока не знаю'],
     ]),
@@ -373,11 +373,11 @@ export const goalsQuestions: readonly QuestionDef[] = [
 ]
 
 export const hoursOptions: readonly { value: HoursBand; label: string }[] = [
-  { value: 'lt1', label: '<1 ч' },
-  { value: '1to3', label: '1–3 ч' },
-  { value: '3to5', label: '3–5 ч' },
-  { value: '5to10', label: '5–10 ч' },
-  { value: '10plus', label: '10+ ч' },
+  { value: 'lt1', label: 'меньше часа' },
+  { value: '1to3', label: '1-3 ч' },
+  { value: '3to5', label: '3-5 ч' },
+  { value: '5to10', label: '5-10 ч' },
+  { value: '10plus', label: 'больше 10 ч' },
 ]
 
 export function optionLabel(q: { options: readonly Option[] }, value: string | undefined): string | undefined {
