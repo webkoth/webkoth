@@ -128,11 +128,13 @@ export const caseMeta = {
     stack: ['TypeScript', 'Node.js', 'MCP', 'Claude Code', 'npm', 'Timeweb Cloud API', 'nginx', 'Certbot'],
     screenshots: [],
   },
+  // `product`, а не `oss`: репозиторий шаблона закрыт 07.10.2026, в нём рабочие
+  // данные магазина. Ссылки нет - вела бы в 404.
   'seller-workspace': {
-    kind: 'oss',
+    kind: 'product',
     status: 'production',
     blocks: ['resources'],
-    links: { github: 'https://github.com/webkoth/sellerai' },
+    links: {},
     stack: ['Claude Code', 'MCP', 'TypeScript', 'Node.js', 'Markdown'],
     screenshots: [],
   },

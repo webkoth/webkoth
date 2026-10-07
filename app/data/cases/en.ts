@@ -794,7 +794,7 @@ export const en: CasesCopy = {
       resources: {
         headline: 'A seller runs sales without hiring an analyst',
         pain: 'Going through sales, unit economics, the funnel, card SEO, ABC analysis and competitors is a job for a separate person. A small store has nothing to hire them with.',
-        outcome: 'An open template: one clone per store, keys in the environment, connectors to three marketplaces and seven commands for those questions. Intended so; how far it replaces an analyst I have not measured.',
+        outcome: 'A template: one clone per store, keys in the environment, connectors to three marketplaces and seven commands for those questions. Intended so; how far it replaces an analyst I have not measured.',
         chips: [
           { icon: 'coverage', label: 'Commands', value: 'report, unit economics, funnel, SEO, ABC, competitors' },
           {
@@ -808,7 +808,7 @@ export const en: CasesCopy = {
       },
     },
     detail: {
-      lead: 'An open Claude Code workspace template for a marketplace seller: connectors to three marketplaces, seven ready commands (from the weekly report to ABC analysis) and a knowledge base inside the repository itself. One clone, one store.',
+      lead: 'A Claude Code workspace template for a marketplace seller: connectors to three marketplaces, seven ready commands (from the weekly report to ABC analysis) and a knowledge base inside the repository itself. One clone, one store.',
       effects: [{ block: 'resources', text: 'The questions people hire an analyst for are packaged as commands of the template' }],
       value: [
         'The report, unit economics, the funnel, an SEO audit, ABC and competitors are called by a command instead of being assembled from scratch each time.',
@@ -822,7 +822,7 @@ export const en: CasesCopy = {
         'The usage model is one clone per store: keys, logs and caches are not versioned, while improvements come back into the shared template as a separate change.',
         'The phrase «without hiring an analyst» is the purpose of the template and an assessment from store owners’ own words. I have no measurement of how much work it takes off, so for now it is an intent rather than a result.',
       ],
-      owner: 'Me. Open source; the store is run by its owner inside their own clone.',
+      owner: 'Me. The template repository is private; the store is run by its owner inside their own clone.',
       facts: [
         { label: 'Commands', value: 'seven, from the report to ABC analysis' },
         { label: 'Maintained by', value: 'the store owner' },
@@ -831,7 +831,7 @@ export const en: CasesCopy = {
       screenshots: [],
       metaTitle: 'Case: a workspace for a marketplace seller | Minas Sarkisyan',
       metaDescription:
-        'An open Claude Code template for a seller: connectors to three marketplaces, seven commands from the weekly report to ABC analysis, keys stay with the owner.',
+        'A Claude Code template for a seller: connectors to three marketplaces, seven commands from the weekly report to ABC analysis, keys stay with the owner.',
     },
   },
 
