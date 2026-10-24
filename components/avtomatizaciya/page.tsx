@@ -53,6 +53,7 @@ export function AvtomatizaciyaPage() {
               llmMarkdown={buildAvtomatizaciyaMarkdown()}
               anchorBase={avtomatizaciyaPath}
               minimal
+              hideModeToggle
             />
             <Hero copy={c.hero} />
             <Services copy={c.services} />

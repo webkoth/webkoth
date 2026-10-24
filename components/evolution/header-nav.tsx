@@ -33,6 +33,7 @@ export function HeaderNav({
   llmMarkdown,
   anchorBase = '',
   minimal = false,
+  hideModeToggle = false,
 }: {
   lang: Lang
   brand: string
@@ -50,6 +51,8 @@ export function HeaderNav({
   anchorBase?: string
   /** Рекламный лендинг: без соцсетей в шапке, чтобы не уводить платный трафик со страницы. */
   minimal?: boolean
+  /** Страница с форсированной темой (FORCED_DARK_PATHS): тумблер светлой/тёмной темы ничего бы не менял. */
+  hideModeToggle?: boolean
 }) {
   const [activeId, setActiveId] = useState<string | null>(null)
   const headerRef = useRef<HTMLElement>(null)
@@ -145,12 +148,14 @@ export function HeaderNav({
             </TooltipTrigger>
             <TooltipContent side="bottom">{nav.palette}</TooltipContent>
           </Tooltip>
-          <Tooltip>
-            <TooltipTrigger render={<span className="inline-flex" />}>
-              <ModeToggle />
-            </TooltipTrigger>
-            <TooltipContent side="bottom">{nav.theme}</TooltipContent>
-          </Tooltip>
+          {!hideModeToggle && (
+            <Tooltip>
+              <TooltipTrigger render={<span className="inline-flex" />}>
+                <ModeToggle />
+              </TooltipTrigger>
+              <TooltipContent side="bottom">{nav.theme}</TooltipContent>
+            </Tooltip>
+          )}
           <Tooltip>
             <TooltipTrigger render={<span className="inline-flex" />}>
               <FontToggle />
