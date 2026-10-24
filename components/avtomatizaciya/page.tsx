@@ -18,7 +18,8 @@ import { Pricing } from './pricing'
 import { Lead } from './lead'
 
 // Одна лента: первый экран → услуги → кейсы → компании → как работаем → цены → вопросы → заявка.
-// Обёртка с классом dark держит страницу тёмной при любой теме сайта (спека, «Внешний вид»).
+// Страница всегда тёмная (спека, «Внешний вид»): тему на весь документ форсит SiteThemeProvider
+// по списку app/data/forced-dark-paths.ts, поэтому здесь нет обёртки с классом dark.
 export function AvtomatizaciyaPage() {
   const c = avtomatizaciya
   const data = evolutionData.ru
@@ -30,7 +31,7 @@ export function AvtomatizaciyaPage() {
     { id: 'faq', label: c.nav.faq },
   ]
   return (
-    <div className="dark min-h-screen bg-background text-foreground">
+    <>
       <HtmlLang lang="ru" />
       <ParticleField />
       <TooltipProvider delay={200}>
@@ -66,6 +67,6 @@ export function AvtomatizaciyaPage() {
           </main>
         </LeadDialogProvider>
       </TooltipProvider>
-    </div>
+    </>
   )
 }

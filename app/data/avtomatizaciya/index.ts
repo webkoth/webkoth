@@ -1,10 +1,9 @@
 import { ru } from './ru'
+import { avtomatizaciyaPath } from './path'
 
 export type { AvtomatizaciyaCopy, CompanyTile, Price, Service, ServiceIcon, Stat, Step } from './types'
 
-/** Источник заявки и имя страницы; дублируется строкой в lib/evolution/schemas.ts. */
-export const AVTOMATIZACIYA_SLUG = 'avtomatizaciya' as const
-export const avtomatizaciyaPath = '/avtomatizaciya'
+export { AVTOMATIZACIYA_SLUG, avtomatizaciyaPath } from './path'
 export const avtomatizaciya = ru
 
 // Markdown страницы для модалки «документация для LLM» и для /llms.txt.

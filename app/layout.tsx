@@ -2,7 +2,7 @@ import { Suspense } from "react"
 import { Geist, Geist_Mono, JetBrains_Mono } from "next/font/google"
 
 import "./globals.css"
-import { ThemeProvider } from "@/components/theme-provider"
+import { SiteThemeProvider } from "@/components/site-theme-provider"
 import { LandingPreferencesScript } from "@/components/landing-preferences-script"
 import { Toaster } from "@/components/ui/sonner"
 import { YandexMetrika } from "@/components/analytics/yandex-metrika"
@@ -48,7 +48,7 @@ export default function RootLayout({
         <LandingPreferencesScript />
       </head>
       <body>
-        <ThemeProvider
+        <SiteThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
@@ -56,7 +56,7 @@ export default function RootLayout({
         >
           {children}
           <Toaster />
-        </ThemeProvider>
+        </SiteThemeProvider>
         <YandexMetrika />
         {/* Метки рекламы для заявки и хиты Метрики при переходах внутри сайта. */}
         <Suspense fallback={null}>
