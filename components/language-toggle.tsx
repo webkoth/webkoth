@@ -5,6 +5,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
 import { isLandingSlug } from "@/app/data/landings"
+import { AVTOMATIZACIYA_SLUG } from "@/app/data/avtomatizaciya/path"
 
 type Lang = "en" | "ru"
 
@@ -15,11 +16,14 @@ interface LanguageToggleProps {
 // Главная: RU в корне, EN под /en. Остальные страницы (CV и страницы кейсов) - /[lang]/… .
 // Лендинги Директа (/kontur, /finance …) есть только по-русски: EN ведёт на английскую главную,
 // RU остаётся на лендинге, иначе переключатель отправлял бы на несуществующий /en/kontur.
+// Так же устроен одностраничник /avtomatizaciya.
+const isRuOnlySlug = (slug: string) => isLandingSlug(slug) || slug === AVTOMATIZACIYA_SLUG
+
 export function buildPath(pathname: string, currentLang: Lang, newLang: Lang): string {
   const segments = pathname.split("/").filter(Boolean)
   const isHome = segments.length === 0 || (segments.length === 1 && (segments[0] === "en" || segments[0] === "ru"))
   if (isHome) return newLang === "ru" ? "/" : "/en"
-  if (segments.length === 1 && isLandingSlug(segments[0])) return newLang === "ru" ? `/${segments[0]}` : "/en"
+  if (segments.length === 1 && isRuOnlySlug(segments[0])) return newLang === "ru" ? `/${segments[0]}` : "/en"
 
   if (segments[0] === currentLang || segments[0] === "en" || segments[0] === "ru") {
     segments[0] = newLang
