@@ -52,8 +52,9 @@ describe('реестр лендингов', () => {
   })
 
   // Слаги дублируются в схеме заявки (lib не импортирует app/data); тест не даёт им разойтись.
+  // Кроме четырёх лендингов в схеме есть одностраничник /avtomatizaciya.
   it('слаги лендингов совпадают со слагами в схеме заявки', () => {
-    expect([...LANDING_SLUGS].sort()).toEqual([...LEAD_LANDINGS].sort())
+    expect([...LEAD_LANDINGS].sort()).toEqual([...LANDING_SLUGS, 'avtomatizaciya'].sort())
   })
 })
 

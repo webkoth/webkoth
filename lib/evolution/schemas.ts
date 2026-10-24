@@ -2,7 +2,7 @@ import { z } from 'zod'
 
 // Слаги лендингов дублируются здесь строкой, а не импортом из app/data:
 // схема живёт в lib и не должна тянуть за собой тексты страниц.
-export const LEAD_LANDINGS = ['kontur', 'it-director', 'agent', 'finance'] as const
+export const LEAD_LANDINGS = ['kontur', 'it-director', 'agent', 'finance', 'avtomatizaciya'] as const
 
 // Откуда пришла заявка с лендинга: страница, пресет квиза и тег вердикта.
 // Всё необязательное: заявка с главной идёт без source.
