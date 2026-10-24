@@ -2,6 +2,7 @@ import { MetadataRoute } from "next";
 import { CASE_SLUGS, casePath } from "@/app/data/cases";
 import { LANGS } from "@/app/data/evolution";
 import { LANDING_SLUGS, landingPath } from "@/app/data/landings";
+import { avtomatizaciyaPath } from "@/app/data/avtomatizaciya";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://webkoth.com";
@@ -36,6 +37,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/ru/standard/verdict`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
     { url: `${baseUrl}/privacy`, lastModified: now, changeFrequency: "yearly", priority: 0.2 },
     { url: `${baseUrl}/en/standard/verdict`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
+    { url: `${baseUrl}${avtomatizaciyaPath}`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
     ...landings,
     ...cases,
   ];

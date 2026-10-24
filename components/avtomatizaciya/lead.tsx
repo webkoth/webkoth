@@ -2,21 +2,11 @@
 
 import { useState } from 'react'
 import { Send } from 'lucide-react'
-import { evolutionData } from '@/app/data/evolution'
 import { AVTOMATIZACIYA_SLUG, type AvtomatizaciyaCopy } from '@/app/data/avtomatizaciya'
+import { leadFormCopy } from '@/app/data/avtomatizaciya/lead-form-copy'
 import { LeadForm } from '@/components/evolution/lead-form'
 import { TelegramLink } from '@/components/analytics/telegram-link'
 import { contacts } from '@/lib/landing/contacts'
-
-/** Форма главной с вопросом этой страницы вместо вопроса главной. */
-export function leadFormCopy(copy: AvtomatizaciyaCopy['lead']) {
-  const base = evolutionData.ru.finale.form
-  return {
-    ...base,
-    fields: { ...base.fields, answer: copy.answerLabel },
-    placeholders: { ...base.placeholders, answer: copy.answerPlaceholder },
-  }
-}
 
 // startedAt от монтирования: антибот-таймер роута отсчитывает от него (как в lead-section.tsx).
 export function Lead({ copy }: { copy: AvtomatizaciyaCopy['lead'] }) {

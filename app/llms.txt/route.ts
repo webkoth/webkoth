@@ -2,6 +2,7 @@ import { evolutionData, LANGS } from '@/app/data/evolution'
 import { buildEvolutionMarkdown } from '@/lib/evolution/llms-markdown'
 import { LANDING_SLUGS, landingCopy } from '@/app/data/landings'
 import { buildLandingMarkdown } from '@/lib/landings/llms-markdown'
+import { buildAvtomatizaciyaMarkdown } from '@/app/data/avtomatizaciya'
 
 export const dynamic = 'force-static'
 
@@ -19,6 +20,7 @@ export function GET() {
     ...sections,
     '# Страницы услуг',
     '',
+    buildAvtomatizaciyaMarkdown(),
     ...LANDING_SLUGS.map((slug) => buildLandingMarkdown(slug, landingCopy[slug])),
   ].join('\n')
 
