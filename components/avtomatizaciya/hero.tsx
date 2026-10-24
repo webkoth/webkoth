@@ -36,8 +36,8 @@ export function Hero({ copy }: { copy: AvtomatizaciyaCopy['hero'] }) {
       <dl className="mt-14 grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-3">
         {copy.stats.map((s) => (
           // Подпись - термин (dt), цифра - значение (dd); column-reverse ставит цифру сверху,
-          // а скринридер читает подпись один раз и перед цифрой.
-          <div key={s.value} className="flex flex-col-reverse bg-background/80 p-6 backdrop-blur md:p-8">
+          // а скринридер читает подпись один раз и перед цифрой. justify-end в reverse - прижать к верху.
+          <div key={s.value} className="flex flex-col-reverse justify-end bg-background/80 p-6 backdrop-blur md:p-8">
             <dt className="mt-2 text-sm text-muted-foreground">{s.label}</dt>
             <dd className="text-4xl font-bold tracking-tight text-primary md:text-5xl">{s.value}</dd>
           </div>
