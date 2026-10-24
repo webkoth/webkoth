@@ -1,4 +1,4 @@
-import { Bot, Boxes, ChartColumn, FileSpreadsheet, Image, Megaphone, MessageSquareText, MessagesSquare, type LucideIcon } from 'lucide-react'
+import { Bot, Boxes, ChartColumn, FileSpreadsheet, Image as ImageIcon, Megaphone, MessageSquareText, MessagesSquare, type LucideIcon } from 'lucide-react'
 import type { AvtomatizaciyaCopy, ServiceIcon } from '@/app/data/avtomatizaciya'
 
 const ICONS: Record<ServiceIcon, LucideIcon> = {
@@ -9,7 +9,7 @@ const ICONS: Record<ServiceIcon, LucideIcon> = {
   reviews: MessageSquareText,
   chat: MessagesSquare,
   agents: Bot,
-  photo: Image,
+  photo: ImageIcon,
 }
 
 // Восемь услуг сеткой: одна колонка на телефоне, две на планшете, четыре на широком экране.

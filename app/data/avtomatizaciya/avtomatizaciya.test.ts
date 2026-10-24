@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest'
 import { angleForCase, CASE_SLUGS } from '@/app/data/cases'
 import { LEAD_DETAIL_KEY, LEAD_DETAILS_MAX } from '@/lib/evolution/schemas'
 import { avtomatizaciya, avtomatizaciyaPath, buildAvtomatizaciyaMarkdown } from './index'
+import { leadFormCopy } from './lead-form-copy'
 
 const c = avtomatizaciya
 
@@ -38,5 +39,12 @@ describe('тексты одностраничника', () => {
     const md = buildAvtomatizaciyaMarkdown()
     expect(md).toContain(c.hero.title)
     expect(md).toContain(avtomatizaciyaPath)
+  })
+
+  it('модалка заявки говорит заголовком и вопросом страницы', () => {
+    const form = leadFormCopy(c.lead)
+    expect(form.title).toBe(c.lead.title)
+    expect(form.sub).toBe(c.lead.sub)
+    expect(form.fields.answer).toBe(c.lead.answerLabel)
   })
 })

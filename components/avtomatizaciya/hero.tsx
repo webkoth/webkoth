@@ -35,12 +35,11 @@ export function Hero({ copy }: { copy: AvtomatizaciyaCopy['hero'] }) {
       <p className="mt-4 text-sm text-muted-foreground">{copy.note}</p>
       <dl className="mt-14 grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-3">
         {copy.stats.map((s) => (
-          <div key={s.value} className="bg-background/80 p-6 backdrop-blur md:p-8">
-            <dt className="sr-only">{s.label}</dt>
-            <dd>
-              <span className="block text-4xl font-bold tracking-tight text-primary md:text-5xl">{s.value}</span>
-              <span className="mt-2 block text-sm text-muted-foreground">{s.label}</span>
-            </dd>
+          // Подпись - термин (dt), цифра - значение (dd); column-reverse ставит цифру сверху,
+          // а скринридер читает подпись один раз и перед цифрой.
+          <div key={s.value} className="flex flex-col-reverse bg-background/80 p-6 backdrop-blur md:p-8">
+            <dt className="mt-2 text-sm text-muted-foreground">{s.label}</dt>
+            <dd className="text-4xl font-bold tracking-tight text-primary md:text-5xl">{s.value}</dd>
           </div>
         ))}
       </dl>

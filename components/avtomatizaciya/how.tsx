@@ -12,7 +12,7 @@ export function How({ copy }: { copy: AvtomatizaciyaCopy['how'] }) {
       <ol className="mt-10 grid gap-8 md:grid-cols-4 md:gap-6">
         {copy.steps.map((s, i) => (
           <li key={s.title} className="border-t-2 border-primary/60 pt-4">
-            <span className="font-mono text-4xl font-bold text-primary">{i + 1}</span>
+            <span aria-hidden className="font-mono text-4xl font-bold text-primary">{i + 1}</span>
             <h3 className="mt-3 text-lg font-semibold tracking-tight">{s.title}</h3>
             <p className="mt-2 text-sm text-muted-foreground">{s.body}</p>
           </li>

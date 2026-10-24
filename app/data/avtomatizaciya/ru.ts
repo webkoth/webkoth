@@ -2,7 +2,7 @@ import type { AvtomatizaciyaCopy } from './types'
 
 export const ru: AvtomatizaciyaCopy = {
   meta: {
-    title: 'Автоматизация и ИИ для продавцов Wildberries, Ozon и Маркета · webkoth',
+    title: 'Автоматизация и ИИ для продавцов WB, Ozon и Маркета · webkoth',
     description:
       'Прибыль по артикулу, отчёты, остатки, реклама и ответы на отзывы без ручной работы. Разработчик, который сам ведёт магазин на трёх площадках. Разбор бесплатно.',
   },
