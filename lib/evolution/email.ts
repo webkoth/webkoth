@@ -22,6 +22,16 @@ export type EvolutionLeadData = {
   attribution?: LeadAttribution
   /** Необязательные поля лендинга («Какая 1С: УТ 11»), уже с подписями. */
   details?: readonly LeadDetailRow[]
+  /** Вопрос, на который отвечали в поле answer, если страница спрашивает своё; без него - вопрос по умолчанию. */
+  answerLabel?: string
+}
+
+/** Вопрос по умолчанию к полю answer (главная и лендинги Директа). */
+export const DEFAULT_ANSWER_LABEL = 'Какую проблему хотят решить и что уже пробовали'
+
+// Подпись к ответу в уведомлении: двоеточие в конце, если вопрос не кончается своим знаком.
+export function answerHeading(label: string): string {
+  return /[?!:.]$/.test(label) ? label : `${label}:`
 }
 
 // Подписи берутся из полей лендинга, а без них - сам ключ: поле, которого страница уже
@@ -65,7 +75,7 @@ export function buildLeadText(d: EvolutionLeadData): string {
     `🌐 IP:      ${d.ip}`,
     ...(d.details?.length ? ['', ...d.details.map((r) => `${r.label}: ${r.value}`)] : []),
     '',
-    'Какую проблему хотят решить и что уже пробовали:',
+    answerHeading(d.answerLabel ?? DEFAULT_ANSWER_LABEL),
     d.answer,
     '',
     `Источник: ${sourceLabel(d.lang, d.source)}`,
@@ -87,7 +97,7 @@ export function buildLeadHtml(d: EvolutionLeadData): string {
     ${(d.details ?? []).map((r) => row(escapeHtml(r.label), r.value)).join('\n    ')}
   </table>
   <div style="margin-top:20px">
-    <div style="color:#666;font-size:13px;margin-bottom:8px">Какую проблему хотят решить и что уже пробовали</div>
+    <div style="color:#666;font-size:13px;margin-bottom:8px">${escapeHtml(d.answerLabel ?? DEFAULT_ANSWER_LABEL)}</div>
     <div style="background:#f8f8f8;padding:14px 16px;border-radius:6px;white-space:pre-wrap;font-size:14px;line-height:1.5">${escapeHtml(d.answer)}</div>
   </div>
 </body></html>`

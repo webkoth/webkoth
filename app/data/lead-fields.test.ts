@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 import { LEAD_LANDINGS, leadSourceSchema } from '@/lib/evolution/schemas'
 import { landingCopy } from '@/app/data/landings'
 import { AVTOMATIZACIYA_SLUG, avtomatizaciya } from '@/app/data/avtomatizaciya'
-import { leadFieldsFor } from './lead-fields'
+import { leadAnswerLabelFor, leadFieldsFor } from './lead-fields'
 
 describe('источник заявки', () => {
   it('схема принимает заявку с новой страницы', () => {
@@ -19,5 +19,16 @@ describe('источник заявки', () => {
 
   it('для каждого источника схемы поля находятся без ошибки', () => {
     for (const landing of LEAD_LANDINGS) expect(() => leadFieldsFor(landing)).not.toThrow()
+  })
+})
+
+describe('вопрос к ответу по источнику', () => {
+  it('новая страница отдаёт свой вопрос', () => {
+    expect(leadAnswerLabelFor(AVTOMATIZACIYA_SLUG)).toBe(avtomatizaciya.lead.answerLabel)
+    expect(leadAnswerLabelFor(AVTOMATIZACIYA_SLUG)).toBe('Что отнимает больше всего времени?')
+  })
+
+  it('старый лендинг без своего вопроса', () => {
+    expect(leadAnswerLabelFor('kontur')).toBeUndefined()
   })
 })

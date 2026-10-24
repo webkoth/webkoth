@@ -54,3 +54,17 @@ describe('письмо о заявке', () => {
     expect(html).not.toContain('<доработанная>')
   })
 })
+
+describe('вопрос к ответу в письме', () => {
+  it('без answerLabel вопрос по умолчанию, как раньше', () => {
+    expect(buildLeadText(lead)).toContain('\nКакую проблему хотят решить и что уже пробовали:\nВыплаты WB')
+    expect(buildLeadHtml(lead)).toContain('margin-bottom:8px">Какую проблему хотят решить и что уже пробовали</div>')
+  })
+
+  it('с answerLabel письмо подписано вопросом страницы', () => {
+    const d = { ...lead, answerLabel: 'Что отнимает больше всего времени?' }
+    expect(buildLeadText(d)).toContain('\nЧто отнимает больше всего времени?\nВыплаты WB')
+    expect(buildLeadHtml(d)).toContain('margin-bottom:8px">Что отнимает больше всего времени?</div>')
+    expect(buildLeadText(d)).not.toContain('Какую проблему')
+  })
+})

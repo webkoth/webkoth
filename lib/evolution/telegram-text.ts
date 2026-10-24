@@ -1,5 +1,5 @@
 import { escapeHtml } from '@/lib/landing/telegram'
-import { sourceLabel, type EvolutionLeadData } from './email'
+import { answerHeading, sourceLabel, type EvolutionLeadData } from './email'
 import type { LeadAttribution } from './schemas'
 
 // Telegram sendMessage ограничен 4096 символами и на превышение отвечает 400,
@@ -11,7 +11,10 @@ import type { LeadAttribution } from './schemas'
 const TELEGRAM_MAX_CHARS = 4096
 const ANSWER_BUDGET = 2500
 const TRUNCATION_NOTE = '\n\n<i>Ответ обрезан, полный текст - в письме.</i>'
+// Вопрос по умолчанию в Telegram короче, чем в письме («что пробовали»): оставлен как был.
 const ANSWER_HEADER = '\n\n<b>Какую проблему хотят решить и что пробовали:</b>\n'
+const answerHeader = (label?: string) =>
+  label ? `\n\n<b>${escapeHtml(answerHeading(label))}</b>\n` : ANSWER_HEADER
 // Необязательное поле лендинга - до 200 символов, но экранирование раздувает «&» впятеро:
 // шесть таких полей перебили бы лимит сообщения. Значение поля режем после экранирования.
 const DETAIL_BUDGET = 250
@@ -80,17 +83,18 @@ export function buildLeadTelegramText(d: EvolutionLeadData): string {
     (d.consentAt ? `\n<b>Согласие на обработку ПДн:</b> ${escapeHtml(d.consentAt)}` : '') +
     attributionBlock(d.attribution)
 
+  const header = answerHeader(d.answerLabel)
   const escaped = escapeHtml(d.answer)
   const room = Math.max(
     0,
     Math.min(
       ANSWER_BUDGET,
-      TELEGRAM_MAX_CHARS - base.length - ANSWER_HEADER.length - TRUNCATION_NOTE.length - 1,
+      TELEGRAM_MAX_CHARS - base.length - header.length - TRUNCATION_NOTE.length - 1,
     ),
   )
 
-  if (escaped.length <= room) return `${base}${ANSWER_HEADER}${escaped}`
+  if (escaped.length <= room) return `${base}${header}${escaped}`
 
   const cut = trimDanglingEntity(escaped.slice(0, room))
-  return `${base}${ANSWER_HEADER}${cut}…${TRUNCATION_NOTE}`
+  return `${base}${header}${cut}…${TRUNCATION_NOTE}`
 }

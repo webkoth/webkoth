@@ -8,3 +8,10 @@ export function leadFieldsFor(landing: LeadSource['landing']): readonly LeadFiel
   if (landing === AVTOMATIZACIYA_SLUG) return avtomatizaciya.lead.fields
   return landingCopy[landing].lead.fields
 }
+
+// Вопрос к полю answer для уведомления: у страницы со своим вопросом - он, у остальных
+// undefined, и уведомление пишет вопрос по умолчанию.
+export function leadAnswerLabelFor(landing: LeadSource['landing']): string | undefined {
+  if (landing === AVTOMATIZACIYA_SLUG) return avtomatizaciya.lead.answerLabel
+  return undefined
+}

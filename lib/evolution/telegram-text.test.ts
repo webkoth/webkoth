@@ -114,3 +114,31 @@ describe('buildLeadTelegramText', () => {
     expect(text).not.toContain('меток нет')
   })
 })
+
+describe('вопрос к ответу по источнику', () => {
+  it('заявка с /avtomatizaciya подписана вопросом страницы и её полями', async () => {
+    const { leadAnswerLabelFor, leadFieldsFor } = await import('@/app/data/lead-fields')
+    const { leadDetailRows } = await import('./email')
+    const text = buildLeadTelegramText({
+      ...lead,
+      source: { landing: 'avtomatizaciya' },
+      details: leadDetailRows({ marketplaces: 'WB' }, leadFieldsFor('avtomatizaciya')),
+      answerLabel: leadAnswerLabelFor('avtomatizaciya'),
+    })
+    expect(text).toContain('<b>Площадки:</b> WB')
+    expect(text).toContain('Лендинг /avtomatizaciya')
+    expect(text).toContain('<b>Что отнимает больше всего времени?</b>\n')
+    expect(text).not.toContain('Какую проблему хотят решить')
+  })
+
+  it('без answerLabel вопрос по умолчанию, как раньше', () => {
+    expect(buildLeadTelegramText(lead)).toContain(
+      '\n\n<b>Какую проблему хотят решить и что пробовали:</b>\nСобрали бота',
+    )
+  })
+
+  it('подпись без знака в конце получает двоеточие и экранируется', () => {
+    const text = buildLeadTelegramText({ ...lead, answerLabel: 'Что & как' })
+    expect(text).toContain('<b>Что &amp; как:</b>\n')
+  })
+})

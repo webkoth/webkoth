@@ -1,5 +1,5 @@
 import { NextResponse, type NextRequest } from 'next/server'
-import { leadFieldsFor } from '@/app/data/lead-fields'
+import { leadAnswerLabelFor, leadFieldsFor } from '@/app/data/lead-fields'
 import { evolutionLeadSchema } from '@/lib/evolution/schemas'
 import { leadDetailRows, type EvolutionLeadData } from '@/lib/evolution/email'
 import { buildLeadTelegramText } from '@/lib/evolution/telegram-text'
@@ -66,6 +66,8 @@ export async function POST(req: NextRequest) {
       parsed.data.details,
       parsed.data.source ? leadFieldsFor(parsed.data.source.landing) : undefined,
     ),
+    // Вопрос к ответу: страница может спрашивать своё («Что отнимает больше всего времени?»).
+    answerLabel: parsed.data.source ? leadAnswerLabelFor(parsed.data.source.landing) : undefined,
     // Схема уже отклонила заявку без согласия; фиксируем момент как доказательство.
     consentAt: new Date().toISOString(),
   }
