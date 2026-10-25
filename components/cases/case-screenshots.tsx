@@ -22,7 +22,7 @@ export function CaseScreenshots({
       <ul className="mt-4 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-3 [scrollbar-width:thin]">
         {shots.map((s, i) => (
           <li key={s.src} className="w-[82vw] max-w-[34rem] shrink-0 snap-start sm:w-[28rem]">
-            <figure className="overflow-hidden rounded-2xl border border-border bg-card/70">
+            <figure className="glass overflow-hidden rounded-[22px]">
               <Image
                 src={s.src}
                 alt={captions[i].alt}
@@ -31,7 +31,7 @@ export function CaseScreenshots({
                 sizes="(max-width: 640px) 82vw, 34rem"
                 className="h-auto w-full"
               />
-              <figcaption className="border-t border-border px-4 py-2.5 text-xs text-muted-foreground">
+              <figcaption className="px-4 py-3 text-sm text-muted-foreground">
                 {captions[i].caption}
               </figcaption>
             </figure>

@@ -55,116 +55,108 @@
 }
 
 :root {
-    /* Шрифты: по умолчанию JetBrains Mono везде (текст, заголовки, моно-слот);
-       по классу .mono-geist (тумблер в шапке) — Geist + Geist Mono. */
-    --font-sans-active: var(--font-jetbrains-mono);
+    /* Шрифт как в роликах finstock (content-factory/content/styles/finstock/visual.md):
+       Inter для текста и заголовков, JetBrains Mono — только для кода и цифр-подписей. */
+    --font-sans-active: var(--font-inter);
     --font-mono-active: var(--font-jetbrains-mono);
 
-    /* Нейтрали — одна семья на оттенке 267 (#02003f = oklch(0.168 0.114 266.6)):
-       текст — глубокий индиго, серые — с тем же синим подтоном, не зеленоватые. */
-    --background: oklch(1 0 0);
-    --foreground: oklch(0.168 0.114 266.6);
-    --card: oklch(1 0 0);
-    --card-foreground: oklch(0.168 0.114 266.6);
-    --popover: oklch(1 0 0);
-    --popover-foreground: oklch(0.168 0.114 266.6);
-    --primary: oklch(0.62 0.21 35);
-    --primary-foreground: oklch(0.985 0 0);
-    --secondary: oklch(0.957 0.012 267);
-    --secondary-foreground: oklch(0.25 0.09 267);
-    --muted: oklch(0.962 0.01 267);
-    --muted-foreground: oklch(0.48 0.055 267);
-    --accent: oklch(0.962 0.01 267);
-    --accent-foreground: oklch(0.22 0.1 267);
-    --destructive: oklch(0.577 0.245 27.325);
-    --border: oklch(0.912 0.014 267);
-    --input: oklch(0.912 0.014 267);
-    --ring: oklch(0.70 0.045 267);
-    --chart-1: oklch(0.865 0.127 207.078);
-    --chart-2: oklch(0.715 0.143 215.221);
-    --chart-3: oklch(0.609 0.126 221.723);
-    --chart-4: oklch(0.52 0.105 223.128);
-    --chart-5: oklch(0.45 0.085 224.283);
-    --radius: 0.625rem;
-    --sidebar: oklch(0.985 0.004 267);
-    --sidebar-foreground: oklch(0.168 0.114 266.6);
-    --sidebar-primary: oklch(0.62 0.21 35);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.962 0.01 267);
-    --sidebar-accent-foreground: oklch(0.22 0.1 267);
-    --sidebar-border: oklch(0.912 0.014 267);
-    --sidebar-ring: oklch(0.70 0.045 267);
-    /* Цвета шагов карты брифа: «сам» зелёный, «человек» фиолетово-синий, «не трогать» серый.
-       «ИИ готовит» берёт --primary. */
+    /* Светлая тема finstock — палитра светлой темы hubmarket.ru: серо-голубой холст,
+       графитовый текст, один акцент — циан. На светлом циан #00b8db не читается,
+       поэтому акцент — его тёмная пара #0092b8. */
+    --background: #ecf0f1;
+    --foreground: #1e2939;
+    --card: #ffffff;
+    --card-foreground: #1e2939;
+    --popover: #ffffff;
+    --popover-foreground: #1e2939;
+    --primary: #0092b8;
+    --primary-foreground: #ffffff;
+    --secondary: #f4f7f8;
+    --secondary-foreground: #1e2939;
+    --muted: #e9eeef;
+    --muted-foreground: #6a7282;
+    --accent: #ddf3f8;
+    --accent-foreground: #0b6e8a;
+    --destructive: #e5484d;
+    --border: #dfe5e8;
+    --input: #dfe5e8;
+    --ring: #00b8db;
+    --chart-1: #00b8db;
+    --chart-2: #0092b8;
+    --chart-3: #6a7282;
+    --chart-4: #9aa3b2;
+    --chart-5: #1e2939;
+    --radius: 0.75rem;
+    --sidebar: #f4f7f8;
+    --sidebar-foreground: #1e2939;
+    --sidebar-primary: #0092b8;
+    --sidebar-primary-foreground: #ffffff;
+    --sidebar-accent: #ddf3f8;
+    --sidebar-accent-foreground: #0b6e8a;
+    --sidebar-border: #dfe5e8;
+    --sidebar-ring: #00b8db;
+
+    /* Цвета шагов брифа (анкета /brief). */
     --brief-auto: oklch(0.55 0.12 160);
     --brief-human: oklch(0.48 0.14 285);
     --brief-skip: oklch(0.65 0.02 267);
-    /* Текст шагов на светлом фоне темнее заливки: мелкий шрифт читается (контраст от 4.5:1). */
     --brief-auto-fg: oklch(0.46 0.1 160);
-    --brief-ai-fg: oklch(0.52 0.18 35);
+    --brief-ai-fg: var(--primary);
     --brief-human-fg: var(--brief-human);
-}
 
-:root.mono-geist {
-    --font-sans-active: var(--font-geist-sans);
-    --font-mono-active: var(--font-geist-mono);
+    /* Светлое стекло: белое 62 → 46 %, кадр под ним размыт и чуть осветлён. Без рамок. */
+    --glass-from: rgb(255 255 255 / 0.62);
+    --glass-to: rgb(236 240 241 / 0.46);
+    --glass-filter: blur(26px) saturate(160%) brightness(108%);
+    --glass-shadow: 0 18px 44px -12px rgb(30 41 57 / 0.16);
+    --glass-light: rgb(255 255 255 / 0.5);
+    --glow-a: rgb(0 184 219 / 0.16);
+    --glow-b: rgb(0 146 184 / 0.1);
 }
 
 .dark {
-    /* Тот же оттенок 267, приглушённый: «та же марка в ночном режиме», а не чистый #02003f во весь экран. */
-    --background: oklch(0.17 0.045 267);
-    --foreground: oklch(0.96 0.008 267);
-    --card: oklch(0.215 0.045 267);
-    --card-foreground: oklch(0.96 0.008 267);
-    --popover: oklch(0.215 0.045 267);
-    --popover-foreground: oklch(0.96 0.008 267);
-    --primary: oklch(0.7 0.22 38);
-    --primary-foreground: oklch(0.985 0 0);
-    --secondary: oklch(0.265 0.04 267);
-    --secondary-foreground: oklch(0.96 0.008 267);
-    --muted: oklch(0.265 0.04 267);
-    --muted-foreground: oklch(0.72 0.03 267);
-    --accent: oklch(0.275 0.045 267);
-    --accent-foreground: oklch(0.96 0.008 267);
-    --destructive: oklch(0.704 0.191 22.216);
-    --border: oklch(1 0 0 / 10%);
-    --input: oklch(1 0 0 / 15%);
-    --ring: oklch(0.7 0.22 38 / 60%);
-    --chart-1: oklch(0.865 0.127 207.078);
-    --chart-2: oklch(0.715 0.143 215.221);
-    --chart-3: oklch(0.609 0.126 221.723);
-    --chart-4: oklch(0.52 0.105 223.128);
-    --chart-5: oklch(0.45 0.085 224.283);
-    --sidebar: oklch(0.2 0.045 267);
-    --sidebar-foreground: oklch(0.96 0.008 267);
-    --sidebar-primary: oklch(0.7 0.22 38);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.275 0.045 267);
-    --sidebar-accent-foreground: oklch(0.96 0.008 267);
-    --sidebar-border: oklch(1 0 0 / 10%);
-    --sidebar-ring: oklch(0.72 0.03 267);
+    /* Тёмная тема finstock — первый блок hubmarket.ru и ролики: графит почти без свечения. */
+    --background: #12181f;
+    --foreground: #ecf0f1;
+    --card: #1e2939;
+    --card-foreground: #ecf0f1;
+    --popover: #1e2939;
+    --popover-foreground: #ecf0f1;
+    --primary: #00b8db;
+    --primary-foreground: #1e2939;
+    --secondary: #243140;
+    --secondary-foreground: #ecf0f1;
+    --muted: #1a2430;
+    --muted-foreground: #9aa3b2;
+    --accent: #163844;
+    --accent-foreground: #ddf3f8;
+    --destructive: #f2555a;
+    --border: rgb(255 255 255 / 0.08);
+    --input: #2c3a48;
+    --ring: rgb(0 184 219 / 0.6);
+    --sidebar: #1a2430;
+    --sidebar-foreground: #ecf0f1;
+    --sidebar-primary: #00b8db;
+    --sidebar-primary-foreground: #1e2939;
+    --sidebar-accent: #163844;
+    --sidebar-accent-foreground: #ddf3f8;
+    --sidebar-border: rgb(255 255 255 / 0.08);
+    --sidebar-ring: #9aa3b2;
     --brief-auto: oklch(0.76 0.13 160);
     --brief-human: oklch(0.74 0.1 285);
     --brief-skip: oklch(0.58 0.02 267);
     --brief-auto-fg: var(--brief-auto);
     --brief-ai-fg: var(--primary);
     --brief-human-fg: var(--brief-human);
-}
 
-/* Classic palette override (teal/blue) — toggled via .palette-classic on <html> */
-:root.palette-classic {
-    --primary: oklch(0.52 0.105 223.128);
-    --primary-foreground: oklch(0.984 0.019 200.873);
-    --ring: oklch(0.723 0.014 214.4);
-    /* Шаг «ИИ готовит» в цвете палитры: классический primary и так тёмный. */
-    --brief-ai-fg: var(--primary);
-}
-
-:root.palette-classic.dark,
-.dark.palette-classic {
-    --primary: oklch(0.45 0.085 224.283);
-    --primary-foreground: oklch(0.984 0.019 200.873);
-    --ring: oklch(0.56 0.021 213.5);
+    /* Тёмное стекло: графит 42 → 30 %, кадр под ним размыт и притемнён. */
+    --glass-from: rgb(30 41 57 / 0.42);
+    --glass-to: rgb(30 41 57 / 0.3);
+    --glass-filter: blur(28px) saturate(170%) brightness(60%);
+    --glass-shadow: 0 18px 44px -10px rgb(0 11 13 / 0.45);
+    --glass-light: rgb(255 255 255 / 0.14);
+    --glow-a: rgb(0 184 219 / 0.16);
+    --glow-b: rgb(0 184 219 / 0.08);
 }
 
 @layer base {
@@ -184,7 +176,7 @@
     position: relative;
   }
 
-  /* Minimal site-wide background: subtle honeycomb pattern + accent radial tints */
+  /* Фон как перебивка в роликах finstock: ровный холст и два больших мягких пятна циана. Без сетки. */
   body::before {
     content: "";
     position: fixed;
@@ -192,27 +184,27 @@
     z-index: 0;
     pointer-events: none;
     background-image:
-      radial-gradient(circle at 12% 0%, color-mix(in oklab, var(--primary) 7%, transparent), transparent 40%),
-      radial-gradient(circle at 88% 100%, color-mix(in oklab, var(--chart-2) 5%, transparent), transparent 42%),
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='49' viewBox='0 0 28 49'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%23000' fill-opacity='0.05'%3E%3Cpath d='M13.99 9.25l13 7.5v15l-13 7.5L1 31.75v-15l12.99-7.5zM3 17.9v12.7l10.99 6.34 11-6.35V17.9l-11-6.34L3 17.9zM0 15l12.98-7.5V0h-2v6.35L0 12.69v2.3zm0 18.5L12.98 41v8h-2v-6.85L0 35.81v-2.3zM15 0v7.5L27.99 15H28v-2.31h-.01L17 6.35V0h-2zm0 49v-8l12.99-7.5H28v2.31h-.01L17 42.15V49h-2z'/%3E%3C/g%3E%3C/svg%3E");
-    background-size: 100% 100%, 100% 100%, 56px 98px;
-    background-position: 0 0, 0 0, 0 0;
-    /* Soft top + bottom fade so the pattern doesn't fight content edges */
-    mask-image: linear-gradient(180deg, transparent 0, #000 8%, #000 92%, transparent 100%);
-    -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 8%, #000 92%, transparent 100%);
-  }
-
-  .dark body::before {
-    background-image:
-      radial-gradient(circle at 12% 0%, color-mix(in oklab, var(--primary) 14%, transparent), transparent 40%),
-      radial-gradient(circle at 88% 100%, color-mix(in oklab, var(--chart-2) 10%, transparent), transparent 42%),
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='49' viewBox='0 0 28 49'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.06'%3E%3Cpath d='M13.99 9.25l13 7.5v15l-13 7.5L1 31.75v-15l12.99-7.5zM3 17.9v12.7l10.99 6.34 11-6.35V17.9l-11-6.34L3 17.9zM0 15l12.98-7.5V0h-2v6.35L0 12.69v2.3zm0 18.5L12.98 41v8h-2v-6.85L0 35.81v-2.3zM15 0v7.5L27.99 15H28v-2.31h-.01L17 6.35V0h-2zm0 49v-8l12.99-7.5H28v2.31h-.01L17 42.15V49h-2z'/%3E%3C/g%3E%3C/svg%3E");
+      radial-gradient(ellipse 60% 50% at 12% 0%, var(--glow-a), transparent 70%),
+      radial-gradient(ellipse 55% 45% at 90% 85%, var(--glow-b), transparent 70%);
   }
 
   /* Heading rhythm */
   h1, h2, h3 {
-    letter-spacing: -0.015em;
+    letter-spacing: -0.02em;
   }
+}
+
+/* «Жидкое стекло» finstock: почти прозрачная панель, кадр под ней размыт.
+   Никаких рамок, кромок и свечения по краям; мягкий свет сверху слева. */
+@utility glass {
+  position: relative;
+  isolation: isolate;
+  background:
+    radial-gradient(120% 80% at 0% 0%, var(--glass-light), transparent 45%),
+    linear-gradient(160deg, var(--glass-from), var(--glass-to));
+  -webkit-backdrop-filter: var(--glass-filter);
+  backdrop-filter: var(--glass-filter);
+  box-shadow: var(--glass-shadow);
 }
 
 /* Печать карты брифа в PDF, только на странице брифа (у корня брифа data-brief-page):

@@ -54,18 +54,11 @@ export function buildCaseMetadata(lang: Lang, slug: CaseSlug): Metadata {
     title: copy.detail.metaTitle,
     description: copy.detail.metaDescription,
     robots: { index: true, follow: true },
-    alternates: {
-      canonical: url,
-      languages: {
-        ru: `${baseUrl}${casePath('ru', slug)}`,
-        en: `${baseUrl}${casePath('en', slug)}`,
-        'x-default': `${baseUrl}${casePath('ru', slug)}`,
-      },
-    },
+    // С 25.10.2026 кейсы только на русском: английская версия перенаправляется на главную.
+    alternates: { canonical: url },
     openGraph: {
       type: 'article',
-      locale: lang === 'ru' ? 'ru_RU' : 'en_US',
-      alternateLocale: lang === 'ru' ? ['en_US'] : ['ru_RU'],
+      locale: 'ru_RU',
       url,
       title: copy.detail.metaTitle,
       description: copy.detail.metaDescription,

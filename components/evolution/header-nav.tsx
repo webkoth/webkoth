@@ -3,9 +3,6 @@
 import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import { ModeToggle } from '@/components/mode-toggle'
-import { PaletteToggle } from '@/components/palette-toggle'
-import { LanguageToggle } from '@/components/language-toggle'
-import { FontToggle } from '@/components/font-toggle'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 import { cn } from '@/lib/utils'
 import type { EvolutionData, Lang } from '@/app/data/evolution/types'
@@ -17,7 +14,7 @@ import { SOCIAL_LINKS_HEADER } from '@/lib/landing/social'
 
 export type NavItem = { id: string; label: string }
 
-// Шапка: бренд · служебные тумблеры в ряд (язык, палитра, тема, моно-шрифт) ·
+// Шапка: бренд · тумблер темы и документация для LLM ·
 // строка якорей по шести шагам с иконками-словарём. CTA в шапке нет — её
 // работу делают кнопка в hero и плавающая StickyCta. Активный шаг подсвечивается
 // по скроллу; на узких экранах подписи якорей прячутся, остаются иконка и номер
@@ -101,7 +98,7 @@ export function HeaderNav({
   }, [items])
 
   return (
-    <header ref={headerRef} className="sticky top-0 z-40 border-b border-border bg-background/80 backdrop-blur-md">
+    <header ref={headerRef} className="glass sticky top-0 z-40 shadow-none">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3 md:px-8">
         {/* Вместо текстового бренда — фото владельца: то же, что в профилях соцсетей
             (public/images/avatar). Подпись бренда остаётся для скринридеров и title. */}
@@ -141,13 +138,6 @@ export function HeaderNav({
           })}
         </nav>
         <div className="ml-auto flex items-center gap-1.5">
-          <LanguageToggle currentLang={lang} />
-          <Tooltip>
-            <TooltipTrigger render={<span className="inline-flex" />}>
-              <PaletteToggle />
-            </TooltipTrigger>
-            <TooltipContent side="bottom">{nav.palette}</TooltipContent>
-          </Tooltip>
           {!hideModeToggle && (
             <Tooltip>
               <TooltipTrigger render={<span className="inline-flex" />}>
@@ -158,19 +148,13 @@ export function HeaderNav({
           )}
           <Tooltip>
             <TooltipTrigger render={<span className="inline-flex" />}>
-              <FontToggle />
-            </TooltipTrigger>
-            <TooltipContent side="bottom">{nav.font}</TooltipContent>
-          </Tooltip>
-          <Tooltip>
-            <TooltipTrigger render={<span className="inline-flex" />}>
               <LlmDocsButton markdown={llmMarkdown} copy={nav.llm} labels={labels} />
             </TooltipTrigger>
             <TooltipContent side="bottom">{nav.llm.title}</TooltipContent>
           </Tooltip>
         </div>
       </div>
-      <nav aria-label={nav.stepsAria} className="border-t border-border/60">
+      <nav aria-label={nav.stepsAria}>
         <ul className="mx-auto flex max-w-6xl gap-1 overflow-x-auto px-2 py-1.5 [scrollbar-width:none] md:px-6 lg:justify-center-safe [&::-webkit-scrollbar]:hidden">
           {items.map((item, i) => {
             const active = activeId === item.id
@@ -188,11 +172,12 @@ export function HeaderNav({
                     )}
                   >
                     {/* Номер: на мобильном — вместе с иконкой (подписи нет); на десктопе прячем — иконка + подпись и так говорят всё, а место нужно шести якорям. */}
-                    <span className="font-mono text-[10px] opacity-60 lg:hidden">0{i + 1}</span>
+                    {/* Без иконки (меню главной-оффера) пункты короткие: подпись видна всегда, номер не нужен. */}
+                    {Icon ? <span className="font-mono text-[10px] opacity-60 lg:hidden">0{i + 1}</span> : null}
                     {Icon ? <Icon className="size-3.5" aria-hidden /> : null}
-                    <span className="hidden sm:inline">{item.label}</span>
+                    <span className={Icon ? 'hidden sm:inline' : undefined}>{item.label}</span>
                   </TooltipTrigger>
-                  <TooltipContent side="bottom" className="sm:hidden">
+                  <TooltipContent side="bottom" className={Icon ? 'sm:hidden' : 'hidden'}>
                     {item.label}
                   </TooltipContent>
                 </Tooltip>

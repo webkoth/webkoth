@@ -1,4 +1,3 @@
-import { Badge } from '@/components/ui/badge'
 import { CaseFactRow } from '@/components/evolution/case-card'
 import { CASE_KIND_LABELS, CASE_STATUS_LABELS, type CaseCopy, type CaseMeta } from '@/app/data/cases'
 import type { EvolutionData, Lang } from '@/app/data/evolution/types'
@@ -31,7 +30,7 @@ export function CaseFacts({
 
   return (
     <div className="lg:sticky lg:top-28">
-      <div className="rounded-2xl border border-border bg-card/70 p-5 backdrop-blur-sm">
+      <div className="glass rounded-[28px] p-5">
         {/* Ряд тот же, что на карточке: подпись над значением. В колонке шириной
             примерно 17 rem значения вроде «полный прогон, по расписанию или
             командой» рядом с подписью не помещаются ни в одной локали. */}
@@ -47,16 +46,8 @@ export function CaseFacts({
           ))}
         </dl>
 
-        <div className="mt-4 flex flex-wrap gap-1.5 border-t border-border pt-4">
-          {meta.stack.map((s) => (
-            <Badge key={s} variant="outline" className="border-primary/40 bg-primary/5 font-mono text-[11px] text-primary">
-              {s}
-            </Badge>
-          ))}
-        </div>
-
         {links.length > 0 ? (
-          <div className="mt-4 flex flex-col items-start gap-2 border-t border-border pt-4">
+          <div className="mt-4 flex flex-col items-start gap-2 border-t border-foreground/[0.08] pt-4">
             {links.map((l) => (
               <a
                 key={l.key}

@@ -32,11 +32,11 @@ export function BeforeAfterExhibit({
         </TabsTrigger>
       </TabsList>
       <TabsContent value="before">
-        <div className="rounded-xl border border-border bg-background/60 p-4">
+        <div className="rounded-[20px] bg-foreground/[0.04] p-4">
           <ol className="space-y-1.5 text-sm text-muted-foreground">
             {before.map((step, i) => (
               <li key={step} className="flex gap-2">
-                <span className="font-mono text-xs tabular-nums opacity-60">{i + 1}.</span>
+                <span className="text-xs tabular-nums opacity-60">{i + 1}.</span>
                 <span>{step}</span>
               </li>
             ))}
@@ -44,8 +44,8 @@ export function BeforeAfterExhibit({
         </div>
       </TabsContent>
       <TabsContent value="after">
-        <div className="flex min-h-[9.5rem] flex-col items-center justify-center rounded-xl border border-primary/50 bg-primary/10 p-4">
-          <span className="inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-sm">
+        <div className="flex min-h-[9.5rem] flex-col items-center justify-center rounded-[20px] bg-primary/10 p-4">
+          <span className="inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-sm">
             <MousePointerClick className="size-4" aria-hidden />
             {after}
           </span>

@@ -1,29 +1,33 @@
 import { describe, expect, it } from 'vitest'
-import { angleForCase, CASE_SLUGS } from '@/app/data/cases'
+import { CASE_SLUGS, getCase } from '@/app/data/cases'
 import { LEAD_DETAIL_KEY, LEAD_DETAILS_MAX } from '@/lib/evolution/schemas'
-import { avtomatizaciya, avtomatizaciyaPath, buildAvtomatizaciyaMarkdown } from './index'
+import { SHOWN_CASE_SLUGS, avtomatizaciya, buildAvtomatizaciyaMarkdown, glavnayaPath } from './index'
 import { leadFormCopy } from './lead-form-copy'
 
 const c = avtomatizaciya
 
-describe('тексты одностраничника', () => {
-  it('восемь услуг для продавцов, заголовки не повторяются', () => {
-    expect(c.services.items).toHaveLength(8)
-    expect(new Set(c.services.items.map((s) => s.title)).size).toBe(8)
+describe('тексты главной', () => {
+  it('заголовок утверждён, акцент — его часть', () => {
+    expect(c.hero.title).toBe('Автоматизация и внедрение ИИ для продавцов на маркетплейсах')
+    expect(c.hero.title).toContain(c.hero.titleAccent)
   })
 
-  it('четыре плитки для компаний в утверждённом составе', () => {
-    expect(c.companies.items.map((t) => t.id)).toEqual(['kontur', 'finance', 'it-director', 'training'])
+  it('шесть направлений в утверждённом порядке', () => {
+    expect(c.directions.items.map((d) => d.id)).toEqual(['finance', 'data', 'stock', 'ads', 'content', 'chat'])
   })
 
-  it('кейсы существуют в реестре, не повторяются и у каждого есть угол', () => {
-    for (const slug of c.cases.slugs) expect(CASE_SLUGS, slug).toContain(slug)
-    expect(new Set(c.cases.slugs).size).toBe(c.cases.slugs.length)
-    for (const slug of c.cases.slugs) expect(() => angleForCase('ru', slug)).not.toThrow()
+  it('одиннадцать кейсов: есть в реестре, не повторяются', () => {
+    expect(SHOWN_CASE_SLUGS).toHaveLength(11)
+    expect(new Set(SHOWN_CASE_SLUGS).size).toBe(11)
+    for (const slug of SHOWN_CASE_SLUGS) {
+      expect(CASE_SLUGS, slug).toContain(slug)
+      expect(() => getCase('ru', slug)).not.toThrow()
+    }
   })
 
-  it('разбор бесплатный', () => {
-    expect(c.pricing.items[0]).toMatchObject({ title: 'Разбор', price: 'бесплатно' })
+  it('цена: созвон бесплатно, месяц 100 000 ₽, сопровождение', () => {
+    expect(c.pricing.items.map((p) => p.price)).toEqual(['бесплатно', '100 000 ₽', 'от 15 000 ₽ в месяц'])
+    expect(c.pricing.items.filter((p) => p.highlight)).toHaveLength(1)
   })
 
   it('поля заявки проходят ограничения схемы', () => {
@@ -31,14 +35,21 @@ describe('тексты одностраничника', () => {
     for (const f of c.lead.fields) expect(f.key).toMatch(LEAD_DETAIL_KEY)
   })
 
-  it('в текстах нет длинного тире', () => {
-    expect(JSON.stringify(c)).not.toMatch(/—/)
+  it('в текстах нет длинного тире и стрелок', () => {
+    const text = JSON.stringify(c)
+    expect(text).not.toMatch(/—/)
+    expect(text).not.toMatch(/→/)
   })
 
-  it('markdown для LLM содержит заголовок и адрес страницы', () => {
+  it('в текстах нет упоминания супруги', () => {
+    expect(JSON.stringify(c)).not.toMatch(/супруг/i)
+  })
+
+  it('markdown для LLM содержит заголовок, адрес и все кейсы', () => {
     const md = buildAvtomatizaciyaMarkdown()
     expect(md).toContain(c.hero.title)
-    expect(md).toContain(avtomatizaciyaPath)
+    expect(md).toContain(`webkoth.com${glavnayaPath}`)
+    for (const slug of SHOWN_CASE_SLUGS) expect(md).toContain(`/ru/cases/${slug}`)
   })
 
   it('модалка заявки говорит заголовком и вопросом страницы', () => {

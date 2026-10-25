@@ -50,11 +50,11 @@ export function CaseFactRow({
   const Icon = icon ? CHIP_ICONS[icon] : null
   return (
     <div>
-      <dt className="flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">
+      <dt className="flex items-center gap-1.5 text-xs text-muted-foreground">
         {Icon ? <Icon className="size-3.5 shrink-0" aria-hidden /> : null}
         {label}
       </dt>
-      <dd className={cn('mt-0.5 font-mono text-[13px] font-medium leading-snug tabular-nums', Icon && 'pl-5')}>
+      <dd className={cn('mt-0.5 text-sm font-medium leading-snug tabular-nums', Icon && 'pl-5')}>
         <NoteHover note={note} hint={hint} className="relative z-10">
           {value}
         </NoteHover>

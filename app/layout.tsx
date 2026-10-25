@@ -1,25 +1,19 @@
 import { Suspense } from "react"
-import { Geist, Geist_Mono, JetBrains_Mono } from "next/font/google"
+import { Inter, JetBrains_Mono } from "next/font/google"
 
 import "./globals.css"
-import { SiteThemeProvider } from "@/components/site-theme-provider"
-import { LandingPreferencesScript } from "@/components/landing-preferences-script"
+import { ThemeProvider } from "@/components/theme-provider"
 import { Toaster } from "@/components/ui/sonner"
 import { YandexMetrika } from "@/components/analytics/yandex-metrika"
 import { RouteTracker } from "@/components/analytics/route-tracker"
 import { cn } from "@/lib/utils";
 
-// Два набора шрифтов по тумблеру в шапке (класс `mono-geist` на <html>, см.
-// globals.css и FontToggle): по умолчанию JetBrains Mono везде — заголовки,
-// текст и моно-слот; альтернатива — Geist + Geist Mono.
-const fontSans = Geist({
-  subsets: ["latin"],
-  variable: "--font-geist-sans",
-})
-
-const fontMono = Geist_Mono({
-  subsets: ["latin"],
-  variable: "--font-geist-mono",
+// Шрифты как в роликах finstock: Inter для текста и заголовков (500/600),
+// JetBrains Mono для кода и мелких моно-подписей.
+const fontInter = Inter({
+  subsets: ["latin", "cyrillic"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-inter",
 })
 
 const fontJetBrains = JetBrains_Mono({
@@ -38,17 +32,13 @@ export default function RootLayout({
       suppressHydrationWarning
       className={cn(
         "antialiased",
-        fontSans.variable,
-        fontMono.variable,
+        fontInter.variable,
         fontJetBrains.variable,
         "font-sans",
       )}
     >
-      <head>
-        <LandingPreferencesScript />
-      </head>
       <body>
-        <SiteThemeProvider
+        <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
@@ -56,7 +46,7 @@ export default function RootLayout({
         >
           {children}
           <Toaster />
-        </SiteThemeProvider>
+        </ThemeProvider>
         <YandexMetrika />
         {/* Метки рекламы для заявки и хиты Метрики при переходах внутри сайта. */}
         <Suspense fallback={null}>

@@ -1,28 +1,50 @@
 import { ru } from './ru'
-import { avtomatizaciyaPath } from './path'
+import { glavnayaPath } from './path'
 
-export type { AvtomatizaciyaCopy, CompanyTile, Price, Service, ServiceIcon, Stat, Step } from './types'
+export type {
+  AvtomatizaciyaCopy,
+  CaseOwner,
+  Direction,
+  DirectionCase,
+  DirectionId,
+  IllustrationKind,
+  Price,
+  Stat,
+  Step,
+} from './types'
 
-export { AVTOMATIZACIYA_SLUG, avtomatizaciyaPath } from './path'
+export { AVTOMATIZACIYA_SLUG, avtomatizaciyaPath, glavnayaPath } from './path'
 export const avtomatizaciya = ru
 
-// Markdown страницы для модалки «документация для LLM» и для /llms.txt.
+/** Кейсы, которые остались на сайте: те, что стоят в направлениях главной. Порядок — как на странице. */
+export const SHOWN_CASE_SLUGS = ru.directions.items.flatMap((d) => d.cases.map((k) => k.slug))
+
+// Markdown главной для модалки «документация для LLM» и для /llms.txt.
 export function buildAvtomatizaciyaMarkdown(): string {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://webkoth.com'
   const c = ru
   return [
     `## ${c.hero.title}`,
     '',
-    `URL: ${baseUrl}${avtomatizaciyaPath}`,
+    `URL: ${baseUrl}${glavnayaPath}`,
     '',
     c.hero.sub,
     '',
-    `### ${c.services.title}`,
-    ...c.services.items.map((s) => `- **${s.title}.** ${s.body}`),
+    c.hero.proof,
     '',
-    `### ${c.companies.title}`,
-    ...c.companies.items.map((t) => `- **${t.title}** (${t.price}; ${t.support}). ${t.body}`),
+    `### ${c.directions.title}`,
     '',
+    ...c.directions.items.flatMap((d) => [
+      `#### ${d.label}. ${d.title}`,
+      '',
+      d.body,
+      '',
+      ...d.cases.map(
+        (k) =>
+          `- **${c.directions.owners[k.owner]}. ${k.title}.** ${c.directions.labels.before}: ${k.before} ${c.directions.labels.after}: ${k.after} (${baseUrl}/ru/cases/${k.slug})`,
+      ),
+      '',
+    ]),
     `### ${c.how.title}`,
     ...c.how.steps.map((s, i) => `${i + 1}. **${s.title}.** ${s.body}`),
     '',

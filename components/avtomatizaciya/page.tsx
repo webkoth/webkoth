@@ -1,39 +1,34 @@
 import { evolutionData } from '@/app/data/evolution'
-import { AVTOMATIZACIYA_SLUG, avtomatizaciya, avtomatizaciyaPath, buildAvtomatizaciyaMarkdown } from '@/app/data/avtomatizaciya'
+import { AVTOMATIZACIYA_SLUG, avtomatizaciya, buildAvtomatizaciyaMarkdown } from '@/app/data/avtomatizaciya'
 import { leadFormCopy } from '@/app/data/avtomatizaciya/lead-form-copy'
 import { TooltipProvider } from '@/components/ui/tooltip'
-import { ParticleField } from '@/components/evolution/particle-field'
 import { HeaderNav } from '@/components/evolution/header-nav'
 import { Footer } from '@/components/evolution/footer'
 import { StickyCta } from '@/components/evolution/sticky-cta'
 import { LeadDialogProvider } from '@/components/evolution/lead-dialog'
 import { HtmlLang } from '@/components/evolution/html-lang'
-import { LandingCases } from '@/components/landings/landing-cases'
-import { Faq } from '@/components/landings/faq'
 import { Hero } from './hero'
-import { Services } from './services'
-import { Companies } from './companies'
+import { Directions } from './directions'
 import { How } from './how'
 import { Pricing } from './pricing'
+import { Faq } from './faq'
 import { Lead } from './lead'
 
-// Одна лента: первый экран → услуги → кейсы → компании → как работаем → цены → вопросы → заявка.
-// Страница всегда тёмная (спека, «Внешний вид»): тему на весь документ форсит SiteThemeProvider
-// по списку app/data/forced-dark-paths.ts, поэтому здесь нет обёртки с классом dark.
+// Главная webkoth.com: один оффер для продавцов маркетплейсов (решение 25.10.2026).
+// Лента: первый экран → шесть направлений с кейсами → как работаем → цена → вопросы → заявка.
+// Обе темы, стиль finstock: стекло, циан, Inter (app/globals.css).
 export function AvtomatizaciyaPage() {
   const c = avtomatizaciya
   const data = evolutionData.ru
   const navItems = [
     { id: 'services', label: c.nav.services },
-    { id: 'cases', label: c.nav.cases },
-    { id: 'companies', label: c.nav.companies },
+    { id: 'how', label: c.nav.how },
     { id: 'pricing', label: c.nav.pricing },
     { id: 'faq', label: c.nav.faq },
   ]
   return (
     <>
       <HtmlLang lang="ru" />
-      <ParticleField />
       <TooltipProvider delay={200}>
         <LeadDialogProvider
           copy={leadFormCopy(c.lead)}
@@ -51,14 +46,10 @@ export function AvtomatizaciyaPage() {
               labels={data.labels}
               items={navItems}
               llmMarkdown={buildAvtomatizaciyaMarkdown()}
-              anchorBase={avtomatizaciyaPath}
               minimal
-              hideModeToggle
             />
             <Hero copy={c.hero} />
-            <Services copy={c.services} />
-            <LandingCases copy={c.cases} slugs={c.cases.slugs} />
-            <Companies copy={c.companies} />
+            <Directions copy={c.directions} />
             <How copy={c.how} />
             <Pricing copy={c.pricing} />
             <Faq copy={c.faq} />

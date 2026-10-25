@@ -1,43 +1,74 @@
-// Тексты одностраничника /avtomatizaciya. Только RU. Компоненты тексты не содержат.
+// Тексты главной webkoth.com (оффер для продавцов маркетплейсов). Только RU.
+// Компоненты тексты не содержат. Утверждено собственником 25.10.2026:
+// business-os/portfolio/2026-10-25-webkoth-glavnaya-teksty.md.
 import type { CaseSlug } from '@/app/data/cases'
 import type { LandingCopy, LeadField } from '@/app/data/landings'
 
-export type ServiceIcon = 'profit' | 'reports' | 'stock' | 'ads' | 'reviews' | 'chat' | 'agents' | 'photo'
+export type DirectionId = 'finance' | 'data' | 'stock' | 'ads' | 'content' | 'chat'
 
-export type Service = { icon: ServiceIcon; title: string; body: string }
-export type CompanyTile = { id: 'kontur' | 'finance' | 'it-director' | 'training'; title: string; body: string; price: string; support: string }
+/** Живая иллюстрация блока: сюжеты из набора «Деньги и учёт» роликов finstock. */
+export type IllustrationKind = 'waterfall' | 'reconcile' | 'stock' | 'summary' | 'card' | 'chat'
+
+/** Кто заказчик кейса: свой магазин или небольшой продавец, либо торговая компания. */
+export type CaseOwner = 'shop' | 'company'
+
+export type DirectionCase = {
+  slug: CaseSlug
+  owner: CaseOwner
+  title: string
+  before: string
+  after: string
+}
+
+export type Direction = {
+  id: DirectionId
+  /** Короткое имя направления: подпись над заголовком блока. */
+  label: string
+  title: string
+  body: string
+  illustration: IllustrationKind
+  cases: readonly [DirectionCase, ...DirectionCase[]]
+}
+
 export type Step = { title: string; body: string }
-export type Price = { title: string; price: string; body: string }
+export type Price = { title: string; price: string; body: string; highlight?: boolean }
 export type Stat = { value: string; label: string }
 
 export type AvtomatizaciyaCopy = {
   meta: { title: string; description: string }
-  nav: { services: string; cases: string; companies: string; pricing: string; faq: string; cta: string }
+  nav: { services: string; how: string; pricing: string; faq: string; cta: string }
   hero: {
     eyebrow: string
     title: string
+    /** Часть заголовка, которая горит акцентом (одна циановая строка, как в роликах). */
+    titleAccent: string
     sub: string
+    /** Строка доверия под подзаголовком. */
+    proof: string
     primaryCta: string
     secondaryCta: string
     note: string
-    /** Три цифры из кейсов сайта: выразительный ход первого экрана. */
     stats: readonly [Stat, Stat, Stat]
   }
-  services: { eyebrow: string; title: string; items: readonly Service[] }
-  /** Тип карусели старых лендингов плюс состав кейсов. */
-  cases: LandingCopy['cases'] & { slugs: readonly [CaseSlug, CaseSlug, CaseSlug, ...CaseSlug[]] }
-  companies: { eyebrow: string; title: string; lead: string; items: readonly CompanyTile[] }
-  how: { eyebrow: string; title: string; steps: readonly Step[]; standardLink: { label: string; href: string } }
-  pricing: { eyebrow: string; title: string; note: string; items: readonly Price[] }
+  directions: {
+    eyebrow: string
+    title: string
+    owners: Record<CaseOwner, string>
+    labels: { before: string; after: string; more: string; example: string; siblings: string }
+    items: readonly Direction[]
+  }
+  how: { eyebrow: string; title: string; steps: readonly Step[] }
+  pricing: { eyebrow: string; title: string; items: readonly Price[] }
   faq: LandingCopy['faq']
   lead: {
     eyebrow: string
     title: string
     sub: string
-    /** Подпись и подсказка главного вопроса формы вместо вопроса с главной сайта. */
+    /** Подпись и подсказка главного вопроса формы вместо вопроса прежней главной. */
     answerLabel: string
     answerPlaceholder: string
     fieldsNote: string
     fields: readonly LeadField[]
+    brief: { label: string; href: string }
   }
 }

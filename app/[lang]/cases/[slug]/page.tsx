@@ -1,26 +1,30 @@
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
-import { CASE_SLUGS, isCaseSlug } from '@/app/data/cases'
-import { LANGS, isLang } from '@/app/data/evolution'
+import { isCaseSlug, type CaseSlug } from '@/app/data/cases'
+import { SHOWN_CASE_SLUGS } from '@/app/data/avtomatizaciya'
 import { CasePage } from '@/components/cases/case-page'
 import { buildCaseMetadata } from '@/lib/evolution/metadata'
 
 type Params = { lang: string; slug: string }
 
-// 18 систем x 2 локали = 36 статических страниц. Чужой язык или чужой слаг
-// сюда попадают только запросом руками - на них 404, а не пустая страница.
+// С 25.10.2026 на сайте только кейсы направлений главной и только по-русски.
+// Снятые кейсы и /en перенаправляет next.config.mjs; остальное - 404.
+const isShown = (slug: string): slug is CaseSlug => isCaseSlug(slug) && (SHOWN_CASE_SLUGS as readonly string[]).includes(slug)
+
+export const dynamicParams = false
+
 export function generateStaticParams() {
-  return LANGS.flatMap((lang) => CASE_SLUGS.map((slug) => ({ lang, slug })))
+  return SHOWN_CASE_SLUGS.map((slug) => ({ lang: 'ru', slug }))
 }
 
 export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
   const { lang, slug } = await params
-  if (!isLang(lang) || !isCaseSlug(slug)) return {}
+  if (lang !== 'ru' || !isShown(slug)) return {}
   return buildCaseMetadata(lang, slug)
 }
 
 export default async function Case({ params }: { params: Promise<Params> }) {
   const { lang, slug } = await params
-  if (!isLang(lang) || !isCaseSlug(slug)) notFound()
+  if (lang !== 'ru' || !isShown(slug)) notFound()
   return <CasePage lang={lang} slug={slug} />
 }

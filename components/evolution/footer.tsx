@@ -39,7 +39,7 @@ export function Footer({ data }: { data: EvolutionData }) {
             )
           })}
         </div>
-        <div className="flex flex-col gap-1 font-mono text-xs text-muted-foreground md:items-end">
+        <div className="flex flex-col gap-1 text-xs text-muted-foreground md:items-end">
           <p>
             &copy; {new Date().getFullYear()} {data.footer.owner} ·{' '}
             <Link href="/privacy" className="underline underline-offset-2 transition hover:text-primary">
