@@ -37,7 +37,7 @@ export function AvtomatizaciyaPage() {
           fields={c.lead.fields}
           fieldsNote={c.lead.fieldsNote}
         >
-          <main className="relative z-[1] min-h-screen" lang="ru">
+          <main className="relative z-[1] min-h-screen overflow-x-clip" lang="ru">
             <HeaderNav
               lang="ru"
               brand={data.brand}
@@ -48,10 +48,10 @@ export function AvtomatizaciyaPage() {
               llmMarkdown={buildAvtomatizaciyaMarkdown()}
               minimal
             />
-            <Hero copy={c.hero} />
+            <Hero copy={c.hero} exampleLabel={c.directions.labels.example} />
             <Directions copy={c.directions} />
             <How copy={c.how} />
-            <Pricing copy={c.pricing} />
+            <Pricing copy={c.pricing} cta={c.nav.cta} />
             <Faq copy={c.faq} />
             <Lead copy={c.lead} />
             <Footer data={data} />

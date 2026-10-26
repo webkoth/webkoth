@@ -1,7 +1,5 @@
 import Link from 'next/link'
-import { FileText } from 'lucide-react'
 import { contacts } from '@/lib/landing/contacts'
-import { cvPath } from '@/app/data/evolution'
 import type { EvolutionData } from '@/app/data/evolution/types'
 import { CopyButton } from './copy-button'
 import { SOCIAL_ICONS } from './social-icons'
@@ -10,19 +8,17 @@ import { SOCIAL_LINKS } from '@/lib/landing/social'
 const telegramHandle = '@' + contacts.telegram.replace(/\/$/, '').split('/').pop()
 
 export function Footer({ data }: { data: EvolutionData }) {
-  const linkCls = 'inline-flex items-center gap-1.5 text-foreground/80 transition hover:text-primary'
+  const linkCls = 'inline-flex items-center gap-1.5 text-foreground/80 transition hover:text-foreground'
   return (
-    <footer className="border-t border-border">
+    <footer>
       {/* pb-20 до lg - место под плавающую кнопку: она висит в 16 px от низа
           и высотой около 43 px, а прежние 40 px отступа закрывались ею вместе
           со строкой копирайта. От lg кнопки на странице кейса нет, а на главной
           внизу её прячет inline-форма - там отступ прежний. */}
-      <div className="mx-auto flex max-w-6xl flex-col gap-4 px-4 pt-10 pb-20 md:flex-row md:items-center md:justify-between md:px-8 lg:pb-10">
-        <div className="flex flex-wrap items-center gap-4 text-sm">
-          {/* <Link href={cvPath(data.lang)} className={linkCls}>
-            <FileText className="size-4" aria-hidden />
-            {data.footer.cv}
-          </Link> */}
+      {/* Две строки (слово собственника 26.10): сверху соцсети, ниже две колонки —
+          копирайт с политикой слева и реквизиты рекламодателя справа. */}
+      <div className="mx-auto max-w-6xl px-4 pt-10 pb-20 md:px-8 lg:pb-10">
+        <div className="flex flex-wrap items-center gap-x-5 gap-y-3 text-sm">
           {/* Единый список соцсетей (lib/landing/social.ts) — тот же, что у фото в шапке. */}
           {SOCIAL_LINKS.map((s) => {
             const Icon = SOCIAL_ICONS[s.key]
@@ -39,15 +35,15 @@ export function Footer({ data }: { data: EvolutionData }) {
             )
           })}
         </div>
-        <div className="flex flex-col gap-1 text-xs text-muted-foreground md:items-end">
+        <div className="mt-6 grid gap-2 border-t border-foreground/10 pt-5 text-xs text-muted-foreground md:grid-cols-2 md:gap-6">
           <p>
             &copy; {new Date().getFullYear()} {data.footer.owner} ·{' '}
-            <Link href="/privacy" className="underline underline-offset-2 transition hover:text-primary">
+            <Link href="/privacy" className="underline underline-offset-2 transition hover:text-foreground">
               {data.footer.privacy}
             </Link>
           </p>
           {/* Реквизиты рекламодателя: модерация Директа требует данные продавца на сайте. */}
-          <p>{data.footer.legal}</p>
+          <p className="md:text-right">{data.footer.legal}</p>
         </div>
       </div>
     </footer>

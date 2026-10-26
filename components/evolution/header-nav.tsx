@@ -97,15 +97,50 @@ export function HeaderNav({
     return () => io.disconnect()
   }, [items])
 
+  const anchors = (className: string, listClass: string) => (
+    <nav aria-label={nav.stepsAria} className={className}>
+      <ul className={listClass}>
+        {items.map((item, i) => {
+          const active = activeId === item.id
+          const Icon = isStepKey(item.id) ? STEP_ICONS[item.id] : null
+          return (
+            <li key={item.id} className="shrink-0">
+              <Tooltip>
+                <TooltipTrigger
+                  render={<a href={`${anchorBase}#${item.id}`} aria-current={active ? 'location' : undefined} />}
+                  className={cn(
+                    'inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[13px] whitespace-nowrap transition',
+                    active ? 'bg-foreground/10 text-foreground' : 'text-muted-foreground hover:bg-foreground/5 hover:text-foreground',
+                  )}
+                >
+                  {/* Номер и иконка — у шести шагов прежней главной; у меню оффера пункты короткие, только подпись. */}
+                  {Icon ? <span className="font-mono text-[10px] opacity-60 lg:hidden">0{i + 1}</span> : null}
+                  {Icon ? <Icon className="size-3.5" aria-hidden /> : null}
+                  <span className={Icon ? 'hidden sm:inline' : undefined}>{item.label}</span>
+                </TooltipTrigger>
+                <TooltipContent side="bottom" className={Icon ? 'sm:hidden' : 'hidden'}>
+                  {item.label}
+                </TooltipContent>
+              </Tooltip>
+            </li>
+          )
+        })}
+      </ul>
+    </nav>
+  )
+
+  // Шапка одной строкой (слово собственника 26.10): плавающая стеклянная капсула — фото,
+  // меню по центру, тема и документация справа. Это слой навигации, поэтому стекло здесь
+  // уместно (практика Liquid Glass). На телефоне меню не помещается — второй строкой с прокруткой.
   return (
-    <header ref={headerRef} className="glass sticky top-0 z-40 shadow-none">
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3 md:px-8">
+    <header ref={headerRef} className="sticky top-0 z-40 px-3 pt-3 md:px-6">
+      <div className="glass mx-auto flex max-w-6xl items-center gap-3 rounded-full py-1.5 pr-1.5 pl-1.5 md:pr-2">
         {/* Вместо текстового бренда — фото владельца: то же, что в профилях соцсетей
             (public/images/avatar). Подпись бренда остаётся для скринридеров и title. */}
         <a
           href={`${anchorBase}#hero`}
           title={brand}
-          className="inline-flex items-center gap-2 rounded-full transition hover:opacity-90 focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:outline-none"
+          className="inline-flex shrink-0 items-center gap-2 rounded-full transition hover:opacity-90 focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:outline-none"
         >
           <Image
             src="/images/avatar/avatar-256.webp"
@@ -113,12 +148,12 @@ export function HeaderNav({
             width={36}
             height={36}
             priority
-            className="size-9 rounded-full object-cover ring-1 ring-border"
+            className="size-9 rounded-full object-cover"
           />
           <span className="sr-only">{brand}</span>
         </a>
         {/* Соцсети рядом с фото — те же, что в футере; на узких экранах их показывает футер. */}
-        <nav aria-label={nav.socialAria} className={minimal ? 'hidden' : 'ml-2 hidden items-center gap-0.5 md:flex'}>
+        <nav aria-label={nav.socialAria} className={minimal ? 'hidden' : 'hidden items-center gap-0.5 lg:flex'}>
           {SOCIAL_LINKS_HEADER.map((s) => {
             const Icon = SOCIAL_ICONS[s.key]
             const label = s.label[lang]
@@ -130,14 +165,15 @@ export function HeaderNav({
                 rel="noopener noreferrer"
                 aria-label={label}
                 title={label}
-                className="inline-flex size-8 items-center justify-center rounded-md text-muted-foreground transition hover:bg-muted hover:text-primary"
+                className="inline-flex size-8 items-center justify-center rounded-full text-muted-foreground transition hover:bg-foreground/5 hover:text-foreground"
               >
                 <Icon className="size-4" />
               </a>
             )
           })}
         </nav>
-        <div className="ml-auto flex items-center gap-1.5">
+        {anchors('hidden min-w-0 flex-1 md:block', 'flex justify-center gap-0.5')}
+        <div className="ml-auto flex shrink-0 items-center gap-1 md:ml-0">
           {!hideModeToggle && (
             <Tooltip>
               <TooltipTrigger render={<span className="inline-flex" />}>
@@ -154,38 +190,10 @@ export function HeaderNav({
           </Tooltip>
         </div>
       </div>
-      <nav aria-label={nav.stepsAria}>
-        <ul className="mx-auto flex max-w-6xl gap-1 overflow-x-auto px-2 py-1.5 [scrollbar-width:none] md:px-6 lg:justify-center-safe [&::-webkit-scrollbar]:hidden">
-          {items.map((item, i) => {
-            const active = activeId === item.id
-            const Icon = isStepKey(item.id) ? STEP_ICONS[item.id] : null
-            return (
-              <li key={item.id} className="shrink-0">
-                <Tooltip>
-                  <TooltipTrigger
-                    render={<a href={`${anchorBase}#${item.id}`} aria-current={active ? 'location' : undefined} />}
-                    className={cn(
-                      'inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs whitespace-nowrap transition xl:text-[13px]',
-                      active
-                        ? 'bg-primary/10 text-primary'
-                        : 'text-muted-foreground hover:bg-muted hover:text-foreground',
-                    )}
-                  >
-                    {/* Номер: на мобильном — вместе с иконкой (подписи нет); на десктопе прячем — иконка + подпись и так говорят всё, а место нужно шести якорям. */}
-                    {/* Без иконки (меню главной-оффера) пункты короткие: подпись видна всегда, номер не нужен. */}
-                    {Icon ? <span className="font-mono text-[10px] opacity-60 lg:hidden">0{i + 1}</span> : null}
-                    {Icon ? <Icon className="size-3.5" aria-hidden /> : null}
-                    <span className={Icon ? 'hidden sm:inline' : undefined}>{item.label}</span>
-                  </TooltipTrigger>
-                  <TooltipContent side="bottom" className={Icon ? 'sm:hidden' : 'hidden'}>
-                    {item.label}
-                  </TooltipContent>
-                </Tooltip>
-              </li>
-            )
-          })}
-        </ul>
-      </nav>
+      {anchors(
+        'md:hidden',
+        'mx-auto mt-2 flex max-w-6xl gap-1 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden',
+      )}
       <ReadingProgress label={labels.readingProgress} />
     </header>
   )

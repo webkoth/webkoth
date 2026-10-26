@@ -76,10 +76,10 @@ export function CasePage({ lang, slug }: { lang: Lang; slug: CaseSlug }) {
               </nav>
 
               <header className="mt-8 max-w-3xl">
-                <p className="text-sm font-medium text-primary">
+                <p className="micro text-muted-foreground">
                   {CASE_KIND_LABELS[lang][meta.kind]} · {CASE_STATUS_LABELS[lang][meta.status]}
                 </p>
-                <h1 className="mt-3 text-3xl font-semibold tracking-[-0.03em] md:text-5xl">{copy.title}</h1>
+                <h1 className="mt-4 text-4xl leading-[1.06] font-semibold tracking-[-0.04em] text-balance md:text-[3.4rem]">{copy.title}</h1>
                 <p className="mt-5 text-base leading-relaxed text-muted-foreground md:text-lg">{copy.detail.lead}</p>
               </header>
 

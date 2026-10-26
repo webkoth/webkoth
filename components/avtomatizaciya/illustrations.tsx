@@ -124,7 +124,7 @@ function Reconcile() {
           />
         </svg>
         <motion.span
-          className="rounded-full bg-primary px-3 py-1 text-sm font-semibold text-primary-foreground"
+          className="rounded-full bg-foreground px-3 py-1 text-sm font-medium text-background"
           initial={{ opacity: 0, scale: 0.96 }}
           animate={seen ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.96 }}
           transition={{ ...SPRING, delay: 1.9 }}
@@ -194,11 +194,11 @@ function SyncCell({ stale, fresh, delay, seen }: { stale: number; fresh: number;
     <motion.span
       className="rounded-xl py-2 text-center tabular-nums"
       animate={{
-        backgroundColor: synced ? 'color-mix(in oklab, var(--primary) 16%, transparent)' : 'color-mix(in oklab, var(--foreground) 4%, transparent)',
+        backgroundColor: synced ? 'color-mix(in oklab, var(--foreground) 9%, transparent)' : 'color-mix(in oklab, var(--foreground) 3%, transparent)',
       }}
       transition={{ duration: 0.4 }}
     >
-      <span className={synced ? 'font-semibold text-primary' : 'text-muted-foreground'}>{synced ? fresh : stale}</span>
+      <span className={synced ? 'font-medium text-foreground' : 'text-muted-foreground/70'}>{synced ? fresh : stale}</span>
     </motion.span>
   )
 }
@@ -296,7 +296,7 @@ function ProductCard() {
             {after ? (
               <>
                 <div className="flex flex-wrap gap-1.5">
-                  <span className="rounded-full bg-primary px-2 py-0.5 text-[11px] font-semibold text-primary-foreground">Защита камеры</span>
+                  <span className="rounded-full bg-foreground px-2 py-0.5 text-[11px] font-medium text-background">Защита камеры</span>
                   <span className="rounded-full bg-foreground/10 px-2 py-0.5 text-[11px]">MagSafe</span>
                 </div>
                 <div className="mx-auto mt-auto mb-auto aspect-[9/16] w-2/5 rounded-[14px] bg-gradient-to-b from-primary/70 to-primary/20 shadow-lg" />
@@ -327,7 +327,7 @@ function ProductCard() {
           </motion.li>
         ))}
         <li className="flex items-center gap-2.5 pt-2 text-sm text-muted-foreground">
-          <Sparkles className="size-4 text-primary" aria-hidden />
+          <Sparkles className="size-4 text-muted-foreground" aria-hidden />
           Человек только подтверждает
         </li>
       </ul>

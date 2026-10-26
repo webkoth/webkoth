@@ -45,3 +45,6 @@ next-env.d.ts
 # Скачанные шаблоны Яндекса для генератора импорта Директа
 /marketing/direct/ref/
 marketing/direct/api/created.json
+
+# Рабочие исходники (генерации KIE и т.п.), в репозиторий не идут
+/.local/

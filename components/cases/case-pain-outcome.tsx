@@ -24,7 +24,7 @@ export function CasePainOutcome({
         <p className="mt-2 text-base leading-relaxed text-muted-foreground">{pain}</p>
       </div>
       <div className="glass rounded-[22px] p-5">
-        <p className="flex items-center gap-1.5 text-sm font-medium text-primary">
+        <p className="flex items-center gap-1.5 text-sm font-medium text-foreground/80">
           <Check className="size-3.5" aria-hidden />
           {outcomeLabel}
         </p>

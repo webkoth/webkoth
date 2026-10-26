@@ -40,7 +40,7 @@ export function LlmDocsButton({
         onClick={() => setOpen(true)}
         aria-label={copy.title}
         title={copy.title}
-        className="relative inline-flex h-9 w-9 items-center justify-center rounded-md border border-border bg-background text-foreground shadow-xs transition hover:bg-muted"
+        className="relative inline-flex h-9 w-9 items-center justify-center rounded-full text-foreground transition hover:bg-foreground/10"
       >
         <FileText className="h-[1.2rem] w-[1.2rem]" />
         <span className="sr-only">{copy.title}</span>

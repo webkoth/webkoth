@@ -13,7 +13,7 @@ export function CaseDiagram({ nodes, note }: { nodes: readonly string[]; note: s
             <span
               className={
                 i === nodes.length - 1
-                  ? 'rounded-full bg-primary px-3.5 py-1.5 font-medium text-primary-foreground'
+                  ? 'rounded-full bg-foreground px-3.5 py-1.5 font-medium text-background'
                   : 'rounded-full bg-foreground/[0.06] px-3.5 py-1.5'
               }
             >

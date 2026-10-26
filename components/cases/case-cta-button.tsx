@@ -13,7 +13,7 @@ export function CaseCtaButton({ label }: { label: string }) {
     <button
       type="button"
       onClick={() => lead.open()}
-      className="mt-4 w-full rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground transition hover:opacity-90 focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:outline-none"
+      className="mt-4 w-full rounded-full bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground shadow-[0_10px_30px_-8px_rgb(0_184_219/.55)] transition hover:brightness-110 focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:outline-none"
     >
       {label}
     </button>

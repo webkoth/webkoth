@@ -15,7 +15,7 @@ export function CaseSection({
 }) {
   return (
     <section className={cn('mt-10', className)}>
-      <h2 className="text-lg font-semibold tracking-[-0.01em]">{title}</h2>
+      <h2 className="micro text-muted-foreground">{title}</h2>
       {children}
     </section>
   )
