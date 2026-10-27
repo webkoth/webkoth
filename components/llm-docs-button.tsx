@@ -19,10 +19,10 @@ function formatCVAsMarkdown(data: CVData, lang: "en" | "ru"): string {
       telegram: "Telegram",
       github: "GitHub",
       about: "About Me",
-      skills: "Technical Skills",
+      skills: "Core Competencies",
       experience: "Work Experience",
       education: "Education",
-      portfolio: "Portfolio",
+      portfolio: "Selected Projects",
       stack: "Stack",
       team: "Team",
       functionality: "Functionality",
@@ -43,10 +43,10 @@ function formatCVAsMarkdown(data: CVData, lang: "en" | "ru"): string {
       telegram: "Telegram",
       github: "GitHub",
       about: "Обо мне",
-      skills: "Технические навыки",
+      skills: "Ключевые компетенции",
       experience: "Опыт работы",
       education: "Образование",
-      portfolio: "Портфолио",
+      portfolio: "Избранные проекты",
       stack: "Стек",
       team: "Команда",
       functionality: "Функционал",
@@ -65,13 +65,14 @@ function formatCVAsMarkdown(data: CVData, lang: "en" | "ru"): string {
 
   let markdown = `# ${data.name}\n\n`
   markdown += `**${t.role}:** ${data.role}\n\n`
+  if (data.roleSub) markdown += `${data.roleSub}\n\n`
 
   markdown += `## ${t.contacts}\n\n`
   markdown += `- ${t.email}: ${data.contacts.email}\n`
   markdown += `- ${t.telegram}: ${data.contacts.telegram}\n`
   markdown += `- ${t.github}: ${data.contacts.github}\n\n`
 
-  markdown += `## ${t.about}\n\n${data.about}\n\n`
+  markdown += `## ${t.about}\n\n${data.pitch}\n\n`
 
   markdown += `## ${t.skills}\n\n`
   data.skills.forEach((cat) => {
@@ -123,7 +124,10 @@ function formatCVAsMarkdown(data: CVData, lang: "en" | "ru"): string {
 export function LLMDocsButton({ data, lang }: LLMDocsButtonProps) {
   const [copied, setCopied] = React.useState(false)
   const [open, setOpen] = React.useState(false)
-  const markdown = React.useMemo(() => formatCVAsMarkdown(data, lang), [data, lang])
+  const markdown = React.useMemo(
+    () => formatCVAsMarkdown(data, lang),
+    [data, lang]
+  )
 
   const handleCopy = async () => {
     try {
@@ -196,7 +200,7 @@ export function LLMDocsButton({ data, lang }: LLMDocsButtonProps) {
               </button>
             </div>
             <div className="flex-1 overflow-auto">
-              <pre className="whitespace-pre-wrap break-words rounded-lg bg-muted p-4 font-mono text-sm">
+              <pre className="rounded-lg bg-muted p-4 font-mono text-sm break-words whitespace-pre-wrap">
                 {markdown}
               </pre>
             </div>

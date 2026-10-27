@@ -1,76 +1,73 @@
-import { CVData } from "@/app/data/cv";
+import { CVData } from "@/app/data/cv"
 
 interface JsonLdPersonProps {
-  data: CVData;
-  lang: "en" | "ru";
+  data: CVData
+  lang: "en" | "ru"
 }
 
 export function JsonLdPerson({ data }: JsonLdPersonProps) {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://webkoth.com';
-  
-  // Get current job from experience
-  const currentJob = data.experience[0];
-  
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://webkoth.com"
+
   // Build skills array — flatten categorized skills into a single list of names
   // and augment with JD-fit keywords that may not be in the categorized skills
-  const categorizedSkills = data.skills.flatMap((cat) => cat.items.map((item) => item.name));
+  const categorizedSkills = data.skills.flatMap((cat) =>
+    cat.items.map((item) => item.name)
+  )
   const additionalKeywords = [
+    "Product Engineering",
+    "Spec-Driven Development",
+    "FinTech",
+    "ERP",
+    "Supply Chain",
+    "Human-in-the-Loop",
     "Production AI Engineering",
     "Large Language Models",
     "Retrieval-Augmented Generation (RAG)",
     "LLM agents and tool calling",
     "Multi-provider LLM cascade",
-  ];
-  const skills = Array.from(new Set([...additionalKeywords, ...categorizedSkills]));
-  
+  ]
+  const skills = Array.from(
+    new Set([...additionalKeywords, ...categorizedSkills])
+  )
+
   // Build sameAs array (social profiles)
-  const sameAs: string[] = [];
+  const sameAs: string[] = []
   if (data.contacts.github) {
-    sameAs.push(`https://${data.contacts.github}`);
+    sameAs.push(`https://${data.contacts.github}`)
   }
   if (data.contacts.linkedin) {
-    sameAs.push(data.contacts.linkedin);
+    sameAs.push(data.contacts.linkedin)
   }
   if (data.contacts.telegram) {
-    sameAs.push(`https://t.me/${data.contacts.telegram.replace('@', '')}`);
+    sameAs.push(`https://t.me/${data.contacts.telegram.replace("@", "")}`)
   }
-  
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Person",
-    "name": data.name,
-    "jobTitle": data.role,
-    "description": data.about,
-    "email": data.contacts.email,
-    "url": baseUrl,
-    "sameAs": sameAs,
-    "knowsAbout": skills,
-    "alumniOf": {
+    name: data.name,
+    jobTitle: data.role,
+    description: data.about,
+    email: data.contacts.email,
+    url: baseUrl,
+    sameAs: sameAs,
+    knowsAbout: skills,
+    alumniOf: {
       "@type": "EducationalOrganization",
-      "name": data.education.university,
-      "department": {
+      name: data.education.university,
+      department: {
         "@type": "Organization",
-        "name": data.education.faculty
-      }
+        name: data.education.faculty,
+      },
     },
-    "worksFor": currentJob ? {
-      "@type": "Organization",
-      "name": currentJob.company,
-      "jobTitle": currentJob.role
-    } : undefined,
-    "hasOccupation": {
+    hasOccupation: {
       "@type": "Occupation",
-      "name": data.role,
-      "occupationLocation": {
+      name: data.role,
+      occupationLocation: {
         "@type": "Country",
-        "name": "Russia"
-      }
-    }
-  };
-
-  // Remove undefined fields
-  if (!jsonLd.worksFor) {
-    delete jsonLd.worksFor;
+        name: "Russia",
+      },
+    },
   }
 
   return (
@@ -78,5 +75,5 @@ export function JsonLdPerson({ data }: JsonLdPersonProps) {
       type="application/ld+json"
       dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
     />
-  );
+  )
 }

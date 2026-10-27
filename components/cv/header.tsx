@@ -1,25 +1,30 @@
-import { CVData } from "@/app/data/cv";
-import Image from "next/image";
-import { Mail, Send } from "lucide-react";
+import { CVData } from "@/app/data/cv"
+import Image from "next/image"
+import { Download, Mail, Send } from "lucide-react"
 
 interface HeaderProps {
-  data: CVData;
+  data: CVData
 }
 
 function GithubIcon({ className }: { className?: string }) {
   return (
-    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
+    <svg
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      className={className}
+      aria-hidden="true"
+    >
       <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.4 3-.405 1.02.005 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
     </svg>
-  );
+  )
 }
 
 export function Header({ data }: HeaderProps) {
-  const telegramHandle = data.contacts.telegram.replace("@", "");
+  const telegramHandle = data.contacts.telegram.replace("@", "")
   return (
     <header className="flex flex-col items-center gap-6 text-center md:flex-row md:items-start md:gap-8 md:text-left">
-      <div className="relative shrink-0 h-36 w-32 md:h-44 md:w-36">
-        <div className="absolute inset-0 overflow-hidden rounded-2xl bg-muted ring-1 ring-border shadow-md">
+      <div className="relative h-36 w-32 shrink-0 md:h-44 md:w-36">
+        <div className="absolute inset-0 overflow-hidden rounded-2xl bg-muted shadow-md ring-1 ring-border">
           <Image
             src="/images/profile.jpg"
             alt={data.name}
@@ -32,10 +37,16 @@ export function Header({ data }: HeaderProps) {
 
       <div className="flex-1 space-y-3">
         <div>
-          <h1 className="text-3xl md:text-4xl font-bold tracking-tight">{data.name}</h1>
-          <p className="mt-1 text-base font-semibold text-primary md:text-lg">{data.role}</p>
+          <h1 className="text-3xl font-bold tracking-tight md:text-4xl">
+            {data.name}
+          </h1>
+          <p className="mt-1 text-base font-semibold text-primary md:text-lg">
+            {data.role}
+          </p>
           {data.roleSub ? (
-            <p className="text-xs text-muted-foreground md:text-sm">{data.roleSub}</p>
+            <p className="text-xs text-muted-foreground md:text-sm">
+              {data.roleSub}
+            </p>
           ) : null}
           {data.location ? (
             <p className="text-xs text-muted-foreground">{data.location}</p>
@@ -73,7 +84,22 @@ export function Header({ data }: HeaderProps) {
             <span>{data.contacts.github}</span>
           </a>
         </div>
+        {data.downloads?.length ? (
+          <div className="flex flex-wrap justify-center gap-x-4 gap-y-2 text-sm md:justify-start">
+            {data.downloads.map(({ label, url }) => (
+              <a
+                key={url}
+                href={url}
+                download
+                className="inline-flex items-center gap-1.5 text-primary underline-offset-4 hover:underline"
+              >
+                <Download className="size-3.5" aria-hidden="true" />
+                {label}
+              </a>
+            ))}
+          </div>
+        ) : null}
       </div>
     </header>
-  );
+  )
 }
