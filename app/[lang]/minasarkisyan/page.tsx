@@ -21,7 +21,6 @@ import { Portfolio } from "@/components/cv/portfolio"
 import { ContentGrid } from "@/components/cv/content-grid"
 import { ModeToggle } from "@/components/mode-toggle"
 import { LanguageToggle } from "@/components/language-toggle"
-import { PaletteToggle } from "@/components/palette-toggle"
 import { LLMDocsButton } from "@/components/llm-docs-button"
 import { PageBackground } from "@/components/landing/page-background"
 import { useParams } from "next/navigation"
@@ -125,7 +124,6 @@ export default function MinasarkisyanPage() {
           <div className="mx-auto flex max-w-5xl items-center justify-end gap-2 px-4 py-3 md:px-8">
             <LLMDocsButton data={data} lang={lang} />
             <LanguageToggle currentLang={lang} />
-            <PaletteToggle />
             <ModeToggle />
           </div>
         </div>
